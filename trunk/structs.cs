@@ -16,6 +16,14 @@ namespace ico
         public int f;
     };
 
+    public enum estadoGeneral 
+    { 
+        Activo ,
+        Incapacitado,
+        Inconsciente,
+        Muerto
+    };
+
     public enum estado
     {
         Excelente,
