@@ -88,7 +88,7 @@ namespace ico
         }
 
         public Boolean EstaEnVision(Posicion p) {
-
+            //calcula el cono y mira si p esta en el si esta devuelve trues si no false 
 
         }
 
