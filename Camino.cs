@@ -74,6 +74,7 @@ namespace ico
             ArrayList cerrado = new ArrayList();
             ArrayList abierto = new ArrayList();
             int n = 0;
+            //hola antonio
             
             return new Camino(new ArrayList());
 
