@@ -86,53 +86,10 @@ namespace ico
         public Casilla Casilla(Posicion p) {
             return _casillas[p.fila() - 1, p.columna() - 1];
         }
-        /*
-        public int deCasillaACasillaMinimo(int deFila, int deColumna, int aFila,int aColumna) {
-            return Math.Abs(Math.Abs((deFila + deColumna) - (aFila + aColumna)) - (Math.Min(Math.Abs(deFila-aFila),Math.Abs(deColumna-aColumna))-1));
-            
-        }public int masProximo(Posicion de, Posicion a) {
-            int pasos = 0;
-            while (a.fila()!=de.fila() || a.fila() !=de.fila()){
-                if (deColumna % 2)//impar
-                {
-                    if (a.fila()<de.fila()||a.columna()<de.columna()) {
-                        if (Math.Abs(a.fila() - de.fila()) > Math.Abs(a.columna() - de.columna()))
-                        {
-                            de.fila(de.fila()--);
-                            pasos++;
-                        }
-                        else
-                        {
-                            de.fila(de.fila()--);
-                            pasos++;
-                        }
-                        pasos++;
-                    }else if (deFila < aFila && deColumna > aColumna) {
-                        deFila++;
-                        deColumna--;
-                        pasos++;
-                    }else if(deFila< aFila && deColumna < aColumna){
-                        fila++;
-                        pasos++;
-                    }
-                    else if (deFila > aFila && deColumna > aColumna) {
-                        deFila--;
-                        pasos++;
-                    } else if (deFila == aFila && deColumna > aColumna) {
-                        deColumna--;
-                        pasos++;
-                    } if (deFila == aFila && deColumna < aColumna)
-                    {
-                        deColumna++;
-                        pasos++;
-                    }
-                }
-                else { 
-                }
-            }
-        }*/
-        public int g(Casilla a, Casilla b, Encaramiento encara) {
-            return 1;
+
+        public Boolean EstaEnVision(Posicion p) {
+
+
         }
 
         #endregion
