@@ -5,3 +5,4 @@ Primeras tareas:
 			- Guardar archivos con la armadura inicial
 	- Hacer cono vision
 	- distancia casillas
+
