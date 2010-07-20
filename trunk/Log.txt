@@ -6,3 +6,28 @@ Primeras tareas:
 	- Hacer cono vision
 	- distancia casillas
 
+Pathfinder (battletech):
+	Para la heuristica
+	- Costo movimiento casillas (tablero) 
+	- Distancia a casillas (clase tablero)
+	- Capacidad de recibir disparo. (battletech)
+	- Capacidad de dar disparo. (battletech)
+	- Estado del contrario. (mech)
+	- Estado propio.(mech)
+	- Calor generado. (calculado por battletech)
+	- Iniciativa.(configuracion juego)
+	- Eleccion movimiento (andar,correr o saltar)
+	- Encaramiento (mech)
+**camino calculara el pathfinder. Se le pasara el tablero, el array de mech, el vector de iniciativa.
+
+Fase reaccion (battletech)
+	- cono vision (mech---> funcion que le pasas casilla y responde afirmativo si esta en el cono)
+
+Fase disparo (mech)
+	- distancia 
+	- calor
+	- capacidad acierto
+**debera tener en cuenta si nos conviene disparar o esperarnos para luego golpear cuerpo a cuerpo
+
+Fase ataque fisico(mech)
+	- tener en cuenta calor
