@@ -38,12 +38,12 @@ Fase ataque fisico(mech)
 
 	Pathfinder (camino constructor)
 	Heuristica:
-		-Distancia (tablero)
-		-Costo de movimiento (tablero)
-		-Seguridad (BattleTech)
-		->Capacidad de disparo (BattleTech)
-		-Calor (camino [codigo])
-		->Estado del contraio (mech)
+		-INT Distancia (tablero) // devuelve numero de casillas de un punto p a q
+		-INT Costo de movimiento (tablero) // devuelve un numero que es el costo de movimiento a esa casilla
+		->Float Seguridad (BattleTech) // Probabilidad de que te disparen en media sobre 2d6
+		->Float Capacidad de disparo (BattleTech) // Probabilidad de disparar en media sobre 2d6
+		- INT Calor (camino [codigo]) // Puntos de calor por tipo de movimiento
+		->Struct Estado del contraio (mech) // devuelve una estructura con enumerables con la situacion 
 		->Estado propio (mech)
 		->Iniciativa (configuracionjuego)
 		-Tipo de movimiento(me [codigo])*
