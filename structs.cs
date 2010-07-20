@@ -16,6 +16,9 @@ namespace ico
         public int f;
     };
 
+    /*
+     * Enumerado que define los posibles estados en que puede encontrarse un mech 
+     */
     public enum estadoGeneral 
     { 
         Activo ,
@@ -24,6 +27,9 @@ namespace ico
         Muerto
     };
 
+    /*
+     * Enumerado que define los posibles estados de una zona del cuerpo de un mech 
+     */
     public enum estado
     {
         Excelente,
@@ -35,6 +41,9 @@ namespace ico
     };
 
 
+    /*
+     * Estructura usada para conocer el estado de las distintas partes de un mech
+     */
     public struct vitalidad 
     { 
         public estado brazoIzquierdo;
