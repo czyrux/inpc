@@ -31,3 +31,31 @@ Fase disparo (mech)
 
 Fase ataque fisico(mech)
 	- tener en cuenta calor
+
+
+	------------------------------------------- ### Angel ### ----------------------------------
+
+	Pathfinder (camino constructor)
+	Heuristica:
+		-Distancia (tablero)
+		-Costo de movimiento (tablero)
+		-Seguridad (BattleTech)
+		-Capacidad de disparo (BattleTech)
+		-Calor (camino [codigo])
+		-Estado del contraio (mech)
+		-Estado propio (mech)
+		-Iniciativa (configuracionjuego)
+		-Tipo de movimiento(me [codigo])*
+		-Encaramiento(mech && codigo)
+
+Reaccion	(BattleTech):
+		-cono de visiones (mech [codigo])
+Disparo (mech):
+	-Con que disparar:
+			-Distancia (tablero)
+			-Calor (codigo)
+			-Capacidad de acierto (codigo)
+			-si no estamos en melee
+Ataque fisico (mech):
+		-Si se esta a melee
+		-calor?¿
