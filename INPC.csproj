@@ -10,8 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>INPC</RootNamespace>
     <AssemblyName>INPC</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -33,18 +32,34 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ico.Inpc</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Actuador.cs" />
+    <Compile Include="BattleTech.cs" />
+    <Compile Include="Camino.cs" />
+    <Compile Include="Cara.cs" />
+    <Compile Include="Casilla.cs" />
+    <Compile Include="Componente.cs" />
+    <Compile Include="ConfiguracionJuego.cs" />
+    <Compile Include="Inpc.cs" />
+    <Compile Include="LocalizacionMech.cs" />
+    <Compile Include="Mech.cs" />
+    <Compile Include="MechJugador.cs" />
+    <Compile Include="Posicion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Slot.cs" />
+    <Compile Include="structs.cs" />
+    <Compile Include="Tablero.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
