@@ -43,7 +43,7 @@ Fase ataque fisico(mech)
 		->Float Seguridad (BattleTech) // Probabilidad de que te disparen en media sobre 2d6
 		->Float Capacidad de disparo (BattleTech) // Probabilidad de disparar en media sobre 2d6
 		- INT Calor (camino [codigo]) // Puntos de calor por tipo de movimiento
-		->Struct Estado del contraio (mech) // devuelve una estructura con enumerables con la situacion localizada del enemigo
+		->Struct Estado del contrario (mech) // devuelve una estructura con enumerables con el daño sufrido por zonas del enemigo
 		->Struct Estado propio (mech) // idem para uno
 		->Int Iniciativa (configuracionjuego) // devuelve un entero que indica cuando actuas
 		-Tipo de movimiento(me [codigo])* //
