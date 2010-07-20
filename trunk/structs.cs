@@ -18,7 +18,6 @@ namespace ico
 
     public enum estado
     {
-        //Excelente , Bueno , Herido , Malherido , Critico , Incapacitado , Incosciente , Muerto
         Excelente,
         Bueno,
         Herido,
