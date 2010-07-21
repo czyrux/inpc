@@ -147,7 +147,7 @@ namespace ico
 			}else
 				_municionesExpulsar=null;
 			
-			//NARC  e iNARC No guardamos los valores
+			//NARC  e iNARC. No guardamos los valores
 			for ( int i=0 ; i<numeroJugadores*2 ; i++) {
 				Convert.ToBoolean(f.ReadLine());
 			}
