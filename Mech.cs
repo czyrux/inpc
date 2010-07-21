@@ -47,7 +47,7 @@ namespace ico {
 		protected int _EstrucTorsoCentral;
 		protected int _EstrucCabeza;
 		
-//ATRIBUTOS DE DEFINICION
+//ATRIBUTOS DE FICHERO DEFINICION
 		protected string _nombre;
 		protected string _modelo;
 		protected int _tonelados;
