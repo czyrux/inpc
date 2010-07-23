@@ -68,3 +68,5 @@ Ataque fisico (mech):
 
 	- mira e puesto la lista de ficheros en "C:/ficheros/" asi pa tenerlos los dos en la misma ruta y que compile el ejecutable. Ademas te los mando por correo.
 	a ender.mar.... 
+
+	- escritura de fichero con los datos iniciales de las armaduras i su posterior lectura. Nombre de fichero "armaduraInicialJ<nº jugador>.sbt"
