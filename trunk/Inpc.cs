@@ -10,7 +10,7 @@ namespace ico {
 			
         static void Main(string[] args) {
 			
-			int numeroJugador=2;
+			int numeroJugador=1;
 			string fase="Movimiento";
 			BattleTech juego = new BattleTech(numeroJugador,fase);
 			
