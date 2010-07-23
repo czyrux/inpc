@@ -6,7 +6,7 @@ namespace ico {
 
 	public class ConfiguracionJuego {
 		
-#region atributos
+        #region atributos
 		private int _numeroJugador;
 		private Boolean _incendios;
 	    private Boolean _viento;
@@ -22,15 +22,18 @@ namespace ico {
 	    private Boolean _explosionMunicion;
 	    private Boolean _apagarRadiadores;
 		private int[] _iniciativa;
-#endregion
-		
-		public ConfiguracionJuego ( int numeroJugador) {
+        #endregion
+
+        #region constructor
+        public ConfiguracionJuego ( int numeroJugador) {
 			_numeroJugador = numeroJugador;
 			leerConfiguracion();
 			leerIniciativa();
 		}
-		
-		private void leerConfiguracion( ){
+        #endregion
+
+        #region lectura ficheros
+        private void leerConfiguracion( ){
 			string path="C:/ficheros/";
 			StreamReader f = new StreamReader(path+"configJ"+_numeroJugador.ToString()+".sbt" );
 			f.ReadLine();
@@ -61,8 +64,9 @@ namespace ico {
 			}
 			f.Close();
 		}
+#endregion
 		
-#region metodosGet
+        #region metodosGet
 		public int numeroJugador() { return _numeroJugador; }
 		public Boolean incendios() { return _incendios; }
 	    public Boolean viento() { return _viento; }
@@ -78,7 +82,7 @@ namespace ico {
 	    public Boolean explosionMunicion() { return _explosionMunicion; }
 	    public Boolean apagarRadiadores() { return _apagarRadiadores; }
 		public int[] iniciativa() { return _iniciativa; }
-#endregion
+        #endregion
 		
 	}
 }
