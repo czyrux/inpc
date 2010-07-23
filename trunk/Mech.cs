@@ -514,7 +514,19 @@ namespace ico {
 			Console.WriteLine("Distancia media en media de tiro del mech: "+_distanciaTiroMedia);
 			Console.WriteLine("Distancia larga en media de tiro del mech: "+_distanciaTiroLarga);
 			Console.WriteLine("Numero radiadores: "+_numeroRadiadores);
-			
+
+            Console.WriteLine("Datos blindaje: ");
+            Console.WriteLine("Blindaje brazo izq : "+_BlindBrazoIzquierdo);
+            Console.WriteLine("Blindaje torso izq: "+_BlindTorsoIzquierdo);
+            Console.WriteLine("Blindaje pierna izq: "+_BlindPiernaIzquierda);
+            Console.WriteLine("Blindaje pierna drcha: "+_BlindPiernaDerecha);
+            Console.WriteLine("Blindaje torso drcha: "+_BlindTorsoDerecho);
+            Console.WriteLine("Blindaje brazo drcha: "+_BlindBrazoDerecho);
+            Console.WriteLine("Blindaje torso central: "+_BlindTorsoCentral);
+            Console.WriteLine("Blindaje cabeza: "+_BlindCabeza);
+            Console.WriteLine("Blindaje torso atras izq: "+_BlindAtrasTorsoIzquierdo);
+            Console.WriteLine("Blindaje torso atras drcha: "+_BlindAtrasTorsoDerecho);
+            Console.WriteLine("Blindaje torso central atras: "+_BlindAtrasTorsoCentral);
 		
 			Console.WriteLine();
 		}
