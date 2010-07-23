@@ -8,7 +8,7 @@ namespace ico
 
 	public class MechJugador: Mech {
 		
-#region atributos
+        #region atributos
 		//ATRIBUTOS		
 		private int _puntosAndar;
 		private int _puntosCorrer;
@@ -41,9 +41,10 @@ namespace ico
 		
 		private int _municionesExpulsarCantidad;
 		private municion[] _municionesExpulsar;
-#endregion
-		
-		//CONSTRUCTOR
+        #endregion
+
+        #region constructor
+        //CONSTRUCTOR
 		public MechJugador ( StreamReader estado, StreamReader definicion, int nJugadores) {
 			numeroJugadores=nJugadores;
 			
@@ -53,9 +54,10 @@ namespace ico
 			fichero_definicion(definicion);
 			
 		}
+        #endregion
 
-#region lecturafichero		
-		//METODOS
+        #region lecturafichero
+        //METODOS
 		private void fichero_estado( StreamReader f ) {
 			_numeroJ=Convert.ToInt32(f.ReadLine());
 			
@@ -153,9 +155,9 @@ namespace ico
 			}
 
 		}
-#endregion
+        #endregion
 		
-#region metodosGet
+        #region metodosGet
 		//Metodos get
 		public int puntosAndar() { return _puntosAndar; }
 		public int puntosCorrer() { return _puntosCorrer; }
@@ -187,12 +189,12 @@ namespace ico
 		
 		public int municionesExpulsarCantidad() { return _municionesExpulsarCantidad; }
 		public municion[] municionesExpulsar() { return _municionesExpulsar; }
-#endregion
+        #endregion
 
-#region metodos
+        #region metodos
 		//Excelente , Bueno , Herido , Malherido , Critico , Incapacitado , Incosciente , Muerto
 		//public string estado()
-#endregion
+        #endregion
 	}	
 
 }

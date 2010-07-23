@@ -7,7 +7,7 @@ namespace ico {
 	
 	public class Mech {
 
-#region atributos
+        #region atributos
 		//ATRIBUTOS	ESTADO
 		protected int numeroJugadores;
 		
@@ -114,9 +114,9 @@ namespace ico {
         protected int _distanciaTiroCorta; //***
         protected int _distanciaTiroMedia; //***
         protected int _distanciaTiroLarga; //***
-#endregion
+        #endregion
 
-#region constructores
+        #region constructores
         //CONSTRUCTORES
 		public Mech () {}
 		
@@ -125,9 +125,9 @@ namespace ico {
 			fichero_estado(f1);
 			fichero_definicion(f2);
 		}
-#endregion
+        #endregion
 
-#region lecturaficheros
+        #region lecturaficheros
         //Metodos de lecturas de datos
 		private void fichero_estado( StreamReader f ) {
 			_numeroJ=Convert.ToInt32(f.ReadLine());
@@ -254,9 +254,9 @@ namespace ico {
 			_tipoRadiador=Convert.ToInt32(f.ReadLine());
 		
 		}
-#endregion		
+        #endregion		
 			
-#region metodosGet
+        #region metodosGet
 				
 	//METODOS GET ESTADO
 		public int numeroJ() { return _numeroJ; }
@@ -366,9 +366,9 @@ namespace ico {
 		public int distanciaTiroMedia() { return _distanciaTiroMedia;}
 		public int distanciaTiroLarga() { return _distanciaTiroLarga;}
 		
-#endregion
+        #endregion
 
-#region metodos		
+        #region metodos
 		public void datos(){
 			Console.WriteLine("Numero jugador:"+ _numeroJ);
 			Console.WriteLine("Nombre mech: "+_nombre);
@@ -474,7 +474,7 @@ namespace ico {
 
         //metodo que de una porcentaje de accion?¿
 		
-#endregion
+        #endregion
 		
 	}
 
