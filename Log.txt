@@ -70,3 +70,6 @@ Ataque fisico (mech):
 	a ender.mar.... 
 
 	- escritura de fichero con los datos iniciales de las armaduras i su posterior lectura. Nombre de fichero "armaduraInicialJ<nº jugador>.sbt"
+
+	- angel para saber si una zona esta en critico, o herido o tal, voi a acerlo en saltos de 5 puntos. El problema eske hay zonas que tienen eso o menos, pero tu
+	dijiste de no hacerlo en proporcion, no?¿ mejor asi, en saltos de un determinado valor?¿
