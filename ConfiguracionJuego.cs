@@ -31,7 +31,7 @@ namespace ico {
 		}
 		
 		private void leerConfiguracion( ){
-			string path="ficheros2/";
+			string path="C:/ficheros/";
 			StreamReader f = new StreamReader(path+"configJ"+_numeroJugador.ToString()+".sbt" );
 			f.ReadLine();
 			_incendios=Convert.ToBoolean(f.ReadLine());
@@ -51,7 +51,7 @@ namespace ico {
 		}
 		
 		private void leerIniciativa() {
-			string path="ficheros2/";
+            string path = "C:/ficheros/";
 			StreamReader f = new StreamReader(path+"iniciativaJ"+_numeroJugador.ToString()+".sbt" );
 			
 			int n = Convert.ToInt32(f.ReadLine());

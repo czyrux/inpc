@@ -87,10 +87,10 @@ namespace ico
             return _casillas[p.fila() - 1, p.columna() - 1];
         }
 
-        public Boolean EstaEnVision(Posicion p) {
+        /*public Boolean EstaEnVision(Posicion p) {
             //calcula el cono y mira si p esta en el si esta devuelve trues si no false 
 
-        }
+        }*/
 
         #endregion
 

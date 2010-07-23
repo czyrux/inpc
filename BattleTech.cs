@@ -9,7 +9,7 @@ namespace ico
     class BattleTech {
 
         public BattleTech(int Jugador, String  fase) {
- 			string path="ficheros2/";
+            string path = "C:/ficheros/";
             _myJugador = Jugador;
             _faseJuego = fase;
           
@@ -30,7 +30,7 @@ namespace ico
 			StreamReader f1, f2;
 			Mech m;
 			//variable path
-			string path="ficheros2/";
+            string path ="C:/ficheros/";
 			
 			f1 = new StreamReader(path+"mechsJ"+_myJugador.ToString()+".sbt");
 			f1.ReadLine();//nombre magico fichero

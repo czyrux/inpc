@@ -191,10 +191,7 @@ namespace ico
 
 #region metodos
 		//Excelente , Bueno , Herido , Malherido , Critico , Incapacitado , Incosciente , Muerto
-		public string estado() {
-			return "";
-			
-		}
+		//public string estado()
 #endregion
 	}	
 

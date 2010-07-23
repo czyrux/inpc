@@ -14,12 +14,12 @@ namespace ico {
 		protected int _numeroJ;
 		protected Boolean _operativo; //***
         protected Boolean _desconectado; //***
-        protected Boolean _atascado; //***?¿
+        protected Boolean _atascado;
 		protected Boolean _enSuelo;
 		protected Posicion _posicion; // clase posicion
         protected int _ladoEncaramiento; //***
         protected int _ladoEncaramientoTorso; //***
-		protected int _nivelTemp;
+        protected int _nivelTemp; //***
 		protected Boolean _ardiendo;
 		protected Boolean _garrote;
 		protected int _tipoGarrote;
@@ -59,15 +59,15 @@ namespace ico {
 		protected Boolean _dacmti;
 		protected Boolean _dacmtc;
 		protected int _maximoCalorGenerado;
-		protected Boolean _conBrazos;
-		protected Boolean _conHombroIzquierdo;
-		protected Boolean _conBrazoIzquierdo;
-		protected Boolean _conAntebrazoIzquierdo;
-		protected Boolean _conManoIzquierda;
-		protected Boolean _conHombroDerecho;
-		protected Boolean _conBrazoDerecho;
-		protected Boolean _conAntebrazoDerecho;
-		protected Boolean _conManoDerecha;
+        protected Boolean _conBrazos; //***
+        protected Boolean _conHombroIzquierdo; //***
+        protected Boolean _conBrazoIzquierdo; //***
+        protected Boolean _conAntebrazoIzquierdo; //***
+        protected Boolean _conManoIzquierda; //***
+        protected Boolean _conHombroDerecho; //***
+        protected Boolean _conBrazoDerecho; //***
+        protected Boolean _conAntebrazoDerecho; //***
+        protected Boolean _conManoDerecha; //***
 		
 		protected int _BlindBrazoIzquierdoDefinicion;
 		protected int _BlindTorsoIzquierdoDefinicion;
@@ -417,6 +417,60 @@ namespace ico {
 		}
 		
         //metodo para ver si me puedo mover
+        public estadoGeneral estado() {
+
+            return estadoGeneral.Activo;
+        }
+
+        public estado estadoBrazoIzquierdo(){
+            return 0;
+        }
+
+        public estado estadoTorsoIzquierdo() {
+            return 0;
+        }
+        public estado estadoPiernaIzquierda () {
+            return 0;
+        }
+
+        public estado estadoPiernaDerecha() {
+            return 0;
+        }
+
+        public estado estadoTorsoDerecho()
+        {
+            return 0;
+        }
+
+        public estado estadoBrazoDerecho()
+        {
+            return 0;
+        }
+
+        public estado estadoTorsoCentral()
+        {
+            return 0;
+        }
+
+        public estado estadoCabeza()
+        {
+            return 0;
+        }
+
+        public estado estadoAtrasTorsoIzquierdo()
+        {
+            return 0;
+        }
+
+        public estado estadoAtrasTorsoDerecho()
+        {
+            return 0;
+        }
+
+        public estado estadoAtrasTorsoCentral()
+        {
+            return 0;
+        }
 
         //metodo que de una porcentaje de accion?¿
 		
