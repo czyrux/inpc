@@ -547,6 +547,7 @@ namespace ico {
 		}
 
         //METODOS PARA VER LOS ESTADOS DEL MECH
+        //para estado activo, hacer una media numerica de los otros estados?¿
         public estadoGeneral estado() {
 
             return estadoGeneral.Activo;
