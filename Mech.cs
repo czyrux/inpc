@@ -206,7 +206,10 @@ namespace ico {
 
 
             }else {//en caso opuesto lo creamos
+                StreamWriter fich = new StreamWriter("armaduraInicialJ" + _numeroJ.ToString() + ".sbt");
+                fich.Write("Hola mundo de: "+_numeroJ);
                 Console.WriteLine("No Existe");
+                fich.Close();
 
             }
 		}
