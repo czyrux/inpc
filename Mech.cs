@@ -416,7 +416,7 @@ namespace ico {
 			_distanciaTiroLarga=larga/_armas.Count;
 		}
 		
-        //metodo para ver si me puedo mover
+        //METODOS PARA VER LOS ESTADOS DEL MECH
         public estadoGeneral estado() {
 
             return estadoGeneral.Activo;
