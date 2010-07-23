@@ -72,4 +72,7 @@ Ataque fisico (mech):
 	- escritura de fichero con los datos iniciales de las armaduras i su posterior lectura. Nombre de fichero "armaduraInicialJ<nº jugador>.sbt"
 
 	- angel para saber si una zona esta en critico, o herido o tal, voi a acerlo en saltos de 5 puntos. El problema eske hay zonas que tienen eso o menos, pero tu
-	dijiste de no hacerlo en proporcion, no?¿ mejor asi, en saltos de un determinado valor?¿
+	dijiste de no hacerlo en proporcion, no?¿ mejor asi, en saltos de un determinado valor?¿ Es ke por ejemplo un mech ligero tiene nada de armadura.
+
+	- Por cierto hay un problema que he detectado que tenemos un problema con los ficheros de armadura, y es que tienen que eliminarse despues de cada ejecucion, sino le programa falla.
+	WEno no es que falle, es que cogera datos de armadura de otro mech
