@@ -8,6 +8,7 @@ namespace ico {
 	public class Mech {
 
         #region atributos
+
 		//ATRIBUTOS	ESTADO
 		protected int numeroJugadores;
 		
@@ -47,7 +48,9 @@ namespace ico {
 		protected int _EstrucTorsoCentral;
 		protected int _EstrucCabeza;
 		
-//ATRIBUTOS DE FICHERO DEFINICION
+
+
+        //ATRIBUTOS DE FICHERO DEFINICION
 		protected string _nombre;
 		protected string _modelo;
 		protected int _tonelados;
@@ -69,7 +72,7 @@ namespace ico {
         protected Boolean _conAntebrazoDerecho; //***
         protected Boolean _conManoDerecha; //***
 		
-		protected int _BlindBrazoIzquierdoDefinicion;
+		/*protected int _BlindBrazoIzquierdoDefinicion;
 		protected int _BlindTorsoIzquierdoDefinicion;
 		protected int _BlindPiernaIzquierdaDefinicion;
 		protected int _BlindPiernaDerechaDefinicion;
@@ -88,7 +91,7 @@ namespace ico {
 		protected int _EstrucTorsoDerechoDefinicion;
 		protected int _EstrucBrazoDerechoDefinicion;
 		protected int _EstrucTorsoCentralDefinicion;
-		protected int _EstrucCabezaDefinicion;
+		protected int _EstrucCabezaDefinicion;*/
 		
 		protected int _numeroComponentes;
 		protected Componente[] _componentes;
@@ -114,6 +117,28 @@ namespace ico {
         protected int _distanciaTiroCorta; //***
         protected int _distanciaTiroMedia; //***
         protected int _distanciaTiroLarga; //***
+
+        //DATOS DE ARMADURA INICIALES DEL MECH
+        protected int _BlindBrazoIzquierdoInicial;
+        protected int _BlindTorsoIzquierdoInicial;
+        protected int _BlindPiernaIzquierdaInicial;
+        protected int _BlindPiernaDerechaInicial;
+        protected int _BlindTorsoDerechoInicial;
+        protected int _BlindBrazoDerechoInicial;
+        protected int _BlindTorsoCentralInicial;
+        protected int _BlindCabezaInicial;
+        protected int _BlindAtrasTorsoIzquierdoInicial;
+        protected int _BlindAtrasTorsoDerechoInicial;
+        protected int _BlindAtrasTorsoCentralInicial;
+
+        protected int _EstrucBrazoIzquierdoInicial;
+        protected int _EstrucTorsoIzquierdoInicial;
+        protected int _EstrucPiernaIzquierdaInicial;
+        protected int _EstrucPiernaDerechaInicial;
+        protected int _EstrucTorsoDerechoInicial;
+        protected int _EstrucBrazoDerechoInicial;
+        protected int _EstrucTorsoCentralInicial;
+        protected int _EstrucCabezaInicial;
         #endregion
 
         #region constructores
@@ -146,19 +171,28 @@ namespace ico {
 			_tipoGarrote=Convert.ToInt32(f.ReadLine());
 			
 			//datos blindaje
-			_BlindBrazoIzquierdo=Convert.ToInt32(f.ReadLine());
-			_BlindTorsoIzquierdo=Convert.ToInt32(f.ReadLine());
-			_BlindPiernaIzquierda=Convert.ToInt32(f.ReadLine());
-			_BlindPiernaDerecha=Convert.ToInt32(f.ReadLine());
-			_BlindTorsoDerecho=Convert.ToInt32(f.ReadLine());
-			_BlindBrazoDerecho=Convert.ToInt32(f.ReadLine());
-			_BlindTorsoCentral=Convert.ToInt32(f.ReadLine());
-			_BlindCabeza=Convert.ToInt32(f.ReadLine());
-			_BlindAtrasTorsoIzquierdo=Convert.ToInt32(f.ReadLine());
-			_BlindAtrasTorsoDerecho=Convert.ToInt32(f.ReadLine());
-			_BlindAtrasTorsoCentral=Convert.ToInt32(f.ReadLine());
+			_BlindBrazoIzquierdoInicial = _BlindBrazoIzquierdo=Convert.ToInt32(f.ReadLine());
+            _BlindTorsoIzquierdoInicial = _BlindTorsoIzquierdo = Convert.ToInt32(f.ReadLine());
+			_BlindPiernaIzquierdaInicial = _BlindPiernaIzquierda=Convert.ToInt32(f.ReadLine());
+			_BlindPiernaDerechaInicial = _BlindPiernaDerecha=Convert.ToInt32(f.ReadLine());
+			_BlindTorsoDerechoInicial = _BlindTorsoDerecho=Convert.ToInt32(f.ReadLine());
+			_BlindBrazoDerechoInicial = _BlindBrazoDerecho=Convert.ToInt32(f.ReadLine());
+			_BlindTorsoCentralInicial = _BlindTorsoCentral=Convert.ToInt32(f.ReadLine());
+			_BlindCabezaInicial = _BlindCabeza=Convert.ToInt32(f.ReadLine());
+			_BlindAtrasTorsoIzquierdoInicial = _BlindAtrasTorsoIzquierdo=Convert.ToInt32(f.ReadLine());
+			_BlindAtrasTorsoDerechoInicial = _BlindAtrasTorsoDerecho=Convert.ToInt32(f.ReadLine());
+            _BlindAtrasTorsoCentralInicial = _BlindAtrasTorsoCentral = Convert.ToInt32(f.ReadLine());
 			
 			//datos esctructura interna
+                    /*protected int _EstrucBrazoIzquierdoInicial;
+        protected int _EstrucTorsoIzquierdoInicial;
+        protected int _EstrucPiernaIzquierdaInicial;
+        protected int _EstrucPiernaDerechaInicial;
+        protected int _EstrucTorsoDerechoInicial;
+        protected int _EstrucBrazoDerechoInicial;
+        protected int _EstrucTorsoCentralInicial;
+        protected int _EstrucCabezaInicial;*/
+
 			_EstrucBrazoIzquierdo=Convert.ToInt32(f.ReadLine());
 			_EstrucTorsoIzquierdo=Convert.ToInt32(f.ReadLine());
 			_EstrucPiernaIzquierda=Convert.ToInt32(f.ReadLine());
@@ -172,6 +206,15 @@ namespace ico {
 			for ( int i=0 ; i<numeroJugadores*2 ; i++) {
 				Convert.ToBoolean(f.ReadLine());
 			}
+
+            //si existe el fichero con los datos de armadura iniciales del mech, lo leemos
+            if (System.IO.File.Exists("Ruta Archivo")) {
+
+
+
+            }else {//en caso opuesto lo creamos
+
+            }
 		}
 		
 		protected void fichero_definicion( StreamReader f){
@@ -198,8 +241,11 @@ namespace ico {
 			_conBrazoDerecho=Convert.ToBoolean(f.ReadLine());
 			_conAntebrazoDerecho=Convert.ToBoolean(f.ReadLine());
 			_conManoDerecha=Convert.ToBoolean(f.ReadLine());
-			
-			_BlindBrazoIzquierdoDefinicion=Convert.ToInt32(f.ReadLine());
+
+            //readline correspondientes a los datos de blindaje y estructura interna del fichero de definicion, que son repetidos
+            for (int i = 0; i < 19; i++) f.ReadLine();
+
+			/*_BlindBrazoIzquierdoDefinicion=Convert.ToInt32(f.ReadLine());
 			_BlindTorsoIzquierdoDefinicion=Convert.ToInt32(f.ReadLine());
 			_BlindPiernaIzquierdaDefinicion=Convert.ToInt32(f.ReadLine());
 			_BlindPiernaDerechaDefinicion=Convert.ToInt32(f.ReadLine());
@@ -218,7 +264,7 @@ namespace ico {
 			_EstrucTorsoDerechoDefinicion=Convert.ToInt32(f.ReadLine());
 			_EstrucBrazoDerechoDefinicion=Convert.ToInt32(f.ReadLine());
 			_EstrucTorsoCentralDefinicion=Convert.ToInt32(f.ReadLine());
-			_EstrucCabezaDefinicion=Convert.ToInt32(f.ReadLine());
+			_EstrucCabezaDefinicion=Convert.ToInt32(f.ReadLine());*/
 			
 			_numeroComponentes=Convert.ToInt32(f.ReadLine());
 			_componentes = new Componente[_numeroComponentes];
@@ -275,7 +321,7 @@ namespace ico {
 		public int tipoGarrote() { return _tipoGarrote; }
 		
 		//puntos blindaje
-		public int BlindBrazoIzquierdo() { return _BlindBrazoIzquierdo; }		
+		/*public int BlindBrazoIzquierdo() { return _BlindBrazoIzquierdo; }		
 		public int BlindTorsoIzquierdo() { return _BlindTorsoIzquierdo; }		
 		public int BlindPiernaIzquierda() { return _BlindPiernaIzquierda; }		
 		public int BlindPiernaDerecha() { return _BlindPiernaDerecha; }		
@@ -295,7 +341,7 @@ namespace ico {
 		public int EstrucTorsoDerecho() { return _EstrucTorsoDerecho; }		
 		public int EstrucBrazoDerecho() { return _EstrucBrazoDerecho; }
 		public int EstrucTorsoCentral() { return _EstrucTorsoCentral; }		
-		public int EstrucCabeza() { return _EstrucCabeza; }
+		public int EstrucCabeza() { return _EstrucCabeza; }*/
 		
 	//METODOS GET DEFINICION
 		public string nombre() { return _nombre; }
@@ -304,10 +350,10 @@ namespace ico {
 		public int potencia() { return _potencia; }
 		public int numeroRadiadoresInternos() { return _numeroRadiadoresInternos; }
 		public int numeroRadiadores() { return _numeroRadiadores; }
-		public Boolean masc() { return _masc; }
+		/*public Boolean masc() { return _masc; }
 		public Boolean dacmtd() { return _dacmtd; }
 		public Boolean dacmti() { return _dacmti; }
-		public Boolean dacmtc() { return _dacmtc; }
+		public Boolean dacmtc() { return _dacmtc; }*/
 		public int maximoCalorGenerado() { return _maximoCalorGenerado; }
 		public Boolean conBrazos() { return _conBrazos; }
 		public Boolean conHombroIzquierdo() { return _conHombroIzquierdo; }
@@ -356,7 +402,7 @@ namespace ico {
 		public LocalizacionMech slotsTorsoDerecho() { return _slotsTorsoDerecho; }
 		public LocalizacionMech slotsBrazoDerecho() { return _slotsBrazoDerecho; }
 		public LocalizacionMech slotsTorsoCentral() { return _slotsTorsoCentral; }
-		public LocalizacionMech 	slotsCabeza() { return _slotsCabeza; }
+		public LocalizacionMech slotsCabeza() { return _slotsCabeza; }
 	/*	public int andarDefinicion() { return _andarDefinicion; }
 		public int correrDefinicion() { return _correrDefinicion; }
 		public int saltarDefinicion() { return _saltarDefinicion; } */
@@ -393,9 +439,9 @@ namespace ico {
 				Console.WriteLine("\tDistancia minima: "+ ((Componente)_armas[i]).distanciaMinima());
 
 			}
-			Console.WriteLine("Distancia corta de tiro del mech: "+_distanciaTiroCorta);
-			Console.WriteLine("Distancia media de tiro del mech: "+_distanciaTiroMedia);
-			Console.WriteLine("Distancia larga de tiro del mech: "+_distanciaTiroLarga);
+			Console.WriteLine("Distancia corta en media de tiro del mech: "+_distanciaTiroCorta);
+			Console.WriteLine("Distancia media en media de tiro del mech: "+_distanciaTiroMedia);
+			Console.WriteLine("Distancia larga en media de tiro del mech: "+_distanciaTiroLarga);
 			Console.WriteLine("Numero radiadores: "+_numeroRadiadores);
 			
 		
