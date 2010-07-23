@@ -12,13 +12,13 @@ namespace ico {
 		protected int numeroJugadores;
 		
 		protected int _numeroJ;
-		protected Boolean _operativo;
-		protected Boolean _desconectado;
-		protected Boolean _atascado;
+		protected Boolean _operativo; //***
+        protected Boolean _desconectado; //***
+        protected Boolean _atascado; //***?¿
 		protected Boolean _enSuelo;
 		protected Posicion _posicion; // clase posicion
-		protected int _ladoEncaramiento;
-		protected int _ladoEncaramientoTorso;
+        protected int _ladoEncaramiento; //***
+        protected int _ladoEncaramientoTorso; //***
 		protected int _nivelTemp;
 		protected Boolean _ardiendo;
 		protected Boolean _garrote;
@@ -106,14 +106,14 @@ namespace ico {
 		protected LocalizacionMech _slotsBrazoDerecho;
 		protected LocalizacionMech _slotsTorsoCentral;
 		protected LocalizacionMech _slotsCabeza;
-		protected int _andarDefinicion;
-		protected int _correrDefinicion;
-		protected int _saltarDefinicion;
-		protected int _tipoRadiador;
-		
-		protected int _distanciaTiroCorta;
-		protected int _distanciaTiroMedia;
-		protected int _distanciaTiroLarga;
+        protected int _andarDefinicion; //***
+        protected int _correrDefinicion; //***
+        protected int _saltarDefinicion; //***
+        protected int _tipoRadiador; //***
+
+        protected int _distanciaTiroCorta; //***
+        protected int _distanciaTiroMedia; //***
+        protected int _distanciaTiroLarga; //***
 #endregion
 
 #region constructores

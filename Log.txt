@@ -61,3 +61,7 @@ Disparo (mech):
 Ataque fisico (mech):
 		-Si se esta a melee
 		-calor?¿
+
+
+	------------------------------------------- ### Bitacora ### ----------------------------------
+	- Tenemos que poner una descripcion de las funciones principales, para aclararnos entre nosotros
