@@ -152,7 +152,7 @@ namespace ico {
 		}
         #endregion
 
-        #region lecturaficheros
+        #region Privados lecturaficheros
         //Metodos de lecturas de datos
 
 		private void fichero_estado( StreamReader f ) {
@@ -284,6 +284,9 @@ namespace ico {
 
             //Rellenamos los atributos de la armadura que tenia al inicio de partida el mech
             datos_armadura_inicial();
+
+            //Calculamos la media de las armas
+            calculoDistanciaTiro();
 		}
 
         protected void datos_armadura_inicial() {
@@ -516,8 +519,8 @@ namespace ico {
 			Console.WriteLine();
 		}
 		
-		
-		public void calculoDistanciaTiro() {
+		//Metodo que calcula la media de la distancia por armas del mech 
+		private void calculoDistanciaTiro() {
 			int media=0 , larga=0 , corta=0 ;
 			for ( int i=0 ; i<_armas.Count ; i++ ) {
 				corta+=((Componente)_armas[i]).distanciaCorta();
