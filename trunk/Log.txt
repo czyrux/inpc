@@ -65,3 +65,6 @@ Ataque fisico (mech):
 
 	------------------------------------------- ### Bitacora ### ----------------------------------
 	- Tenemos que poner una descripcion de las funciones principales, para aclararnos entre nosotros
+
+	- mira e puesto la lista de fichero en "C:/ficheros/" asi pa tenerlos los dos en la misma ruta y que compile el ejecutable. Ademas te los mando por correo.
+	a ender.mar.... 
