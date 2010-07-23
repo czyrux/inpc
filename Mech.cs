@@ -519,7 +519,8 @@ namespace ico {
 			Console.WriteLine();
 		}
 		
-		//Metodo que calcula la media de la distancia por armas del mech 
+		//Metodo que calcula la media de la distancia por armas del mech
+        //HAY QUE BUSCAR OTRA FORMA
 		private void calculoDistanciaTiro() {
 			int media=0 , larga=0 , corta=0 ;
 			for ( int i=0 ; i<_armas.Count ; i++ ) {
@@ -532,7 +533,7 @@ namespace ico {
 			_distanciaTiroMedia=media/_armas.Count;
 			_distanciaTiroLarga=larga/_armas.Count;
 		}
-		
+
         //METODOS PARA VER LOS ESTADOS DEL MECH
         public estadoGeneral estado() {
 

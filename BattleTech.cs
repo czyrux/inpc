@@ -49,7 +49,6 @@ namespace ico
 				} else {
                     m = new Mech(f1, f2, _numeroJugadores);
 				}
-				m.calculoDistanciaTiro();
 				_mechs[i]=m;
 				f2.Close();
 			}
