@@ -8,7 +8,7 @@ namespace ico
 {
     public class Camino
     {
-        #region Constructores
+#region Constructores
         public Camino(Posicion p1, Posicion p2,Tablero tablero) {
             Process proc = new Process();
             _moviminetos = _nldv = 0;
@@ -51,9 +51,9 @@ namespace ico
             _ldv =_cobertura= false;
             _nldv = _moviminetos = 0;
         }
-        #endregion
+#endregion
 
-        #region Propiedades
+#region Propiedades
 
         int longitud() {
             return _length;
@@ -67,7 +67,7 @@ namespace ico
         Boolean cobertura() {
             return _cobertura;
         }
-        #endregion
+#endregion
 
         public Camino pathFinder(Casilla a, Casilla b, Casilla[] Tablero)
         {
@@ -80,7 +80,7 @@ namespace ico
 
         }
 
-        #region Privado
+#region Privado
         private int _length;
         private Casilla[] _camino;
         private Boolean _ldv;
@@ -129,7 +129,7 @@ namespace ico
                 abierto.Add(tablero.colindante(a, Encaramiento.SuperiorIzquierda));
             }
         } 
-        #endregion
+#endregion
 
     }
 }

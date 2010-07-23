@@ -6,8 +6,10 @@ using System.IO;
 
 namespace ico
 {
-    class BattleTech {
+    class BattleTech
+    {
 
+        #region constructores
         public BattleTech(int Jugador, String  fase) {
             string path = "C:/ficheros/";
             _myJugador = Jugador;
@@ -23,8 +25,9 @@ namespace ico
 			_config = new ConfiguracionJuego( _myJugador );
 
         }
-		
-		#region parametros juego
+        #endregion
+
+        #region lectura parametros juego
         private void readMechs () {
 
 			StreamReader f1, f2;
@@ -56,10 +59,10 @@ namespace ico
 
         }
 		
-		#endregion
-		
-		
-		public void pruebas () {
+        #endregion
+
+        #region metodos
+        public void pruebas () {
 			Console.WriteLine("Numero de jugadores: " + _numeroJugadores);
 			Console.WriteLine();
 
@@ -89,6 +92,8 @@ namespace ico
 					fin=true;
 			}
 		}
+        #endregion
+
         #region atributos
         private int _myJugador;
         private String _faseJuego;
@@ -96,7 +101,7 @@ namespace ico
         private Tablero _tablero;
         private Mech[] _mechs;
 		private ConfiguracionJuego _config;
-        #endregion
+#endregion
 
     }
 
