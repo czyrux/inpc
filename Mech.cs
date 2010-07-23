@@ -184,23 +184,14 @@ namespace ico {
             _BlindAtrasTorsoCentralInicial = _BlindAtrasTorsoCentral = Convert.ToInt32(f.ReadLine());
 			
 			//datos esctructura interna
-                    /*protected int _EstrucBrazoIzquierdoInicial;
-        protected int _EstrucTorsoIzquierdoInicial;
-        protected int _EstrucPiernaIzquierdaInicial;
-        protected int _EstrucPiernaDerechaInicial;
-        protected int _EstrucTorsoDerechoInicial;
-        protected int _EstrucBrazoDerechoInicial;
-        protected int _EstrucTorsoCentralInicial;
-        protected int _EstrucCabezaInicial;*/
-
-			_EstrucBrazoIzquierdo=Convert.ToInt32(f.ReadLine());
-			_EstrucTorsoIzquierdo=Convert.ToInt32(f.ReadLine());
-			_EstrucPiernaIzquierda=Convert.ToInt32(f.ReadLine());
-			_EstrucPiernaDerecha=Convert.ToInt32(f.ReadLine());
-			_EstrucTorsoDerecho=Convert.ToInt32(f.ReadLine());
-			_EstrucBrazoDerecho=Convert.ToInt32(f.ReadLine());
-			_EstrucTorsoCentral=Convert.ToInt32(f.ReadLine());
-			_EstrucCabeza=Convert.ToInt32(f.ReadLine());
+			_EstrucBrazoIzquierdoInicial = _EstrucBrazoIzquierdo=Convert.ToInt32(f.ReadLine());
+			_EstrucTorsoIzquierdoInicial = _EstrucTorsoIzquierdo=Convert.ToInt32(f.ReadLine());
+			_EstrucPiernaIzquierdaInicial = _EstrucPiernaIzquierda=Convert.ToInt32(f.ReadLine());
+			_EstrucPiernaDerechaInicial = _EstrucPiernaDerecha=Convert.ToInt32(f.ReadLine());
+			_EstrucTorsoDerechoInicial = _EstrucTorsoDerecho=Convert.ToInt32(f.ReadLine());
+			_EstrucBrazoDerechoInicial = _EstrucBrazoDerecho=Convert.ToInt32(f.ReadLine());
+			_EstrucTorsoCentralInicial = _EstrucTorsoCentral=Convert.ToInt32(f.ReadLine());
+            _EstrucCabezaInicial = _EstrucCabeza = Convert.ToInt32(f.ReadLine());
 			
 			//NARC  e iNARC No guardamos los valores
 			for ( int i=0 ; i<numeroJugadores*2 ; i++) {
@@ -208,11 +199,14 @@ namespace ico {
 			}
 
             //si existe el fichero con los datos de armadura iniciales del mech, lo leemos
-            if (System.IO.File.Exists("Ruta Archivo")) {
-
+            //string name= "armaduraInicialJ", extension=".sbt";
+            if (System.IO.File.Exists("armaduraInicialJ" + _numeroJ.ToString() + ".sbt"))
+            {
+                Console.WriteLine("Existe");
 
 
             }else {//en caso opuesto lo creamos
+                Console.WriteLine("No Existe");
 
             }
 		}
