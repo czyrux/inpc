@@ -84,5 +84,5 @@ Ataque fisico (mech):
 		Para mech ligeros: 7,72 2,36 4,54 7,36 6,09
 		Para mech medios: 13,72 15,36 7,72 12,90
 		Para mech pesados: 17,45   11,90 18,54 14,14  13,27
-	Podriamos hacer una clasificacion de mech en tres: ligeros, medios y asalto o pesados. Con eso creo ke bastaria. La funcion se llamara tipoMech() devolvera
-	un enum que se llame tipoMech, estara en el archivo structs.cs
+	Podriamos hacer una clasificacion de mech en tres: ligeros, medios y asalto o pesados. Con eso creo ke bastaria. La funcion se llamara tipoMech()  en la clase mech 
+	devolvera un enum que se llame tipoMech.
