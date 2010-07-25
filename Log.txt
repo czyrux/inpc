@@ -76,3 +76,8 @@ Ataque fisico (mech):
 
 	- Por cierto hay un problema que he detectado con los ficheros de armadura, y es que tienen que eliminarse despues de cada partida de forma manual, sino
 	le programa falla. WEno no es que falle, es que cogera datos de armadura de un mech de otra partida
+
+	- He pensado en hacer el que el nivel de daño por zona sea en proporcion, pero aparte tener una funcion que nos indique que tipo de armadura
+	a nivel general que tiene cada bixo. (algo asi como indicarnos el tipo de mech que es de asalto, o ligero o pesado etc.) Voi a hacer pruebas para ver si mech
+	del mismo tipo siguen una serie de "reglas" en cuanto a puntos de armadura para hacer una clasificacion.
+
