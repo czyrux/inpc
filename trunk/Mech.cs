@@ -515,6 +515,8 @@ namespace ico {
 			Console.WriteLine("Distancia larga en media de tiro del mech: "+_distanciaTiroLarga);
 			/*Console.WriteLine("Numero radiadores: "+_numeroRadiadores);*/
 
+            float media = _BlindTorsoCentral + _BlindTorsoIzquierdo + _BlindBrazoIzquierdo + _BlindPiernaIzquierda + _BlindPiernaDerecha + _BlindBrazoDerecho + _BlindAtrasTorsoDerecho +
+                 _BlindAtrasTorsoCentral + _BlindAtrasTorsoDerecho + _BlindAtrasTorsoIzquierdo + _BlindCabeza;
             Console.WriteLine("Datos blindaje: ");
             Console.WriteLine("Blindaje brazo izq : "+_BlindBrazoIzquierdo);
             Console.WriteLine("Blindaje torso izq: "+_BlindTorsoIzquierdo);
@@ -527,6 +529,7 @@ namespace ico {
             Console.WriteLine("Blindaje torso atras izq: "+_BlindAtrasTorsoIzquierdo);
             Console.WriteLine("Blindaje torso atras drcha: "+_BlindAtrasTorsoDerecho);
             Console.WriteLine("Blindaje torso central atras: "+_BlindAtrasTorsoCentral);
+            Console.WriteLine("Media de los datos es: " + (media / 11));
 		
 			Console.WriteLine();
 		}
