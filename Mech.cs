@@ -490,7 +490,7 @@ namespace ico {
 			Console.WriteLine("Numero jugador:"+ _numeroJ);
 			Console.WriteLine("Nombre mech: "+_nombre);
 			Console.WriteLine("Modelo mech: "+_modelo);
-			Console.WriteLine("operativo:" + _operativo);
+			/*Console.WriteLine("operativo:" + _operativo);
 			Console.WriteLine("desconectado: "+_desconectado);
 			Console.WriteLine("atascado terreno pantanoso: "+_atascado);
 			Console.WriteLine("en el suelo: "+_enSuelo);
@@ -509,11 +509,11 @@ namespace ico {
 				Console.WriteLine("\tDistancia larga: "+ ((Componente)_armas[i]).distanciaLarga());
 				Console.WriteLine("\tDistancia minima: "+ ((Componente)_armas[i]).distanciaMinima());
 
-			}
+			}*/
 			Console.WriteLine("Distancia corta en media de tiro del mech: "+_distanciaTiroCorta);
 			Console.WriteLine("Distancia media en media de tiro del mech: "+_distanciaTiroMedia);
 			Console.WriteLine("Distancia larga en media de tiro del mech: "+_distanciaTiroLarga);
-			Console.WriteLine("Numero radiadores: "+_numeroRadiadores);
+			/*Console.WriteLine("Numero radiadores: "+_numeroRadiadores);*/
 
             Console.WriteLine("Datos blindaje: ");
             Console.WriteLine("Blindaje brazo izq : "+_BlindBrazoIzquierdo);
@@ -549,8 +549,10 @@ namespace ico {
         //METODOS PARA VER LOS ESTADOS DEL MECH
         //para estado activo, hacer una media numerica de los otros estados?¿
         public estadoGeneral estado() {
+            estadoGeneral e=estadoGeneral.Activo;
 
-            return estadoGeneral.Activo;
+
+            return e;
         }
 
         public estado estadoBrazoIzquierdo(){
