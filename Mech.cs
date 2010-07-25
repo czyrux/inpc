@@ -535,7 +535,6 @@ namespace ico {
 		}
 		
 		//Metodo que calcula la media de la distancia por armas del mech
-        //HAY QUE BUSCAR OTRA FORMA
 		private void calculoDistanciaTiro() {
 			int media=0 , larga=0 , corta=0 ;
 			for ( int i=0 ; i<_armas.Count ; i++ ) {
@@ -548,6 +547,23 @@ namespace ico {
 			_distanciaTiroMedia=media/_armas.Count;
 			_distanciaTiroLarga=larga/_armas.Count;
 		}
+
+        //indica el tipo de armadura que tiene el mech
+        public tipoMech tipo() {
+            tipoMech t;
+            float media = (_BlindBrazoIzquierdoInicial + _BlindTorsoIzquierdoInicial + _BlindPiernaIzquierdaInicial + _BlindBrazoDerechoInicial +
+                _BlindTorsoDerechoInicial + _BlindPiernaDerechaInicial + _BlindCabezaInicial + _BlindTorsoCentralInicial + _BlindAtrasTorsoCentralInicial +
+                _BlindAtrasTorsoDerechoInicial + _BlindAtrasTorsoIzquierdoInicial) / 11.0f;
+
+            if (media < 10.0) {
+                t = tipoMech.Ligero;
+            } else if (media < 20.0 && media >= 10.0) {
+                t = tipoMech.Medio;
+            } else
+                t = tipoMech.Pesado;
+
+            return t;
+        }
 
         //METODOS PARA VER LOS ESTADOS DEL MECH
         //para estado activo, hacer una media numerica de los otros estados?¿

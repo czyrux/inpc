@@ -60,6 +60,14 @@ namespace ico
     };
 
 
+    /**
+     * Enumerado utilizado para clasificar al tipo de mech segun su armadura 
+     */
+    public enum tipoMech { 
+        Ligero ,
+        Medio ,
+        Pesado ,
+    };
 
 	/**
 	 * Enumerado que define los posibles encaramientos del mech
