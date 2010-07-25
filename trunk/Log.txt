@@ -82,5 +82,5 @@ Ataque fisico (mech):
 	del mismo tipo siguen una serie de "reglas" en cuanto a puntos de armadura para hacer una clasificacion.
 	Para mech asalto: 22,63 23,63 24,45 21
 	Para mech ligeros: 7,72 2,36 4,54 7,36 6,09
-	Para mech 
-
+	Para mech medios: 13,72 15,36 7,72 12,90
+	Para mech pesados: 17,45   11,90 18,54 14,14  13,27
