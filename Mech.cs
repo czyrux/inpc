@@ -53,7 +53,7 @@ namespace ico {
         //ATRIBUTOS DE FICHERO DEFINICION
 		protected string _nombre;
 		protected string _modelo;
-		protected int _tonelados;
+		protected int _toneladas;
 		protected int _potencia;
 		protected int _numeroRadiadoresInternos;
 		protected int _numeroRadiadores;
@@ -206,7 +206,7 @@ namespace ico {
 			
 			_nombre=f.ReadLine();
 			_modelo=f.ReadLine();
-			_tonelados=Convert.ToInt32(f.ReadLine());
+			_toneladas=Convert.ToInt32(f.ReadLine());
 			_potencia=Convert.ToInt32(f.ReadLine());
 			_numeroRadiadoresInternos=Convert.ToInt32(f.ReadLine());
 			_numeroRadiadores=Convert.ToInt32(f.ReadLine());
@@ -417,7 +417,7 @@ namespace ico {
 	//METODOS GET DEFINICION
 		public string nombre() { return _nombre; }
 		public string modelo() { return _modelo; }
-		public int tonelados() { return _tonelados; }
+		public int tonelados() { return _toneladas; }
 		public int potencia() { return _potencia; }
 		public int numeroRadiadoresInternos() { return _numeroRadiadoresInternos; }
 		public int numeroRadiadores() { return _numeroRadiadores; }
@@ -490,6 +490,7 @@ namespace ico {
 			Console.WriteLine("Numero jugador:"+ _numeroJ);
 			Console.WriteLine("Nombre mech: "+_nombre);
 			Console.WriteLine("Modelo mech: "+_modelo);
+            Console.WriteLine("Tonelaje: " + _toneladas);
 			/*Console.WriteLine("operativo:" + _operativo);
 			Console.WriteLine("desconectado: "+_desconectado);
 			Console.WriteLine("atascado terreno pantanoso: "+_atascado);
