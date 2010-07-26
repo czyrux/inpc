@@ -98,5 +98,7 @@ Ataque fisico (mech):
 	teniendo en cuenta nuestro blindaje actual.
 
 	-(Angel) si lo ves acomplcado quitalo pero no lo veia descabellado.
-	-(Angel) Estube trabajando en la linea de vision, no encuentro la razon matematica que me de el numero. Si no lo logro esta noche are uno secuencial.
-	-(Angel) Estaba pensando que la funcion de linea de vision si esta en linea de vision deveria devolver 0 si no esta y un valor k de pntuacion (cerca, medio, lejos). 
+	-(Angel) Estube trabajando en la linea de vision, no encuentro la razon matematica que me de el numero. 
+	Si no lo logro esta noche are uno secuencial.
+	-(Angel) Estaba pensando que la funcion de linea de vision si esta en linea de vision deveria devolver 0 si no esta y 
+	un valor k de pntuacion (cerca, medio, lejos). 
