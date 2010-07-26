@@ -87,7 +87,7 @@ Ataque fisico (mech):
 	Podriamos hacer una clasificacion de mech en tres: ligeros, medios y asalto o pesados. Con eso creo ke bastaria. La funcion se llamara tipoMech()  en la clase mech 
 	devolvera un enum que se llame tipoMech.
 
-	-He encontrado el siguiente dato buscando por ahi. Asi que el tipo de mech nos lo va a indicar el tonelaje del mech
+	-He encontrado el siguiente dato buscando por ahi. Asi que el tipo de mech nos lo va a indicar el tonelaje del mech (eso implica que lo que habia exo antes ia no sirve ¬¬)
 		Ligeros: 20 a 35 toneladas.
 		Medios: 40 a 55 toneladas.
 		Pesados: 60 a 75 toneladas.
