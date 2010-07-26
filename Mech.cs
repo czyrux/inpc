@@ -549,7 +549,7 @@ namespace ico {
 			_distanciaTiroLarga=larga/_armas.Count;
 		}
 
-        //indica el tipo de armadura que tiene el mech
+        //indica el tipo mech
         public tipoMech tipo() {
             tipoMech t;
             /*Ligeros: 20 a 35 toneladas.
