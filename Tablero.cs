@@ -23,12 +23,12 @@ namespace ico
             {
                 StreamReader fich = new StreamReader(nombreMapa);
                 fich.ReadLine();
-                int filas = Convert.ToInt32(fich.ReadLine());
-                int columnas = Convert.ToInt32(fich.ReadLine());
-                _casillas = new Casilla[filas, columnas];
-                for (int f = 0; f < filas; f++)
+                _filas = Convert.ToInt32(fich.ReadLine());
+                _columnas = Convert.ToInt32(fich.ReadLine());
+                _casillas = new Casilla[_filas, _columnas];
+                for (int f = 0; f < _filas; f++)
                 {
-                    for (int c = 0; c < columnas; c++)
+                    for (int c = 0; c < _columnas; c++)
                     {
 
                         _casillas[f, c] = new Casilla();
@@ -91,11 +91,32 @@ namespace ico
 
         }*/
 
+        public int[,] EstaEnVision(Posicion o, Posicion d, Encaramiento dir) {
+
+            int[,] ldv= new int[2,(_filas*_columnas)];
+            Boolean continuar=true;
+            switch (dir) { 
+                case Encaramiento.Arriba:
+
+                    for (int i = 0; continuar; i++) {
+                        if (((o.fila() - i) % 2) == 0)
+                        {
+
+                        }
+                        else { 
+                        }
+                    }
+                    break;
+            }
+            return ldv;
+
+        }
         #endregion
 
         #region Privados
         private Casilla[,] _casillas;
-
+        int _filas; 
+        int _columnas;
         #region Funciones privadas
         public Casilla colindante(Casilla actual, Encaramiento direccion ) {
             Casilla devolver= null;
