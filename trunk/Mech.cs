@@ -624,8 +624,6 @@ namespace ico {
         {
             return 0;
         }
-
-        //metodo que de una porcentaje de accion?¿
 		
         #endregion
 		
