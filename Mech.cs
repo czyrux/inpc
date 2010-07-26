@@ -552,13 +552,13 @@ namespace ico {
         //indica el tipo de armadura que tiene el mech
         public tipoMech tipo() {
             tipoMech t;
-            float media = (_BlindBrazoIzquierdoInicial + _BlindTorsoIzquierdoInicial + _BlindPiernaIzquierdaInicial + _BlindBrazoDerechoInicial +
-                _BlindTorsoDerechoInicial + _BlindPiernaDerechaInicial + _BlindCabezaInicial + _BlindTorsoCentralInicial + _BlindAtrasTorsoCentralInicial +
-                _BlindAtrasTorsoDerechoInicial + _BlindAtrasTorsoIzquierdoInicial) / 11.0f;
-
-            if (media < 10.0) {
+            /*Ligeros: 20 a 35 toneladas.
+		    Medios: 40 a 55 toneladas.
+		    Pesados: 60 a 75 toneladas.
+		    Asalto: 80 a 100 toneladas.*/
+            if (_toneladas >= 20 && _toneladas <= 35) {
                 t = tipoMech.Ligero;
-            } else if (media < 20.0 && media >= 10.0) {
+            } else if (_toneladas >= 40 && _toneladas <= 55) {
                 t = tipoMech.Medio;
             } else
                 t = tipoMech.Pesado;
