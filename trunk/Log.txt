@@ -96,3 +96,5 @@ Ataque fisico (mech):
 	- Por cierto hablando con mi cuñado (esta con la practica, tiene una ya hecha) me ha dicho que lo de armadura con los ficheros lo ve un poco locura, xk lo que tenemos
 	que mirar es el nivel de blindaje actual, no ver que teniamos al principio i comparar, asike eso lo voi a kitar. E intentare medir de alguna manera nuestra salud solo
 	teniendo en cuenta nuestro blindaje actual.
+
+	-(Angel) si lo ves acomplcado quitalo pero no lo veia descabellado.
