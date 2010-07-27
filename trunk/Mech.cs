@@ -37,6 +37,8 @@ namespace ico {
 		protected int _BlindAtrasTorsoIzquierdo;
 		protected int _BlindAtrasTorsoDerecho;
 		protected int _BlindAtrasTorsoCentral;
+
+        protected int _BlindTotal;
 		
 		//puntos estructura interna
 		protected int _EstrucBrazoIzquierdo;
@@ -119,7 +121,7 @@ namespace ico {
         protected int _distanciaTiroLarga; //***
 
         //DATOS DE ARMADURA INICIALES DEL MECH
-        protected int _BlindBrazoIzquierdoInicial;
+        /*protected int _BlindBrazoIzquierdoInicial;
         protected int _BlindTorsoIzquierdoInicial;
         protected int _BlindPiernaIzquierdaInicial;
         protected int _BlindPiernaDerechaInicial;
@@ -138,7 +140,7 @@ namespace ico {
         protected int _EstrucTorsoDerechoInicial;
         protected int _EstrucBrazoDerechoInicial;
         protected int _EstrucTorsoCentralInicial;
-        protected int _EstrucCabezaInicial;
+        protected int _EstrucCabezaInicial;*/
         #endregion
 
         #region constructores
@@ -183,7 +185,9 @@ namespace ico {
 			_BlindAtrasTorsoIzquierdo=Convert.ToInt32(f.ReadLine());
 			_BlindAtrasTorsoDerecho=Convert.ToInt32(f.ReadLine());
             _BlindAtrasTorsoCentral = Convert.ToInt32(f.ReadLine());
-			
+
+            _BlindTotal = _BlindBrazoIzquierdo + _BlindTorsoIzquierdo + _BlindPiernaIzquierda + _BlindPiernaDerecha + _BlindTorsoDerecho + _BlindBrazoDerecho + _BlindTorsoCentral + _BlindCabeza + _BlindAtrasTorsoIzquierdo + _BlindAtrasTorsoDerecho + _BlindAtrasTorsoCentral;
+
 			//datos esctructura interna
 			_EstrucBrazoIzquierdo=Convert.ToInt32(f.ReadLine());
 			_EstrucTorsoIzquierdo=Convert.ToInt32(f.ReadLine());
@@ -289,7 +293,7 @@ namespace ico {
             calculoDistanciaTiro();
 		}
 
-        protected void datos_armadura_inicial() {
+        /*protected void datos_armadura_inicial() {
             //si existe el fichero con los datos de armadura iniciales del mech, lo leemos
             if (System.IO.File.Exists("armaduraInicialJ" + _numeroJ.ToString() + ".sbt")) {
                 Console.WriteLine("Existe");
@@ -368,7 +372,7 @@ namespace ico {
                 _EstrucTorsoCentralInicial = _EstrucTorsoCentral;
                 _EstrucCabezaInicial = _EstrucCabeza;
             }
-        }
+        }*/
 
 
         #endregion		
@@ -530,7 +534,7 @@ namespace ico {
             Console.WriteLine("Blindaje torso atras izq: "+_BlindAtrasTorsoIzquierdo);
             Console.WriteLine("Blindaje torso atras drcha: "+_BlindAtrasTorsoDerecho);
             Console.WriteLine("Blindaje torso central atras: "+_BlindAtrasTorsoCentral);
-            Console.WriteLine("Media de los datos es: " + (media / 11));
+            Console.WriteLine("Blindaje total: " + _BlindTotal);
 		
 			Console.WriteLine();
 		}
