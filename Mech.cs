@@ -495,15 +495,15 @@ namespace ico {
 			Console.WriteLine("Nombre mech: "+_nombre);
 			Console.WriteLine("Modelo mech: "+_modelo);
             Console.WriteLine("Tonelaje: " + _toneladas);
-			/*Console.WriteLine("operativo:" + _operativo);
+			Console.WriteLine("operativo:" + _operativo);
 			Console.WriteLine("desconectado: "+_desconectado);
 			Console.WriteLine("atascado terreno pantanoso: "+_atascado);
 			Console.WriteLine("en el suelo: "+_enSuelo);
-			Console.WriteLine("posicion fila: "+_posicion.fila()+" columna: "+_posicion.columna());
-			Console.WriteLine("lado encaramiento: "+_ladoEncaramiento);
-			Console.WriteLine("lado encaramiento torso: "+_ladoEncaramientoTorso);
+			//Console.WriteLine("posicion fila: "+_posicion.fila()+" columna: "+_posicion.columna());
+			//Console.WriteLine("lado encaramiento: "+_ladoEncaramiento);
+			//Console.WriteLine("lado encaramiento torso: "+_ladoEncaramientoTorso);
 			Console.WriteLine("nivel temperatura: "+_nivelTemp);
-			Console.WriteLine("Numero armas: "+_numeroArmas);
+			/*Console.WriteLine("Numero armas: "+_numeroArmas);
 			for ( int i=0 ; i<_armas.Count ; i++ ){
 				Console.WriteLine("Arma "+i+": "+((Componente)_armas[i]).nombre());		
 				Console.WriteLine("\tTipo Arma: "+((Componente)_armas[i]).tipoArma());
@@ -533,8 +533,8 @@ namespace ico {
             Console.WriteLine("Blindaje torso atras drcha: "+_BlindAtrasTorsoDerecho);
             Console.WriteLine("Blindaje torso central atras: "+_BlindAtrasTorsoCentral);
             Console.WriteLine("Blindaje total: " + _BlindTotal);
-		
-			Console.WriteLine();
+
+            Console.WriteLine(); Console.WriteLine();
 		}
 		
 		//Metodo que calcula la media de la distancia por armas del mech
