@@ -283,7 +283,7 @@ namespace ico {
 			_tipoRadiador=Convert.ToInt32(f.ReadLine());
 
             //Rellenamos los atributos de la armadura que tenia al inicio de partida el mech
-            datos_armadura_inicial();
+            //datos_armadura_inicial();
 
             //Calculamos la media de las armas
             calculoDistanciaTiro();
