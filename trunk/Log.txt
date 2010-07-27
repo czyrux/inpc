@@ -107,3 +107,6 @@ Ataque fisico (mech):
 	-(Antonio ) Respecto a lo de los ficheros ia esta hecho lo que pasa es que lo voi a comentar, i si mas adelante nos hace falta lo usamos.
 	- (Antonio) Voi a ver si pienso como detectar el grado de armadura, o poner algo en plan la salud del mech para saber como esta un mech para
 	actuar en consonancia (para definir una estrategia, o saber cuando ir por un contrario o algo).
+
+	-(Antonio) por cierto la funcion tipo de los mech te devuelve el tipo de mech que es: Ligero,Medio o Pesado. Al final solo e puesto estos tres
+	porque con ello vale. Lo que devuelve es un dato de tipo enum tipoMech (esta en los structs, por si quieres verlo)
