@@ -32,7 +32,7 @@ namespace ico
 			StreamReader f1, f2;
 			Mech m;
 			//variable path
-            string path ="C:/ficheros/";
+            string path = "C:/ficheros/";
 			
 			f1 = new StreamReader(path+"mechsJ"+_myJugador.ToString()+".sbt");
 			f1.ReadLine();//nombre magico fichero
