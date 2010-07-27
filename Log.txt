@@ -102,3 +102,9 @@ Ataque fisico (mech):
 	Si no lo logro esta noche are uno secuencial.
 	-(Angel) Estaba pensando que la funcion de linea de vision si esta en linea de vision deveria devolver 0 si no esta y 
 	un valor k de pntuacion (cerca, medio, lejos). 
+	- (Antonio) si con la linea de vision te refieres al cono de vision, si estaria bien que devolviera a cuando se encuentra el enemigo
+
+	-(Antonio) Para que la linea de vision¿? te refieres al cono de vision¿?
+
+	- (Antonio) Voi a ver si pienso como detectar el grado de armadura, o poner algo en plan la salud en plan global del mech o ke hacer. Para saber cuando estamos
+	dañados para 
