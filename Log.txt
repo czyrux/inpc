@@ -120,3 +120,10 @@ Ataque fisico (mech):
 	ellas no hay armas, y si te dan, no es tan peligroso como los otros sitios, que tienes radiadores, giroscopios... y es lo que creo que de verdad habria de tener
 	en cuenta. Weno ya me dices que te parece la idea. (tengo una captura de pantalla que te mando al correo pa que veas a que me refiero). REspecto a esto tambien
 	decirte que he visto en el libro que hasta con una sola pierna puedes seguir andando.
+
+	-(Angel) Perdon por no haber hecho mucho aun, me puse a pensar sobre lo de el cono pero no surgio nada 5 horas perdidas. 
+	No he tenido mucho tiempo desde que llegue (de hecho solo he tenido 2 dias normales) y uno fue ayer y el otro hoy, y bueno mañana voy a dressden
+	asi que no creo hacer nada. Tratare de ponerme al dia pero seguramente no hasta que comience la escuela de verano pusto que en 2 dias ire a berlin (otra vez).
+	Sobre lo que me dices confio en tu criterio pero todabia creo que deveriamos tener funciones que nos dijeran si podemos hacer daño mucho a una zona, 
+	tal vez simplemente una que le reste a la armadura el daño del arma y nos devuelva ese valor. Lo digo para tener idea si podemos hacer mucho daño, incluso en las piernas porque 
+	aunque no tengan nada si ellas no caminas. La funcion general esta bien, es deci la que suma todos los puntos al igal que esta bien la clasificacion.
