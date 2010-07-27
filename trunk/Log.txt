@@ -110,3 +110,12 @@ Ataque fisico (mech):
 
 	-(Antonio) por cierto la funcion tipo de los mech te devuelve el tipo de mech que es: Ligero,Medio o Pesado. Al final solo e puesto estos tres
 	porque con ello vale. Lo que devuelve es un dato de tipo enum tipoMech (esta en los structs, por si quieres verlo)
+
+	- (Antonio) Oye para ver lo del grado de salud habia pensado en sumar todos los blindajes y tener un puntuacion en plan general, y en funcion de eso
+	ya ver el estado en que se encuentra. Seria sin tener en cuenta las distintas partes. Luego podriamos tener un funcion para que nos avisara si una zona
+	se queda sin blindaje, para ver si tenemos que soltar las armas que alli estuvieran hubicadas.
+
+	- (Antonio) Respecto a lo de antes, he exo una simulacion y he visto que un mech estaba bastante mal, y todavia le quedaban muchos puntos de blindaje, debido
+	a que las piernas las tenia intactas. Digo esto xk habia pensao en a la ora de hacer la suma esa generica no añadir el blindaje de las piernas, puesto que en 
+	ellas no hay armas, y si te dan, no es tan peligroso como los otros sitios, que tienes radiadores, giroscopios... y es lo que creo que de verdad habria de tener
+	en cuenta. Weno ya me dices que te parece la idea. (tengo una captura de pantalla que te mando al correo pa que veas a que me refiero)
