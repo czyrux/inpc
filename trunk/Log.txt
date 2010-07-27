@@ -118,4 +118,5 @@ Ataque fisico (mech):
 	- (Antonio) Respecto a lo de antes, he exo una simulacion y he visto que un mech estaba bastante mal, y todavia le quedaban muchos puntos de blindaje, debido
 	a que las piernas las tenia intactas. Digo esto xk habia pensao en a la ora de hacer la suma esa generica no añadir el blindaje de las piernas, puesto que en 
 	ellas no hay armas, y si te dan, no es tan peligroso como los otros sitios, que tienes radiadores, giroscopios... y es lo que creo que de verdad habria de tener
-	en cuenta. Weno ya me dices que te parece la idea. (tengo una captura de pantalla que te mando al correo pa que veas a que me refiero)
+	en cuenta. Weno ya me dices que te parece la idea. (tengo una captura de pantalla que te mando al correo pa que veas a que me refiero). REspecto a esto tambien
+	decirte que he visto en el libro que hasta con una sola pierna puedes seguir andando.
