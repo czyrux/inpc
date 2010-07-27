@@ -86,7 +86,9 @@ namespace ico
 			_BlindAtrasTorsoIzquierdo=Convert.ToInt32(f.ReadLine());
 			_BlindAtrasTorsoDerecho=Convert.ToInt32(f.ReadLine());
 			_BlindAtrasTorsoCentral=Convert.ToInt32(f.ReadLine());
-			
+
+            _BlindTotal = _BlindBrazoIzquierdo + _BlindTorsoIzquierdo + _BlindPiernaIzquierda + _BlindPiernaDerecha + _BlindTorsoDerecho + _BlindBrazoDerecho + _BlindTorsoCentral + _BlindCabeza + _BlindAtrasTorsoIzquierdo + _BlindAtrasTorsoDerecho + _BlindAtrasTorsoCentral;
+
 			//datos esctructura interna
 			_EstrucBrazoIzquierdo=Convert.ToInt32(f.ReadLine());
 			_EstrucTorsoIzquierdo=Convert.ToInt32(f.ReadLine());
