@@ -22,9 +22,10 @@ namespace ico
     public enum estadoGeneral 
     { 
         Activo ,
-        Incapacitado,
-        Inconsciente,
-        Muerto
+        Incapacitado ,
+        Tumbado ,
+        Atascado ,
+        Desconectado
     };
 
     /*
