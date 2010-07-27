@@ -571,19 +571,20 @@ namespace ico {
         //METODOS PARA VER LOS ESTADOS DEL MECH
         //para estado activo, hacer una media numerica de los otros estados?¿
         public estadoGeneral estado() {
-            estadoGeneral e=estadoGeneral.Activo;
+            estadoGeneral e;
 
-            /*Activo ,
-        Incapacitado,
-        Inconsciente,
-        Muerto*/
-            if (_desconectado)
-            {
-                e = estadoGeneral.Muerto;
+            if ( _desconectado ) {
+                e = estadoGeneral.Desconectado;
             }
-            else if (_EstrucBrazoIzquierdo == 0 || _EstrucBrazoDerecho == 0 || _EstrucPiernaDerecha == 0 || _EstrucPiernaIzquierda == 0)
-            {
+            else if (_EstrucBrazoIzquierdo == 0 || _EstrucBrazoDerecho == 0 || _EstrucPiernaDerecha == 0 || _EstrucPiernaIzquierda == 0) {
+                //Le falta alguna extremidad
                 e = estadoGeneral.Incapacitado;
+            }
+            else if (_atascado) {
+                e = estadoGeneral.Atascado;
+            }
+            else if (_enSuelo) {
+                e = estadoGeneral.Tumbado;
             }
             else
                 e = estadoGeneral.Activo;
