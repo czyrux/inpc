@@ -104,7 +104,7 @@ Ataque fisico (mech):
 	un valor k de pntuacion (cerca, medio, lejos). 
 	- (Antonio) si con la linea de vision te refieres al cono de vision, si estaria bien que devolviera a cuando se encuentra el enemigo
 
-	-(Antonio) Para que la linea de vision¿? te refieres al cono de vision¿?
+	-(Antonio ) Respecto a lo de los ficheros ia esta hecho lo que pasa es que lo voi a comentar, i si mas adelante nos hace falta lo usamos.
 
-	- (Antonio) Voi a ver si pienso como detectar el grado de armadura, o poner algo en plan la salud en plan global del mech o ke hacer. Para saber cuando estamos
-	dañados para 
+	- (Antonio) Voi a ver si pienso como detectar el grado de armadura, o poner algo en plan la salud en plan global del mech o ke hacer. Para saber como esta un mech para
+	actuar en consonancia.
