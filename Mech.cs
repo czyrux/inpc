@@ -520,8 +520,6 @@ namespace ico {
 			Console.WriteLine("Distancia larga en media de tiro del mech: "+_distanciaTiroLarga);
 			/*Console.WriteLine("Numero radiadores: "+_numeroRadiadores);*/
 
-            float media = _BlindTorsoCentral + _BlindTorsoIzquierdo + _BlindBrazoIzquierdo + _BlindPiernaIzquierda + _BlindPiernaDerecha + _BlindBrazoDerecho + _BlindAtrasTorsoDerecho +
-                 _BlindAtrasTorsoCentral + _BlindAtrasTorsoDerecho + _BlindAtrasTorsoIzquierdo + _BlindCabeza;
             Console.WriteLine("Datos blindaje: ");
             Console.WriteLine("Blindaje brazo izq : "+_BlindBrazoIzquierdo);
             Console.WriteLine("Blindaje torso izq: "+_BlindTorsoIzquierdo);
@@ -575,6 +573,20 @@ namespace ico {
         public estadoGeneral estado() {
             estadoGeneral e=estadoGeneral.Activo;
 
+            /*Activo ,
+        Incapacitado,
+        Inconsciente,
+        Muerto*/
+            if (_desconectado)
+            {
+                e = estadoGeneral.Muerto;
+            }
+            else if (_EstrucBrazoIzquierdo == 0 || _EstrucBrazoDerecho == 0 || _EstrucPiernaDerecha == 0 || _EstrucPiernaIzquierda == 0)
+            {
+                e = estadoGeneral.Incapacitado;
+            }
+            else
+                e = estadoGeneral.Activo;
 
             return e;
         }
