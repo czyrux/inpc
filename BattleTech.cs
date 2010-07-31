@@ -82,7 +82,11 @@ namespace ico
 				if (c1!="q"){
 					p1 = new Posicion(c1);
                     Casilla aux = _tablero.Casilla(p1);
-                    _mechs[_myJugador].conoVision(aux);
+                    if (_mechs[0].conoVision(aux))
+                    {
+                        Console.WriteLine("Esta dentro");
+                    }else
+                        Console.WriteLine("No esta dentro");
 					//_tablero.casillaInfo(p1.fila(),p1.columna());
 				}else
 					fin=true;
