@@ -580,16 +580,23 @@ namespace ico {
                 else {
                     //Calculamos los limites del cono
                     if (_posicion.fila() % 2 == 0) {//posicion par
-                        jIzq = Math.Abs((_posicion.fila() - casilla.fila()) * 2 - casilla.columna());
-                        jDrcha = Math.Abs((_posicion.fila() - casilla.fila()) * 2 + casilla.columna());
+                        jIzq = (_posicion.fila() - casilla.fila()) * 2 - casilla.columna();
+                        jDrcha = (_posicion.fila() - casilla.fila()) * 2 + casilla.columna();
+                        if (jIzq < 0) jIzq = 0; if (jDrcha < 0) jDrcha = 0;
+                        Console.WriteLine("LA fila es: " + casilla.fila());
+                        Console.WriteLine("La columna izquierda es: " + jIzq + " "+((_posicion.fila() - casilla.fila()) * 2 - casilla.columna()));
+                        Console.WriteLine("La columna derecha es: " + jDrcha+" "+(_posicion.fila() - casilla.fila()) * 2 + casilla.columna());
                     }
                     else {//posicion impar
                         jIzq = Math.Abs((_posicion.fila() - casilla.fila()) * 2 - 1 - casilla.columna());
                         jDrcha = Math.Abs((_posicion.fila() - casilla.fila()) * 2 - 1 + casilla.columna());
+                        Console.WriteLine("LA fila es: " + casilla.fila());
+                        Console.WriteLine("La columna izquierda es: " + jIzq);
+                        Console.WriteLine("La columna derecha es: " + jDrcha);
                     }
 
                     //Vemos si la casilla a observar esta dentro de esos limites
-                    if (casilla.columna() > jIzq && casilla.columna() < jDrcha) {
+                    if (casilla.columna() >= jIzq && casilla.columna() <= jDrcha) {
                         enCono = true;
                     }
                     else
@@ -626,7 +633,7 @@ namespace ico {
                     }
 
                     //Vemos si la casilla a observar esta dentro de esos limites
-                    if (casilla.columna() > jIzq && casilla.columna() < jDrcha) {
+                    if (casilla.columna() >= jIzq && casilla.columna() <= jDrcha) {
                         enCono = true;
                     }
                     else
