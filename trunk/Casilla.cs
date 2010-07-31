@@ -144,18 +144,31 @@ namespace ico
             }
            
         }
+
         public Posicion posicion(){
             return _posicion;
         }
+
         public void posicion(Posicion poscion) {
             _posicion = poscion;
         }
+
+        public int fila() {
+            return _posicion.fila();
+        }
+
+        public int columna() {
+            return _posicion.columna();
+        }
+
         public heuristica heuristica() {
             return _heristica;
         }
+
         public void heuristica(heuristica value) {
             _heristica = value;
         }
+
         #endregion
 
         #region Privados

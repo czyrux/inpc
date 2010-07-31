@@ -127,3 +127,5 @@ Ataque fisico (mech):
 	Sobre lo que me dices confio en tu criterio pero todabia creo que deveriamos tener funciones que nos dijeran si podemos hacer daño mucho a una zona, 
 	tal vez simplemente una que le reste a la armadura el daño del arma y nos devuelva ese valor. Lo digo para tener idea si podemos hacer mucho daño, incluso en las piernas porque 
 	aunque no tengan nada si ellas no caminas. La funcion general esta bien, es deci la que suma todos los puntos al igal que esta bien la clasificacion.
+
+	- (Antonio) Creo haber encontrado una forma de hacer el cono de vision, voy a ver si consigo terminarla en el finde

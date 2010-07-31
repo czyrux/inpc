@@ -83,7 +83,10 @@ namespace ico
 		
 		
         public Casilla Casilla(Posicion p) {
-            return _casillas[p.fila() - 1, p.columna() - 1];
+            if (p.fila() - 1 < 0 || p.columna() - 1 < 0) {
+                return null;
+            }else
+                return _casillas[p.fila() - 1, p.columna() - 1];
         }
 
         /*public Boolean EstaEnVision(Posicion p) {

@@ -71,21 +71,19 @@ namespace ico
                     ((Mech)_mechs[i]).datos();
 			}
 			
-			string c1 , c2;
-			Posicion p1 , p2;
+			string c1 ;
+			Posicion p1 ;
 			Camino c;
 			Boolean fin=false;
 			
 			while (!fin) {
-				Console.WriteLine("Elija la casilla origen");
+				Console.WriteLine("Elija la casilla que desea averiguar si nuestro mech la ve");
 				c1=Console.ReadLine();
 				if (c1!="q"){
-					//Console.WriteLine("Elija la casilla destino");
-					//c2=Console.ReadLine();
-					
 					p1 = new Posicion(c1);
-					//p2 = new Posicion(c2);
-					_tablero.casillaInfo(p1.fila(),p1.columna());
+                    Casilla aux = _tablero.Casilla(p1);
+                    _mechs[_myJugador].conoVision(aux);
+					//_tablero.casillaInfo(p1.fila(),p1.columna());
 				}else
 					fin=true;
 			}

@@ -568,6 +568,45 @@ namespace ico {
             return t;
         }
 
+        public Boolean conoVision( Casilla c ) {
+            Boolean enCono = false;
+
+            //Si tiene el encaramiento 1
+            if ( _ladoEncaramiento == 1 ) {
+                Console.WriteLine("Mirando 1");
+                if (c.fila() < _posicion.fila()) //Si esta mas abajo que la casilla donde me encuentro
+                    enCono = false;
+
+            }//Si tiene el encaramiento 2
+            else if (_ladoEncaramiento == 2) {
+                Console.WriteLine("Mirando 2");
+
+
+            }//Si tiene el encaramiento 3
+            else if (_ladoEncaramiento == 3) {
+                Console.WriteLine("Mirando 3");
+
+
+            }//Si tiene el encaramiento 4
+            else if (_ladoEncaramiento == 4) {
+                Console.WriteLine("Mirando 4");
+
+
+            }//Si tiene el encaramiento 5
+            else if (_ladoEncaramiento == 5) {
+                Console.WriteLine("Mirando 5");
+
+
+            }//Si tiene el encaramiento 6
+            else if (_ladoEncaramiento == 6) {
+                Console.WriteLine("Mirando 6");
+
+
+            }
+
+            return enCono;
+        }
+ 
         //METODOS PARA VER LOS ESTADOS DEL MECH
         //para estado activo, hacer una media numerica de los otros estados?¿
         public estadoGeneral estado() {
