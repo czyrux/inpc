@@ -568,14 +568,35 @@ namespace ico {
             return t;
         }
 
-        public Boolean conoVision( Casilla c ) {
+        public Boolean conoVision( Casilla casilla ) {
             Boolean enCono = false;
-
+            int jIzq, jDrcha;
             //Si tiene el encaramiento 1
             if ( _ladoEncaramiento == 1 ) {
                 Console.WriteLine("Mirando 1");
-                if (c.fila() < _posicion.fila()) //Si esta mas abajo que la casilla donde me encuentro
+                if (casilla.fila() > _posicion.fila()) {//Si esta mas abajo que la casilla donde me encuentro
                     enCono = false;
+                }
+                else {
+                    //Calculamos los limites del cono
+                    if (_posicion.fila() % 2 == 0) {//posicion par
+                        jIzq = Math.Abs((_posicion.fila() - casilla.fila()) * 2 - casilla.columna());
+                        jDrcha = Math.Abs((_posicion.fila() - casilla.fila()) * 2 + casilla.columna());
+                    }
+                    else {//posicion impar
+                        jIzq = Math.Abs((_posicion.fila() - casilla.fila()) * 2 - 1 - casilla.columna());
+                        jDrcha = Math.Abs((_posicion.fila() - casilla.fila()) * 2 - 1 + casilla.columna());
+                    }
+
+                    //Vemos si la casilla a observar esta dentro de esos limites
+                    if (casilla.columna() > jIzq && casilla.columna() < jDrcha) {
+                        enCono = true;
+                    }
+                    else
+                        enCono = false;
+
+                }
+
 
             }//Si tiene el encaramiento 2
             else if (_ladoEncaramiento == 2) {
