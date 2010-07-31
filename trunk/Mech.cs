@@ -611,7 +611,28 @@ namespace ico {
             }//Si tiene el encaramiento 4
             else if (_ladoEncaramiento == 4) {
                 Console.WriteLine("Mirando 4");
+                if (casilla.fila() < _posicion.fila()) {//Si esta mas arriba que la casilla donde me encuentro
+                    enCono = false;
+                }
+                else {
+                    //Calculamos los limites del cono
+                    if (_posicion.fila() % 2 == 0) {//posicion par
+                        jIzq = Math.Abs((casilla.fila() - _posicion.fila()) * 2 - 1 - casilla.columna());
+                        jDrcha = Math.Abs((casilla.fila() - _posicion.fila()) * 2 - 1 + casilla.columna());
+                    }
+                    else {//posicion impar
+                        jIzq = Math.Abs((casilla.fila() - _posicion.fila()) * 2 - casilla.columna());
+                        jDrcha = Math.Abs((casilla.fila() - _posicion.fila()) * 2 + casilla.columna());
+                    }
 
+                    //Vemos si la casilla a observar esta dentro de esos limites
+                    if (casilla.columna() > jIzq && casilla.columna() < jDrcha) {
+                        enCono = true;
+                    }
+                    else
+                        enCono = false;
+
+                }
 
             }//Si tiene el encaramiento 5
             else if (_ladoEncaramiento == 5) {
