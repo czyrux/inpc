@@ -132,3 +132,5 @@ Ataque fisico (mech):
 	He conseguio hacer ia cuando el robot tiene encaramiento 1. Voi por los siguientes
 	Encaramiento 4, Hecho
 	Encaramiento 2, Hecho
+	Encaramiento 3, Hecho
+	Mañana lunes termino los otros dos
