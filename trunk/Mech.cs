@@ -580,21 +580,22 @@ namespace ico {
                 }
                 else {
                     //Calculamos los limites del cono
-                    if (_posicion.fila() % 2 == 0) {//posicion par
-                        jIzq = Math.Abs((_posicion.fila() - casilla.fila()) * 2 - casilla.columna());
-                        jDrcha = (_posicion.fila() - casilla.fila()) * 2 + casilla.columna();
-                        //if (jIzq < 0) jIzq = 0; if (jDrcha < 0) jDrcha = 0;
+                    //if (_posicion.fila() % 2 == 0) {//posicion par
+                        jIzq = (_posicion.fila() - casilla.fila()) * 2 - _posicion.columna();//casilla.columna();
+                        jDrcha = (_posicion.fila() - casilla.fila()) * 2 + _posicion.columna();//casilla.columna();
+                        if (jIzq < 0) jIzq = 1;
                         //Console.WriteLine("LA fila es: " + casilla.fila());
                         Console.WriteLine("Casilla limite izquierda es: " + jIzq + " " + casilla.fila());
                         Console.WriteLine("Casilla limite derecha es: " + jDrcha + " " + casilla.fila());
-                    }
+                    /*}
                     else {//posicion impar
-                        jIzq = Math.Abs((_posicion.fila() - casilla.fila()) * 2 - 1 - casilla.columna());
-                        jDrcha = Math.Abs((_posicion.fila() - casilla.fila()) * 2 - 1 + casilla.columna());
+                        jIzq = (_posicion.fila() - casilla.fila()) * 2 - 1 - casilla.columna();
+                        jDrcha = (_posicion.fila() - casilla.fila()) * 2 - 1 + casilla.columna();
+                        if (jIzq < 0) jIzq = 1;
                         //Console.WriteLine("LA fila es: " + casilla.fila());
                         Console.WriteLine("Limite izquierda es: " + jIzq+" "+casilla.fila());
                         Console.WriteLine("Limite derecha es: " + jDrcha+" "+casilla.fila());
-                    }
+                    }*/
 
                     //Vemos si la casilla a observar esta dentro de esos limites
                     if (casilla.columna() > jIzq && casilla.columna() <= jDrcha) {
