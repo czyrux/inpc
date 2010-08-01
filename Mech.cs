@@ -571,7 +571,10 @@ namespace ico {
         public Boolean conoVision( Casilla casilla ) {
             Boolean enCono = false;
             int jIzq, jDrcha;
+
             Console.WriteLine("Casilla:" + casilla.columna() + " " + casilla.fila());
+            Console.WriteLine("Nosotros:" + _posicion.columna() + " " + _posicion.fila());
+
             //Si tiene el encaramiento 1
             if ( _ladoEncaramiento == 1 ) {
                 Console.WriteLine("Mirando 1");
@@ -580,30 +583,19 @@ namespace ico {
                 }
                 else {
                     //Calculamos los limites del cono
-                    //if (_posicion.fila() % 2 == 0) {//posicion par
-                        jIzq = (_posicion.fila() - casilla.fila()) * 2 - _posicion.columna();//casilla.columna();
-                        jDrcha = (_posicion.fila() - casilla.fila()) * 2 + _posicion.columna();//casilla.columna();
-                        if (jIzq < 0) jIzq = 1;
-                        //Console.WriteLine("LA fila es: " + casilla.fila());
-                        Console.WriteLine("Casilla limite izquierda es: " + jIzq + " " + casilla.fila());
-                        Console.WriteLine("Casilla limite derecha es: " + jDrcha + " " + casilla.fila());
-                    /*}
-                    else {//posicion impar
-                        jIzq = (_posicion.fila() - casilla.fila()) * 2 - 1 - casilla.columna();
-                        jDrcha = (_posicion.fila() - casilla.fila()) * 2 - 1 + casilla.columna();
-                        if (jIzq < 0) jIzq = 1;
-                        //Console.WriteLine("LA fila es: " + casilla.fila());
-                        Console.WriteLine("Limite izquierda es: " + jIzq+" "+casilla.fila());
-                        Console.WriteLine("Limite derecha es: " + jDrcha+" "+casilla.fila());
-                    }*/
+                    jIzq = _posicion.columna() - (_posicion.fila() - casilla.fila()) * 2;
+                    jDrcha = _posicion.columna() + (_posicion.fila() - casilla.fila()) * 2;
+                    if (jIzq <= 0) jIzq = 1;
 
                     //Vemos si la casilla a observar esta dentro de esos limites
-                    if (casilla.columna() > jIzq && casilla.columna() <= jDrcha) {
-                        enCono = true;
+                    if (_posicion.columna() % 2 == 0) {//posicion pares
+                        if ((casilla.columna() >= jIzq || casilla.columna() >= jIzq - 1) && (casilla.columna() <= jDrcha || casilla.columna() <= jDrcha + 1))
+                            enCono = true;
                     }
-                    else
-                        enCono = false;
-
+                    else {//posicion impar
+                        if ((casilla.columna() >= jIzq || casilla.columna() >= jIzq + 1) && (casilla.columna() <= jDrcha || casilla.columna() <= jDrcha - 1))
+                            enCono = true;
+                    }
                 }
 
 
@@ -620,27 +612,28 @@ namespace ico {
             }//Si tiene el encaramiento 4
             else if (_ladoEncaramiento == 4) {
                 Console.WriteLine("Mirando 4");
-                if (casilla.fila() < _posicion.fila()) {//Si esta mas arriba que la casilla donde me encuentro
+                if (casilla.fila() < _posicion.fila())
+                {//Si esta mas arriba que la casilla donde me encuentro
                     enCono = false;
                 }
-                else {
+                else
+                {
                     //Calculamos los limites del cono
-                    if (_posicion.fila() % 2 == 0) {//posicion par
-                        jIzq = Math.Abs((casilla.fila() - _posicion.fila()) * 2 - 1 - casilla.columna());
-                        jDrcha = Math.Abs((casilla.fila() - _posicion.fila()) * 2 - 1 + casilla.columna());
-                    }
-                    else {//posicion impar
-                        jIzq = Math.Abs((casilla.fila() - _posicion.fila()) * 2 - casilla.columna());
-                        jDrcha = Math.Abs((casilla.fila() - _posicion.fila()) * 2 + casilla.columna());
-                    }
+                    jIzq = _posicion.columna() - (casilla.fila() - _posicion.fila()) * 2;
+                    jDrcha = _posicion.columna() + (casilla.fila() - _posicion.fila()) * 2;
+                    if (jIzq <= 0) jIzq = 1;
 
                     //Vemos si la casilla a observar esta dentro de esos limites
-                    if (casilla.columna() >= jIzq && casilla.columna() <= jDrcha) {
-                        enCono = true;
+                    if (_posicion.columna() % 2 != 0)
+                    {//posicion impares
+                        if ((casilla.columna() >= jIzq || casilla.columna() >= jIzq - 1) && (casilla.columna() <= jDrcha || casilla.columna() <= jDrcha + 1))
+                            enCono = true;
                     }
                     else
-                        enCono = false;
-
+                    {//posicion pares
+                        if ((casilla.columna() >= jIzq || casilla.columna() >= jIzq + 1) && (casilla.columna() <= jDrcha || casilla.columna() <= jDrcha - 1))
+                            enCono = true;
+                    }
                 }
 
             }//Si tiene el encaramiento 5
