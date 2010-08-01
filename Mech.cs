@@ -573,8 +573,8 @@ namespace ico {
             int jIzq, jDrcha;
 
             //Calculamos los limites del cono
-            jIzq = _posicion.columna() - (casilla.fila() - _posicion.fila()) * 2;
-            jDrcha = _posicion.columna() + (casilla.fila() - _posicion.fila()) * 2;
+            jIzq = _posicion.columna() - Math.Abs(casilla.fila() - _posicion.fila()) * 2;
+            jDrcha = _posicion.columna() + Math.Abs(casilla.fila() - _posicion.fila()) * 2;
             if (jIzq <= 0) jIzq = 1;
 
             Console.WriteLine("Casilla:" + casilla.columna() + " " + casilla.fila());
@@ -632,7 +632,29 @@ namespace ico {
             }//Si tiene el encaramiento 3
             else if (_ladoEncaramiento == 3) {
                 Console.WriteLine("Mirando 3");
-
+                if (casilla.columna() < _posicion.columna())
+                {//Si esta mas a la izquierda que la casilla donde me encuentro
+                    enCono = false;
+                }
+                else if (casilla.fila() >= _posicion.fila())
+                {
+                    //Vemos esta en la zona inferior
+                    enCono = true;
+                }
+                else
+                {
+                    //Vemos si la casilla a observar esta dentro de esos limites
+                    if (_posicion.columna() % 2 == 0)
+                    {//posicion pares
+                        if (casilla.columna() >= jDrcha || casilla.columna() >= jDrcha + 1)
+                            enCono = true;
+                    }
+                    else
+                    {//posicion impar
+                        if  (casilla.columna() >= jDrcha || casilla.columna() >= jDrcha - 1)
+                            enCono = true;
+                    }
+                }
 
             }//Si tiene el encaramiento 4
             else if (_ladoEncaramiento == 4) {
@@ -664,7 +686,32 @@ namespace ico {
             }//Si tiene el encaramiento 5
             else if (_ladoEncaramiento == 5) {
                 Console.WriteLine("Mirando 5");
-
+                if (casilla.columna() < _posicion.columna())
+                {//Si esta mas a la izquierda que la casilla donde me encuentro
+                    enCono = false;
+                }
+                else if (casilla.fila() >= _posicion.fila())
+                {
+                    //Vemos esta en la zona inferior
+                    enCono = true;
+                }
+                else
+                {
+                    Console.WriteLine("Estamos en la parte superior");
+                    Console.WriteLine("Borde:" + jDrcha + " " + casilla.fila());
+                    Console.WriteLine("Borde:" + jIzq + " " + casilla.fila());
+                    //Vemos si la casilla a observar esta dentro de esos limites
+                    if (_posicion.columna() % 2 == 0)
+                    {//posicion pares
+                        if ((casilla.columna() >= jIzq || casilla.columna() >= jIzq - 1))
+                            enCono = true;
+                    }
+                    else
+                    {//posicion impar
+                        if ((casilla.columna() >= jIzq || casilla.columna() >= jIzq + 1))
+                            enCono = true;
+                    }
+                }
 
             }//Si tiene el encaramiento 6
             else if (_ladoEncaramiento == 6) {
