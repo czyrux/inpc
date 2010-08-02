@@ -543,6 +543,7 @@ namespace ico {
             Console.WriteLine("Blindaje torso atras drcha: "+_BlindAtrasTorsoDerecho);
             Console.WriteLine("Blindaje torso central atras: "+_BlindAtrasTorsoCentral);
             Console.WriteLine("Blindaje total: " + _BlindTotal);
+            estadoBlindajeMech();
 
             Console.WriteLine(); Console.WriteLine();
 		}
@@ -755,6 +756,29 @@ namespace ico {
                 e = situacion.Activo;
 
             return e;
+        }
+
+        //METODOS PARA VER EL BLINDAJE DEL MECH
+        public estadoBlindaje estadoBlindajeMech() 
+        {
+            estadoBlindaje e;
+            int[] puntos = new int[11] ;
+
+            //Vemos los datos de las diferentes partes
+            puntos[0] = ((int)estadoBrazoIzquierdo())*2;
+            puntos[1] = ((int)estadoTorsoIzquierdo()) * 2;
+            puntos[2] = ((int)estadoPiernaIzquierda()) * 2;
+            puntos[3] = ((int)estadoPiernaDerecha()) * 2;
+            puntos[4] = ((int)estadoTorsoDerecho()) * 2;
+            puntos[5] = ((int)estadoBrazoDerecho()) * 2;
+            puntos[6] = ((int)estadoTorsoCentral()) * 2;
+            puntos[7] = ((int)estadoCabeza()) * 2;
+            puntos[8] = ((int)estadoAtrasTorsoIzquierdo()) * 2;
+            puntos[9] = ((int)estadoAtrasTorsoDerecho()) * 2;
+            puntos[10] = ((int)estadoAtrasTorsoCentral()) * 2;
+
+
+            return 0;
         }
 
         public estadoBlindaje estadoBrazoIzquierdo()
