@@ -757,53 +757,77 @@ namespace ico {
             return e;
         }
 
-        public estado estadoBrazoIzquierdo(){
+        /*public enum estado
+        {
+            Excelente, //100%
+            Bueno, //80%
+            Herido, //50%
+            Malherido, //30%
+            Critico, //15%
+            Inutilizado//0%
+        };*/
+        public estado estadoBrazoIzquierdo()
+        {
+            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
             return 0;
         }
 
-        public estado estadoTorsoIzquierdo() {
+        public estado estadoTorsoIzquierdo() 
+        {
+            int heridas = _BlindTorsoIzquierdo * 100 / _BlindTorsoIzquierdoInicial;
             return 0;
         }
-        public estado estadoPiernaIzquierda () {
+        public estado estadoPiernaIzquierda () 
+        {
+            int heridas = _BlindPiernaIzquierda * 100 / _BlindPiernaIzquierdaInicial;
             return 0;
         }
 
-        public estado estadoPiernaDerecha() {
+        public estado estadoPiernaDerecha() 
+        {
+            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
             return 0;
         }
 
         public estado estadoTorsoDerecho()
         {
+            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
             return 0;
         }
 
         public estado estadoBrazoDerecho()
         {
+            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
             return 0;
         }
 
         public estado estadoTorsoCentral()
         {
+            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
             return 0;
         }
 
         public estado estadoCabeza()
         {
+            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
             return 0;
         }
 
         public estado estadoAtrasTorsoIzquierdo()
         {
+            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
             return 0;
         }
 
         public estado estadoAtrasTorsoDerecho()
         {
+            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
             return 0;
         }
 
         public estado estadoAtrasTorsoCentral()
         {
+            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
             return 0;
         }
 		
