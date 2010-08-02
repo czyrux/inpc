@@ -121,7 +121,7 @@ namespace ico {
         protected int _distanciaTiroLarga; //***
 
         //DATOS DE ARMADURA INICIALES DEL MECH
-        /*protected int _BlindBrazoIzquierdoInicial;
+        protected int _BlindBrazoIzquierdoInicial;
         protected int _BlindTorsoIzquierdoInicial;
         protected int _BlindPiernaIzquierdaInicial;
         protected int _BlindPiernaDerechaInicial;
@@ -133,7 +133,7 @@ namespace ico {
         protected int _BlindAtrasTorsoDerechoInicial;
         protected int _BlindAtrasTorsoCentralInicial;
 
-        protected int _EstrucBrazoIzquierdoInicial;
+        /*protected int _EstrucBrazoIzquierdoInicial;
         protected int _EstrucTorsoIzquierdoInicial;
         protected int _EstrucPiernaIzquierdaInicial;
         protected int _EstrucPiernaDerechaInicial;
@@ -287,44 +287,54 @@ namespace ico {
 			_tipoRadiador=Convert.ToInt32(f.ReadLine());
 
             //Rellenamos los atributos de la armadura que tenia al inicio de partida el mech
-            //datos_armadura_inicial();
+            datos_armadura_inicial();
 
             //Calculamos la media de las armas
             calculoDistanciaTiro();
 		}
 
-        /*protected void datos_armadura_inicial() {
+        protected void datos_armadura_inicial() {
+            bool nuevo = true;
             //si existe el fichero con los datos de armadura iniciales del mech, lo leemos
             if (System.IO.File.Exists("armaduraInicialJ" + _numeroJ.ToString() + ".sbt")) {
-                Console.WriteLine("Existe");
                 StreamReader f = new StreamReader("armaduraInicialJ" + _numeroJ.ToString() + ".sbt");
-                _BlindBrazoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
-                _BlindTorsoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
-                _BlindPiernaIzquierdaInicial = Convert.ToInt32(f.ReadLine());
-                _BlindPiernaDerechaInicial = Convert.ToInt32(f.ReadLine());
-                _BlindTorsoDerechoInicial = Convert.ToInt32(f.ReadLine());
-                _BlindBrazoDerechoInicial = Convert.ToInt32(f.ReadLine());
-                _BlindTorsoCentralInicial = Convert.ToInt32(f.ReadLine());
-                _BlindCabezaInicial = Convert.ToInt32(f.ReadLine());
-                _BlindAtrasTorsoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
-                _BlindAtrasTorsoDerechoInicial = Convert.ToInt32(f.ReadLine());
-                _BlindAtrasTorsoCentralInicial = Convert.ToInt32(f.ReadLine());
+                string nombre=f.ReadLine();
+                //si no es el mismo modelo de mech es el fichero de otro mech de una partida anterior
+                if (_nombre == nombre) nuevo = false;
 
-                _EstrucBrazoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
+                if (!nuevo)
+                {
+                    _BlindBrazoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
+                    _BlindTorsoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
+                    _BlindPiernaIzquierdaInicial = Convert.ToInt32(f.ReadLine());
+                    _BlindPiernaDerechaInicial = Convert.ToInt32(f.ReadLine());
+                    _BlindTorsoDerechoInicial = Convert.ToInt32(f.ReadLine());
+                    _BlindBrazoDerechoInicial = Convert.ToInt32(f.ReadLine());
+                    _BlindTorsoCentralInicial = Convert.ToInt32(f.ReadLine());
+                    _BlindCabezaInicial = Convert.ToInt32(f.ReadLine());
+                    _BlindAtrasTorsoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
+                    _BlindAtrasTorsoDerechoInicial = Convert.ToInt32(f.ReadLine());
+                    _BlindAtrasTorsoCentralInicial = Convert.ToInt32(f.ReadLine());
+                }
+                /*_EstrucBrazoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
                 _EstrucTorsoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
                 _EstrucPiernaIzquierdaInicial = Convert.ToInt32(f.ReadLine());
                 _EstrucPiernaDerechaInicial = Convert.ToInt32(f.ReadLine());
                 _EstrucTorsoDerechoInicial = Convert.ToInt32(f.ReadLine());
                 _EstrucBrazoDerechoInicial = Convert.ToInt32(f.ReadLine());
                 _EstrucTorsoCentralInicial = Convert.ToInt32(f.ReadLine());
-                _EstrucCabezaInicial = Convert.ToInt32(f.ReadLine());
+                _EstrucCabezaInicial = Convert.ToInt32(f.ReadLine());*/
+
+                //Cerramos el fichero
                 f.Close();
             }
-            else { //en caso opuesto lo creamos
+            
+            if (nuevo) { //en caso opuesto lo creamos
 
                 StreamWriter f = new StreamWriter("armaduraInicialJ" + _numeroJ.ToString() + ".sbt");
-                Console.WriteLine("No Existe");
                 //escribimos los atributos
+                //escribimos el modelo de mech
+                f.WriteLine(_nombre);
                 //puntos blindaje
                 f.WriteLine(_BlindBrazoIzquierdo);
                 f.WriteLine(_BlindTorsoIzquierdo);
@@ -339,14 +349,14 @@ namespace ico {
                 f.WriteLine(_BlindAtrasTorsoCentral);
 
                 //puntos estructura interna
-                f.WriteLine(_EstrucBrazoIzquierdo);
+                /*f.WriteLine(_EstrucBrazoIzquierdo);
                 f.WriteLine(_EstrucTorsoIzquierdo);
                 f.WriteLine(_EstrucPiernaIzquierda);
                 f.WriteLine(_EstrucPiernaDerecha);
                 f.WriteLine(_EstrucTorsoDerecho);
                 f.WriteLine(_EstrucBrazoDerecho);
                 f.WriteLine(_EstrucTorsoCentral);
-                f.WriteLine(_EstrucCabeza);
+                f.WriteLine(_EstrucCabeza);*/
 
                 f.Close();
 
@@ -363,16 +373,16 @@ namespace ico {
                 _BlindAtrasTorsoDerechoInicial = _BlindAtrasTorsoDerecho;
                 _BlindAtrasTorsoCentralInicial = _BlindAtrasTorsoCentral;
 
-                _EstrucBrazoIzquierdoInicial = _EstrucBrazoIzquierdo;
+                /*_EstrucBrazoIzquierdoInicial = _EstrucBrazoIzquierdo;
                 _EstrucTorsoIzquierdoInicial = _EstrucTorsoIzquierdo;
                 _EstrucPiernaIzquierdaInicial = _EstrucPiernaIzquierda;
                 _EstrucPiernaDerechaInicial = _EstrucPiernaDerecha;
                 _EstrucTorsoDerechoInicial = _EstrucTorsoDerecho;
                 _EstrucBrazoDerechoInicial = _EstrucBrazoDerecho;
                 _EstrucTorsoCentralInicial = _EstrucTorsoCentral;
-                _EstrucCabezaInicial = _EstrucCabeza;
+                _EstrucCabezaInicial = _EstrucCabeza;*/
             }
-        }*/
+        }
 
 
         #endregion		

@@ -147,3 +147,15 @@ Ataque fisico (mech):
 		- torsos traseros y cabeza: x 3
 		- torso central: x 4 (he puesto esto porque esta zona si se destruye el mech muere)
 	Que te parece?¿ Para esto voi a tener que usar lo de los ficheros de la armadura inicial, pero weno.... Voi a ver si consigo implementarlo
+		
+	- (Antonio )Mira que valores para las zonas:
+			Excelente, //100%
+			Bueno, //80%
+			Herido, //50%
+			Malherido, //30%
+			Critico, //15%
+			Inutilizado//0%
+
+	- (Antonio) He resuelto el problema de tener que borrar luego los ficheros de armadura a mano por lo de que para otra partida no sabiamos si eran
+	nuestros datos o de otro robot de una partida antigua. Para ello lo que hago es meter el modelo de robot en el fichero, asi si al leer es de un modelo
+	antiguo, cambiamos los datos.
