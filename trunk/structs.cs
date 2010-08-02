@@ -17,9 +17,9 @@ namespace ico
     };
 
     /*
-     * Enumerado que define los posibles estados en que puede encontrarse un mech 
+     * Enumerado que define los posibles situaciones en que puede encontrarse un mech 
      */
-    public enum estadoGeneral 
+    public enum situacion 
     { 
         Activo ,
         Incapacitado ,
@@ -29,16 +29,15 @@ namespace ico
     };
 
     /*
-     * Enumerado que define los posibles estados de una zona del cuerpo de un mech 
+     * Enumerado que define los posibles estados del blindaje de una zona del mech 
      */
-    public enum estado
+    public enum estadoBlindaje
     {
-        Excelente, //100%
-        Bueno, //80%
-        Herido, //50%
-        Malherido, //30%
-        Critico, //15%
-        Inutilizado//0%
+        Excelente, //100%-80%
+        Bueno, //80%-50%
+        Medio, //50%-20%
+        Malo, //20%-0%
+        Nulo//0%
     };
 
 
@@ -46,12 +45,12 @@ namespace ico
      * Estructura usada para conocer el estado de las distintas partes de un mech
      */
     public struct vitalidad 
-    { 
-        public estado brazoIzquierdo;
-		public estado torsoIzquierdo;
-		public estado piernaIzquierda;
-		public estado piernaDerecha;
-		public estado torsoDerecho;
+    {
+        public estadoBlindaje brazoIzquierdo;
+        public estadoBlindaje torsoIzquierdo;
+        public estadoBlindaje piernaIzquierda;
+        public estadoBlindaje piernaDerecha;
+        public estadoBlindaje torsoDerecho;
 		public estado brazoDerecho;
 		public estado torsoCentral;
 		public estado cabeza;
