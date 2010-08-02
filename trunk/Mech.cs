@@ -762,23 +762,36 @@ namespace ico {
         public estadoBlindaje estadoBlindajeMech() 
         {
             estadoBlindaje e;
-            int[] puntos = new int[11] ;
+            int[] puntos = new int[10] ;
+            float media = 0;
+            int media2=0;
 
             //Vemos los datos de las diferentes partes
-            puntos[0] = ((int)estadoBrazoIzquierdo())*2;
-            puntos[1] = ((int)estadoTorsoIzquierdo()) * 2;
-            puntos[2] = ((int)estadoPiernaIzquierda()) * 2;
-            puntos[3] = ((int)estadoPiernaDerecha()) * 2;
-            puntos[4] = ((int)estadoTorsoDerecho()) * 2;
-            puntos[5] = ((int)estadoBrazoDerecho()) * 2;
-            puntos[6] = ((int)estadoTorsoCentral()) * 2;
-            puntos[7] = ((int)estadoCabeza()) * 2;
-            puntos[8] = ((int)estadoAtrasTorsoIzquierdo()) * 2;
-            puntos[9] = ((int)estadoAtrasTorsoDerecho()) * 2;
-            puntos[10] = ((int)estadoAtrasTorsoCentral()) * 2;
+            puntos[0] = ((int)estadoBrazoIzquierdo())*3;
+            puntos[1] = ((int)estadoTorsoIzquierdo()) * 3;
+            puntos[2] = ((int)estadoPiernaIzquierda()) * 1;
+            puntos[3] = ((int)estadoPiernaDerecha()) * 1;
+            puntos[4] = ((int)estadoTorsoDerecho()) * 3;
+            puntos[5] = ((int)estadoBrazoDerecho()) * 3;
+            puntos[6] = ((int)estadoTorsoCentral()) * 4;
+            //puntos[10] = ((int)estadoCabeza()) * 3;
+            puntos[7] = ((int)estadoAtrasTorsoIzquierdo()) * 2;
+            puntos[8] = ((int)estadoAtrasTorsoDerecho()) * 2;
+            puntos[9] = ((int)estadoAtrasTorsoCentral()) * 2;
+
+            for (int i = 0; i < 10; i++)
+            {
+                //Console.WriteLine("zona " + i + ": " + puntos[i]);
+                media += puntos[i];
+                media2 += puntos[i];
+            }
+            media /= 24;
+            media2 /= 24;
+            Console.WriteLine("La media es: " + media);
+            Console.WriteLine("La media truncada es: " + media2);
 
 
-            return 0;
+                return 0;
         }
 
         public estadoBlindaje estadoBrazoIzquierdo()
@@ -806,6 +819,7 @@ namespace ico {
             else
                 e = estadoBlindaje.Nulo;
 
+            Console.WriteLine("estado brazo izq " + e);
             return e;
         }
 
@@ -833,7 +847,7 @@ namespace ico {
             }
             else
                 e = estadoBlindaje.Nulo;
-
+            Console.WriteLine("estado torso izq " + e);
             return e;
         }
 
@@ -861,7 +875,7 @@ namespace ico {
             }
             else
                 e = estadoBlindaje.Nulo;
-
+            Console.WriteLine("estado pierna izq " + e);
             return e;
         }
 
@@ -889,7 +903,7 @@ namespace ico {
             }
             else
                 e = estadoBlindaje.Nulo;
-
+            Console.WriteLine("estado pierna drcha " + e);
             return e;
         }
 
@@ -917,7 +931,7 @@ namespace ico {
             }
             else
                 e = estadoBlindaje.Nulo;
-
+            Console.WriteLine("estado torso drcha " + e);
             return e;
         }
 
@@ -945,7 +959,7 @@ namespace ico {
             }
             else
                 e = estadoBlindaje.Nulo;
-
+            Console.WriteLine("estado brazo drcha " + e);
             return e;
         }
 
@@ -973,7 +987,7 @@ namespace ico {
             }
             else
                 e = estadoBlindaje.Nulo;
-
+            Console.WriteLine("estado torso central " + e);
             return e;
         }
 
@@ -1001,7 +1015,7 @@ namespace ico {
             }
             else
                 e = estadoBlindaje.Nulo;
-
+            Console.WriteLine("estado cabeza " + e);
             return e;
         }
 
@@ -1029,7 +1043,7 @@ namespace ico {
             }
             else
                 e = estadoBlindaje.Nulo;
-
+            Console.WriteLine("estado atras izq " + e);
             return e;
         }
 
@@ -1057,7 +1071,7 @@ namespace ico {
             }
             else
                 e = estadoBlindaje.Nulo;
-
+            Console.WriteLine("estado atras drcha " + e);
             return e;
         }
 
@@ -1085,10 +1099,10 @@ namespace ico {
             }
             else
                 e = estadoBlindaje.Nulo;
-
+            Console.WriteLine("estado atras central " + e);
             return e;
         }
-		
+
         #endregion
 		
 	}

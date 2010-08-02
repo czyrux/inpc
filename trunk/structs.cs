@@ -33,7 +33,7 @@ namespace ico
      */
     public enum estadoBlindaje
     {
-        Excelente=0, //100%-80%
+        Excelente=1, //100%-80%
         Bueno, //80%-50%
         Medio, //50%-20%
         Malo, //20%-0%
