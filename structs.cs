@@ -33,12 +33,12 @@ namespace ico
      */
     public enum estado
     {
-        Excelente,
-        Bueno,
-        Herido,
-        Malherido,
-        Critico,
-        Inutilizado
+        Excelente, //100%
+        Bueno, //80%
+        Herido, //50%
+        Malherido, //30%
+        Critico, //15%
+        Inutilizado//0%
     };
 
 
