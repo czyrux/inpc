@@ -33,7 +33,7 @@ namespace ico
      */
     public enum estadoBlindaje
     {
-        Excelente, //100%-80%
+        Excelente=0, //100%-80%
         Bueno, //80%-50%
         Medio, //50%-20%
         Malo, //20%-0%
@@ -51,12 +51,12 @@ namespace ico
         public estadoBlindaje piernaIzquierda;
         public estadoBlindaje piernaDerecha;
         public estadoBlindaje torsoDerecho;
-		public estado brazoDerecho;
-		public estado torsoCentral;
-		public estado cabeza;
-		public estado atrasTorsoIzquierdo;
-		public estado atrasTorsoDerecho;
-		public estado atrasTorsoCentral;
+        public estadoBlindaje brazoDerecho;
+        public estadoBlindaje torsoCentral;
+        public estadoBlindaje cabeza;
+        public estadoBlindaje atrasTorsoIzquierdo;
+        public estadoBlindaje atrasTorsoDerecho;
+        public estadoBlindaje atrasTorsoCentral;
     };
 
 
