@@ -135,7 +135,8 @@ Ataque fisico (mech):
 	Encaramiento 3, Hecho
 	Mañana lunes termino los otros dos
 	Encaramiento 5 y 6 , HECHO
-	CONO TERMINADO ^^
+	CONO TERMINADO ^^ ha sido un coñazo enorme, pero ia esta, la funcion se tiene la siguiente cabecera y esta en mech, por si quieres verla:
+		 public Boolean conoVision( Casilla casilla )
 
 	- (Antonio) Te voi a explicar lo que se me ha ocurrido hacer para ver el estado de salud. He pensado primero, en ver cada zona de forma independiente, y ver, en funcion
 	de los puntos que tenga esa zona como me encuentro ( en una pierna el 100% es 30 puntos de golpe, mientras que la cabeza el 100% es 9). Luego una vez recogidos estos datos
@@ -145,4 +146,4 @@ Ataque fisico (mech):
 		- brazos y torsos delantero: x 2
 		- torsos traseros y cabeza: x 3
 		- torso central: x 4 (he puesto esto porque esta zona si se destruye el mech muere)
-	Que te parece?¿ Para esto voi a tener que usar lo de la armadura inicial, pero weno.... Voi a ver si consigo implementarlo
+	Que te parece?¿ Para esto voi a tener que usar lo de los ficheros de la armadura inicial, pero weno.... Voi a ver si consigo implementarlo
