@@ -785,49 +785,49 @@ namespace ico {
 
         public estado estadoPiernaDerecha() 
         {
-            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
+            int heridas = _BlindPiernaDerecha * 100 / _BlindPiernaDerechaInicial;
             return 0;
         }
 
         public estado estadoTorsoDerecho()
         {
-            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
+            int heridas = _BlindTorsoDerecho * 100 / _BlindTorsoDerechoInicial;
             return 0;
         }
 
         public estado estadoBrazoDerecho()
         {
-            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
+            int heridas = _BlindBrazoDerecho * 100 / _BlindBrazoDerechoInicial;
             return 0;
         }
 
         public estado estadoTorsoCentral()
         {
-            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
+            int heridas = _BlindTorsoCentral * 100 / _BlindTorsoCentralInicial;
             return 0;
         }
 
         public estado estadoCabeza()
         {
-            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
+            int heridas = _BlindCabeza * 100 / _BlindCabezaInicial;
             return 0;
         }
 
         public estado estadoAtrasTorsoIzquierdo()
         {
-            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
+            int heridas = _BlindAtrasTorsoIzquierdo * 100 / _BlindAtrasTorsoIzquierdoInicial;
             return 0;
         }
 
         public estado estadoAtrasTorsoDerecho()
         {
-            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
+            int heridas = _BlindAtrasTorsoDerecho * 100 / _BlindAtrasTorsoDerechoInicial;
             return 0;
         }
 
         public estado estadoAtrasTorsoCentral()
         {
-            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
+            int heridas = _BlindAtrasTorsoCentral * 100 / _BlindAtrasTorsoCentralInicial;
             return 0;
         }
 		
