@@ -143,8 +143,8 @@ Ataque fisico (mech):
 	hacer una especie de media entre las posiciones. Ahora bien, como hay zonas mas importantes habia pensao en que algunas zonas tengan mas valor que otras. Asi por ejemplo,
 	habia pensao que:
 		- piernas : x1
-		- brazos y torsos delantero: x 2
-		- torsos traseros y cabeza: x 3
+		- brazos, torsos delantero y traseros: x 2
+		- cabeza: x 3
 		- torso central: x 4 (he puesto esto porque esta zona si se destruye el mech muere)
 	Que te parece?¿ Para esto voi a tener que usar lo de los ficheros de la armadura inicial, pero weno.... Voi a ver si consigo implementarlo
 
@@ -162,3 +162,5 @@ Ataque fisico (mech):
 	- (Antonio) He resuelto el problema de tener que borrar luego los ficheros de armadura a mano por lo de que para otra partida no sabiamos si eran
 	nuestros datos o de otro robot de una partida antigua. Para ello lo que hago es meter el nombre del mech en el fichero, asi si al leer es de un nombre
 	antiguo, cambiamos los datos.
+
+	-(Antonio) Estoy intentando resolver el problema de como dar valores a cada zona segun importancia, ya que no encuentro una reparticion que me convenza.
