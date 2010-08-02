@@ -735,136 +735,334 @@ namespace ico {
  
         //METODOS PARA VER LOS ESTADOS DEL MECH
         //para estado activo, hacer una media numerica de los otros estados?¿
-        public estadoGeneral situacionGeneral() {
-            estadoGeneral e;
+        public situacion situacionMech() {
+            situacion e;
 
             if ( _desconectado ) {
-                e = estadoGeneral.Desconectado;
+                e = situacion.Desconectado;
             }
             else if (_EstrucBrazoIzquierdo == 0 || _EstrucBrazoDerecho == 0 || _EstrucPiernaDerecha == 0 || _EstrucPiernaIzquierda == 0) {
                 //Le falta alguna extremidad
-                e = estadoGeneral.Incapacitado;
+                e = situacion.Incapacitado;
             }
             else if (_atascado) {
-                e = estadoGeneral.Atascado;
+                e = situacion.Atascado;
             }
             else if (_enSuelo) {
-                e = estadoGeneral.Tumbado;
+                e = situacion.Tumbado;
             }
             else
-                e = estadoGeneral.Activo;
+                e = situacion.Activo;
 
             return e;
         }
 
-        /*public enum estado
+        public estadoBlindaje estadoBrazoIzquierdo()
         {
-            Excelente, //100%
-            Bueno, //80%
-            Herido, //50%
-            Malherido, //30%
-            Critico, //15%
-            Inutilizado//0%
-        };*/
-        public estado estadoBrazoIzquierdo()
-        {
-            estado e;
+            estadoBlindaje e;
             int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
 
             //Vemos el estado en que se encuentra
             if (heridas > 80)
             {
-                e = estado.Excelente;
+                e = estadoBlindaje.Excelente;
             }
             else if (heridas > 50)
             {
-                e = estado.Bueno;
+                e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 30)
+            else if (heridas > 20)
             {
-                e = estado.Herido;
-            }
-            else if (heridas > 15)
-            {
-                e = estado.Malherido;
+                e = estadoBlindaje.Medio;
             }
             else if (heridas > 0)
             {
-                e = estado.Critico;
+                e = estadoBlindaje.Malo;
             }
             else
-                e = estado.Inutilizado;
+                e = estadoBlindaje.Nulo;
 
             return e;
         }
 
-        public estado estadoTorsoIzquierdo() 
+        public estadoBlindaje estadoTorsoIzquierdo() 
         {
-            estado e;
+            estadoBlindaje e;
             int heridas = _BlindTorsoIzquierdo * 100 / _BlindTorsoIzquierdoInicial;
-            return 0;
+
+            //Vemos el estado en que se encuentra
+            if (heridas > 80)
+            {
+                e = estadoBlindaje.Excelente;
+            }
+            else if (heridas > 50)
+            {
+                e = estadoBlindaje.Bueno;
+            }
+            else if (heridas > 20)
+            {
+                e = estadoBlindaje.Medio;
+            }
+            else if (heridas > 0)
+            {
+                e = estadoBlindaje.Malo;
+            }
+            else
+                e = estadoBlindaje.Nulo;
+
+            return e;
         }
-        public estado estadoPiernaIzquierda () 
+
+        public estadoBlindaje estadoPiernaIzquierda() 
         {
-            estado e;
+            estadoBlindaje e;
             int heridas = _BlindPiernaIzquierda * 100 / _BlindPiernaIzquierdaInicial;
-            return 0;
+
+            //Vemos el estado en que se encuentra
+            if (heridas > 80)
+            {
+                e = estadoBlindaje.Excelente;
+            }
+            else if (heridas > 50)
+            {
+                e = estadoBlindaje.Bueno;
+            }
+            else if (heridas > 20)
+            {
+                e = estadoBlindaje.Medio;
+            }
+            else if (heridas > 0)
+            {
+                e = estadoBlindaje.Malo;
+            }
+            else
+                e = estadoBlindaje.Nulo;
+
+            return e;
         }
 
-        public estado estadoPiernaDerecha() 
+        public estadoBlindaje estadoPiernaDerecha() 
         {
-            estado e;
+            estadoBlindaje e;
             int heridas = _BlindPiernaDerecha * 100 / _BlindPiernaDerechaInicial;
-            return 0;
+
+            //Vemos el estado en que se encuentra
+            if (heridas > 80)
+            {
+                e = estadoBlindaje.Excelente;
+            }
+            else if (heridas > 50)
+            {
+                e = estadoBlindaje.Bueno;
+            }
+            else if (heridas > 20)
+            {
+                e = estadoBlindaje.Medio;
+            }
+            else if (heridas > 0)
+            {
+                e = estadoBlindaje.Malo;
+            }
+            else
+                e = estadoBlindaje.Nulo;
+
+            return e;
         }
 
-        public estado estadoTorsoDerecho()
+        public estadoBlindaje estadoTorsoDerecho()
         {
-            estado e;
+            estadoBlindaje e;
             int heridas = _BlindTorsoDerecho * 100 / _BlindTorsoDerechoInicial;
-            return 0;
+
+            //Vemos el estado en que se encuentra
+            if (heridas > 80)
+            {
+                e = estadoBlindaje.Excelente;
+            }
+            else if (heridas > 50)
+            {
+                e = estadoBlindaje.Bueno;
+            }
+            else if (heridas > 20)
+            {
+                e = estadoBlindaje.Medio;
+            }
+            else if (heridas > 0)
+            {
+                e = estadoBlindaje.Malo;
+            }
+            else
+                e = estadoBlindaje.Nulo;
+
+            return e;
         }
 
-        public estado estadoBrazoDerecho()
+        public estadoBlindaje estadoBrazoDerecho()
         {
-            estado e;
+            estadoBlindaje e;
             int heridas = _BlindBrazoDerecho * 100 / _BlindBrazoDerechoInicial;
-            return 0;
+
+            //Vemos el estado en que se encuentra
+            if (heridas > 80)
+            {
+                e = estadoBlindaje.Excelente;
+            }
+            else if (heridas > 50)
+            {
+                e = estadoBlindaje.Bueno;
+            }
+            else if (heridas > 20)
+            {
+                e = estadoBlindaje.Medio;
+            }
+            else if (heridas > 0)
+            {
+                e = estadoBlindaje.Malo;
+            }
+            else
+                e = estadoBlindaje.Nulo;
+
+            return e;
         }
 
-        public estado estadoTorsoCentral()
+        public estadoBlindaje estadoTorsoCentral()
         {
-            estado e;
+            estadoBlindaje e;
             int heridas = _BlindTorsoCentral * 100 / _BlindTorsoCentralInicial;
-            return 0;
+
+            //Vemos el estado en que se encuentra
+            if (heridas > 80)
+            {
+                e = estadoBlindaje.Excelente;
+            }
+            else if (heridas > 50)
+            {
+                e = estadoBlindaje.Bueno;
+            }
+            else if (heridas > 20)
+            {
+                e = estadoBlindaje.Medio;
+            }
+            else if (heridas > 0)
+            {
+                e = estadoBlindaje.Malo;
+            }
+            else
+                e = estadoBlindaje.Nulo;
+
+            return e;
         }
 
-        public estado estadoCabeza()
+        public estadoBlindaje estadoCabeza()
         {
-            estado e;
+            estadoBlindaje e;
             int heridas = _BlindCabeza * 100 / _BlindCabezaInicial;
-            return 0;
+
+            //Vemos el estado en que se encuentra
+            if (heridas > 80)
+            {
+                e = estadoBlindaje.Excelente;
+            }
+            else if (heridas > 50)
+            {
+                e = estadoBlindaje.Bueno;
+            }
+            else if (heridas > 20)
+            {
+                e = estadoBlindaje.Medio;
+            }
+            else if (heridas > 0)
+            {
+                e = estadoBlindaje.Malo;
+            }
+            else
+                e = estadoBlindaje.Nulo;
+
+            return e;
         }
 
-        public estado estadoAtrasTorsoIzquierdo()
+        public estadoBlindaje estadoAtrasTorsoIzquierdo()
         {
-            estado e;
+            estadoBlindaje e;
             int heridas = _BlindAtrasTorsoIzquierdo * 100 / _BlindAtrasTorsoIzquierdoInicial;
-            return 0;
+
+            //Vemos el estado en que se encuentra
+            if (heridas > 80)
+            {
+                e = estadoBlindaje.Excelente;
+            }
+            else if (heridas > 50)
+            {
+                e = estadoBlindaje.Bueno;
+            }
+            else if (heridas > 20)
+            {
+                e = estadoBlindaje.Medio;
+            }
+            else if (heridas > 0)
+            {
+                e = estadoBlindaje.Malo;
+            }
+            else
+                e = estadoBlindaje.Nulo;
+
+            return e;
         }
 
-        public estado estadoAtrasTorsoDerecho()
+        public estadoBlindaje estadoAtrasTorsoDerecho()
         {
-            estado e;
+            estadoBlindaje e;
             int heridas = _BlindAtrasTorsoDerecho * 100 / _BlindAtrasTorsoDerechoInicial;
-            return 0;
+
+            //Vemos el estado en que se encuentra
+            if (heridas > 80)
+            {
+                e = estadoBlindaje.Excelente;
+            }
+            else if (heridas > 50)
+            {
+                e = estadoBlindaje.Bueno;
+            }
+            else if (heridas > 20)
+            {
+                e = estadoBlindaje.Medio;
+            }
+            else if (heridas > 0)
+            {
+                e = estadoBlindaje.Malo;
+            }
+            else
+                e = estadoBlindaje.Nulo;
+
+            return e;
         }
 
-        public estado estadoAtrasTorsoCentral()
+        public estadoBlindaje estadoAtrasTorsoCentral()
         {
-            estado e;
+            estadoBlindaje e;
             int heridas = _BlindAtrasTorsoCentral * 100 / _BlindAtrasTorsoCentralInicial;
-            return 0;
+
+            //Vemos el estado en que se encuentra
+            if (heridas > 80)
+            {
+                e = estadoBlindaje.Excelente;
+            }
+            else if (heridas > 50)
+            {
+                e = estadoBlindaje.Bueno;
+            }
+            else if (heridas > 20)
+            {
+                e = estadoBlindaje.Medio;
+            }
+            else if (heridas > 0)
+            {
+                e = estadoBlindaje.Malo;
+            }
+            else
+                e = estadoBlindaje.Nulo;
+
+            return e;
         }
 		
         #endregion

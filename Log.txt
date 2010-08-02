@@ -138,7 +138,7 @@ Ataque fisico (mech):
 	CONO TERMINADO ^^ ha sido un coñazo enorme, pero ia esta, la funcion se tiene la siguiente cabecera y esta en mech, por si quieres verla:
 		 public Boolean conoVision( Casilla casilla )
 
-	- (Antonio) Te voi a explicar lo que se me ha ocurrido hacer para ver el estado de salud. He pensado primero, en ver cada zona de forma independiente, y ver, en funcion
+	- (Antonio) Te voi a explicar lo que se me ha ocurrido hacer para ver el estado de salud (estado blindaje). He pensado primero, en ver cada zona de forma independiente, y ver, en funcion
 	de los puntos que tenga esa zona como me encuentro ( en una pierna el 100% es 30 puntos de golpe, mientras que la cabeza el 100% es 9). Luego una vez recogidos estos datos
 	hacer una especie de media entre las posiciones. Ahora bien, como hay zonas mas importantes habia pensao en que algunas zonas tengan mas valor que otras. Asi por ejemplo,
 	habia pensao que:
@@ -147,22 +147,18 @@ Ataque fisico (mech):
 		- torsos traseros y cabeza: x 3
 		- torso central: x 4 (he puesto esto porque esta zona si se destruye el mech muere)
 	Que te parece?¿ Para esto voi a tener que usar lo de los ficheros de la armadura inicial, pero weno.... Voi a ver si consigo implementarlo
-		
-	- (Antonio )Mira que valores para las zonas:
-			Excelente, //100%
-			Bueno, //80%
-			Herido, //50%
-			Malherido, //30%
-			Critico, //15%
-			Inutilizado//0%
 
-	- (Antonio) Me parece mejor darle estos valores, pero a ver que opinas
-			Excelente, //100%
-			Bueno, //80%
-			Herido, //50%
-			Critico, //20%
-			Inutilizado//0%
+	- (Antonio) Me parece mejor darle estos valores, pero a ver que opinas, es que tampoco creo ke necesitemos hilar tan fino, incluso podriamos fusionar
+	el estado bueno y excelente
+			    public enum estadoBlindaje
+				{
+					Excelente, //100%-80%
+					Bueno, //80%-50%
+					Medio, //50%-20%
+					Malo, //20%-0%
+					Nulo//0%
+				};
 
 	- (Antonio) He resuelto el problema de tener que borrar luego los ficheros de armadura a mano por lo de que para otra partida no sabiamos si eran
-	nuestros datos o de otro robot de una partida antigua. Para ello lo que hago es meter el modelo de robot en el fichero, asi si al leer es de un modelo
+	nuestros datos o de otro robot de una partida antigua. Para ello lo que hago es meter el nombre del mech en el fichero, asi si al leer es de un nombre
 	antiguo, cambiamos los datos.
