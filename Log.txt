@@ -156,6 +156,13 @@ Ataque fisico (mech):
 			Critico, //15%
 			Inutilizado//0%
 
+	- (Antonio) Me parece mejor darle estos valores, pero a ver que opinas
+			Excelente, //100%
+			Bueno, //80%
+			Herido, //50%
+			Critico, //20%
+			Inutilizado//0%
+
 	- (Antonio) He resuelto el problema de tener que borrar luego los ficheros de armadura a mano por lo de que para otra partida no sabiamos si eran
 	nuestros datos o de otro robot de una partida antigua. Para ello lo que hago es meter el modelo de robot en el fichero, asi si al leer es de un modelo
 	antiguo, cambiamos los datos.

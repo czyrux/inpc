@@ -735,7 +735,7 @@ namespace ico {
  
         //METODOS PARA VER LOS ESTADOS DEL MECH
         //para estado activo, hacer una media numerica de los otros estados?¿
-        public estadoGeneral estado() {
+        public estadoGeneral situacionGeneral() {
             estadoGeneral e;
 
             if ( _desconectado ) {
@@ -768,65 +768,101 @@ namespace ico {
         };*/
         public estado estadoBrazoIzquierdo()
         {
+            estado e;
             int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
-            return 0;
+
+            //Vemos el estado en que se encuentra
+            if (heridas > 80)
+            {
+                e = estado.Excelente;
+            }
+            else if (heridas > 50)
+            {
+                e = estado.Bueno;
+            }
+            else if (heridas > 30)
+            {
+                e = estado.Herido;
+            }
+            else if (heridas > 15)
+            {
+                e = estado.Malherido;
+            }
+            else if (heridas > 0)
+            {
+                e = estado.Critico;
+            }
+            else
+                e = estado.Inutilizado;
+
+            return e;
         }
 
         public estado estadoTorsoIzquierdo() 
         {
+            estado e;
             int heridas = _BlindTorsoIzquierdo * 100 / _BlindTorsoIzquierdoInicial;
             return 0;
         }
         public estado estadoPiernaIzquierda () 
         {
+            estado e;
             int heridas = _BlindPiernaIzquierda * 100 / _BlindPiernaIzquierdaInicial;
             return 0;
         }
 
         public estado estadoPiernaDerecha() 
         {
+            estado e;
             int heridas = _BlindPiernaDerecha * 100 / _BlindPiernaDerechaInicial;
             return 0;
         }
 
         public estado estadoTorsoDerecho()
         {
+            estado e;
             int heridas = _BlindTorsoDerecho * 100 / _BlindTorsoDerechoInicial;
             return 0;
         }
 
         public estado estadoBrazoDerecho()
         {
+            estado e;
             int heridas = _BlindBrazoDerecho * 100 / _BlindBrazoDerechoInicial;
             return 0;
         }
 
         public estado estadoTorsoCentral()
         {
+            estado e;
             int heridas = _BlindTorsoCentral * 100 / _BlindTorsoCentralInicial;
             return 0;
         }
 
         public estado estadoCabeza()
         {
+            estado e;
             int heridas = _BlindCabeza * 100 / _BlindCabezaInicial;
             return 0;
         }
 
         public estado estadoAtrasTorsoIzquierdo()
         {
+            estado e;
             int heridas = _BlindAtrasTorsoIzquierdo * 100 / _BlindAtrasTorsoIzquierdoInicial;
             return 0;
         }
 
         public estado estadoAtrasTorsoDerecho()
         {
+            estado e;
             int heridas = _BlindAtrasTorsoDerecho * 100 / _BlindAtrasTorsoDerechoInicial;
             return 0;
         }
 
         public estado estadoAtrasTorsoCentral()
         {
+            estado e;
             int heridas = _BlindAtrasTorsoCentral * 100 / _BlindAtrasTorsoCentralInicial;
             return 0;
         }
