@@ -578,6 +578,7 @@ namespace ico {
             return t;
         }
 
+        //INDICA SI UNA CASILLA ESTA EN EL CONO DE VISION O NO
         public Boolean conoVision( Casilla casilla ) {
             Boolean enCono = false;
             int jIzq, jDrcha;
@@ -733,8 +734,7 @@ namespace ico {
             return enCono;
         }
  
-        //METODOS PARA VER LOS ESTADOS DEL MECH
-        //para estado activo, hacer una media numerica de los otros estados?¿
+        //METODOS PARA VER LA SITUACION DEL MECH
         public situacion situacionMech() {
             situacion e;
 
