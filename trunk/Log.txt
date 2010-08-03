@@ -164,3 +164,14 @@ Ataque fisico (mech):
 	antiguo, cambiamos los datos.
 
 	-(Antonio) Estoy intentando resolver el problema de como dar valores a cada zona segun importancia, ya que no encuentro una reparticion que me convenza.
+
+	-(Antonio) He pensado la siguiente reparticion. La he puesto en sentido inverso, xk al hacer la media lo que hare sera truncar, con lo que siempre va,
+	hacia el numero mas pequeño, y asi, al ponerlo en sentido inverso siempre nos saldra una estado mas negativo que positivo, lo que yo piendo que asi es preferible
+
+				public enum estadoBlindaje
+				{
+					Nulo=1//0%
+					Malo, //30%-0%
+					Medio, //60%-30%
+					Bueno, //100%-60%
+				};

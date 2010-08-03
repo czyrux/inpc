@@ -779,6 +779,7 @@ namespace ico {
             puntos[8] = ((int)estadoAtrasTorsoDerecho()) * 2;
             puntos[9] = ((int)estadoAtrasTorsoCentral()) * 2;
 
+            //Calculamos la media
             for (int i = 0; i < 10; i++)
             {
                 //Console.WriteLine("zona " + i + ": " + puntos[i]);
@@ -790,6 +791,7 @@ namespace ico {
             Console.WriteLine("La media es: " + media);
             Console.WriteLine("La media truncada es: " + media2);
 
+            //Asignamos el estado
 
                 return 0;
         }
