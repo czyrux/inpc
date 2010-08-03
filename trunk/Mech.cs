@@ -788,11 +788,17 @@ namespace ico {
             }
             media /= 24;
             media2 /= 24;
+            e = (estadoBlindaje)media2;
             Console.WriteLine("La media es: " + media);
-            Console.WriteLine("La media truncada es: " + media2);
-
+            Console.WriteLine("La media truncada es: " + media2+" "+e);
+            
             //Asignamos el estado
-
+            /* ?¿
+             * No hay que truncar. De 3,5 a 4, estado Bueno.
+             * Por debajo de 3,5 a 3 herido
+             * Por debajo de 2,8, malo
+             * sin nulo, ya que no hace falta
+             */
                 return 0;
         }
 
@@ -802,15 +808,11 @@ namespace ico {
             int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
 
             //Vemos el estado en que se encuentra
-            if (heridas > 80)
-            {
-                e = estadoBlindaje.Excelente;
-            }
-            else if (heridas > 50)
+            if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 20)
+            else if (heridas > 30)
             {
                 e = estadoBlindaje.Medio;
             }
@@ -831,15 +833,11 @@ namespace ico {
             int heridas = _BlindTorsoIzquierdo * 100 / _BlindTorsoIzquierdoInicial;
 
             //Vemos el estado en que se encuentra
-            if (heridas > 80)
-            {
-                e = estadoBlindaje.Excelente;
-            }
-            else if (heridas > 50)
+            if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 20)
+            else if (heridas > 30)
             {
                 e = estadoBlindaje.Medio;
             }
@@ -859,15 +857,11 @@ namespace ico {
             int heridas = _BlindPiernaIzquierda * 100 / _BlindPiernaIzquierdaInicial;
 
             //Vemos el estado en que se encuentra
-            if (heridas > 80)
-            {
-                e = estadoBlindaje.Excelente;
-            }
-            else if (heridas > 50)
+            if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 20)
+            else if (heridas > 30)
             {
                 e = estadoBlindaje.Medio;
             }
@@ -887,15 +881,11 @@ namespace ico {
             int heridas = _BlindPiernaDerecha * 100 / _BlindPiernaDerechaInicial;
 
             //Vemos el estado en que se encuentra
-            if (heridas > 80)
-            {
-                e = estadoBlindaje.Excelente;
-            }
-            else if (heridas > 50)
+            if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 20)
+            else if (heridas > 30)
             {
                 e = estadoBlindaje.Medio;
             }
@@ -915,15 +905,11 @@ namespace ico {
             int heridas = _BlindTorsoDerecho * 100 / _BlindTorsoDerechoInicial;
 
             //Vemos el estado en que se encuentra
-            if (heridas > 80)
-            {
-                e = estadoBlindaje.Excelente;
-            }
-            else if (heridas > 50)
+            if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 20)
+            else if (heridas > 30)
             {
                 e = estadoBlindaje.Medio;
             }
@@ -943,15 +929,11 @@ namespace ico {
             int heridas = _BlindBrazoDerecho * 100 / _BlindBrazoDerechoInicial;
 
             //Vemos el estado en que se encuentra
-            if (heridas > 80)
-            {
-                e = estadoBlindaje.Excelente;
-            }
-            else if (heridas > 50)
+            if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 20)
+            else if (heridas > 30)
             {
                 e = estadoBlindaje.Medio;
             }
@@ -971,15 +953,11 @@ namespace ico {
             int heridas = _BlindTorsoCentral * 100 / _BlindTorsoCentralInicial;
 
             //Vemos el estado en que se encuentra
-            if (heridas > 80)
-            {
-                e = estadoBlindaje.Excelente;
-            }
-            else if (heridas > 50)
+            if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 20)
+            else if (heridas > 30)
             {
                 e = estadoBlindaje.Medio;
             }
@@ -999,15 +977,11 @@ namespace ico {
             int heridas = _BlindCabeza * 100 / _BlindCabezaInicial;
 
             //Vemos el estado en que se encuentra
-            if (heridas > 80)
-            {
-                e = estadoBlindaje.Excelente;
-            }
-            else if (heridas > 50)
+            if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 20)
+            else if (heridas > 30)
             {
                 e = estadoBlindaje.Medio;
             }
@@ -1027,15 +1001,11 @@ namespace ico {
             int heridas = _BlindAtrasTorsoIzquierdo * 100 / _BlindAtrasTorsoIzquierdoInicial;
 
             //Vemos el estado en que se encuentra
-            if (heridas > 80)
-            {
-                e = estadoBlindaje.Excelente;
-            }
-            else if (heridas > 50)
+            if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 20)
+            else if (heridas > 30)
             {
                 e = estadoBlindaje.Medio;
             }
@@ -1055,15 +1025,11 @@ namespace ico {
             int heridas = _BlindAtrasTorsoDerecho * 100 / _BlindAtrasTorsoDerechoInicial;
 
             //Vemos el estado en que se encuentra
-            if (heridas > 80)
-            {
-                e = estadoBlindaje.Excelente;
-            }
-            else if (heridas > 50)
+            if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 20)
+            else if (heridas > 30)
             {
                 e = estadoBlindaje.Medio;
             }
@@ -1083,15 +1049,11 @@ namespace ico {
             int heridas = _BlindAtrasTorsoCentral * 100 / _BlindAtrasTorsoCentralInicial;
 
             //Vemos el estado en que se encuentra
-            if (heridas > 80)
-            {
-                e = estadoBlindaje.Excelente;
-            }
-            else if (heridas > 50)
+            if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
-            else if (heridas > 20)
+            else if (heridas > 30)
             {
                 e = estadoBlindaje.Medio;
             }

@@ -32,14 +32,12 @@ namespace ico
      * Enumerado que define los posibles estados del blindaje de una zona del mech 
      */
     public enum estadoBlindaje
-    {
-        Excelente=1, //100%-80%
-        Bueno, //80%-50%
-        Medio, //50%-20%
-        Malo, //20%-0%
-        Nulo//0%
-    };
-
+	{
+		Nulo=1, //0%
+		Malo, //30%-0%
+		Medio, //60%-30%
+		Bueno, //100%-60%
+	};
 
     /*
      * Estructura usada para conocer el estado de las distintas partes de un mech
