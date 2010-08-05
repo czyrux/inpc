@@ -190,3 +190,10 @@ Ataque fisico (mech):
 			camino c; 
 			c.costoMovimiento();
 	la funcion devovleria un int con el costo de el camino.
+	-(angel) Sobre el costo tengo un problema tengo que calcular el movimiento del encaramiento como la clase camino no lleva para cada paso un encaramiento solo puedo hacer dos cosas:
+			>Que la funcion reciva como parametro el encaramiento inicial y el final, y los medios los calcula girando de forma natural (es decir si esta en la casilla 1115 encarado a la 5
+			 y quiere ir 1114 girara 5->6->1 y luego avanzara).
+			>La segunda opcion es alguna de estas tres: Crear, rescribir, crear una clase que herede de camino; cuya cual tenga una nueva clase que sea paso, el paso seria una tupla de 
+			2 elementos una casilla y un encaramiento. No se si esto sera necesario para algun otro caso ademas de este, aunque puede que nos interese los encaramientos del medio 
+			(por si queremos en un paso intermedio ir de espaldas o algo asi).
+	Por ahora trabajare en el caso 1 porque requiere menos cambios por si la forma dos no te parece.
