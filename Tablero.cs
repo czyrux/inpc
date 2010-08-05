@@ -89,29 +89,14 @@ namespace ico
                 return _casillas[p.fila() - 1, p.columna() - 1];
         }
 
-        /*public Boolean EstaEnVision(Posicion p) {
-            //calcula el cono y mira si p esta en el si esta devuelve trues si no false 
+        //Funcion que devuelve la distancia aproximada entre el punto a y el punto b.
 
-        }*/
+        int Distancia(Posicion a, Posicion b) {
+            //dx <----La distancia entre la x de a y la x de b. Idem para la dy
+            int dx=Math.Abs(a.columna()+b.columna()), dy=Math.Abs(b.columna()+a.columna());
 
-        public int[,] EstaEnVision(Posicion o, Posicion d, Encaramiento dir) {
-
-            int[,] ldv= new int[2,(_filas*_columnas)];
-            Boolean continuar=true;
-            switch (dir) { 
-                case Encaramiento.Arriba:
-
-                    for (int i = 0; continuar; i++) {
-                        if (((o.fila() - i) % 2) == 0)
-                        {
-
-                        }
-                        else { 
-                        }
-                    }
-                    break;
-            }
-            return ldv;
+            // (dx^2+dy^2)^1/2<-----La parte entera
+            return (int)Math.Truncate(Math.Pow((Math.Pow(dx, 2) + Math.Pow(dx, 2)), 0.5));
 
         }
         #endregion
