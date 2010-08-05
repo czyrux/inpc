@@ -184,3 +184,9 @@ Ataque fisico (mech):
 	esa hoja con el resumen que nome la traje.
 
 	-(angel) Ya he hecho la distancia se llama int distanciaAB(posicion a, posicion b) (la he comentado es muy simple).
+
+	-(angel) No entiendo el tipo de terreno hay 3 tipos despejado pavimentado y pantanoso el costo en el 1 y 2 es el mismo y el tercero no esta en ningun lado.
+	-(angel) Por cierto estoy trabajando para hacer el cosot de un camino es decir 
+			camino c; 
+			c.costoMovimiento();
+	la funcion devovleria un int con el costo de el camino.
