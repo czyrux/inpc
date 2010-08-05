@@ -179,3 +179,6 @@ Ataque fisico (mech):
 	-(angel) Hola estoy vivo, ya ve o que has trabajado me parece espupendo. Lo siento por no estar muy al corriente por aqui esoy muy ocupado.
 	Ya veo que has hecho el cono de vision por lo que no se que hacer, creo que empezare con funciones que calculen la distancia.
 	Por cierto sobre la funcion de cono de vision ¿para que le mandas una casilla si solo basta con la posicion? Digo no sobra solo era curiosidad.
+
+	-(angel) Nesecito que me mandes o me digas donde puedo encontrar los datos de las casillas, me rfiero a la hojita que decia el costo de ir en bosque, terraseria, etc.
+	esa hoja con el resumen que nome la traje.
