@@ -109,30 +109,37 @@ namespace ico
 
                     case 3://pantanoso
                         costo++;
-                    break;
-                    switch (_camino[i].objetoTerreno()) { 
+                    break;  
+                }
+                switch (_camino[i].objetoTerreno())
+                {
 
-                        case 0://escombros
-                            costo += 2;
-                            break;
-                        case 1://bosque disperso
-                            costo += 2;
-                            break;
-                        case 2://bosque denso
-                            costo += 3;
-                            break;
-                        case 3: //edificio ligero
-                            costo += 2;
-                            break;
-                        case 4://edificio medio
-                            costo += 3;
-                            break;
-                        case 5: //edificio grande o pesado
-                            costo += 4;
-                            break;
-                        case 6: //edificio reforzado
-                            costo += 5;
-                            break;
+                    case 0://escombros
+                        costo += 2;
+                        break;
+                    case 1://bosque disperso
+                        costo += 2;
+                        break;
+                    case 2://bosque denso
+                        costo += 3;
+                        break;
+                    case 3: //edificio ligero
+                        costo += 2;
+                        break;
+                    case 4://edificio medio
+                        costo += 3;
+                        break;
+                    case 5: //edificio grande o pesado
+                        costo += 4;
+                        break;
+                    case 6: //edificio reforzado
+                        costo += 5;
+                        break;
+                }
+                if(i<_length && _camino[i].nivel() < _camino[i+1].nivel()){
+                    if ((_camino[i + 1].nivel() - _camino[i].nivel())==1) {
+                        costo++;
+
                     }
                 }
             }
