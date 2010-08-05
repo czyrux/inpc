@@ -91,7 +91,7 @@ namespace ico
 
         //Funcion que devuelve la distancia aproximada entre el punto a y el punto b.
 
-        int Distancia(Posicion a, Posicion b) {
+        int DistanciaAB(Posicion a, Posicion b) {
             //dx <----La distancia entre la x de a y la x de b. Idem para la dy
             int dx=Math.Abs(a.columna()+b.columna()), dy=Math.Abs(b.columna()+a.columna());
 

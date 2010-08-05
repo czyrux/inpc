@@ -182,3 +182,5 @@ Ataque fisico (mech):
 
 	-(angel) Nesecito que me mandes o me digas donde puedo encontrar los datos de las casillas, me rfiero a la hojita que decia el costo de ir en bosque, terraseria, etc.
 	esa hoja con el resumen que nome la traje.
+
+	-(angel) Ya he hecho la distancia se llama int distanciaAB(posicion a, posicion b) (la he comentado es muy simple).
