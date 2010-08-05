@@ -80,7 +80,26 @@ namespace ico
 
         }
 
+        int costoMovimiento() {
+            int costo = 0;
 
+            for (int i = 0; i < _length; i++)
+            {
+                switch (_camino[i].tipoTerreno()) { 
+                    case 1:
+                        costo++;
+                    break;
+                    case 2:
+                        costo++;
+                    break;
+                    case 3:
+                        costo++;
+                    break;
+
+                }
+            }
+            return costo;
+        }
 #endregion
         #region Privado
         private int _length;
