@@ -93,7 +93,7 @@ namespace ico
                         costo++;
                     break;
                     case 2://agua
-                    switch (_camino[i].nivel()) { 
+                    switch (_camino[i].nivel()) { // ver comentarios de el agua en el log.
                         case 0:
                             costo++;
                         break;
