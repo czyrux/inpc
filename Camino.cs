@@ -67,7 +67,7 @@ namespace ico
             return _cobertura;
         }
 #endregion
-
+#region "Funciones"
         public Camino pathFinder(Casilla a, Casilla b, Casilla[] Tablero)
         {
             ArrayList cerrado = new ArrayList();
@@ -77,9 +77,12 @@ namespace ico
             //hola angel
             return new Camino(new ArrayList());
 
+
         }
 
-#region Privado
+
+#endregion
+        #region Privado
         private int _length;
         private Casilla[] _camino;
         private Boolean _ldv;
