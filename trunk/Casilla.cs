@@ -182,7 +182,7 @@ namespace ico
         private Boolean _humo;
         private int _nGarrotes;
         private Cara[] _caras;
-        private heuristica _heristica;
+        private heuristica _heuristica;
         #endregion
     }
 }
