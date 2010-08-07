@@ -90,7 +90,6 @@ namespace ico
         }
 
         //Funcion que devuelve la distancia aproximada entre el punto a y el punto b.
-
         public int DistanciaAB(Posicion a, Posicion b) {
             //dx <----La distancia entre la x de a y la x de b. Idem para la dy
             int dx=Math.Abs(a.columna()+b.columna()), dy=Math.Abs(b.columna()+a.columna());
@@ -99,22 +98,18 @@ namespace ico
             return (int)Math.Truncate(Math.Pow((Math.Pow(dx, 2) + Math.Pow(dx, 2)), 0.5));
 
         }
-        #endregion
 
-        #region Privados
-        private Casilla[,] _casillas;
-        int _filas; 
-        int _columnas;
-        #region Funciones privadas
-        public Casilla colindante(Casilla actual, Encaramiento direccion ) {
-            Casilla devolver= null;
+        public Casilla colindante(Casilla actual, Encaramiento direccion)
+        {//revisada
+            Casilla devolver = null;
             if (direccion == Encaramiento.Arriba || direccion == Encaramiento.Abajo)
             {
                 if (direccion == Encaramiento.Arriba)
                 {
                     devolver = _casillas[actual.posicion().fila(), actual.posicion().columna() - 1];
                 }
-                else {
+                else
+                {
                     devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna()];
                 }
             }
@@ -123,16 +118,16 @@ namespace ico
                 switch (direccion)
                 {
                     case Encaramiento.SuperiorDerecha:
-                        devolver = _casillas[actual.posicion().fila(), actual.posicion().columna()];
+                        devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna()];
                         break;
                     case Encaramiento.InferiorDerecho:
-                        devolver = _casillas[actual.posicion().fila()-1, actual.posicion().columna() ];
+                        devolver = _casillas[actual.posicion().fila(), actual.posicion().columna()];
                         break;
                     case Encaramiento.InferiorIzquierda:
-                        devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna()-2];
+                        devolver = _casillas[actual.posicion().fila(), actual.posicion().columna() - 2];
                         break;
                     case Encaramiento.SuperiorIzquierda:
-                        devolver = _casillas[actual.posicion().fila() - 2, actual.posicion().columna() - 2];
+                        devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna() - 2];
                         break;
                 }
             }
@@ -141,22 +136,30 @@ namespace ico
                 switch (direccion)
                 {
                     case Encaramiento.SuperiorDerecha:
-                        devolver = _casillas[actual.posicion().fila()-1, actual.posicion().columna()];
+                        devolver = _casillas[actual.posicion().fila() - 2, actual.posicion().columna()];
                         break;
                     case Encaramiento.InferiorDerecho:
-                        devolver = _casillas[actual.posicion().fila()-2, actual.posicion().columna() ];
+                        devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna()];
                         break;
                     case Encaramiento.InferiorIzquierda:
-                        devolver = _casillas[actual.posicion().fila() - 2, actual.posicion().columna() - 2];
+                        devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna() - 2];
                         break;
                     case Encaramiento.SuperiorIzquierda:
-                        devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna() - 2];
+                        devolver = _casillas[actual.posicion().fila() - 2, actual.posicion().columna() - 2];
                         break;
                 }
 
             }
             return devolver;
         }
+        #endregion
+
+        #region Privados
+        private Casilla[,] _casillas;
+        int _filas; 
+        int _columnas;
+        #region Funciones privadas
+       
 		
 		
         public Casilla desplazamientoRecto(Casilla actual, Encaramiento direccion ,int movimiento) {

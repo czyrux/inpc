@@ -9,10 +9,11 @@ namespace ico
     {
         #region Constructores
         public Casilla() {
-            _nivel = _fceEdificio = _tipoTerreno = _objetoTerreno = _nGarrotes = _heristica.f = _heristica.g = _heristica.h = 0;
+            _nivel = _fceEdificio = _tipoTerreno = _objetoTerreno = _nGarrotes = _heuristica.f = _heuristica.g = _heuristica.h = 0;
             _edificioDerrumbado = _fuego = _humo = false;
             _caras = new Cara[6];
             _posicion = new Posicion();
+            _puntosMovimientos = 0;
             
         }
         public Casilla(int nivel, int tipoTerreno, int objetoTerreno, int fceEdificio, Boolean edificioDerrumbado,
@@ -27,6 +28,7 @@ namespace ico
             _humo = humo;
             _nGarrotes = nGarrotes;
             _caras = caras;
+            _puntosMovimientos = 0;
         }
         public Casilla(int nivel, int tipoTerreno, int objetoTerreno, int fceEdificio, Boolean edificioDerrumbado,
    Boolean fuego, Boolean humo, int nGarrotes)
@@ -39,6 +41,7 @@ namespace ico
             _fuego = fuego;
             _humo = humo;
             _nGarrotes = nGarrotes;
+            _puntosMovimientos = 0;
         }
 #endregion
 
@@ -220,11 +223,11 @@ namespace ico
         }
 
         public heuristica heuristica() {
-            return _heristica;
+            return _heuristica;
         }
 
         public void heuristica(heuristica value) {
-            _heristica = value;
+            _heuristica = value;
         }
 
         #endregion
@@ -240,6 +243,7 @@ namespace ico
         private Boolean _humo;
         private int _nGarrotes;
         private Cara[] _caras;
+        private int _puntosMovimientos;
         private heuristica _heuristica;
         #endregion
     }
