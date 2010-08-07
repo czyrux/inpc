@@ -47,6 +47,10 @@ namespace ico
         {
             _length = camino.Count;
             _camino = new Casilla[_length];
+            for (int i = 0; i < _length; i++)
+            {
+                _camino[i] = (Casilla)camino[i];
+            }
             _ldv =_cobertura= false;
             _nldv = _moviminetos = 0;
         }
@@ -68,19 +72,26 @@ namespace ico
         }
 #endregion
 #region "Funciones"
-        public Camino pathFinder(Casilla a, Casilla b, Casilla[] Tablero)
+        public Camino pathFinder(Casilla a, Casilla b, Tablero Tablero)
         {
             ArrayList cerrado = new ArrayList();
             ArrayList abierto = new ArrayList();
             int n = 0;
-            //adios antonio
-            //hola angel
+            Casilla actual=a;
+
+            do {
+                cerrado.Add(actual);
+                for (int i = 1; i < 7; i++) {
+                    abierto.Add(Tablero.colindante(actual, (Encaramiento)i));
+                }
+
+            } while (true);
             return new Camino(new ArrayList());
 
 
         }
 
-        int costoMovimiento() {
+        public int costoMovimiento() {
             int costo = 0;
 
             for (int i = 0; i < _length; i++)
@@ -153,8 +164,64 @@ namespace ico
             {
                 abierto.Add(tablero.colindante(a, Encaramiento.SuperiorIzquierda));
             }
-        } 
-#endregion
+        }
+
+        private int costoMovimiento(ArrayList camino)
+        {
+            int costo = 0;
+
+            for (int i = 0; i < camino.Count; i++)
+            {
+                costo = ((Casilla)camino[i]).costoMovimiento();
+
+                if (i < camino.Count && ((Casilla)camino[i]).nivel() < ((Casilla)camino[i + 1]).nivel())
+                {
+
+                    switch ((((Casilla)camino[i + 1]).nivel() - ((Casilla)camino[i]).nivel()))
+                    {
+                        case 1:
+                            costo++;
+                            break;
+                        case 2:
+                            costo += 1;
+                            break;
+                        default:
+                            return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
+
+                    }
+                }
+            }
+            return costo;
+        }
+
+        private int costoMovimiento(Casilla de, Casilla a) {
+            int costo = 0;
+
+          
+                costo =a.costoMovimiento();
+
+                if ( de.nivel() < a.nivel())
+                {
+
+                    switch ((a.nivel() - de.nivel()))
+                    {
+                        case 1:
+                            costo++;
+                            break;
+                        case 2:
+                            costo += 1;
+                            break;
+                        default:
+                            return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
+
+                    }
+                }
+            
+            return costo;
+
+        }
+        
+        #endregion
 
     }
 }

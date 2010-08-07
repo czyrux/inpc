@@ -199,3 +199,5 @@ Ataque fisico (mech):
 	Por ahora trabajare en el caso 1 porque requiere menos cambios por si la forma dos no te parece.
 	-(angel) otra cosa el calculo de agua me lo invente, quiero decir, en el libro pone niveles del agua que van del 0 hasta el n y como yo entendi nosotros consideramos agua desde el -1 hasta -n,
 	asi que supongo que el nivel 0 de agua es el nivel 0 y el 1 de agua es el -1 y asi con los demas. Si no es asi dime.
+	
+	-(angel) revise la funcion colindante de tablero.
