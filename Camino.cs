@@ -85,60 +85,19 @@ namespace ico
 
             for (int i = 0; i < _length; i++)
             {
-                switch (_camino[i].tipoTerreno()) { 
-                    case 0://despejado
-                        costo++;
-                    break;
-                    case 1://pavimentado
-                        costo++;
-                    break;
-                    case 2://agua
-                    switch (_camino[i].nivel()) { // ver comentarios de el agua en el log.
-                        case 0:
+                costo = _camino[i].costoMovimiento();
+
+                if(i<_length && _camino[i].nivel() < _camino[i+1].nivel()){
+
+                    switch((_camino[i + 1].nivel() - _camino[i].nivel())) {
+                        case 1:
                             costo++;
                         break;
-                        case -1:
-                            costo += 2;
+                        case 2:
+                            costo += 1;
                         break;
-
                         default:
-                            costo += 4;
-                        break;
-                    }
-                    break;
-
-                    case 3://pantanoso
-                        costo++;
-                    break;  
-                }
-                switch (_camino[i].objetoTerreno())
-                {
-
-                    case 0://escombros
-                        costo += 2;
-                        break;
-                    case 1://bosque disperso
-                        costo += 2;
-                        break;
-                    case 2://bosque denso
-                        costo += 3;
-                        break;
-                    case 3: //edificio ligero
-                        costo += 2;
-                        break;
-                    case 4://edificio medio
-                        costo += 3;
-                        break;
-                    case 5: //edificio grande o pesado
-                        costo += 4;
-                        break;
-                    case 6: //edificio reforzado
-                        costo += 5;
-                        break;
-                }
-                if(i<_length && _camino[i].nivel() < _camino[i+1].nivel()){
-                    if ((_camino[i + 1].nivel() - _camino[i].nivel())==1) {
-                        costo++;
+                            return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
 
                     }
                 }
