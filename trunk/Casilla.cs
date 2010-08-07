@@ -42,6 +42,64 @@ namespace ico
         }
 #endregion
 
+        #region "publicas"
+        public int  costoMovimiento(){
+            int costo=0;
+            switch (_tipoTerreno) { 
+                    case 0://despejado
+                        costo++;
+                    break;
+                    case 1://pavimentado
+                        costo++;
+                    break;
+                    case 2://agua
+                    switch (_nivel) { // ver comentarios de el agua en el log.
+                        case 0:
+                            costo++;
+                        break;
+                        case -1:
+                            costo += 2;
+                        break;
+
+                        default:
+                            costo += 4;
+                        break;
+                    }
+                    break;
+
+                    case 3://pantanoso
+                        costo++;
+                    break;  
+                }
+                switch (_objetoTerreno)
+                {
+
+                    case 0://escombros
+                        costo += 2;
+                        break;
+                    case 1://bosque disperso
+                        costo += 2;
+                        break;
+                    case 2://bosque denso
+                        costo += 3;
+                        break;
+                    case 3: //edificio ligero
+                        costo += 2;
+                        break;
+                    case 4://edificio medio
+                        costo += 3;
+                        break;
+                    case 5: //edificio grande o pesado
+                        costo += 4;
+                        break;
+                    case 6: //edificio reforzado
+                        costo += 5;
+                        break;
+                }
+                return costo;
+        }
+        #endregion
+
         #region Propiedades
         public int nivel() {
             return _nivel;
