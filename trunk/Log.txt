@@ -220,3 +220,5 @@ Ataque fisico (mech):
 	que clcula el costo si no esta calculado antes si lo esta lo devuelve.
 
 	he comentado lo mas posible la funcion pathfinder si la quieres mirar es corta (por ahora).
+
+	-(angel) si llama un telefono desconocido a tu movil contesta!!!!! Soy yo!!!!
