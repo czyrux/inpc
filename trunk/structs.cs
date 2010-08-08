@@ -14,6 +14,7 @@ namespace ico
         public int g;
         public int h;
         public int f;
+        public Casilla casilla;
     };
 
     /*

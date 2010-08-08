@@ -201,3 +201,22 @@ Ataque fisico (mech):
 	asi que supongo que el nivel 0 de agua es el nivel 0 y el 1 de agua es el -1 y asi con los demas. Si no es asi dime.
 	
 	-(angel) revise la funcion colindante de tablero.
+
+	-(angel) he hecho tres funciones pero aun no se donde deverian de estar, tal vez en casilla todas pero bueno. Te las escribo y tu luego me dices donde cres.
+			 (Casilla)public static  int costoMovimientoAB(Casilla de, Casilla a)<--esta calcula el costo de moverce entre dos casillas (para calcular el costo de movimiento relacionado con el nivel)
+			 (camino)private int costoMovimiento(ArrayList camino)<--aun no la uso dado un array "camino" calcula su costo de movimiento
+			 (camino)private int costoMovimiento(Casilla de, Casilla a) <---la usare en pathfinder calcula el costo total para moverce de una casilla a otra colindante (es decir puntos de movimientos por propiedades intrincecas(agua,escobros, etc) y relacionales (diferencia de niveles))
+			 (Casilla)public int  costoMovimiento()<--- calcual el costo de movimiento intrinceco (es decir su costo estatico por sus propiedades y no por relacion a otra)
+	movi la funcion que calcula la distancia heuristica de la clase tablero a camino y no se si hacerla privada.
+	
+	-(Angel) Creo que necesitamos o apliar la clase casilla crear una heredada. Porque necesito tener 3 datos el costo a moverme a ella desde el punto inicial (esto hay dos el costo intrinceco y el relacionado solo con la casilla actual [de la que vengo]), la heuristica y la suma de estas. Estoy pensando que puedo hacer una estructura, creo que eso hare por ahora. 
+
+	-(angel) Sigo con el pathfinder, he hecho 3 funciones mas:
+		private int mejorCasillaAbierta(ArrayList abiertas) <- esta me dice cual tine menor puntuacion f de las casillas abiertas
+        private int estaEn(ArrayList lista, Casilla  elem) <- esta me dice que indice tinen el elemento elem en la array de heuristicas, si no esta devuelve -1
+        private Boolean esta(ArrayList lista, Casilla elem) <- esta dice si un elemento esta en una matriz devolviendo true  si esta y false si no
+	Todas en la clase pathfinder, y estan siendo utilizadas en la funcion pathfinder de la misma clase al igaul que todas las de costoMovimiento y distanciaAB.
+	Agrege un atributo costoMovimiento que es el costo (en puntos de movimiento) de una casilla (solo los relacionados con la casilla), ademas una funcion que se llama costoMovimeto()
+	que clcula el costo si no esta calculado antes si lo esta lo devuelve.
+
+	he comentado lo mas posible la funcion pathfinder si la quieres mirar es corta (por ahora).

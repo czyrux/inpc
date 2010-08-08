@@ -47,60 +47,89 @@ namespace ico
 
         #region "publicas"
         public int  costoMovimiento(){
-            int costo=0;
-            switch (_tipoTerreno) { 
-                    case 0://despejado
-                        costo++;
-                    break;
-                    case 1://pavimentado
-                        costo++;
-                    break;
-                    case 2://agua
-                    switch (_nivel) { // ver comentarios de el agua en el log.
-                        case 0:
-                            costo++;
-                        break;
-                        case -1:
-                            costo += 2;
-                        break;
+            if (_puntosMovimientos == 0)
+            {
 
-                        default:
-                            costo += 4;
+                switch (_tipoTerreno)
+                {
+                    case 0://despejado
+                        _puntosMovimientos++;
                         break;
-                    }
-                    break;
+                    case 1://pavimentado
+                        _puntosMovimientos++;
+                        break;
+                    case 2://agua
+                        switch (_nivel)
+                        { // ver comentarios de el agua en el log.
+                            case 0:
+                                _puntosMovimientos++;
+                                break;
+                            case -1:
+                                _puntosMovimientos += 2;
+                                break;
+
+                            default:
+                                _puntosMovimientos += 4;
+                                break;
+                        }
+                        break;
 
                     case 3://pantanoso
-                        costo++;
-                    break;  
+                        _puntosMovimientos++;
+                        break;
                 }
                 switch (_objetoTerreno)
                 {
 
                     case 0://escombros
-                        costo += 2;
+                        _puntosMovimientos += 2;
                         break;
                     case 1://bosque disperso
-                        costo += 2;
+                        _puntosMovimientos += 2;
                         break;
                     case 2://bosque denso
-                        costo += 3;
+                        _puntosMovimientos += 3;
                         break;
                     case 3: //edificio ligero
-                        costo += 2;
+                        _puntosMovimientos += 2;
                         break;
                     case 4://edificio medio
-                        costo += 3;
+                        _puntosMovimientos += 3;
                         break;
                     case 5: //edificio grande o pesado
-                        costo += 4;
+                        _puntosMovimientos += 4;
                         break;
                     case 6: //edificio reforzado
-                        costo += 5;
+                        _puntosMovimientos += 5;
                         break;
                 }
-                return costo;
+            }
+            return _puntosMovimientos;
         }
+
+        public static int costoMovimientoAB(Casilla de, Casilla a)
+        {
+            int costo = 0;
+            if (Math.Abs(de.columna() - a.columna()) < 2 || Math.Abs(de.fila() - a.fila()) < 2)
+            {
+                switch ((a.nivel() - de.nivel()))
+                {
+                    case 1:
+                        costo++;
+                        break;
+                    case 2:
+                        costo += 2;
+                        break;
+                    default:
+                        return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
+
+                }
+            }
+            else return int.MaxValue;
+
+            return costo;
+        }
+
         #endregion
 
         #region Propiedades

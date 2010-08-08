@@ -74,20 +74,64 @@ namespace ico
 #region "Funciones"
         public Camino pathFinder(Casilla a, Casilla b, Tablero Tablero)
         {
-            ArrayList cerrado = new ArrayList();
-            ArrayList abierto = new ArrayList();
-            int n = 0;
+            ArrayList cerradas = new ArrayList();
+            ArrayList abiertas = new ArrayList();
+            heuristica elemento;
+            int aux = 0, aux2=0;
             Casilla actual=a;
 
             do {
-                cerrado.Add(actual);
+                cerradas.Add(actual);
                 for (int i = 1; i < 7; i++) {
-                    abierto.Add(Tablero.colindante(actual, (Encaramiento)i));
+                    elemento.casilla = Tablero.colindante(actual, (Encaramiento)i);
+
+                    if (esta(cerradas,elemento.casilla))// Ignoro las casillas que ya estan en la lista de cerradas.
+                        continue;
+
+                    aux=Casilla.costoMovimientoAB(actual, elemento.casilla);// Precalculo la el costo de movimiento relaciona, para no hacer varias veces
+                    if (elemento.casilla.costoMovimiento() != int.MaxValue ||  aux!= int.MaxValue)// verifico si es intrancitable
+                    {
+                        elemento.g = elemento.casilla.costoMovimiento() + aux;// precalculo el costo de movimiento total a esa casilla desde la actual
+                        if ((aux2=estaEn(abiertas, elemento.casilla))>=0)// verifico si la casilla acual ya esta entre las abiertas
+                        {
+                            if (elemento.g > ((heuristica)abiertas[aux2]).g)// compruebo si desde la aterior era mejor que esta
+                            {
+                                continue;// si, si continuo sin hacer cambios
+                            }
+                            else {//si no modifico la casilla antigua
+                                elemento.h = ((heuristica)abiertas[aux2]).h;
+                                elemento.f = elemento.g + elemento.h;
+                                abiertas[aux2]=(elemento);
+                            }
+
+                        }
+                        else//si no estaba entre las abiertas incerto la nueva casilla
+                        {
+                            elemento.h = DistanciaAB(elemento.casilla.posicion(), b.posicion());
+                            elemento.f = elemento.g + elemento.h;
+                            abiertas.Add(elemento);
+                        }
+                        
+                    }
+                    aux = mejorCasillaAbierta(abiertas);//buesca la mejor casilla entre las abiertas
+                    cerradas.Add(abiertas[aux]);//agrego la mejor casilla
+                    actual = (Casilla)abiertas[aux];//pongo la mejor como la siguiente actual
+                    abiertas.RemoveAt(aux);//borro la mejor de las abiertas
                 }
 
             } while (true);
             return new Camino(new ArrayList());
 
+
+        }
+        //Funcion que devuelve la distancia aproximada entre el punto a y el punto b.
+        public int DistanciaAB(Posicion a, Posicion b)
+        {
+            //dx <----La distancia entre la x de a y la x de b. Idem para la dy
+            int dx = Math.Abs(a.columna() + b.columna()), dy = Math.Abs(b.columna() + a.columna());
+
+            // (dx^2+dy^2)^1/2<-----La parte entera
+            return (int)Math.Truncate(Math.Pow((Math.Pow(dx, 2) + Math.Pow(dx, 2)), 0.5));
 
         }
 
@@ -123,7 +167,7 @@ namespace ico
         private Boolean _cobertura;
         private int _nldv;
         private int _moviminetos;
-
+        /*
         private Camino pathfinder(Casilla a, Casilla b, Tablero tablero,ArrayList ceradas, ArrayList abiertas) {
 
             if (ceradas[ceradas.Count - 1] == b)
@@ -165,7 +209,7 @@ namespace ico
                 abierto.Add(tablero.colindante(a, Encaramiento.SuperiorIzquierda));
             }
         }
-
+        //puede que la borre
         private int costoMovimiento(ArrayList camino)
         {
             int costo = 0;
@@ -177,24 +221,13 @@ namespace ico
                 if (i < camino.Count && ((Casilla)camino[i]).nivel() < ((Casilla)camino[i + 1]).nivel())
                 {
 
-                    switch ((((Casilla)camino[i + 1]).nivel() - ((Casilla)camino[i]).nivel()))
-                    {
-                        case 1:
-                            costo++;
-                            break;
-                        case 2:
-                            costo += 1;
-                            break;
-                        default:
-                            return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
-
-                    }
+                    costo = Casilla.costoMovimientoAB((Casilla)camino[i], (Casilla)camino[i + 1]);
                 }
             }
             return costo;
         }
-
-        private int costoMovimiento(Casilla de, Casilla a) {
+        //puede que la borre
+        private heuristica costoMovimiento(Casilla de, Casilla a) {
             int costo = 0;
 
           
@@ -202,25 +235,40 @@ namespace ico
 
                 if ( de.nivel() < a.nivel())
                 {
-
-                    switch ((a.nivel() - de.nivel()))
-                    {
-                        case 1:
-                            costo++;
-                            break;
-                        case 2:
-                            costo += 1;
-                            break;
-                        default:
-                            return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
-
-                    }
+                    costo = Casilla.costoMovimientoAB(de, a);
                 }
             
             return costo;
 
+        }*/
+        private int mejorCasillaAbierta(ArrayList abiertas) {
+            int max = 0;
+            for (int i = 1; i < abiertas.Count; i++ )
+            {
+                if(((heuristica)abiertas[i-1]).f<((heuristica)abiertas[i]).f){
+                    max = i;
+                }
+            }
+            return max;
         }
-        
+
+        private int estaEn(ArrayList lista, Casilla  elem) {
+            int n = 0;
+            foreach (heuristica i in lista) {
+                if (i.casilla.posicion().ToString() == elem.posicion().ToString())
+                    return n;
+                n++;
+            }
+            return -1;
+        }
+
+        private Boolean esta(ArrayList lista, Casilla elem) {
+            foreach(heuristica i in lista){
+                if (i.casilla.ToString() == elem.ToString())
+                    return true;
+            }
+            return false;
+        }
         #endregion
 
     }
