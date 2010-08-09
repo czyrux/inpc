@@ -15,6 +15,7 @@ namespace ico
         public int h;
         public int f;
         public Casilla casilla;
+        public Casilla padre;
     };
 
     /*

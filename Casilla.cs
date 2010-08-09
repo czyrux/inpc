@@ -121,7 +121,7 @@ namespace ico
                         costo += 2;
                         break;
                     default:
-                        return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
+                        return int.MinValue;//<--- Es inaccesible devuelve el maximo valor posible
 
                 }
             }

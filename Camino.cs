@@ -76,53 +76,78 @@ namespace ico
         {
             ArrayList cerradas = new ArrayList();
             ArrayList abiertas = new ArrayList();
+            ArrayList camino = new ArrayList();
             heuristica elemento;
-            int aux = 0, aux2=0;
-            Casilla actual=a;
+            int aux = 0, iaux=0;
+            Casilla actual = a;
+            Boolean nueva = false;
 
+            cerradas.Add(a);
             do {
-                cerradas.Add(actual);
                 for (int i = 1; i < 7; i++) {
                     elemento.casilla = Tablero.colindante(actual, (Encaramiento)i);
 
-                    if (esta(cerradas,elemento.casilla))// Ignoro las casillas que ya estan en la lista de cerradas.
+                    // Ignoro las casillas que ya estan en la lista de cerradas.
+                    if (esta(cerradas,elemento.casilla))
                         continue;
 
-                    aux=Casilla.costoMovimientoAB(actual, elemento.casilla);// Precalculo la el costo de movimiento relaciona, para no hacer varias veces
-                    if (elemento.casilla.costoMovimiento() != int.MaxValue ||  aux!= int.MaxValue)// verifico si es intrancitable
-                    {
-                        elemento.g = elemento.casilla.costoMovimiento() + aux;// precalculo el costo de movimiento total a esa casilla desde la actual
-                        if ((aux2=estaEn(abiertas, elemento.casilla))>=0)// verifico si la casilla acual ya esta entre las abiertas
-                        {
-                            if (elemento.g > ((heuristica)abiertas[aux2]).g)// compruebo si desde la aterior era mejor que esta
-                            {
-                                continue;// si, si continuo sin hacer cambios
-                            }
-                            else {//si no modifico la casilla antigua
-                                elemento.h = ((heuristica)abiertas[aux2]).h;
+                    // Precalculo la el costo de movimiento relaciona, para no hacer varias veces
+                    aux=Casilla.costoMovimientoAB(actual, elemento.casilla);
+
+                    // verifico si es intrancitable
+                    if (/*elemento.casilla.costoMovimiento() >= 0 ||*/  aux >= 0){
+
+                        // precalculo el costo de movimiento total a esa casilla desde la actual
+                        elemento.g = elemento.casilla.costoMovimiento() + aux;
+
+                        // verifico si la casilla actual ya esta entre las abiertas
+                        if ((iaux = estaEn(abiertas, elemento.casilla)) >= 0){
+
+                            // compruebo si desde la aterior era mejor que esta
+                            if (elemento.g > ((heuristica)abiertas[iaux]).g)
+                                // si, si continuo sin hacer cambios
+                                continue;
+                            //si no modifico la casilla antigua
+                            else {
+                                nueva = true;
+                                elemento.h = ((heuristica)abiertas[iaux]).h;
                                 elemento.f = elemento.g + elemento.h;
-                                abiertas[aux2]=(elemento);
+                                elemento.padre = actual;
+                                abiertas[iaux] = (elemento);
                             }
 
                         }
-                        else//si no estaba entre las abiertas incerto la nueva casilla
-                        {
+                        else {//si no estaba entre las abiertas incerto la nueva casilla
+                            nueva = true;
                             elemento.h = DistanciaAB(elemento.casilla.posicion(), b.posicion());
                             elemento.f = elemento.g + elemento.h;
+                            elemento.padre = actual;
                             abiertas.Add(elemento);
                         }
                         
                     }
-                    aux = mejorCasillaAbierta(abiertas);//buesca la mejor casilla entre las abiertas
-                    cerradas.Add(abiertas[aux]);//agrego la mejor casilla
-                    actual = (Casilla)abiertas[aux];//pongo la mejor como la siguiente actual
-                    abiertas.RemoveAt(aux);//borro la mejor de las abiertas
+                   // if (nueva){//si hay nuevas en la lista (o revisadas)
+
+                        //buesca la mejor casilla entre las abiertas
+                        aux = mejorCasillaAbierta(abiertas,actual);
+                        //agrego la mejor casilla
+                        cerradas.Add(abiertas[aux]);
+                        //pongo la mejor como la siguiente actual
+                        actual = (Casilla)abiertas[aux];
+                        //borro la mejor de las abiertas
+                        abiertas.RemoveAt(aux);
+                   //}
+                    nueva = false;
                 }
 
-            } while (true);
-            return new Camino(new ArrayList());
+            } while (actual != b);
 
+            camino.Add(b);
+            for (int i = abiertas.Count - 1; i > 0; i--) {
+                camino.Add(((heuristica)cerradas[i]).padre);
+            }
 
+            return new Camino(camino);
         }
         //Funcion que devuelve la distancia aproximada entre el punto a y el punto b.
         public int DistanciaAB(Posicion a, Posicion b)
@@ -144,17 +169,10 @@ namespace ico
 
                 if(i<_length && _camino[i].nivel() < _camino[i+1].nivel()){
 
-                    switch((_camino[i + 1].nivel() - _camino[i].nivel())) {
-                        case 1:
-                            costo++;
-                        break;
-                        case 2:
-                            costo += 1;
-                        break;
-                        default:
-                            return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
+                   costo+= Casilla.costoMovimientoAB( _camino[i], _camino[i + 1]);
 
-                    }
+                   if (costo < 0)//si hay intransitables en el camino
+                       return costo;
                 }
             }
             return costo;
@@ -241,11 +259,11 @@ namespace ico
             return costo;
 
         }*/
-        private int mejorCasillaAbierta(ArrayList abiertas) {
+        private int mejorCasillaAbierta(ArrayList abiertas,Casilla padre) {
             int max = 0;
             for (int i = 1; i < abiertas.Count; i++ )
             {
-                if(((heuristica)abiertas[i-1]).f<((heuristica)abiertas[i]).f){
+                if(((heuristica)abiertas[i-1]).f<((heuristica)abiertas[i]).f && ((heuristica)abiertas[i]).padre==padre){
                     max = i;
                 }
             }
@@ -255,7 +273,7 @@ namespace ico
         private int estaEn(ArrayList lista, Casilla  elem) {
             int n = 0;
             foreach (heuristica i in lista) {
-                if (i.casilla.posicion().ToString() == elem.posicion().ToString())
+                if (i.casilla == elem)
                     return n;
                 n++;
             }
@@ -264,7 +282,7 @@ namespace ico
 
         private Boolean esta(ArrayList lista, Casilla elem) {
             foreach(heuristica i in lista){
-                if (i.casilla.ToString() == elem.ToString())
+                if (i.casilla == elem)
                     return true;
             }
             return false;
