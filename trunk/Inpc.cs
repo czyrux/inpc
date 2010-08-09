@@ -12,6 +12,8 @@ namespace ico {
 			
 			int numeroJugador=1;
 			string fase="Movimiento";
+            int i = int.MaxValue;
+            i++;
 			BattleTech juego = new BattleTech(numeroJugador,fase);
 			
 			juego.pruebas();
