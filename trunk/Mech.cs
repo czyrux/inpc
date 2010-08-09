@@ -762,44 +762,45 @@ namespace ico {
         public estadoBlindaje estadoBlindajeMech() 
         {
             estadoBlindaje e;
-            int[] puntos = new int[10] ;
             float media = 0;
-            int media2=0;
+            int sumatoria ;
 
             //Vemos los datos de las diferentes partes
-            puntos[0] = ((int)estadoBrazoIzquierdo())*3;
-            puntos[1] = ((int)estadoTorsoIzquierdo()) * 3;
-            puntos[2] = ((int)estadoPiernaIzquierda()) * 1;
-            puntos[3] = ((int)estadoPiernaDerecha()) * 1;
-            puntos[4] = ((int)estadoTorsoDerecho()) * 3;
-            puntos[5] = ((int)estadoBrazoDerecho()) * 3;
-            puntos[6] = ((int)estadoTorsoCentral()) * 4;
-            //puntos[10] = ((int)estadoCabeza()) * 3;
-            puntos[7] = ((int)estadoAtrasTorsoIzquierdo()) * 2;
-            puntos[8] = ((int)estadoAtrasTorsoDerecho()) * 2;
-            puntos[9] = ((int)estadoAtrasTorsoCentral()) * 2;
+            sumatoria = ((int)estadoBrazoIzquierdo()) * 3 + 
+                ((int)estadoTorsoIzquierdo()) * 3 + 
+                ((int)estadoPiernaIzquierda()) * 1 +
+                ((int)estadoPiernaDerecha()) * 1 +
+                ((int)estadoTorsoDerecho()) * 3 + 
+                ((int)estadoBrazoDerecho()) * 3 + 
+                ((int)estadoTorsoCentral()) * 4 +
+                ((int)estadoAtrasTorsoIzquierdo()) * 2 +
+                ((int)estadoAtrasTorsoDerecho()) * 2 +
+                ((int)estadoAtrasTorsoCentral()) * 2;
 
             //Calculamos la media
-            for (int i = 0; i < 10; i++)
-            {
-                //Console.WriteLine("zona " + i + ": " + puntos[i]);
-                media += puntos[i];
-                media2 += puntos[i];
+            media = sumatoria/24.0f;
+
+            //Asignamos el estado
+            if (media > 3.3) {
+                e = estadoBlindaje.Bueno;
             }
-            media /= 24;
-            media2 /= 24;
-            e = (estadoBlindaje)media2;
-            Console.WriteLine("La media es: " + media);
-            Console.WriteLine("La media truncada es: " + media2+" "+e);
+            else if (media > 2.8) {
+                e = estadoBlindaje.Medio;
+            }
+            else
+                e = estadoBlindaje.Malo;
+
+            Console.WriteLine("La media es: " + media+" "+e);
+
             
             //Asignamos el estado
             /* ?¿
-             * No hay que truncar. De 3,5 a 4, estado Bueno.
+             * No hay que truncar. De 3,3 a 4, estado Bueno.
              * Por debajo de 3,5 a 3 herido
              * Por debajo de 2,8, malo
              * sin nulo, ya que no hace falta
              */
-                return 0;
+            return e;
         }
 
         public estadoBlindaje estadoBrazoIzquierdo()
