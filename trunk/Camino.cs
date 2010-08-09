@@ -10,7 +10,7 @@ namespace ico
 #region Constructores
         public Camino(Posicion p1, Posicion p2,Tablero tablero) {
             Process proc = new Process();
-            _moviminetos = _nldv = 0;
+            _movimientos = _nldv = 0;
             String[] nodos;
             proc.StartInfo.WorkingDirectory = @".";
             proc.StartInfo.FileName = "LDVyC.exe";
@@ -52,7 +52,10 @@ namespace ico
                 _camino[i] = (Casilla)camino[i];
             }
             _ldv =_cobertura= false;
-            _nldv = _moviminetos = 0;
+            _nldv = _movimientos = 0;
+        }
+        public Camino(Casilla de, Casilla a, Tablero tablero) {
+            pathFinder(de, a, tablero);
         }
 #endregion
 
@@ -72,7 +75,7 @@ namespace ico
         }
 #endregion
 #region "Funciones"
-        public Camino pathFinder(Casilla a, Casilla b, Tablero Tablero)
+        public  Camino pathFinder(Casilla a, Casilla b, Tablero Tablero)
         {
             ArrayList cerradas = new ArrayList();
             ArrayList abiertas = new ArrayList();
@@ -81,12 +84,22 @@ namespace ico
             int aux = 0, iaux=0;
             Casilla actual = a;
             Boolean nueva = false;
+            elemento.casilla = a;
+            elemento.g = 0;
+            elemento.h = DistanciaAB(a.posicion(), b.posicion());
+            elemento.f = elemento.h;
+            elemento.padre = null;
 
-            cerradas.Add(a);
+            cerradas.Add(elemento);
             do {
                 for (int i = 1; i < 7; i++) {
-                    elemento.casilla = Tablero.colindante(actual, (Encaramiento)i);
-
+                    try
+                    {
+                        elemento.casilla = Tablero.colindante(actual, (Encaramiento)i);//<-- hay que revisar en caso de que salga del tablero
+                    }
+                    catch (Exception e) {
+                        continue;
+                    }
                     // Ignoro las casillas que ya estan en la lista de cerradas.
                     if (esta(cerradas,elemento.casilla))
                         continue;
@@ -117,7 +130,7 @@ namespace ico
                             }
 
                         }
-                        else {//si no estaba entre las abiertas incerto la nueva casilla
+                        else {//si no estaba entre las abiertas inserto la nueva casilla
                             nueva = true;
                             elemento.h = DistanciaAB(elemento.casilla.posicion(), b.posicion());
                             elemento.f = elemento.g + elemento.h;
@@ -128,17 +141,19 @@ namespace ico
                     }
                    // if (nueva){//si hay nuevas en la lista (o revisadas)
 
-                        //buesca la mejor casilla entre las abiertas
-                        aux = mejorCasillaAbierta(abiertas,actual);
-                        //agrego la mejor casilla
-                        cerradas.Add(abiertas[aux]);
-                        //pongo la mejor como la siguiente actual
-                        actual = (Casilla)abiertas[aux];
-                        //borro la mejor de las abiertas
-                        abiertas.RemoveAt(aux);
+                     
                    //}
                     nueva = false;
                 }
+
+                //buesca la mejor casilla entre las abiertas
+                aux = mejorCasillaAbierta(abiertas, actual);
+                //agrego la mejor casilla
+                cerradas.Add(abiertas[aux]);
+                //pongo la mejor como la siguiente actual
+                actual = ((heuristica)abiertas[aux]).casilla;
+                //borro la mejor de las abiertas
+                abiertas.RemoveAt(aux);
 
             } while (actual != b);
 
@@ -146,8 +161,8 @@ namespace ico
             for (int i = abiertas.Count - 1; i > 0; i--) {
                 camino.Add(((heuristica)cerradas[i]).padre);
             }
-
-            return new Camino(camino);
+            camino.Reverse();
+            return new Camino(camino);//<-!!!!! lo hace mal necesito revisar paso a paso
         }
         //Funcion que devuelve la distancia aproximada entre el punto a y el punto b.
         public int DistanciaAB(Posicion a, Posicion b)
@@ -161,21 +176,22 @@ namespace ico
         }
 
         public int costoMovimiento() {
-            int costo = 0;
+            
+                for (int i = 0; i < _length; i++){
 
-            for (int i = 0; i < _length; i++)
-            {
-                costo = _camino[i].costoMovimiento();
+                    _movimientos = _camino[i].costoMovimiento();
 
-                if(i<_length && _camino[i].nivel() < _camino[i+1].nivel()){
+                    if (i < _length && _camino[i].nivel() < _camino[i + 1].nivel())
+                    {
 
-                   costo+= Casilla.costoMovimientoAB( _camino[i], _camino[i + 1]);
+                        _movimientos += Casilla.costoMovimientoAB(_camino[i], _camino[i + 1]);
 
-                   if (costo < 0)//si hay intransitables en el camino
-                       return costo;
+                        if (_movimientos < 0)//si hay intransitables en el camino
+                            return _movimientos;
+                    }
                 }
-            }
-            return costo;
+
+                return _movimientos;
         }
 #endregion
         #region Privado
@@ -184,7 +200,7 @@ namespace ico
         private Boolean _ldv;
         private Boolean _cobertura;
         private int _nldv;
-        private int _moviminetos;
+        private int _movimientos;
         /*
         private Camino pathfinder(Casilla a, Casilla b, Tablero tablero,ArrayList ceradas, ArrayList abiertas) {
 
