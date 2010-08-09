@@ -222,3 +222,6 @@ Ataque fisico (mech):
 	he comentado lo mas posible la funcion pathfinder si la quieres mirar es corta (por ahora).
 
 	-(angel) si llama un telefono desconocido a tu movil contesta!!!!! Soy yo!!!!
+
+	- (antonio) wenas, te mandao un mail en el ke te e contao varias cosas, asike miralo ke no tengo ganas de volver a escribir. Voi a intentar organizar la clase battletech, para ponerle
+	las funciones de las fases i demas rollos.
