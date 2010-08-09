@@ -23,7 +23,7 @@ namespace ico
 			//Leemos el fichero de configuracion
 			_config = new ConfiguracionJuego( _myJugador );
 
-<<<<<<< .mine
+//<<<<<<< .mine
             //prueba de pathfinder el 9/8 - Angel
             string str;
 
@@ -36,7 +36,7 @@ namespace ico
             Camino Camino= new Camino(_tablero.Casilla(de),_tablero.Casilla(a),_tablero);
 
 
-=======
+//=======
 
             //Elegimos la accion a realizar
             if (fase == "Movimiento")
@@ -46,7 +46,7 @@ namespace ico
             else
                 faseReaccion();
 
->>>>>>> .r116
+//>>>>>>> .r116
         }
         #endregion
 
