@@ -49,7 +49,7 @@ namespace ico
         public int  costoMovimiento(){
             if (_puntosMovimientos == 0)
             {
-
+                _puntosMovimientos = 1;
                 switch (_tipoTerreno)
                 {
                     case 0://despejado
@@ -112,13 +112,19 @@ namespace ico
             int costo = 0;
             if (Math.Abs(de.columna() - a.columna()) < 2 || Math.Abs(de.fila() - a.fila()) < 2)
             {
-                switch ((a.nivel() - de.nivel()))
+                switch (Math.Abs(a.nivel() - de.nivel()))
                 {
+                    case 0:
+                        ;
+                    break;
                     case 1:
                         costo++;
                         break;
                     case 2:
-                        costo += 2;
+                        if (de.tipoTerreno() != a.tipoTerreno())
+                            costo = int.MinValue;
+                        else
+                            costo += 2;
                         break;
                     default:
                         return int.MinValue;//<--- Es inaccesible devuelve el maximo valor posible

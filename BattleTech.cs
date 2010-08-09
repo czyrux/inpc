@@ -23,6 +23,20 @@ namespace ico
 			//Leemos el fichero de configuracion
 			_config = new ConfiguracionJuego( _myJugador );
 
+<<<<<<< .mine
+            //prueba de pathfinder el 9/8 - Angel
+            string str;
+
+            Console.WriteLine("estcibe la columnafila de \n");
+            str = Console.ReadLine();
+            Posicion de = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
+            Console.WriteLine("estcibe la columnafila a \n");
+            str = Console.ReadLine();
+            Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
+            Camino Camino= new Camino(_tablero.Casilla(de),_tablero.Casilla(a),_tablero);
+
+
+=======
 
             //Elegimos la accion a realizar
             if (fase == "Movimiento")
@@ -32,6 +46,7 @@ namespace ico
             else
                 faseReaccion();
 
+>>>>>>> .r116
         }
         #endregion
 

@@ -93,17 +93,17 @@ namespace ico
 
        
         public Casilla colindante(Casilla actual, Encaramiento direccion)
-        {//revisada
+        {//revisada v2
             Casilla devolver = null;
             if (direccion == Encaramiento.Arriba || direccion == Encaramiento.Abajo)
             {
                 if (direccion == Encaramiento.Arriba)
                 {
-                    devolver = _casillas[actual.posicion().fila(), actual.posicion().columna() - 1];
+                    devolver = _casillas[actual.posicion().fila() -2, actual.posicion().columna() - 1];
                 }
                 else
                 {
-                    devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna()];
+                    devolver = _casillas[actual.posicion().fila() , actual.posicion().columna()-1];
                 }
             }
             else if (((actual.posicion().columna() - 1) % 2) == 0)//par
