@@ -164,11 +164,11 @@ namespace ico
             camino.Reverse();
             return new Camino(camino);//<-!!!!! lo hace mal necesito revisar paso a paso
         }
-        //Funcion que devuelve la distancia aproximada entre el punto a y el punto b.
+        //Funcion que devuelve la distancia aproximada entre el punto a y el punto b. (revisada)
         public int DistanciaAB(Posicion a, Posicion b)
         {
             //dx <----La distancia entre la x de a y la x de b. Idem para la dy
-            int dx = Math.Abs(a.columna() + b.columna()), dy = Math.Abs(b.columna() + a.columna());
+            int dx = Math.Abs(a.columna() - b.columna())+1, dy = Math.Abs(b.fila() - a.fila())+1;
 
             // (dx^2+dy^2)^1/2<-----La parte entera
             return (int)Math.Truncate(Math.Pow((Math.Pow(dx, 2) + Math.Pow(dx, 2)), 0.5));

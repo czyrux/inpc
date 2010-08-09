@@ -233,3 +233,11 @@ Ataque fisico (mech):
 	ke aga pathfinder y lo que haga falta.
 
 	- ( antonio ) por cierto creo ke la funcion distancia esta mal, porque solo usas las columnas, haz pruebas, sobre el simulador. Yo me voi ia, mñn nos vemos
+
+	-( angel ) en efecto esta mal ya la revise. 
+	
+	-(angel) Por amor de dios no empieces a cambiar cosas sin conectarte al msn y advertirme puesto que puedes dejarme colgado!!!!
+	
+	-(angel) Ya termine pathfinder tine algunos errores (no esta funcionando bien, o mas bien no funciona) pero ya termina. 
+	Me fije que en depuracion comprobando 82 casillas abiertas casi ni tardo asi que no hay problemas de eficiencia.
+	Creo que los errores estan en la funcion colindante, pero ya mañana depurare con atencion. Ademas hay cosas que tengo que corregir en la funcion pathfinder y el funcionamiento interno de colindante.
