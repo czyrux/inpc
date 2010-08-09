@@ -231,3 +231,5 @@ Ataque fisico (mech):
 
 	- ( antonio ) He puesto en la clase BattleTech, la funcion faseMovimiento. Dentro de ella como hablamos es donde habra que llamar a funcion que busquen objetivos, 
 	ke aga pathfinder y lo que haga falta.
+
+	- ( antonio ) por cierto creo ke la funcion distancia esta mal, porque solo usas las columnas, haz pruebas, sobre el simulador. Yo me voi ia, mñn nos vemos
