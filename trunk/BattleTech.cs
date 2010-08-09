@@ -23,6 +23,15 @@ namespace ico
 			//Leemos el fichero de configuracion
 			_config = new ConfiguracionJuego( _myJugador );
 
+
+            //Elegimos la accion a realizar
+            if (fase == "Movimiento")
+            {
+                faseMovimiento();
+            }
+            else
+                faseReaccion();
+
         }
         #endregion
 

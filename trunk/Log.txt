@@ -228,3 +228,6 @@ Ataque fisico (mech):
 
 	- (antonio) oye e visto ke la funcion distancia la has metido en el camino. No deberia estar en el tablero?¿ voi a poner una copia alli i luego tu me dices, pero io creo ke eso es
 	responsabilidad del tablero.
+
+	- ( antonio ) He puesto en la clase BattleTech, la funcion faseMovimiento. Dentro de ella como hablamos es donde habra que llamar a funcion que busquen objetivos, 
+	ke aga pathfinder y lo que haga falta.
