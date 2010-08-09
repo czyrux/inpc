@@ -60,7 +60,8 @@ namespace ico
         #endregion
 
         #region metodos
-        public void pruebas () {
+        public void pruebas () 
+        {
 			Console.WriteLine("Numero de jugadores: " + _numeroJugadores);
 			Console.WriteLine();
 
@@ -92,6 +93,31 @@ namespace ico
 					fin=true;
 			}
 		}
+
+        //Para la fase de movimiento del juego
+        #region faseMovimiento
+        private void faseMovimiento() 
+        {
+        
+        }
+        #endregion
+
+        private void faseReaccion() { 
+        
+        }
+
+        private void faseAtaqueArmas() { 
+        
+        }
+
+        private void faseAtaquesFisico() { 
+        
+        }
+
+        private void faseFinalTurno() { 
+        
+        }
+
         #endregion
 
         #region atributos

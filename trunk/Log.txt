@@ -225,3 +225,6 @@ Ataque fisico (mech):
 
 	- (antonio) wenas, te mandao un mail en el ke te e contao varias cosas, asike miralo ke no tengo ganas de volver a escribir. Voi a intentar organizar la clase battletech, para ponerle
 	las funciones de las fases i demas rollos.
+
+	- (antonio) oye e visto ke la funcion distancia la has metido en el camino. No deberia estar en el tablero?¿ voi a poner una copia alli i luego tu me dices, pero io creo ke eso es
+	responsabilidad del tablero.
