@@ -246,7 +246,7 @@ Ataque fisico (mech):
 	Por otro lado e visto que la busqueda de casillas dentro de los arrays en las funciones es secuencial i pudiera ser un poco lento si se hace muchas veces, pero weno en caso de suceder el problema, ya buscaremos
 	alguna forma mas rapida de guardarlo i luego saber si estan o no. (Como idea podriamos usar una matriz de booleanos o de enteros para ser 1 y 0, i asi saber de forma rapida si algo esta "marcado")
 
-	- (antonio) Por cierto, te comente en el mensaje que quiza se me habia ocurrido una forma de realizar el algoritmo para encontrar el camino. Voi a hacer unas pruebas para ver si es factible. Lo intentare hacer fuera de la clase Camino
+	- (antonio) Por cierto, te comente en el mensaje que quiza se me habia ocurrido una forma de realizar el algoritmo ( una especie de branch and bound ) para encontrar el camino. Voi a hacer unas pruebas para ver si es factible. Lo intentare hacer fuera de la clase Camino
 	para que no interfiramos. Enga animo en la depuracion.
 
 	- (antonio) Por cierto tienes que explicarme ke ace la funcion casillaColindante o colindante. Lo que hace es devolver la de enfrente?¿ Si es para hacer algo asi, podiamos tener en Tablero una serie de funciones que se les pase una casilla
@@ -268,3 +268,6 @@ Ataque fisico (mech):
 		- Si kieres... las funciones esas para el tablero.
 		- Luego implementar mi solucion de camino minimo (en caso de no haber terminado tu)
 	Cualquier comentario ya me dices
+
+	- (antonio) He visto mi posible solucion i creo ke al fin i al cabo era muy parecida, solo ke keria hacerlo sin mirar todo el mapa, i moviendome hasta donde pudiera.
+	Pero kreo ke me corta caminos posibles. Asi de momento sigue tu, si te atrancas, pues lo intento, o sobre tu codigo, o empezando de nuevo. Enga ta lego
