@@ -241,3 +241,24 @@ Ataque fisico (mech):
 	-(angel) Ya termine pathfinder tine algunos errores (no esta funcionando bien, o mas bien no funciona) pero ya termina. 
 	Me fije que en depuracion comprobando 82 casillas abiertas casi ni tardo asi que no hay problemas de eficiencia.
 	Creo que los errores estan en la funcion colindante, pero ya mañana depurare con atencion. Ademas hay cosas que tengo que corregir en la funcion pathfinder y el funcionamiento interno de colindante.
+
+	- (antonio) Buenas angel, no se a ke te refieres con lo de cambiar cosas?¿, si no toque nada, lo unico fue copiar la funcion que tenias en Camino de distancia i ponerla tambien en Tablero, pero aparte de eso?¿
+	Por otro lado e visto que la busqueda de casillas dentro de los arrays en las funciones es secuencial i pudiera ser un poco lento si se hace muchas veces, pero weno en caso de suceder el problema, ya buscaremos
+	alguna forma mas rapida de guardarlo i luego saber si estan o no. (Como idea podriamos usar una matriz de booleanos o de enteros para ser 1 y 0, i asi saber de forma rapida si algo esta "marcado")
+
+	- (antonio) Por cierto, te comente en el mensaje que quiza se me habia ocurrido una forma de realizar el algoritmo para encontrar el camino. Voi a hacer unas pruebas para ver si es factible. Lo intentare hacer fuera de la clase Camino
+	para que no interfiramos. Enga animo en la depuracion.
+
+	- (antonio) Por cierto tienes que explicarme ke ace la funcion casillaColindante o colindante. Lo que hace es devolver la de enfrente?¿ Si es para hacer algo asi, podiamos tener en Tablero una serie de funciones que se les pase una casilla
+	(la que estamos situados) y nos devuelva la de enfrente o la de la izquierda o la de la derecha o la de atras segun la funcion que sea.
+	Si esta es tu funcion colindante:
+			public Casilla colindante(Casilla actual, Encaramiento direccion)
+
+	Las otras serian:
+			public Casilla arriba(Casilla actual, Encaramiento direccion)
+			public Casilla izquierda(Casilla actual, Encaramiento direccion)
+			public Casilla derecha(Casilla actual, Encaramiento direccion)
+			public Casilla atras(Casilla actual, Encaramiento direccion)
+
+	Digo esto porque supongo ke necesitaras, las que estan situadas en estas posiciones para poder realizar todo el camino.
+	Weno ya me dices i si kieres yo las realizo. Cuando puedas me lo dices.

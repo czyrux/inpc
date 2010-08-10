@@ -104,7 +104,7 @@ namespace ico
                     if (esta(cerradas,elemento.casilla))
                         continue;
 
-                    // Precalculo la el costo de movimiento relaciona, para no hacer varias veces
+                    // Precalculo el costo de movimiento relaciona, para no hacerlo varias veces
                     aux=Casilla.costoMovimientoAB(actual, elemento.casilla);
 
                     // verifico si es intrancitable
