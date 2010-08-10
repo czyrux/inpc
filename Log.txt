@@ -262,3 +262,9 @@ Ataque fisico (mech):
 
 	Digo esto porque supongo ke necesitaras, las que estan situadas en estas posiciones para poder realizar todo el camino.
 	Weno ya me dices i si kieres yo las realizo. Cuando puedas me lo dices.
+
+	- ( antonio ) Weno como entrada resumen. ME voi a encargar en este orden:
+		- Hacer lo de la media de la probabilidad de tiro.
+		- Si kieres... las funciones esas para el tablero.
+		- Luego implementar mi solucion de camino minimo (en caso de no haber terminado tu)
+	Cualquier comentario ya me dices
