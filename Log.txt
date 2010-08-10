@@ -270,4 +270,5 @@ Ataque fisico (mech):
 	Cualquier comentario ya me dices
 
 	- (antonio) He visto mi posible solucion i creo ke al fin i al cabo era muy parecida, solo ke keria hacerlo sin mirar todo el mapa, i moviendome hasta donde pudiera.
-	Pero kreo ke me corta caminos posibles. Asi de momento sigue tu, si te atrancas, pues lo intento, o sobre tu codigo, o empezando de nuevo. Enga ta lego
+	Pero kreo ke me corta caminos posibles. Asi de momento sigue tu, si te atrancas, pues lo intento, o sobre tu codigo, o empezando de nuevo. Intentare ir mirando tu codigo para
+	comprenderlo. Enga ta lego
