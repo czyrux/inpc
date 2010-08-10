@@ -164,6 +164,7 @@ namespace ico
             camino.Reverse();
             return new Camino(camino);//<-!!!!! lo hace mal necesito revisar paso a paso
         }
+
         //Funcion que devuelve la distancia aproximada entre el punto a y el punto b. (revisada)
         public int DistanciaAB(Posicion a, Posicion b)
         {
