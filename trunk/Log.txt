@@ -283,3 +283,6 @@ Ataque fisico (mech):
 	- (antonio) Por cierto estoi pensando que antes de realizar el camino en la fase de movimiento, deberiamos escoger la estrategia a seguir. Creo que quiza deberia haber un parametro mas para la funcion camino, que sea
 	dicha estrategia, para tener en cuenta la heuristica de una manera u otra. Por ejemplo, si queremos se ofensivos buscaremos zonas cercanas al mech y con mas altura, mientra que si queremos ser defensivos buscaremos zonas
 	mas a cubierto y sobre todo mas alejadas.
+
+	- ( antonio ) Por cierto he cambiado la zona donde hacias las pruebas de el camino minimo, te lo he puesto dentro de la funcion faseMoviemiento() (me refiero a cuando creabas la instancia dentro de BattleTech, para asi poder realizar io mis pruebas
+	de las armas)
