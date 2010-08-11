@@ -286,3 +286,5 @@ Ataque fisico (mech):
 
 	- ( antonio ) Por cierto he cambiado la zona donde hacias las pruebas de el camino minimo, te lo he puesto dentro de la funcion faseMoviemiento() (me refiero a cuando creabas la instancia dentro de BattleTech, para asi poder realizar io mis pruebas
 	de las armas)
+
+	-(antonio) He cambiado la funcion conoVision, para que reciba una posicion, ya que el mech lo que tiene asociado es una posicion, y no una casilla
