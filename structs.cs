@@ -44,7 +44,7 @@ namespace ico
     /*
      * Estructura usada para conocer el estado de las distintas partes de un mech
      */
-    public struct vitalidad 
+    /*public struct vitalidad 
     {
         public estadoBlindaje brazoIzquierdo;
         public estadoBlindaje torsoIzquierdo;
@@ -57,7 +57,7 @@ namespace ico
         public estadoBlindaje atrasTorsoIzquierdo;
         public estadoBlindaje atrasTorsoDerecho;
         public estadoBlindaje atrasTorsoCentral;
-    };
+    };*/
 
 
     /**
