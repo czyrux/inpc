@@ -272,3 +272,7 @@ Ataque fisico (mech):
 	- (antonio) He visto mi posible solucion i creo ke al fin i al cabo era muy parecida, solo ke keria hacerlo sin mirar todo el mapa, i moviendome hasta donde pudiera.
 	Pero kreo ke me corta caminos posibles. Asi de momento sigue tu, si te atrancas, pues lo intento, o sobre tu codigo, o empezando de nuevo. Intentare ir mirando tu codigo para
 	comprenderlo. Enga ta lego
+
+	11/8/10
+	- (antonio) Wenas angel te he mandado a tu correo una documentacion interesante de otra practica de otro año. Esta bastante detallada y te puede ayudar para realizar el pathfinder puesto
+	que explica la heuristica utilizada i todo. Tambien podria facilitarte el codigo, pero weno. Voi a hacer lo de las armas... dew
