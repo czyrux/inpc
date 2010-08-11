@@ -568,6 +568,11 @@ namespace ico {
 			_distanciaTiroLarga=larga/_armas.Count;
 		}
 
+        //Metodo que calcula, dada una distancia al objetivo, la media de tirada que se necesita para impactar al objetivo
+        public int tiradaParaImpactoMedia(int distancia) 
+        {
+            return 0;
+        }
         //indica el tipo mech
         public tipoMech tipo() {
             tipoMech t;
