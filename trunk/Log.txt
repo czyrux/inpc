@@ -303,5 +303,7 @@ Ataque fisico (mech):
 		Para hacerlo bien necesito la linea de vision, puesto que si hay coberturas parciales... pues hay modificadores, aparte de que podria no existir vision. Lo que podria hacer es una aproximacion... Pero el problema de hacer esto es que te puede llevar 
 		a casillas que luego no tengan LdV con el objetivo. Entonces que hacemos?¿
 		Ahora eso si, esta funcion va a tener que hacerse bien hecha de todas maneras para la fase de disparo con armas, pero claro ahi si se puede llamar a la LdV.exe puesto que la posicion sera ya fija.
-		Lo que voi a hacer es realizar la funcion que utilizaremos para la fase de disparo, y asi me voi encargando de eso, porque yo creo que hacer una aproximacion es un poco pegarse un tiro en el pie, ya que al no saber si vemos el objetivo, pues no tiene
-		mucho sentido.
+		
+		-(antonio) Viendo los problemas que tendremos para calcular esto, veo mejor no tener el cuenta el daño que podria hacer, puesto que no es posible calcularlo. Lo que puedes utilizar es cuando entra en el rango de accion de algun mech.
+		Dado que ahora mismo no puedo ayudarte en el movimiento, puesto que asta que no ablemos no me voi a poner a toquetear tu codigo, lo que voi a hacer es empezar con la fase de ataque con armas.
+		Cuando veas to esto, ve respondiendo una a una a todas las cuestiones que te haya podido plantear.
