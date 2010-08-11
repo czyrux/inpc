@@ -309,3 +309,15 @@ Ataque fisico (mech):
 		Cuando veas to esto, ve respondiendo una a una a todas las cuestiones que te haya podido plantear.
 
 		- (antonio) he estado leyendo la documentacion que te he pasado, y ahi muchas cosas que nos pueden ayudar (en la fase de movimiento sobre todo). Asi que leelo.
+
+		- (angel) Solo quieria decir que me dio un conflicto cuando hice un commit, y por ello agradeceria mucho que si estas trabajando te conectaras (msn) para que haga mas commits. 
+
+		- (angel) Sobre los cambios en colindante para cambiarla puedes hacerlo pero no me es mas util que como esta ahora. Ya que al pasarle el encaramiento como un etero haciendo un casting, puedo meter la i como el encaramiento. 
+		Aunque creo que es posible que colindante tenga fallos pero luego la depurare.
+
+		- (angel) Sobre la busqueda secuencial no pensaba dejarla asi, cuando funcionara pensaba que podria seleccionar la mejor mientras selecionaba todas las abiertas; es decir durante el bucle principal. Pero por ahora no queria complicarme primero que funcione.
+		El codigo actual solo es una aplicacion del pathfinder y no lo he depurado (se de hecho que esta mal).
+
+		- (angel) sobre la heuristica primer quiero que funcione de la manera mas facil, cuando esto este hecho hare el siguiente paso que es incluir mas cosas.
+
+		- (angel) sobre la LdV no se que decirte, tal vez puedes pedirle el codigo en java al profesro , no?
