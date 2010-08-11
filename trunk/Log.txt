@@ -289,7 +289,7 @@ Ataque fisico (mech):
 
 	-(antonio) He cambiado la funcion conoVision, para que reciba una posicion, ya que el mech lo que tiene asociado es una posicion, y no una casilla
 
-	- (antonio) Oye mira los modificadores que tengo ke tener en cuenta para el disparo de cada arma
+	- (antonio) Oye mira los modificadores que tengo ke tener en cuenta para el disparo de cada arma, y eso suponiendo que estoi de frente al mech rival...
 			/** MODIFICADORES PARA DISPARO
              * modificador distancia
              * " alcance minimo
