@@ -572,9 +572,27 @@ namespace ico {
 
 
         /*
-         * Metodo que calcula, dada una distancia al objetivo, la media de tirada que se necesita para impactar al objetivo
+         * Metodo que calcula la media de tirada que se necesita para impactar al objetivo
          */
-        public int tiradaParaImpactoMedia(int distancia) 
+        public int tiradaParaImpactoMedia( int distancia , Mech objetivo , Tablero mapa , int movimientoPropio=1 , int movimientoObjetivo=1 ) 
+        {
+            /** MODIFICADORES PARA DISPARO
+             * modificador distancia
+             * " alcance minimo
+             * " movimiento atacante
+             * " movimiento objetivo
+             * " terreno
+             * " calor y daños
+             * " objetivos inmoviles
+             * " en suelo
+             */
+            return 0;
+        }
+
+        /*
+         * Metodo que calcula, para el arma pasada como argumento, la media de tirada que se necesita para impactar al objetivo
+         */
+        public int tiradaImpacto( Componente arma , int distancia, Mech objetivo, Tablero mapa, int movimientoPropio = 1, int movimientoObjetivo = 1)
         {
             /** MODIFICADORES PARA DISPARO
              * modificador distancia
