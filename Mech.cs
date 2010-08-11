@@ -551,7 +551,9 @@ namespace ico {
             Console.WriteLine(); Console.WriteLine();
 		}
 		
-		//Metodo que calcula la media de la distancia por armas del mech
+		/*
+         * Metodo que calcula la media de la distancia por armas del mech
+         */
 		private void calculoDistanciaTiro() {
 			int media=0 , larga=0 , corta=0 ;
             _maxAlcanceDisparo=0;
@@ -568,12 +570,17 @@ namespace ico {
 			_distanciaTiroLarga=larga/_armas.Count;
 		}
 
-        //Metodo que calcula, dada una distancia al objetivo, la media de tirada que se necesita para impactar al objetivo
+        /*
+         * Metodo que calcula, dada una distancia al objetivo, la media de tirada que se necesita para impactar al objetivo
+         */
         public int tiradaParaImpactoMedia(int distancia) 
         {
             return 0;
         }
-        //indica el tipo mech
+
+        /*
+         * indica el tipo mech
+         */
         public tipoMech tipo() {
             tipoMech t;
             /*Ligeros: 20 a 35 toneladas.
@@ -590,8 +597,10 @@ namespace ico {
             return t;
         }
 
-        //INDICA SI UNA CASILLA ESTA EN EL CONO DE VISION O NO
-        public Boolean conoVision( Casilla casilla ) {
+        /*
+         * Indica si una casilla esta dentro del cono de vision de un mech
+         */
+        public Boolean conoVision( Posicion casilla ) {
             Boolean enCono = false;
             int jIzq, jDrcha;
 
