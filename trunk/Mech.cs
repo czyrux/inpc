@@ -119,6 +119,7 @@ namespace ico {
         protected int _distanciaTiroCorta; //***
         protected int _distanciaTiroMedia; //***
         protected int _distanciaTiroLarga; //***
+        protected int _maxAlcanceDisparo;
 
         //DATOS DE ARMADURA INICIALES DEL MECH
         protected int _BlindBrazoIzquierdoInicial;
@@ -259,7 +260,7 @@ namespace ico {
 			Componente aux1;
 			for ( int i=0 ; i<_numeroComponentes ; i++){
 				aux1 = new Componente(f);
-				if ( aux1.clase()=="ARMA") _armas.Add(aux1);
+                if (aux1.clase() == "ARMA") _armas.Add(aux1);
 				_componentes[i]=aux1;
 			}
 			
@@ -496,6 +497,7 @@ namespace ico {
 		public int distanciaTiroCorta() { return _distanciaTiroCorta;}
 		public int distanciaTiroMedia() { return _distanciaTiroMedia;}
 		public int distanciaTiroLarga() { return _distanciaTiroLarga;}
+        public int maxAlcanceTiro() { return _maxAlcanceDisparo; }
 		
         #endregion
 
@@ -528,6 +530,7 @@ namespace ico {
 			Console.WriteLine("Distancia corta en media de tiro del mech: "+_distanciaTiroCorta);
 			Console.WriteLine("Distancia media en media de tiro del mech: "+_distanciaTiroMedia);
 			Console.WriteLine("Distancia larga en media de tiro del mech: "+_distanciaTiroLarga);
+            Console.WriteLine("Maximo alcance: " + _maxAlcanceDisparo);
 			/*Console.WriteLine("Numero radiadores: "+_numeroRadiadores);*/
 
             Console.WriteLine("Datos blindaje: ");
@@ -551,10 +554,13 @@ namespace ico {
 		//Metodo que calcula la media de la distancia por armas del mech
 		private void calculoDistanciaTiro() {
 			int media=0 , larga=0 , corta=0 ;
+            _maxAlcanceDisparo=0;
 			for ( int i=0 ; i<_armas.Count ; i++ ) {
 				corta+=((Componente)_armas[i]).distanciaCorta();
 				media+=((Componente)_armas[i]).distanciaMedia();
 				larga+=((Componente)_armas[i]).distanciaLarga();
+                if (((Componente)_armas[i]).distanciaLarga() > _maxAlcanceDisparo) _maxAlcanceDisparo = ((Componente)_armas[i]).distanciaLarga();
+                
 			}
 			
 			_distanciaTiroCorta=corta/_armas.Count;

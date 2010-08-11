@@ -276,3 +276,10 @@ Ataque fisico (mech):
 	11/8/10
 	- (antonio) Wenas angel te he mandado a tu correo una documentacion interesante de otra practica de otro año. Esta bastante detallada y te puede ayudar para realizar el pathfinder puesto
 	que explica la heuristica utilizada i todo. Tambien podria facilitarte el codigo, pero weno. Voi a hacer lo de las armas... dew
+
+	- (antonio) Añadida a mech la funcion int maxAlcanceTiro(). Como te imaginas devuelve la maxima casilla a la que una de sus armas puede llegar a dar. La he pensado para ver cuando empezamos a entrar en el rango
+	de accion de un mech. Las otras que teniamos eran medias de todas las armas, mientras que esta es devuelve la de maxima longitud.
+
+	- (antonio) Por cierto estoi pensando que antes de realizar el camino en la fase de movimiento, deberiamos escoger la estrategia a seguir. Creo que quiza deberia haber un parametro mas para la funcion camino, que sea
+	dicha estrategia, para tener en cuenta la heuristica de una manera u otra. Por ejemplo, si queremos se ofensivos buscaremos zonas cercanas al mech y con mas altura, mientra que si queremos ser defensivos buscaremos zonas
+	mas a cubierto y sobre todo mas alejadas.
