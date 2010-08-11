@@ -305,4 +305,4 @@ Ataque fisico (mech):
 		para tener en cuenta:
 			- Las coberturas parciales.
 		Pero el problema de hacer esto es que te puede llevar a casillas que luego no tengan LdV con el objetivo. Entonces que hacemos?¿
-		Ahora eso si, esta funcion va a tener que hacerse en condiciones de todas maneras para la fase de disparo con armas, pero claro ahi si se puede llamar a la LdV.exe
+		Ahora eso si, esta funcion va a tener que hacerse bien heca de todas maneras para la fase de disparo con armas, pero claro ahi si se puede llamar a la LdV.exe puesto que la posicion sera ya fija
