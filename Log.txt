@@ -307,3 +307,5 @@ Ataque fisico (mech):
 		-(antonio) Viendo los problemas que tendremos para calcular esto, veo mejor no tener el cuenta el daño que podria hacer, puesto que no es posible calcularlo. Lo que puedes utilizar es cuando entra en el rango de accion de algun mech.
 		Dado que ahora mismo no puedo ayudarte en el movimiento, puesto que asta que no ablemos no me voi a poner a toquetear tu codigo, lo que voi a hacer es empezar con la fase de ataque con armas.
 		Cuando veas to esto, ve respondiendo una a una a todas las cuestiones que te haya podido plantear.
+
+		- (antonio) he estado leyendo la documentacion que te he pasado, y ahi muchas cosas que nos pueden ayudar (en la fase de movimiento sobre todo). Asi que leelo.
