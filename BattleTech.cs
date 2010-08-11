@@ -23,20 +23,23 @@ namespace ico
 			//Leemos el fichero de configuracion
 			_config = new ConfiguracionJuego( _myJugador );
 
-//<<<<<<< .mine
+//<<<<<<< ANTES DE QUE TE DE LA HISTERIA, E COPIADO ESTE TROZO DE CODIGO DENTRO DE LA FUNCION DE ESTA CLASE QUE SE LLAMA, faseMovimiento(). HAZ LAS PRUEBAS DESDE AHI
+//<<<<<<< .mine 
             //prueba de pathfinder el 9/8 - Angel
-            string str;
+            //string str;
 
-            Console.WriteLine("estcibe la columnafila de \n");
-            str = Console.ReadLine();
-            Posicion de = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
-            Console.WriteLine("estcibe la columnafila a \n");
-            str = Console.ReadLine();
-            Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
-            Camino Camino= new Camino(_tablero.Casilla(de),_tablero.Casilla(a),_tablero);
+            //Console.WriteLine("estcibe la columnafila de \n");
+          //  str = Console.ReadLine();
+        //    Posicion de = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
+      //      Console.WriteLine("estcibe la columnafila a \n");
+    //        str = Console.ReadLine();
+  //          Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
+  //          Camino Camino= new Camino(_tablero.Casilla(de),_tablero.Casilla(a),_tablero);
 
 
 //=======
+            //PRuebas de ÑIKO
+            pruebas(); 
 
             //Elegimos la accion a realizar
             if (fase == "Movimiento")
@@ -96,7 +99,7 @@ namespace ico
                     ((Mech)_mechs[i]).datos();
 			}
 			
-			string c1 ;
+			/*string c1 ;
 			Posicion p1 ;
 			Camino c;
 			Boolean fin=false;
@@ -115,14 +118,28 @@ namespace ico
 					//_tablero.casillaInfo(p1.fila(),p1.columna());
 				}else
 					fin=true;
-			}
+			}*/
 		}
 
         //Para la fase de movimiento del juego
         #region faseMovimiento
         private void faseMovimiento() 
         {
-        
+
+            //<<<<<<< .mine
+            //prueba de pathfinder el 9/8 - Angel
+            string str;
+
+            Console.WriteLine("estcibe la columnafila de \n");
+            str = Console.ReadLine();
+            Posicion de = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
+            Console.WriteLine("estcibe la columnafila a \n");
+            str = Console.ReadLine();
+            Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
+            Camino Camino = new Camino(_tablero.Casilla(de), _tablero.Casilla(a), _tablero);
+
+
+            //=======
         }
         #endregion
 
