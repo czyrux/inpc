@@ -147,10 +147,10 @@ namespace ico
         }
 
         //Funcion que devuelve la distancia aproximada entre el punto a y el punto b.
-        public int distanciaCasillas(Casilla a, Casilla b)
+        public int distanciaCasillas(Posicion a, Posicion b)
         {
             //dx <----La distancia entre la x de a y la x de b. Idem para la dy
-            int dx = Math.Abs(a.columna() + b.columna()), dy = Math.Abs(b.columna() + a.columna());
+            int dx = Math.Abs(a.columna() + b.columna()), dy = Math.Abs(b.fila() + a.fila());
 
             // (dx^2+dy^2)^1/2<-----La parte entera
             return (int)Math.Truncate(Math.Pow((Math.Pow(dx, 2) + Math.Pow(dx, 2)), 0.5));
