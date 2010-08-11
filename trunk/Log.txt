@@ -288,3 +288,21 @@ Ataque fisico (mech):
 	de las armas)
 
 	-(antonio) He cambiado la funcion conoVision, para que reciba una posicion, ya que el mech lo que tiene asociado es una posicion, y no una casilla
+
+	- (antonio) Oye mira los modificadores que tengo ke tener en cuenta para el disparo de cada arma
+			/** MODIFICADORES PARA DISPARO
+             * modificador distancia
+             * " alcance minimo
+             * " movimiento atacante
+             * " movimiento objetivo
+             * " terreno
+             * " calor y daños
+             * " objetivos inmoviles
+             * " en suelo
+             */
+		Para hacerlo bien necesito la linea de vision, puesto que si hay coberturas parciales... pues hay modificadores, aparte de que podria no existir vision. Lo que podria hacer es una aproximacion, sin tener en cuenta algunos parametros.
+		Eso si, a la funcion se le tendria que pasar como parametros, el otro mech y la distancia que los separa por lo pronto. Y si kieres meter modificadores de terreno, pues tambien el tablero. En principio voi a quitar estos parametros
+		para tener en cuenta:
+			- Las coberturas parciales.
+		Pero el problema de hacer esto es que te puede llevar a casillas que luego no tengan LdV con el objetivo. Entonces que hacemos?¿
+		Ahora eso si, esta funcion va a tener que hacerse en condiciones de todas maneras para la fase de disparo con armas, pero claro ahi si se puede llamar a la LdV.exe

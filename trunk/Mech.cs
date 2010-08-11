@@ -570,11 +570,22 @@ namespace ico {
 			_distanciaTiroLarga=larga/_armas.Count;
 		}
 
+
         /*
          * Metodo que calcula, dada una distancia al objetivo, la media de tirada que se necesita para impactar al objetivo
          */
         public int tiradaParaImpactoMedia(int distancia) 
         {
+            /** MODIFICADORES PARA DISPARO
+             * modificador distancia
+             * " alcance minimo
+             * " movimiento atacante
+             * " movimiento objetivo
+             * " terreno
+             * " calor y daños
+             * " objetivos inmoviles
+             * " en suelo
+             */
             return 0;
         }
 
