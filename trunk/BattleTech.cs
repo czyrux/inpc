@@ -173,17 +173,15 @@ namespace ico
 
             //Dejamos solo con los que tengamos linea de vision
             objetivosLdV(objetivos);
-
-            Console.WriteLine("En LdV tenemos:");
+            Console.WriteLine("En LdV tenemos:" + objetivos.Count);
             for (int i = 0; i < objetivos.Count; i++)
                 Console.WriteLine(i + ": " + ((Mech)objetivos[i]).nombre());
             Console.WriteLine();
 
-
             //Dejamos solo los que esten en el cono de vision
             objetivosConoVision(objetivos);
 
-            Console.WriteLine("En Cono vision tenemos:");
+            Console.WriteLine("En Cono vision tenemos:"+objetivos.Count);
             for (int i = 0; i < objetivos.Count; i++)
                 Console.WriteLine(i + ": " + ((Mech)objetivos[i]).nombre());
             Console.WriteLine();
@@ -193,24 +191,30 @@ namespace ico
 
         private void objetivosConoVision (ArrayList objetivos) 
         {
-            for (int i = 0; i < objetivos.Count; i++)
-                if (!_mechs[_myJugador].conoVision(((Mech)objetivos[i]).posicion(), ((Mech)objetivos[i]).ladoEncaramientoTorso()))
-                {
-                    objetivos.RemoveAt(i);
-                    i--;
-                }
+            if (objetivos.Count > 0)
+            {
+                for (int i = 0; i < objetivos.Count; i++)
+                    if (!_mechs[_myJugador].conoVision(((Mech)objetivos[i]).posicion(), _mechs[_myJugador].ladoEncaramientoTorso()))
+                    {
+                        objetivos.RemoveAt(i);
+                        i--;
+                    }
+            }
         }
 
         private void objetivosLdV(ArrayList objetivos)
         {
             Camino c;
-
-            for (int i = 0; i < objetivos.Count; i++) {
-                c = new Camino(_mechs[_myJugador].posicion(), ((Mech)objetivos[i]).posicion(),_tablero,_myJugador);
-                if (!c.ldv())
+            if (objetivos.Count > 0)
+            {
+                for (int i = 0; i < objetivos.Count; i++)
                 {
-                    objetivos.RemoveAt(i);
-                    i--;
+                    c = new Camino(_mechs[_myJugador].posicion(), ((Mech)objetivos[i]).posicion(), _tablero, _myJugador);
+                    if (!c.ldv())
+                    {
+                        objetivos.RemoveAt(i);
+                        i--;
+                    }
                 }
             }
         }

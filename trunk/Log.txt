@@ -339,3 +339,6 @@ Ataque fisico (mech):
 		Aparte he puesto como atributo dentro de la clase Battletech un objeto de Estrategia, para las distintas fases.
 
 		-(antonio) Voi a cambiar la funcion conoVision para que se le pase como argumento el encaramiento. Para que asi sirva para mirar el encaramiento del mech y tambien el encarmiento del torso. Que puede ser distintos
+
+		-(antonio) Creo que voi a tener que hacer funciones para ver cuando un mech esta situado en el lateral (izq o drcha) o cuando esta situado a la espalda, para poder hacer la fase de armas.
+		Por oi lo dejo, dew
