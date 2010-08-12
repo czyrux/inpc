@@ -187,6 +187,8 @@ namespace ico
             for (int i = 0; i < objetivos.Count; i++)
                 Console.WriteLine(i + ": " + ((Mech)objetivos[i]).nombre());
             Console.WriteLine();
+
+            Console.ReadLine();
         }
 
         private void objetivosConoVision (ArrayList objetivos) 
