@@ -166,11 +166,27 @@ namespace ico
                 if (i != _myJugador)
                     objetivos.Add(_mechs[i]);
 
-            //Dejamos solo los que esten en el cono de vision
-            objetivosConoVision(objetivos);
+            Console.WriteLine("Al principio tenemos:");
+            for (int i = 0; i < objetivos.Count; i++)
+                Console.WriteLine(i + ": " + ((Mech)objetivos[i]).nombre());
+            Console.WriteLine();
 
             //Dejamos solo con los que tengamos linea de vision
             objetivosLdV(objetivos);
+
+            Console.WriteLine("En LdV tenemos:");
+            for (int i = 0; i < objetivos.Count; i++)
+                Console.WriteLine(i + ": " + ((Mech)objetivos[i]).nombre());
+            Console.WriteLine();
+
+
+            //Dejamos solo los que esten en el cono de vision
+            objetivosConoVision(objetivos);
+
+            Console.WriteLine("En Cono vision tenemos:");
+            for (int i = 0; i < objetivos.Count; i++)
+                Console.WriteLine(i + ": " + ((Mech)objetivos[i]).nombre());
+            Console.WriteLine();
         }
 
         private void objetivosConoVision (ArrayList objetivos) 
@@ -200,13 +216,14 @@ namespace ico
 
         #endregion
 
-        #region atributos
+#region atributos
         private int _myJugador;
         private String _faseJuego;
         private int _numeroJugadores;
         private Tablero _tablero;
         private Mech[] _mechs;
 		private ConfiguracionJuego _config;
+        private Estrategia _estrategia;
 #endregion
 
     }

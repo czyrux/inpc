@@ -81,4 +81,12 @@ namespace ico
         InferiorIzquierda = 5,
         SuperiorIzquierda = 6,
     };
+
+    /*
+     * Enumerado que define las posibles estrategias que puede tomar un mech
+     */ 
+    public enum Estrategia { 
+        Ofensiva ,
+        Defensiva ,
+    };
 }
