@@ -627,7 +627,7 @@ namespace ico {
         }
 
         /*
-         * Indica si una casilla esta dentro del cono de vision de un mech
+         * Indica si una posicion esta dentro del cono de vision de un mech
          */
         public Boolean conoVision( Posicion casilla ) {
             Boolean enCono = false;
