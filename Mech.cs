@@ -632,7 +632,8 @@ namespace ico {
         public Boolean conoVision( Posicion casilla , int encaramiento ) {
             Boolean enCono = false;
             int jIzq, jDrcha;
-
+            Console.WriteLine(casilla.columna() + " "+casilla.fila());
+            Console.WriteLine(encaramiento);
             //Calculamos las diagonales del cono
             jIzq = _posicion.columna() - Math.Abs(casilla.fila() - _posicion.fila()) * 2;
             jDrcha = _posicion.columna() + Math.Abs(casilla.fila() - _posicion.fila()) * 2;
