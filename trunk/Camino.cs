@@ -69,10 +69,10 @@ namespace ico
         public Casilla[] getCamino() {
             return _camino;
         }
-        Boolean ldv() {
+        public Boolean ldv() {
             return _ldv;
         }
-        Boolean cobertura() {
+        public Boolean cobertura() {
             return _cobertura;
         }
 #endregion
