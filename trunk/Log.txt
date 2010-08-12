@@ -330,3 +330,12 @@ Ataque fisico (mech):
 
 		-(antonio) He modificado el constructor de camino para el programa que lee la LdV, porque tu ponias ke leyera el archivo de mapa "mapaJ1.sbt" mientras que dependiendo del jugador sera uno u otro. Por lo que le he añadido como parametro el numero de jugador a la funcion
 		En la llamada quedaria algo asi: mapaJ"+jugador.ToString()+".sbt" etc.
+
+		-(antonio) Añadido en structs.cs los siguiente:
+			public enum Estrategia { 
+				Ofensiva ,
+				Defensiva ,
+			};
+		Aparte he puesto como atributo dentro de la clase Battletech un objeto de Estrategia, para las distintas fases.
+
+		-(antonio) Voi a cambiar la funcion conoVision para que se le pase como argumento el encaramiento. Para que asi sirva para mirar el encaramiento del mech y tambien el encarmiento del torso. Que puede ser distintos

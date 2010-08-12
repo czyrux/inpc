@@ -629,7 +629,7 @@ namespace ico {
         /*
          * Indica si una posicion esta dentro del cono de vision de un mech
          */
-        public Boolean conoVision( Posicion casilla ) {
+        public Boolean conoVision( Posicion casilla , int encaramiento ) {
             Boolean enCono = false;
             int jIzq, jDrcha;
 
@@ -640,7 +640,8 @@ namespace ico {
 
 
             //Si tiene el encaramiento 1
-            if ( _ladoEncaramiento == 1 ) {
+            if (encaramiento == 1)
+            {
                 if (casilla.fila() > _posicion.fila()) {//Si esta mas abajo que la casilla donde me encuentro
                     enCono = false;
                 }
@@ -658,7 +659,8 @@ namespace ico {
 
 
             }//Si tiene el encaramiento 2
-            else if (_ladoEncaramiento == 2) {
+            else if (encaramiento == 2)
+            {
                 if (casilla.columna() < _posicion.columna())
                 {//Si esta mas a la izquierda que la casilla donde me encuentro
                     enCono = false;
@@ -682,7 +684,8 @@ namespace ico {
                 }
 
             }//Si tiene el encaramiento 3
-            else if (_ladoEncaramiento == 3) {
+            else if (encaramiento == 3)
+            {
                 if (casilla.columna() < _posicion.columna())
                 {//Si esta mas a la izquierda que la casilla donde me encuentro
                     enCono = false;
@@ -708,7 +711,8 @@ namespace ico {
                 }
 
             }//Si tiene el encaramiento 4
-            else if (_ladoEncaramiento == 4) {
+            else if (encaramiento == 4)
+            {
                 if (casilla.fila() < _posicion.fila()) {
                     //Si esta mas arriba que la casilla donde me encuentro
                     enCono = false;
@@ -728,7 +732,8 @@ namespace ico {
                 }
 
             }//Si tiene el encaramiento 5
-            else if (_ladoEncaramiento == 5) {
+            else if (encaramiento == 5)
+            {
                 if (casilla.columna() > _posicion.columna())
                 {//Si esta mas a la derecha que la casilla donde me encuentro
                     enCono = false;
@@ -754,7 +759,8 @@ namespace ico {
                 }
 
             }//Si tiene el encaramiento 6
-            else if (_ladoEncaramiento == 6) {
+            else if (encaramiento == 6)
+            {
                 if (casilla.columna() > _posicion.columna())
                 {//Si esta mas a la derecha que la casilla donde me encuentro
                     enCono = false;
