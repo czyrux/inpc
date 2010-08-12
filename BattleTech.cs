@@ -153,6 +153,7 @@ namespace ico
             Console.WriteLine("Fase Ataque con Armas");
             Console.WriteLine();
 
+            
             /*
              * 1º Eleccion de rivales dentro de cono vision
              * 2º Ver si hay linea de vision con ellos
@@ -160,7 +161,28 @@ namespace ico
              * 4º Ver las armas a dispararle
              * 5º Escribir el fichero
              */
+            ArrayList objetivos = new ArrayList();
+            for (int i = 0; i < _mechs.Length; i++)
+                if (i != _myJugador)
+                    objetivos.Add(_mechs[i]);
+
+            //Dejamos solo los que esten en el cono de vision
+            objetivosConoVision(objetivos);
+
+            //Dejamos solo con los que tengamos linea de vision
+            objetivosLdV(objetivos);
         }
+
+        private void objetivosConoVision (ArrayList objetivos) 
+        { 
+            
+        }
+
+        private void objetivosLdV(ArrayList objetivos)
+        {
+
+        }
+
         #endregion
 
         private void faseAtaquesFisico() { 

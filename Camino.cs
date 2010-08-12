@@ -8,13 +8,13 @@ namespace ico
     public class Camino
     {
 #region Constructores
-        public Camino(Posicion p1, Posicion p2,Tablero tablero) {
+        public Camino(Posicion p1, Posicion p2,Tablero tablero,int jugador) {
             Process proc = new Process();
             _movimientos = _nldv = 0;
             String[] nodos;
             proc.StartInfo.WorkingDirectory = @".";
             proc.StartInfo.FileName = "LDVyC.exe";
-            proc.StartInfo.Arguments = "mapaJ1.sbt " + p1.ToString() + " " + tablero.Casilla(p1).nivel().ToString() + " " + p2.ToString() + " " + tablero.Casilla(p2).nivel().ToString() + "";
+            proc.StartInfo.Arguments = "mapaJ"+jugador.ToString()+".sbt " + p1.ToString() + " " + tablero.Casilla(p1).nivel().ToString() + " " + p2.ToString() + " " + tablero.Casilla(p2).nivel().ToString() + "";
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.RedirectStandardOutput = false;
             proc.StartInfo.RedirectStandardError = true;
@@ -43,6 +43,7 @@ namespace ico
                 }
             }
         }
+
         public Camino(ArrayList camino)
         {
             _length = camino.Count;
@@ -54,6 +55,7 @@ namespace ico
             _ldv =_cobertura= false;
             _nldv = _movimientos = 0;
         }
+
         public Camino(Casilla de, Casilla a, Tablero tablero) {
             pathFinder(de, a, tablero);
         }
