@@ -205,7 +205,7 @@ namespace ico
 
             for (int i = 0; i < objetivos.Count; i++) {
                 c = new Camino(_mechs[_myJugador].posicion(), ((Mech)objetivos[i]).posicion(),_tablero,_myJugador);
-                if (c.)
+                if (!c.ldv())
                 {
                     objetivos.RemoveAt(i);
                     i--;
