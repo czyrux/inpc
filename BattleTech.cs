@@ -152,6 +152,14 @@ namespace ico
         private void faseAtaqueArmas() {
             Console.WriteLine("Fase Ataque con Armas");
             Console.WriteLine();
+
+            /*
+             * 1º Eleccion de rivales dentro de cono vision
+             * 2º Ver si hay linea de vision con ellos
+             * 3º De los restantes escoger al mas debil
+             * 4º Ver las armas a dispararle
+             * 5º Escribir el fichero
+             */
         }
         #endregion
 

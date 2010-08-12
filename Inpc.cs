@@ -10,8 +10,18 @@ namespace ico {
 			
         static void Main(string[] args) {
 			
-			int numeroJugador=1;
-			string fase="Movimiento";
+			int numeroJugador=1 ;
+            string fase = "Movimiento";
+            
+            //En caso de tener argumentos
+            if (args.Length > 0) {
+                numeroJugador = Convert.ToInt32(args[0]);
+                fase = args[1];
+                Console.WriteLine(numeroJugador);
+                Console.WriteLine(fase);
+            }
+			
+            
             //QUE CARAJO ES ESTO?¿
             int i = int.MaxValue;
             i++;
