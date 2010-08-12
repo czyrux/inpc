@@ -192,7 +192,7 @@ namespace ico
         private void objetivosConoVision (ArrayList objetivos) 
         {
             for (int i = 0; i < objetivos.Count; i++)
-                if (!_mechs[_myJugador].conoVision(((Mech)objetivos[i]).posicion()))
+                if (!_mechs[_myJugador].conoVision(((Mech)objetivos[i]).posicion(), ((Mech)objetivos[i]).ladoEncaramientoTorso()))
                 {
                     objetivos.RemoveAt(i);
                     i--;
@@ -201,7 +201,16 @@ namespace ico
 
         private void objetivosLdV(ArrayList objetivos)
         {
+            Camino c;
 
+            for (int i = 0; i < objetivos.Count; i++) {
+                c = new Camino(_mechs[_myJugador].posicion(), ((Mech)objetivos[i]).posicion(),_tablero,_myJugador);
+                if (c.)
+                {
+                    objetivos.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         #endregion
