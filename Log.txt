@@ -321,3 +321,9 @@ Ataque fisico (mech):
 		- (angel) sobre la heuristica primer quiero que funcione de la manera mas facil, cuando esto este hecho hare el siguiente paso que es incluir mas cosas.
 
 		- (angel) sobre la LdV no se que decirte, tal vez puedes pedirle el codigo en java al profesro , no?
+
+		12/8/10
+		- (antonio) para que queremos ese codigo?¿ no nos vamos a poner a implementar nuestra solucion sobre eso, con lo mal que vamos de tiempo. Si en otros años an exo el a* sin tener en cuenta la probabilidad de disparo, nosotros tambien podemos hacerlo. Asi io creo
+		que se debe poder hacer sin tener en cuenta eso. Si luego vemos como hacerlo es simplemente  es añadirle otro dato a la heuristica. Mientras, mirate como lo acen en la documentacion esa. Quiza te sirva de ayuda.
+		Como ya te he dicho voi a empezar con la fase de ataque con armas, salvo ke tengas alguna objeccion, o prefieras que te ayude de alguna manera con el a*.
+		Estare trabajando, dew.
