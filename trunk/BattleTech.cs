@@ -174,8 +174,13 @@ namespace ico
         }
 
         private void objetivosConoVision (ArrayList objetivos) 
-        { 
-            
+        {
+            for (int i = 0; i < objetivos.Count; i++)
+                if (!_mechs[_myJugador].conoVision(((Mech)objetivos[i]).posicion()))
+                {
+                    objetivos.RemoveAt(i);
+                    i--;
+                }
         }
 
         private void objetivosLdV(ArrayList objetivos)

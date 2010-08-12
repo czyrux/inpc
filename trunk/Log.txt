@@ -327,3 +327,6 @@ Ataque fisico (mech):
 		que se debe poder hacer sin tener en cuenta eso. Si luego vemos como hacerlo es simplemente  es añadirle otro dato a la heuristica. Mientras, mirate como lo acen en la documentacion esa. Quiza te sirva de ayuda.
 		Como ya te he dicho voi a empezar con la fase de ataque con armas, salvo ke tengas alguna objeccion, o prefieras que te ayude de alguna manera con el a*.
 		Estare trabajando, dew.
+
+		-(antonio) He modificado el constructor de camino para el programa que lee la LdV, porque tu ponias ke leyera el archivo de mapa "mapaJ1.sbt" mientras que dependiendo del jugador sera uno u otro. Por lo que le he añadido como parametro el numero de jugador a la funcion
+		En la llamada quedaria algo asi: mapaJ"+jugador.ToString()+".sbt" etc.
