@@ -46,8 +46,8 @@ namespace ico
             {
                 faseMovimiento();
             }
-            else
-                faseReaccion();
+            else if (fase=="AtaqueArmas")
+                faseAtaqueArmas();
 
 //>>>>>>> .r116
         }
@@ -125,7 +125,8 @@ namespace ico
         #region faseMovimiento
         private void faseMovimiento() 
         {
-
+            Console.WriteLine("Fase movimiento");
+            Console.WriteLine();
             //<<<<<<< .mine
             //prueba de pathfinder el 9/8 - Angel
             string str;
@@ -147,9 +148,12 @@ namespace ico
         
         }
 
-        private void faseAtaqueArmas() { 
-        
+        #region faseAtaqueArmas
+        private void faseAtaqueArmas() {
+            Console.WriteLine("Fase Ataque con Armas");
+            Console.WriteLine();
         }
+        #endregion
 
         private void faseAtaquesFisico() { 
         
