@@ -63,10 +63,10 @@ namespace ico
 
 #region Propiedades
 
-        int longitud() {
+        public int longitud() {
             return _length;
         }
-        Casilla[] getCamino() {
+        public Casilla[] getCamino() {
             return _camino;
         }
         Boolean ldv() {
