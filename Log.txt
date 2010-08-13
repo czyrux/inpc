@@ -342,3 +342,14 @@ Ataque fisico (mech):
 
 		-(antonio) Creo que voi a tener que hacer funciones para ver cuando un mech esta situado en el lateral (izq o drcha) o cuando esta situado a la espalda, para poder hacer la fase de armas.
 		Por oi lo dejo, dew
+
+		13/8/10
+		-(antonio) Voi a cambiar las funciones del estado del mech. Porque ahora devuelvo un elemento del tipo enumerado estadoBlindaje. Lo que voi ha hacer es que devuelva una nota (un float) que ira sobre 10. Asi cada zona sera sobre 10,
+		y luego para la nota global pues cada zona tendra un % hasta sumar el 100% (por ejemplo: Torso Central=15% - pierna izquierda=5% ). Tambien voi a hacer lo mismo para la estructura interna (hasta ahora solo tenia en cuenta blindaje)
+		Tambien voi a asignar una nota segun el tipo de mech, siendo 10 el mech de asalto y 3 el mech ligero.
+		Mi idea es luego coger estas tres notas parciales (blindaje, estructura interna y tipo mech) y formar una nota global sobre 10 que servira para determinar la estrategia que seguira el mech (ofensiva o defensiva). Esta idea la he cogido del documento
+		que te envie por mail. Ya que creo que sale con mas sentido teniendo todo en una nota sobre 10, xk sale mas facil de manejar y comparar, y sobre todo es mas facil de entender. Cuando termine te mandare en un documento word la distribucin de que tanto 
+		por ciento he dado a cada zona, para ver que opinas. Por supuesto, estos porcentajes se pueden modificar en funcion de los resultados empiricos.
+		Despues de terminar esto, are el resto de conos de vision que me quedan (conoDerecha, conoIzquierda, conoTrasero).
+		Por ultimo continuare con la fase de armas. 
+		Voi a ver si entre este finde y el lunes termino por lo menos hasta los conos. Dew
