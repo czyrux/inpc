@@ -67,6 +67,7 @@ namespace ico
         Ligero ,
         Medio ,
         Pesado ,
+        Asalto ,
     };
 
 	/**
