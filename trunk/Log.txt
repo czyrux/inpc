@@ -340,7 +340,7 @@ Ataque fisico (mech):
 
 		-(antonio) Voi a cambiar la funcion conoVision para que se le pase como argumento el encaramiento. Para que asi sirva para mirar el encaramiento del mech y tambien el encarmiento del torso. Que puede ser distintos
 
-		-(antonio) Creo que voi a tener que hacer funciones para ver cuando un mech esta situado en el lateral (izq o drcha) o cuando esta situado a la espalda, para poder hacer la fase de armas.
+		-(antonio) Creo que voi a tener que hacer funciones para ver cuando un mech esta situado en el cono lateral (izq o drcha) o cuando esta situado a la espalda, para poder hacer la fase de armas.
 		Por oi lo dejo, dew
 
 		13/8/10
@@ -362,3 +362,4 @@ Ataque fisico (mech):
 			        public float tipo()
 					public float nota()
 					Todas las que estan dentro de la region estadoMech, que a su vez esta en la region metodos en la clase mech.cs
+		Por hoy no hare mas, dew
