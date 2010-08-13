@@ -134,14 +134,14 @@ namespace ico {
         protected int _BlindAtrasTorsoDerechoInicial;
         protected int _BlindAtrasTorsoCentralInicial;
 
-        /*protected int _EstrucBrazoIzquierdoInicial;
+        protected int _EstrucBrazoIzquierdoInicial;
         protected int _EstrucTorsoIzquierdoInicial;
         protected int _EstrucPiernaIzquierdaInicial;
         protected int _EstrucPiernaDerechaInicial;
         protected int _EstrucTorsoDerechoInicial;
         protected int _EstrucBrazoDerechoInicial;
         protected int _EstrucTorsoCentralInicial;
-        protected int _EstrucCabezaInicial;*/
+        protected int _EstrucCabezaInicial;
         #endregion
 
         #region constructores
@@ -155,7 +155,7 @@ namespace ico {
 		}
         #endregion
 
-        #region Privados lecturaficheros
+        #region Privados ficheros
         //Metodos de lecturas de datos
 
 		private void fichero_estado( StreamReader f ) {
@@ -316,15 +316,16 @@ namespace ico {
                     _BlindAtrasTorsoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
                     _BlindAtrasTorsoDerechoInicial = Convert.ToInt32(f.ReadLine());
                     _BlindAtrasTorsoCentralInicial = Convert.ToInt32(f.ReadLine());
+
+                    _EstrucBrazoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
+                    _EstrucTorsoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
+                    _EstrucPiernaIzquierdaInicial = Convert.ToInt32(f.ReadLine());
+                    _EstrucPiernaDerechaInicial = Convert.ToInt32(f.ReadLine());
+                    _EstrucTorsoDerechoInicial = Convert.ToInt32(f.ReadLine());
+                    _EstrucBrazoDerechoInicial = Convert.ToInt32(f.ReadLine());
+                    _EstrucTorsoCentralInicial = Convert.ToInt32(f.ReadLine());
+                    _EstrucCabezaInicial = Convert.ToInt32(f.ReadLine());
                 }
-                /*_EstrucBrazoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
-                _EstrucTorsoIzquierdoInicial = Convert.ToInt32(f.ReadLine());
-                _EstrucPiernaIzquierdaInicial = Convert.ToInt32(f.ReadLine());
-                _EstrucPiernaDerechaInicial = Convert.ToInt32(f.ReadLine());
-                _EstrucTorsoDerechoInicial = Convert.ToInt32(f.ReadLine());
-                _EstrucBrazoDerechoInicial = Convert.ToInt32(f.ReadLine());
-                _EstrucTorsoCentralInicial = Convert.ToInt32(f.ReadLine());
-                _EstrucCabezaInicial = Convert.ToInt32(f.ReadLine());*/
 
                 //Cerramos el fichero
                 f.Close();
@@ -350,14 +351,14 @@ namespace ico {
                 f.WriteLine(_BlindAtrasTorsoCentral);
 
                 //puntos estructura interna
-                /*f.WriteLine(_EstrucBrazoIzquierdo);
+                f.WriteLine(_EstrucBrazoIzquierdo);
                 f.WriteLine(_EstrucTorsoIzquierdo);
                 f.WriteLine(_EstrucPiernaIzquierda);
                 f.WriteLine(_EstrucPiernaDerecha);
                 f.WriteLine(_EstrucTorsoDerecho);
                 f.WriteLine(_EstrucBrazoDerecho);
                 f.WriteLine(_EstrucTorsoCentral);
-                f.WriteLine(_EstrucCabeza);*/
+                f.WriteLine(_EstrucCabeza);
 
                 f.Close();
 
@@ -374,14 +375,14 @@ namespace ico {
                 _BlindAtrasTorsoDerechoInicial = _BlindAtrasTorsoDerecho;
                 _BlindAtrasTorsoCentralInicial = _BlindAtrasTorsoCentral;
 
-                /*_EstrucBrazoIzquierdoInicial = _EstrucBrazoIzquierdo;
+                _EstrucBrazoIzquierdoInicial = _EstrucBrazoIzquierdo;
                 _EstrucTorsoIzquierdoInicial = _EstrucTorsoIzquierdo;
                 _EstrucPiernaIzquierdaInicial = _EstrucPiernaIzquierda;
                 _EstrucPiernaDerechaInicial = _EstrucPiernaDerecha;
                 _EstrucTorsoDerechoInicial = _EstrucTorsoDerecho;
                 _EstrucBrazoDerechoInicial = _EstrucBrazoDerecho;
                 _EstrucTorsoCentralInicial = _EstrucTorsoCentral;
-                _EstrucCabezaInicial = _EstrucCabeza;*/
+                _EstrucCabezaInicial = _EstrucCabeza;
             }
         }
 
@@ -859,13 +860,13 @@ namespace ico {
             return e;
         }
 
-        public estadoBlindaje estadoBrazoIzquierdo()
+        public float estadoBrazoIzquierdo()
         {
-            estadoBlindaje e;
-            int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
-
+            //estadoBlindaje e;
+            //int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
+            float heridas = _BlindBrazoIzquierdo * 10 / _BlindBrazoIzquierdoInicial;
             //Vemos el estado en que se encuentra
-            if (heridas > 60)
+            /*if (heridas > 60)
             {
                 e = estadoBlindaje.Bueno;
             }
@@ -878,250 +879,90 @@ namespace ico {
                 e = estadoBlindaje.Malo;
             }
             else
-                e = estadoBlindaje.Nulo;
+                e = estadoBlindaje.Nulo;*/
 
-            Console.WriteLine("estado brazo izq " + e);
-            return e;
+            Console.WriteLine("Estado brazo izq " + heridas);
+            return heridas;
         }
 
-        public estadoBlindaje estadoTorsoIzquierdo() 
+        public float estadoTorsoIzquierdo() 
         {
-            estadoBlindaje e;
-            int heridas = _BlindTorsoIzquierdo * 100 / _BlindTorsoIzquierdoInicial;
+            float heridas = _BlindTorsoIzquierdo * 10 / _BlindTorsoIzquierdoInicial;
 
-            //Vemos el estado en que se encuentra
-            if (heridas > 60)
-            {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (heridas > 30)
-            {
-                e = estadoBlindaje.Medio;
-            }
-            else if (heridas > 0)
-            {
-                e = estadoBlindaje.Malo;
-            }
-            else
-                e = estadoBlindaje.Nulo;
-            Console.WriteLine("estado torso izq " + e);
-            return e;
+            Console.WriteLine("estado torso izq " + heridas);
+            return heridas;
         }
 
-        public estadoBlindaje estadoPiernaIzquierda() 
+        public float estadoPiernaIzquierda() 
         {
-            estadoBlindaje e;
-            int heridas = _BlindPiernaIzquierda * 100 / _BlindPiernaIzquierdaInicial;
+            float heridas = _BlindPiernaIzquierda * 10 / _BlindPiernaIzquierdaInicial;
 
-            //Vemos el estado en que se encuentra
-            if (heridas > 60)
-            {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (heridas > 30)
-            {
-                e = estadoBlindaje.Medio;
-            }
-            else if (heridas > 0)
-            {
-                e = estadoBlindaje.Malo;
-            }
-            else
-                e = estadoBlindaje.Nulo;
-            Console.WriteLine("estado pierna izq " + e);
-            return e;
+            Console.WriteLine("estado pierna izq " + heridas);
+            return heridas;
         }
 
-        public estadoBlindaje estadoPiernaDerecha() 
+        public float estadoPiernaDerecha() 
         {
-            estadoBlindaje e;
-            int heridas = _BlindPiernaDerecha * 100 / _BlindPiernaDerechaInicial;
+            float heridas = _BlindPiernaDerecha * 10 / _BlindPiernaDerechaInicial;
 
-            //Vemos el estado en que se encuentra
-            if (heridas > 60)
-            {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (heridas > 30)
-            {
-                e = estadoBlindaje.Medio;
-            }
-            else if (heridas > 0)
-            {
-                e = estadoBlindaje.Malo;
-            }
-            else
-                e = estadoBlindaje.Nulo;
-            Console.WriteLine("estado pierna drcha " + e);
-            return e;
+            Console.WriteLine("estado pierna drcha " + heridas);
+            return heridas;
         }
 
-        public estadoBlindaje estadoTorsoDerecho()
+        public float estadoTorsoDerecho()
         {
-            estadoBlindaje e;
-            int heridas = _BlindTorsoDerecho * 100 / _BlindTorsoDerechoInicial;
+            float heridas = _BlindTorsoDerecho * 10 / _BlindTorsoDerechoInicial;
 
-            //Vemos el estado en que se encuentra
-            if (heridas > 60)
-            {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (heridas > 30)
-            {
-                e = estadoBlindaje.Medio;
-            }
-            else if (heridas > 0)
-            {
-                e = estadoBlindaje.Malo;
-            }
-            else
-                e = estadoBlindaje.Nulo;
-            Console.WriteLine("estado torso drcha " + e);
-            return e;
+            Console.WriteLine("estado torso drcha " + heridas);
+            return heridas;
         }
 
-        public estadoBlindaje estadoBrazoDerecho()
+        public float estadoBrazoDerecho()
         {
-            estadoBlindaje e;
-            int heridas = _BlindBrazoDerecho * 100 / _BlindBrazoDerechoInicial;
+            float heridas = _BlindBrazoDerecho * 10 / _BlindBrazoDerechoInicial;
 
-            //Vemos el estado en que se encuentra
-            if (heridas > 60)
-            {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (heridas > 30)
-            {
-                e = estadoBlindaje.Medio;
-            }
-            else if (heridas > 0)
-            {
-                e = estadoBlindaje.Malo;
-            }
-            else
-                e = estadoBlindaje.Nulo;
-            Console.WriteLine("estado brazo drcha " + e);
-            return e;
+            Console.WriteLine("estado brazo drcha " + heridas);
+            return heridas;
         }
 
-        public estadoBlindaje estadoTorsoCentral()
+        public float estadoTorsoCentral()
         {
-            estadoBlindaje e;
-            int heridas = _BlindTorsoCentral * 100 / _BlindTorsoCentralInicial;
+            float heridas = _BlindTorsoCentral * 10 / _BlindTorsoCentralInicial;
 
-            //Vemos el estado en que se encuentra
-            if (heridas > 60)
-            {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (heridas > 30)
-            {
-                e = estadoBlindaje.Medio;
-            }
-            else if (heridas > 0)
-            {
-                e = estadoBlindaje.Malo;
-            }
-            else
-                e = estadoBlindaje.Nulo;
-            Console.WriteLine("estado torso central " + e);
-            return e;
+            Console.WriteLine("estado torso central " + heridas);
+            return heridas;
         }
 
-        public estadoBlindaje estadoCabeza()
+        public float estadoCabeza()
         {
-            estadoBlindaje e;
-            int heridas = _BlindCabeza * 100 / _BlindCabezaInicial;
+            float heridas = _BlindCabeza * 10 / _BlindCabezaInicial;
 
-            //Vemos el estado en que se encuentra
-            if (heridas > 60)
-            {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (heridas > 30)
-            {
-                e = estadoBlindaje.Medio;
-            }
-            else if (heridas > 0)
-            {
-                e = estadoBlindaje.Malo;
-            }
-            else
-                e = estadoBlindaje.Nulo;
-            Console.WriteLine("estado cabeza " + e);
-            return e;
+            Console.WriteLine("estado cabeza " + heridas);
+            return heridas;
         }
 
-        public estadoBlindaje estadoAtrasTorsoIzquierdo()
+        public float estadoAtrasTorsoIzquierdo()
         {
-            estadoBlindaje e;
-            int heridas = _BlindAtrasTorsoIzquierdo * 100 / _BlindAtrasTorsoIzquierdoInicial;
+            float heridas = _BlindAtrasTorsoIzquierdo * 10 / _BlindAtrasTorsoIzquierdoInicial;
 
-            //Vemos el estado en que se encuentra
-            if (heridas > 60)
-            {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (heridas > 30)
-            {
-                e = estadoBlindaje.Medio;
-            }
-            else if (heridas > 0)
-            {
-                e = estadoBlindaje.Malo;
-            }
-            else
-                e = estadoBlindaje.Nulo;
-            Console.WriteLine("estado atras izq " + e);
-            return e;
+            Console.WriteLine("estado atras izq " + heridas);
+            return heridas;
         }
 
-        public estadoBlindaje estadoAtrasTorsoDerecho()
+        public float estadoAtrasTorsoDerecho()
         {
-            estadoBlindaje e;
-            int heridas = _BlindAtrasTorsoDerecho * 100 / _BlindAtrasTorsoDerechoInicial;
+            float heridas = _BlindAtrasTorsoDerecho * 10 / _BlindAtrasTorsoDerechoInicial;
 
-            //Vemos el estado en que se encuentra
-            if (heridas > 60)
-            {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (heridas > 30)
-            {
-                e = estadoBlindaje.Medio;
-            }
-            else if (heridas > 0)
-            {
-                e = estadoBlindaje.Malo;
-            }
-            else
-                e = estadoBlindaje.Nulo;
-            Console.WriteLine("estado atras drcha " + e);
-            return e;
+            Console.WriteLine("estado atras drcha " + heridas);
+            return heridas;
         }
 
-        public estadoBlindaje estadoAtrasTorsoCentral()
+        public float estadoAtrasTorsoCentral()
         {
-            estadoBlindaje e;
-            int heridas = _BlindAtrasTorsoCentral * 100 / _BlindAtrasTorsoCentralInicial;
+            int heridas = _BlindAtrasTorsoCentral * 10 / _BlindAtrasTorsoCentralInicial;
 
-            //Vemos el estado en que se encuentra
-            if (heridas > 60)
-            {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (heridas > 30)
-            {
-                e = estadoBlindaje.Medio;
-            }
-            else if (heridas > 0)
-            {
-                e = estadoBlindaje.Malo;
-            }
-            else
-                e = estadoBlindaje.Nulo;
-            Console.WriteLine("estado atras central " + e);
-            return e;
+            Console.WriteLine("estado atras central " + heridas);
+            return heridas;
         }
 
         #endregion
