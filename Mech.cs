@@ -611,21 +611,52 @@ namespace ico {
         /*
          * indica el tipo mech
          */
-        public tipoMech tipo() {
+        /*public tipoMech tipo() {
             tipoMech t;
             /*Ligeros: 20 a 35 toneladas.
 		    Medios: 40 a 55 toneladas.
 		    Pesados: 60 a 75 toneladas.
-		    Asalto: 80 a 100 toneladas.*/
-            if (_toneladas >= 20 && _toneladas <= 35) {
+		    Asalto: 80 a 100 toneladas.
+            if (_toneladas >= 20 && _toneladas <= 35)
+            {
                 t = tipoMech.Ligero;
-            } else if (_toneladas >= 40 && _toneladas <= 55) {
+            }
+            else if (_toneladas >= 40 && _toneladas <= 55)
+            {
                 t = tipoMech.Medio;
-            } else
+            }
+            else if (_toneladas >= 60 && _toneladas <= 75)
+            {
                 t = tipoMech.Pesado;
+            }
+            else
+                t = tipoMech.Asalto;
+
+            return t;
+        }*/
+
+        public float tipo()
+        {
+            float t;
+            
+            if (_toneladas >= 20 && _toneladas <= 35)
+            {
+                t = 3.0f; //ligero
+            }
+            else if (_toneladas >= 40 && _toneladas <= 55)
+            {
+                t = 5.0f;//medio
+            }
+            else if (_toneladas >= 60 && _toneladas <= 75)
+            {
+                t = 7.0f;//pesado
+            }
+            else
+                t = 10.0f;//asalto
 
             return t;
         }
+
 
         /*
          * Indica si una posicion esta dentro del cono de vision de un mech
@@ -815,52 +846,39 @@ namespace ico {
             return e;
         }
 
-        //METODOS PARA VER EL BLINDAJE DEL MECH
-        public estadoBlindaje estadoBlindajeMech() 
+
+        //METODOS PARA VER EL ESTADO DEL MECH
+        #region estadoMech
+
+        //ESTADO BLINDAJE
+        public float estadoBlindajeMech() 
         {
-            estadoBlindaje e;
-            float media = 0;
-            int sumatoria ;
+            //tantos por ciento
+            float TC = 0.15f, CAB = 0.15f, 
+                BD = 0.08f, BI = 0.08f, ATD = 0.08f, ATI = 0.08f, ATC = 0.08f, 
+                TI = 0.1f, TD = 0.1f, 
+                PI = 0.05f, PD = 0.05f;
+            float estado = 0;
 
             //Vemos los datos de las diferentes partes
-            sumatoria = ((int)estadoBrazoIzquierdo()) * 3 + 
-                ((int)estadoTorsoIzquierdo()) * 3 + 
-                ((int)estadoPiernaIzquierda()) * 1 +
-                ((int)estadoPiernaDerecha()) * 1 +
-                ((int)estadoTorsoDerecho()) * 3 + 
-                ((int)estadoBrazoDerecho()) * 3 + 
-                ((int)estadoTorsoCentral()) * 4 +
-                ((int)estadoAtrasTorsoIzquierdo()) * 2 +
-                ((int)estadoAtrasTorsoDerecho()) * 2 +
-                ((int)estadoAtrasTorsoCentral()) * 2;
+            estado = estadoBlindajeBI() * BI +
+                estadoBlindajeTI() * TI +
+                estadoBlindajePI() * PI +
+                estadoBlindajePD() * PD +
+                estadoBlindajeTD() * TD +
+                estadoBlindajeBD() * BD +
+                estadoBlindajeTC() * TC +
+                estadoBlindajeCAB() * CAB +
+                estadoBlindajeATI() * ATI +
+                estadoBlindajeATD() * ATD +
+                estadoBlindajeATC() * ATC;
 
-            //Calculamos la media
-            media = sumatoria/24.0f;
+            Console.WriteLine("Estado del blindaje es: " + estado);
 
-            //Asignamos el estado
-            if (media > 3.3) {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (media > 2.8) {
-                e = estadoBlindaje.Medio;
-            }
-            else
-                e = estadoBlindaje.Malo;
-
-            Console.WriteLine("La media es: " + media+" "+e);
-
-            
-            //Asignamos el estado
-            /* ?¿
-             * No hay que truncar. De 3,3 a 4, estado Bueno.
-             * Por debajo de 3,5 a 3 herido
-             * Por debajo de 2,8, malo
-             * sin nulo, ya que no hace falta
-             */
-            return e;
+            return estado;
         }
 
-        public float estadoBrazoIzquierdo()
+        public float estadoBlindajeBI()
         {
             //estadoBlindaje e;
             //int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
@@ -885,7 +903,7 @@ namespace ico {
             return heridas;
         }
 
-        public float estadoTorsoIzquierdo() 
+        public float estadoBlindajeTI() 
         {
             float heridas = _BlindTorsoIzquierdo * 10 / _BlindTorsoIzquierdoInicial;
 
@@ -893,7 +911,7 @@ namespace ico {
             return heridas;
         }
 
-        public float estadoPiernaIzquierda() 
+        public float estadoBlindajePI() 
         {
             float heridas = _BlindPiernaIzquierda * 10 / _BlindPiernaIzquierdaInicial;
 
@@ -901,7 +919,7 @@ namespace ico {
             return heridas;
         }
 
-        public float estadoPiernaDerecha() 
+        public float estadoBlindajePD() 
         {
             float heridas = _BlindPiernaDerecha * 10 / _BlindPiernaDerechaInicial;
 
@@ -909,7 +927,7 @@ namespace ico {
             return heridas;
         }
 
-        public float estadoTorsoDerecho()
+        public float estadoBlindajeTD()
         {
             float heridas = _BlindTorsoDerecho * 10 / _BlindTorsoDerechoInicial;
 
@@ -917,7 +935,7 @@ namespace ico {
             return heridas;
         }
 
-        public float estadoBrazoDerecho()
+        public float estadoBlindajeBD()
         {
             float heridas = _BlindBrazoDerecho * 10 / _BlindBrazoDerechoInicial;
 
@@ -925,7 +943,7 @@ namespace ico {
             return heridas;
         }
 
-        public float estadoTorsoCentral()
+        public float estadoBlindajeTC()
         {
             float heridas = _BlindTorsoCentral * 10 / _BlindTorsoCentralInicial;
 
@@ -933,7 +951,7 @@ namespace ico {
             return heridas;
         }
 
-        public float estadoCabeza()
+        public float estadoBlindajeCAB()
         {
             float heridas = _BlindCabeza * 10 / _BlindCabezaInicial;
 
@@ -941,7 +959,7 @@ namespace ico {
             return heridas;
         }
 
-        public float estadoAtrasTorsoIzquierdo()
+        public float estadoBlindajeATI()
         {
             float heridas = _BlindAtrasTorsoIzquierdo * 10 / _BlindAtrasTorsoIzquierdoInicial;
 
@@ -949,7 +967,7 @@ namespace ico {
             return heridas;
         }
 
-        public float estadoAtrasTorsoDerecho()
+        public float estadoBlindajeATD()
         {
             float heridas = _BlindAtrasTorsoDerecho * 10 / _BlindAtrasTorsoDerechoInicial;
 
@@ -957,7 +975,7 @@ namespace ico {
             return heridas;
         }
 
-        public float estadoAtrasTorsoCentral()
+        public float estadoBlindajeATC()
         {
             int heridas = _BlindAtrasTorsoCentral * 10 / _BlindAtrasTorsoCentralInicial;
 
@@ -965,8 +983,115 @@ namespace ico {
             return heridas;
         }
 
+        
+        //ESTADO ESTRUCTURA INTERNA
+        public float estadoEsctructuraMech()
+        {
+            //tantos por ciento
+            float TC = 0.2f, CAB = 0.2f,
+                BD = 0.1f, BI = 0.1f,
+                TI = 0.15f, TD = 0.15f,
+                PI = 0.05f, PD = 0.05f;
+            float estado = 0;
+
+            //Vemos los datos de las diferentes partes
+            estado = estadoEsctructuraBI() * BI +
+                estadoEsctructuraTI() * TI +
+                estadoEsctructuraPI() * PI +
+                estadoEsctructuraPD() * PD +
+                estadoEsctructuraTD() * TD +
+                estadoEsctructuraBD() * BD +
+                estadoEsctructuraTC() * TC +
+                estadoEsctructuraCAB() * CAB;
+
+            Console.WriteLine("Estado del blindaje es: " + estado);
+
+            return estado;
+        }
+
+        public float estadoEsctructuraBI()
+        {
+            float heridas = _EstrucBrazoIzquierdo * 10 / _EstrucBrazoIzquierdoInicial;
+
+            Console.WriteLine("Estado brazo izq " + heridas);
+            return heridas;
+        }
+
+        public float estadoEsctructuraTI()
+        {
+            float heridas = _EstrucTorsoIzquierdo * 10 / _EstrucTorsoIzquierdoInicial;
+
+            Console.WriteLine("estado torso izq " + heridas);
+            return heridas;
+        }
+
+        public float estadoEsctructuraPI()
+        {
+            float heridas = _EstrucPiernaIzquierda * 10 / _EstrucPiernaIzquierdaInicial;
+
+            Console.WriteLine("estado pierna izq " + heridas);
+            return heridas;
+        }
+
+        public float estadoEsctructuraPD()
+        {
+            float heridas = _EstrucPiernaDerecha * 10 / _EstrucPiernaDerechaInicial;
+
+            Console.WriteLine("estado pierna drcha " + heridas);
+            return heridas;
+        }
+
+        public float estadoEsctructuraTD()
+        {
+            float heridas = _EstrucTorsoDerecho * 10 / _EstrucTorsoDerechoInicial;
+
+            Console.WriteLine("estado torso drcha " + heridas);
+            return heridas;
+        }
+
+        public float estadoEsctructuraBD()
+        {
+            float heridas = _EstrucBrazoDerecho * 10 / _EstrucBrazoDerechoInicial;
+
+            Console.WriteLine("estado brazo drcha " + heridas);
+            return heridas;
+        }
+
+        public float estadoEsctructuraTC()
+        {
+            float heridas = _EstrucTorsoCentral * 10 / _EstrucTorsoCentralInicial;
+
+            Console.WriteLine("estado torso central " + heridas);
+            return heridas;
+        }
+
+        public float estadoEsctructuraCAB()
+        {
+            float heridas = _EstrucCabeza * 10 / _EstrucCabezaInicial;
+
+            Console.WriteLine("estado cabeza " + heridas);
+            return heridas;
+        }
+
         #endregion
-		
-	}
+
+        /*
+         * Indica una nota con el estado del mech 0-10
+         */
+        public float nota()
+        {
+            //porcentajes
+            float Blindaje = 0.4f, Estructura = 0.2f, Tipo = 0.4f;
+
+            float nota = estadoBlindajeMech() * Blindaje +
+                estadoEsctructuraMech() * Estructura +
+                tipo() * Tipo;
+
+            return nota;
+        }
+
+        #endregion
+
+    }
 
 }

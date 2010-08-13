@@ -353,3 +353,12 @@ Ataque fisico (mech):
 		Despues de terminar esto, are el resto de conos de vision que me quedan (conoDerecha, conoIzquierda, conoTrasero).
 		Por ultimo continuare con la fase de armas. 
 		Voi a ver si entre este finde y el lunes termino por lo menos hasta los conos. Dew
+
+		- (antonio) Cambios en las funciones de estado del mech hechos. La funcion final se llama nota() y devuelve un float. Lo que hace es:
+			40% blindaje
+			40% tipo mech
+			20% esctructura interna
+		Devuelve un float en [0-10], que nos servira para comparar mech y para establecer la estrategia a seguir. Mira las funciones por si quieres mirarlo, estan son:
+			        public float tipo()
+					public float nota()
+					Todas las que estan dentro de la region estadoMech, que a su vez esta en la region metodos en la clase mech.cs
