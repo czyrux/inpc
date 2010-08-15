@@ -131,7 +131,7 @@ namespace ico
 
                 }
             }
-            else return int.MaxValue;
+            else return int.MinValue;
 
             return costo;
         }

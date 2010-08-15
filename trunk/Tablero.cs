@@ -106,7 +106,7 @@ namespace ico
                     devolver = _casillas[actual.posicion().fila() , actual.posicion().columna()-1];
                 }
             }
-            else if (((actual.posicion().columna() - 1) % 2) == 0)//par
+            else if (((actual.posicion().columna() ) % 2) == 0)//par
             {
                 switch (direccion)
                 {
