@@ -76,7 +76,7 @@ namespace ico
             return _cobertura;
         }
 #endregion
-#region "Funciones"
+#region Funciones
         public  Camino pathFinder(Casilla a, Casilla b, Tablero Tablero)
         {
             ArrayList cerradas = new ArrayList();
@@ -106,7 +106,7 @@ namespace ico
                     if (esta(cerradas,elemento.casilla))
                         continue;
 
-                    // Precalculo el costo de movimiento relaciona, para no hacerlo varias veces
+                    // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
                     aux=Casilla.costoMovimientoAB(actual, elemento.casilla);
 
                     // verifico si es intrancitable
@@ -160,7 +160,8 @@ namespace ico
             } while (actual != b);
 
             camino.Add(b);
-            for (int i = abiertas.Count - 1; i > 0; i--) {
+            for (int i = cerradas.Count - 1; i > 0; i--)
+            {
                 camino.Add(((heuristica)cerradas[i]).padre);
             }
             camino.Reverse();
@@ -195,6 +196,9 @@ namespace ico
                 }
 
                 return _movimientos;
+        }
+        public Casilla casilla(int i) {
+            return _camino[i];
         }
 #endregion
         #region Privado
@@ -282,7 +286,7 @@ namespace ico
             int max = 0;
             for (int i = 1; i < abiertas.Count; i++ )
             {
-                if(((heuristica)abiertas[i-1]).f<((heuristica)abiertas[i]).f && ((heuristica)abiertas[i]).padre==padre){
+                if(((heuristica)abiertas[i-1]).f>((heuristica)abiertas[i]).f && ((heuristica)abiertas[i]).padre==padre){
                     max = i;
                 }
             }
