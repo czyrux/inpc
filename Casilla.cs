@@ -9,7 +9,8 @@ namespace ico
     {
         #region Constructores
         public Casilla() {
-            _nivel = _fceEdificio = _tipoTerreno = _objetoTerreno = _nGarrotes = _heuristica.f = _heuristica.g = _heuristica.h = 0;
+            _nivel = _fceEdificio = _tipoTerreno = _objetoTerreno = _nGarrotes = _heuristica.g = 0;
+            _heuristica.f = _heuristica.h = 0;
             _edificioDerrumbado = _fuego = _humo = false;
             _caras = new Cara[6];
             _posicion = new Posicion();

@@ -134,7 +134,7 @@ namespace ico
                         }
                         else {//si no estaba entre las abiertas inserto la nueva casilla
                             nueva = true;
-                            elemento.h = DistanciaAB(elemento.casilla.posicion(), b.posicion());
+                            elemento.h = heuristica(elemento.casilla,b);
                             elemento.f = elemento.g + elemento.h;
                             elemento.padre = actual;
                             abiertas.Add(elemento);
@@ -167,20 +167,10 @@ namespace ico
                 camino.Add(((heuristica)cerradas[i]).padre);
             }
             camino.Reverse();
-            return new Camino(camino);//<-!!!!! lo hace mal necesito revisar paso a paso
+            return new Camino(camino);
         }
 
-        //Funcion que devuelve la distancia aproximada entre el punto a y el punto b. (revisada)
-        public int DistanciaAB(Posicion a, Posicion b)
-        {
-            //dx <----La distancia entre la x de a y la x de b. Idem para la dy
-            int dx = Math.Abs(a.columna() - b.columna())+1, dy = Math.Abs(b.fila() - a.fila())+1;
-
-            // (dx^2+dy^2)^1/2<-----La parte entera
-            return (int)Math.Truncate(Math.Pow((Math.Pow(dx, 2) + Math.Pow(dx, 2)), 0.5));
-
-        }
-
+        
         public int costoMovimiento() {
             
                 for (int i = 0; i < _length; i++){
@@ -202,6 +192,15 @@ namespace ico
         public Casilla casilla(int i) {
             return _camino[i];
         }
+        public int movimentos() { return _movimientos; }
+
+        public void print() { 
+            string str="El camino es: ";
+            foreach (Casilla i in _camino)
+                str += i.posicion().ToString() + "->";
+            str += "FIN";
+            Console.WriteLine(str);
+        }
 #endregion
         #region Privado
         private int _length;
@@ -210,80 +209,28 @@ namespace ico
         private Boolean _cobertura;
         private int _nldv;
         private int _movimientos;
-        /*
-        private Camino pathfinder(Casilla a, Casilla b, Tablero tablero,ArrayList ceradas, ArrayList abiertas) {
 
-            if (ceradas[ceradas.Count - 1] == b)
-            {
-            }
-            else {
-                calculaAbiertas(a,  ref abiertas, tablero);
-                foreach (Casilla i in abiertas)
-                {
 
-                }
-            }
-            return new Camino(abiertas);//compile
-        }
-		
-        private void calculaAbiertas(Casilla a, ref ArrayList abierto, Tablero tablero) {
-
-            if (Math.Abs(tablero.colindante(a, Encaramiento.Arriba).nivel() - a.nivel()) < 2 && tablero.colindante(a, Encaramiento.Arriba).nivel() != -1)
-            {
-                abierto.Add(tablero.colindante(a, Encaramiento.Arriba));
-            }
-            if (Math.Abs(tablero.colindante(a, Encaramiento.SuperiorDerecha).nivel() - a.nivel()) < 2 && tablero.colindante(a, Encaramiento.Arriba).nivel() != -1)
-            {
-                abierto.Add(tablero.colindante(a, Encaramiento.SuperiorDerecha));
-            } if (Math.Abs(tablero.colindante(a, Encaramiento.InferiorDerecho).nivel() - a.nivel()) < 2 && tablero.colindante(a, Encaramiento.Arriba).nivel() != -1)
-            {
-                abierto.Add(tablero.colindante(a, Encaramiento.InferiorDerecho));
-            } if (Math.Abs(tablero.colindante(a, Encaramiento.Abajo).nivel() - a.nivel()) < 2 && tablero.colindante(a, Encaramiento.Arriba).nivel() != -1)
-            {
-                abierto.Add(tablero.colindante(a, Encaramiento.InferiorDerecho));
-            } if (Math.Abs(tablero.colindante(a, Encaramiento.Abajo).nivel() - a.nivel()) < 2 && tablero.colindante(a, Encaramiento.Arriba).nivel() != -1)
-            {
-                abierto.Add(tablero.colindante(a, Encaramiento.Abajo));
-            } if (Math.Abs(tablero.colindante(a, Encaramiento.InferiorIzquierda).nivel() - a.nivel()) < 2 && tablero.colindante(a, Encaramiento.Arriba).nivel() != -1)
-            {
-                abierto.Add(tablero.colindante(a, Encaramiento.InferiorIzquierda));
-            } if (Math.Abs(tablero.colindante(a, Encaramiento.SuperiorIzquierda).nivel() - a.nivel()) < 2 && tablero.colindante(a, Encaramiento.Arriba).nivel() != -1)
-            {
-                abierto.Add(tablero.colindante(a, Encaramiento.SuperiorIzquierda));
-            }
-        }
-        //puede que la borre
-        private int costoMovimiento(ArrayList camino)
+        //Funcion que devuelve la distancia aproximada entre el punto a y el punto b. (revisada)
+        private float DistanciaAB(Posicion a, Posicion b)
         {
-            int costo = 0;
+            //dx <----La distancia entre la x de a y la x de b. Idem para la dy
+            int dx = Math.Abs(a.columna() - b.columna()) + 1, dy = Math.Abs(b.fila() - a.fila()) + 1;
 
-            for (int i = 0; i < camino.Count; i++)
-            {
-                costo = ((Casilla)camino[i]).costoMovimiento();
+            // (dx^2+dy^2)^1/2<-----La parte entera
+            return (float)Math.Pow((Math.Pow(dx, 2) + Math.Pow(dx, 2)), 0.5);
 
-                if (i < camino.Count && ((Casilla)camino[i]).nivel() < ((Casilla)camino[i + 1]).nivel())
-                {
-
-                    costo = Casilla.costoMovimientoAB((Casilla)camino[i], (Casilla)camino[i + 1]);
-                }
-            }
-            return costo;
         }
-        //puede que la borre
-        private heuristica costoMovimiento(Casilla de, Casilla a) {
-            int costo = 0;
+        // funcion que calcula los valores euristicos siendo menos el mejor.
+        private float heuristica(Casilla a, Casilla b)
+        {
+            float h = 0;
 
-          
-                costo =a.costoMovimiento();
-
-                if ( de.nivel() < a.nivel())
-                {
-                    costo = Casilla.costoMovimientoAB(de, a);
-                }
+            h = DistanciaAB(a.posicion(), b.posicion());// Calculo de la distancia aproximada al objetivo.
             
-            return costo;
-
-        }*/
+            return h;
+        }
+        
         private int mejorCasillaAbierta(ArrayList abiertas,Casilla padre) {
             int max = 0;
             for (int i = 1; i < abiertas.Count; i++ )
