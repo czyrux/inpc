@@ -39,7 +39,10 @@ namespace ico
 
 //=======
             //PRuebas de ÑIKO
-            pruebas(); 
+            Console.WriteLine("eres ñiko y/n ");
+            string str = Console.ReadLine();
+            if(str=="yes"&& str=="y"&& str=="Y"&& str=="Yes"&& str=="si"&& str=="s"&& str=="Si"&& str=="S")
+                pruebas(); 
 
             //Elegimos la accion a realizar
             if (fase == "Movimiento")
@@ -127,20 +130,18 @@ namespace ico
         {
             Console.WriteLine("Fase movimiento");
             Console.WriteLine();
-            //<<<<<<< .mine
             //prueba de pathfinder el 9/8 - Angel
             string str;
 
-            Console.WriteLine("estcibe la columnafila de \n");
+            Console.WriteLine("escribe la columnafila de \n");
             str = Console.ReadLine();
             Posicion de = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
-            Console.WriteLine("estcibe la columnafila a \n");
+            Console.WriteLine("escribe la columnafila a \n");
             str = Console.ReadLine();
             Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
             Camino Camino = new Camino(_tablero.Casilla(de), _tablero.Casilla(a), _tablero);
 
 
-            //=======
         }
         #endregion
 
