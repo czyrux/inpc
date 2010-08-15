@@ -12,8 +12,8 @@ namespace ico
     public struct heuristica
     {
         public int g;
-        public int h;
-        public int f;
+        public float h;
+        public float f;
         public Casilla casilla;
         public Casilla padre;
     };

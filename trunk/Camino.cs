@@ -83,7 +83,7 @@ namespace ico
             ArrayList abiertas = new ArrayList();
             ArrayList camino = new ArrayList();
             heuristica elemento;
-            int aux = 0, iaux=0;
+            int aux = 0, iaux=0, mejor=-1;
             Casilla actual = a;
             Boolean nueva = false;
             elemento.casilla = a;
@@ -146,16 +146,18 @@ namespace ico
                      
                    //}
                     nueva = false;
+              
+                    
                 }
 
                 //buesca la mejor casilla entre las abiertas
-                aux = mejorCasillaAbierta(abiertas, actual);
+                mejor = mejorCasillaAbierta(abiertas, actual);
                 //agrego la mejor casilla
-                cerradas.Add(abiertas[aux]);
+                cerradas.Add(abiertas[mejor]);
                 //pongo la mejor como la siguiente actual
-                actual = ((heuristica)abiertas[aux]).casilla;
+                actual = ((heuristica)abiertas[mejor]).casilla;
                 //borro la mejor de las abiertas
-                abiertas.RemoveAt(aux);
+                abiertas.RemoveAt(mejor);
 
             } while (actual != b);
 
