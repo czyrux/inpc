@@ -363,3 +363,19 @@ Ataque fisico (mech):
 					public float nota()
 					Todas las que estan dentro de la region estadoMech, que a su vez esta en la region metodos en la clase mech.cs
 		Por hoy no hare mas, dew
+
+		(15/08/10 angel) ya funciona el pathfinder basico. Necesito saber sobre que mapa estoy haciedo las pruebas, para ver si esta haceindolo del todo bien. Por lo menos parece que hace los caminos 
+		de manera correcta. Voy a gregar una funcion que se llamara heuristica y alli debemos incluir los calculos para eleccion de casilla. Por ahora es solo la distancia (aproximada) al destino,
+		pero debemos aumentar eso. La funcion sera un float, donde el minimo numero (inluyendo negativos) sera la mejor opcion. Por ahora estoy dando el valor a las casillas intransitables el valor int.MaxValue,
+		ya que es el pero valor posible alcanzable. 
+
+		Sobre por que negativos y por que float, la razon es sipmle: los valores de h por ahora estan entre 5 y 15 son muy bajos si queremos incluir muchas cosas creo que sera dificil no saturar los valor (aunque podemos multiplicaros).
+		Pero si no queremos que lleguen a negativos siempre tendremos que tener cuidado de ver si en algun caso la suma nos pueda dar negativa (eso se puede si en la euristica solo sumamos y no damos puntos negativos, esto puede ser dificil).
+		Lo de float porque si para darle mas marjen al rango de decicion sobre las casillas y reducir los empates.
+
+		Por ello cambiare la struct heuristica y al valor h y f las cambiare por float. Si quieres puedes hacer tus pruebas, y dime si hay errores.
+
+		Por cierto trate de cambiar la elecion de la casila mejor de las abiertas de forma que se hiciera durante la creaccion de la misma; pero la lista
+		abiertas puede llegar a ser mas grade que el bulce que las va creando, de hecho casi siempre lo es. Esto se puede solucionar pre-rastreando las abiertas en el bucle y luego terminar fuera de el. Pero no se si 
+		vale la pena el esfuerzo, por que no creo que el rastreo de una lista de a lo mucho 600  elementos (y esto es exagerando muchisisimo) sea mucho trabajo.
+

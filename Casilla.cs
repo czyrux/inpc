@@ -122,12 +122,12 @@ namespace ico
                         break;
                     case 2:
                         if (de.tipoTerreno() != a.tipoTerreno())
-                            costo = int.MinValue;
+                            costo = int.MaxValue;
                         else
                             costo += 2;
                         break;
                     default:
-                        return int.MinValue;//<--- Es inaccesible devuelve el maximo valor posible
+                        return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
 
                 }
             }
