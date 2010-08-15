@@ -379,3 +379,4 @@ Ataque fisico (mech):
 		abiertas puede llegar a ser mas grade que el bulce que las va creando, de hecho casi siempre lo es. Esto se puede solucionar pre-rastreando las abiertas en el bucle y luego terminar fuera de el. Pero no se si 
 		vale la pena el esfuerzo, por que no creo que el rastreo de una lista de a lo mucho 600  elementos (y esto es exagerando muchisisimo) sea mucho trabajo.
 
+		(angel) descubri un error tonto en la construccion del camino, llamo a la funcion path finder pero esta no construlle nada. Miralo si quieres se arregla muy rapido pero tengo que irme ya.
