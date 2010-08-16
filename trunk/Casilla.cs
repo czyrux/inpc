@@ -9,8 +9,8 @@ namespace ico
     {
         #region Constructores
         public Casilla() {
-            _nivel = _fceEdificio = _tipoTerreno = _objetoTerreno = _nGarrotes = _heuristica.g = 0;
-            _heuristica.f = _heuristica.h = 0;
+            _nivel = _fceEdificio = _tipoTerreno = _objetoTerreno = _nGarrotes = /*_heuristica.g = */0;
+            //_heuristica.f = _heuristica.h = 0;
             _edificioDerrumbado = _fuego = _humo = false;
             _caras = new Cara[6];
             _posicion = new Posicion();
@@ -108,7 +108,7 @@ namespace ico
             return _puntosMovimientos;
         }
 
-        public static int costoMovimientoAB(Casilla de, Casilla a)
+        public static int costoMovimiento(Casilla de, Casilla a)
         {
             int costo = 0;
             if (Math.Abs(de.columna() - a.columna()) < 2 || Math.Abs(de.fila() - a.fila()) < 2)
@@ -132,7 +132,36 @@ namespace ico
 
                 }
             }
-            else return int.MinValue;
+            else return int.MaxValue;
+
+            return costo;
+        }
+
+        public int costoMovimiento( Casilla a)
+        {
+            int costo = 0;
+            if (Math.Abs(_posicion.columna() - a.columna()) < 2 || Math.Abs(_posicion.fila() - a.fila()) < 2)
+            {
+                switch (Math.Abs(a.nivel() - _nivel))
+                {
+                    case 0:
+                        ;
+                        break;
+                    case 1:
+                        costo++;
+                        break;
+                    case 2:
+                        if (_tipoTerreno != a.tipoTerreno())
+                            costo = int.MaxValue;
+                        else
+                            costo += 2;
+                        break;
+                    default:
+                        return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
+
+                }
+            }
+            else return int.MaxValue;
 
             return costo;
         }
@@ -258,13 +287,13 @@ namespace ico
             return _posicion.columna();
         }
 
-        public heuristica heuristica() {
+       /* public heuristica heuristica() {
             return _heuristica;
         }
 
         public void heuristica(heuristica value) {
             _heuristica = value;
-        }
+        }*/
 
         #endregion
 
@@ -280,7 +309,7 @@ namespace ico
         private int _nGarrotes;
         private Cara[] _caras;
         private int _puntosMovimientos;
-        private heuristica _heuristica;
+        //private heuristica _heuristica;
         #endregion
     }
 }
