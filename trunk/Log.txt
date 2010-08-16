@@ -398,3 +398,6 @@ Ataque fisico (mech):
 		Que te parece usar esa idea?¿ Y lo que he hecho de cuantificar el estado del mech segun una nota del 0 al 10?¿ Respecto a esto en entradas anteriores te comente que habia una funcion nota, que devolvia la situacion del mech
 		teniendo en cuenta el blindaje, la estructura y el tipo de mech que era. Habia pensado que si esa nota sale por encima de 7, tener una actitud ofensiva, y en caso opuesto actitud defensiva. Y que en funcion de esta actitud
 		elijamos la casilla destino y el tipo de movimiento a realizar. Que te parece?¿ Cuando te conectes lo primero que tienes que hacer es contestar respuestas.
+
+
+		- (antonio) Creo que puedo hacer que la distancia devuelva el entero exacto, que separa dos casillas.

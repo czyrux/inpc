@@ -218,7 +218,7 @@ namespace ico
             int dx = Math.Abs(a.columna() - b.columna()) + 1, dy = Math.Abs(b.fila() - a.fila()) + 1;
 
             // (dx^2+dy^2)^1/2<-----La parte entera
-            return (float)Math.Pow((Math.Pow(dx, 2) + Math.Pow(dx, 2)), 0.5);
+            return (float)Math.Pow((Math.Pow(dx, 2) + Math.Pow(dy, 2)), 0.5);
 
         }
         // funcion que calcula los valores euristicos siendo menos el mejor.
