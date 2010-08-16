@@ -152,10 +152,7 @@ namespace ico
                         }
                         
                     }
-                   // if (nueva){//si hay nuevas en la lista (o revisadas)
-
-                     
-                   //}
+                 
                     nueva = false;
               
                     
