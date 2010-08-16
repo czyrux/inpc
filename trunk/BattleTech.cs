@@ -123,7 +123,7 @@ namespace ico
             Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
             Camino Camino = new Camino(_tablero.Casilla(de), _tablero.Casilla(a), _tablero);
 
-            //Camino.print();
+            Camino.print();
 
             Console.ReadKey();
         }

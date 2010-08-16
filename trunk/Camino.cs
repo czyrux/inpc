@@ -57,7 +57,17 @@ namespace ico
         }
 
         public Camino(Casilla de, Casilla a, Tablero tablero) {
-            pathFinder(de, a, tablero);
+
+           ArrayList camino = pathFinder(de, a, tablero);
+           int j = 0;
+          _length = camino.Count;
+          _camino = new Casilla[_length];
+          foreach (Casilla i in camino) {
+              _camino[j] = i;
+              j++;
+          }
+          _ldv = _cobertura = false;
+          _nldv = _movimientos = 0;
         }
 #endregion
 
@@ -77,7 +87,7 @@ namespace ico
         }
 #endregion
 #region Funciones
-        public  Camino pathFinder(Casilla a, Casilla b, Tablero Tablero)
+        public  ArrayList  pathFinder(Casilla a, Casilla b, Tablero Tablero)
         {
             ArrayList cerradas = new ArrayList();
             ArrayList abiertas = new ArrayList();
@@ -167,7 +177,7 @@ namespace ico
                 camino.Add(((heuristica)cerradas[i]).padre);
             }
             camino.Reverse();
-            return new Camino(camino);
+            return camino;
         }
 
         
