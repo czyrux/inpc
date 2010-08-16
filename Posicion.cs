@@ -75,6 +75,15 @@ namespace ico
 
             return colD + fmod;
         }
+        //Funcion que devuelve la distancia aproximada entre el punto a y el punto b. (revisada)
+        public static float distancia(Posicion a, Posicion b)
+        {
+            //dx <----La distancia entre la x de a y la x de b. Idem para la dy
+            int dx = Math.Abs(a.columna() - b.columna()) + 1, dy = Math.Abs(b.fila() - a.fila()) + 1;
 
+            // (dx^2+dy^2)^1/2<-----La parte entera
+            return (float)Math.Pow((Math.Pow(dx, 2) + Math.Pow(dy, 2)), 0.5);
+
+        }
 	}
 }

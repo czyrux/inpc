@@ -409,3 +409,5 @@ Ataque fisico (mech):
 		No lo HE SUSTITUIDO todavia en tu codigo de pathfinder, puesto que ahora esa funcion devuelve un entero, y antes tu lo tenias que devolviera un float, entonces no se como te variara el codigo.
 		Por cierto, cuando copia tu funcion de distancia para tomarla como base me di cuenta que devolvias sqrt( dx^2 + dx^2 ), asi que ve probando todo para que luego  no nos volvemos locos buscando tonterias asi.
 		Lo voi a dejar ya por oi, que son las 20.30 Tchüs
+
+		-(angel) he cambiado de funcion distancia de la tuya a la mia, pero e includo la mia en posicion. La antigua es estatica del mismo nombre y requiere dos posiciones (ya esta hecha y por si la otra llega a dar problemas).

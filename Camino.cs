@@ -98,7 +98,7 @@ namespace ico
             Boolean nueva = false;
             elemento.casilla = a;
             elemento.g = 0;
-            elemento.h = DistanciaAB(a.posicion(), b.posicion());
+            elemento.h = a.posicion().distancia(b.posicion());
             elemento.f = elemento.h;
             elemento.padre = null;
 
@@ -107,7 +107,7 @@ namespace ico
                 for (int i = 1; i < 7; i++) {
                     try
                     {
-                        elemento.casilla = Tablero.colindante(actual, (Encaramiento)i);//<-- hay que revisar en caso de que salga del tablero
+                        elemento.casilla = Tablero.colindante(actual, (Encaramiento)i);//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
                     }
                     catch (Exception e) {
                         continue;
@@ -117,7 +117,8 @@ namespace ico
                         continue;
 
                     // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
-                    aux=Casilla.costoMovimientoAB(actual, elemento.casilla);
+                    aux=actual.costoMovimiento(elemento.casilla);
+                    //aux = actual.posicion().distancia(elemento.casilla.posicion());
 
                     // verifico si es intrancitable
                     if (/*elemento.casilla.costoMovimiento() >= 0 ||*/  aux >= 0){
@@ -190,7 +191,7 @@ namespace ico
                     if (i < _length && _camino[i].nivel() < _camino[i + 1].nivel())
                     {
 
-                        _movimientos += Casilla.costoMovimientoAB(_camino[i], _camino[i + 1]);
+                        _movimientos += _camino[i].costoMovimiento(_camino[i + 1]);
 
                         if (_movimientos < 0)//si hay intransitables en el camino
                             return _movimientos;
@@ -221,23 +222,15 @@ namespace ico
         private int _movimientos;
 
 
-        //Funcion que devuelve la distancia aproximada entre el punto a y el punto b. (revisada)
-        private float DistanciaAB(Posicion a, Posicion b)
-        {
-            //dx <----La distancia entre la x de a y la x de b. Idem para la dy
-            int dx = Math.Abs(a.columna() - b.columna()) + 1, dy = Math.Abs(b.fila() - a.fila()) + 1;
 
-            // (dx^2+dy^2)^1/2<-----La parte entera
-            return (float)Math.Pow((Math.Pow(dx, 2) + Math.Pow(dy, 2)), 0.5);
-
-        }
         // funcion que calcula los valores euristicos siendo menos el mejor.
         private float heuristica(Casilla a, Casilla b)
         {
             float h = 0;
 
-            h = DistanciaAB(a.posicion(), b.posicion());// Calculo de la distancia aproximada al objetivo.
-            
+           //h = DistanciaAB(a.posicion(), b.posicion());// Calculo de la distancia aproximada al objetivo.
+            h = a.posicion().distancia(b.posicion());
+
             return h;
         }
         
