@@ -380,3 +380,21 @@ Ataque fisico (mech):
 		vale la pena el esfuerzo, por que no creo que el rastreo de una lista de a lo mucho 600  elementos (y esto es exagerando muchisisimo) sea mucho trabajo.
 
 		(angel) descubri un error tonto en la construccion del camino, llamo a la funcion path finder pero esta no construlle nada. Miralo si quieres se arregla muy rapido pero tengo que irme ya.
+
+		16/08/10
+		- (antonio) Hola angel, me alegro que el pathfinde vaya saliendo, yo este finde no e podido hacer nada. 
+		A ver, vamos por partes, en cuanto a lo del mapa para saber si lo hace bien no te hace falta, simplemente empieza una simulacion
+		nueva en tu ordenador, eso si, el unico requisito de la partida es que el jugador designado como automatico se el numero 2, puesto que en el codigo esta puesto para que sea este, y que el fichero que le digas que
+		es el jugador automatico (yo utilizo simplemente un .txt, y si kieres utilizar el ejecutable que te crea el visual, pues lo copias en la carpeta de los ficheros. Esto ultimo es lo que estoi haciendo para la fase de armas) 
+		este en la carpeta C:/ficheros/, con eso ya puedes tu ir aciendo las pruebas que necesites sobre el mapa.
+		Por otro lado, creo haber encontrado en que caso tu funcion distanciaAB falla, y creo que es cuando uno de los dos sumandos de la raiz es igual a cero, es decir o a.fila+b.fila==0 o a.columna+b.columna==0. Voi a seguir
+		mirandolo y si veo un patron de fallo, lo corrijo. Por otro lado, creo ke esta funcion deberia pertenecer a la clase Posicion.cs, para que una posicion te diga a que distancia esta de otra dado que lo unico que usa es
+		la fila y la columna, y esa informacion esta en posicion, y asi, si keremos usar esos datos para otras fases de movimiento u otros menesteres, pues se puede. Si detecto y corrijo el fallo pondre esta funcion en la clase
+		posicion, y tu luego modificas el codigo del pathfinder para usar esta funcion, y asi no te toqueteo el codigo.
+
+		En cuanto a lo de pre-rastrear y demas, de momento no nos complicaremos, y si vemos que el resultado final es lento, lo vemos.
+
+		Por otro lado, te as mirao lo que te mande por mail?¿ En ese documento lo que utiliza es una zona de influencia para elegir la casilla destino (que se podria usar en el radio de nuestro mech o en el radio del mech rival).
+		Que te parece usar esa idea?¿ Y lo que he hecho de cuantificar el estado del mech segun una nota del 0 al 10?¿ Respecto a esto en entradas anteriores te comente que habia una funcion nota, que devolvia la situacion del mech
+		teniendo en cuenta el blindaje, la estructura y el tipo de mech que era. Habia pensado que si esa nota sale por encima de 7, tener una actitud ofensiva, y en caso opuesto actitud defensiva. Y que en funcion de esta actitud
+		elijamos la casilla destino y el tipo de movimiento a realizar. Que te parece?¿ Cuando te conectes lo primero que tienes que hacer es contestar respuestas.
