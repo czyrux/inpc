@@ -413,3 +413,5 @@ Ataque fisico (mech):
 		-(angel) he cambiado de funcion distancia de la tuya a la mia, pero e includo la mia en posicion. La antigua es estatica del mismo nombre y requiere dos posiciones (ya esta hecha y por si la otra llega a dar problemas).
 
 		- (antonio) No si el problema no es que falle, si hace bien los numeros, el problema es que no se como lo calcula xD. Voi a hacer mas pruebas ahora para asegurarme que funciona, perfectamente.
+
+		- (antonio) Oye lo e estado probando en profundidad y no falla, mientras que el tuyo en ciertos casos tenia errores, asike utiliza el que yo e puesto y que es la funcion "misteriosa" xD.
