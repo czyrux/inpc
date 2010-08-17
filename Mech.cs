@@ -661,7 +661,8 @@ namespace ico {
         /*
          * Indica si una posicion esta dentro del cono delantero de vision de un mech
          */
-        public Boolean conoDelantero( Posicion casilla , int encaramiento ) {
+        public Boolean conoDelantero( Posicion casilla , int encaramiento ) 
+        {
             Boolean enCono = false;
             int jIzq, jDrcha;
             //Console.WriteLine(casilla.columna() + " "+casilla.fila());
@@ -823,12 +824,15 @@ namespace ico {
             return enCono;
         }
 
+        /*
+         * Indica si una posicion esta dentro del cono trasero de vision de un mech
+         */
         public Boolean conoTrasero(Posicion casilla, int encaramiento)
         {
             Boolean enCono = false;
             int jIzq, jDrcha;
-            Console.WriteLine(casilla.columna() + " "+casilla.fila());
-            Console.WriteLine(encaramiento);
+            //Console.WriteLine(casilla.columna() + " "+casilla.fila());
+            //Console.WriteLine(encaramiento);
             //Calculamos las diagonales del cono
             jIzq = _posicion.columna() - Math.Abs(casilla.fila() - _posicion.fila()) * 2;
             jDrcha = _posicion.columna() + Math.Abs(casilla.fila() - _posicion.fila()) * 2;
@@ -848,12 +852,12 @@ namespace ico {
                     //Vemos si la casilla a observar esta dentro de esos limites
                     if (_posicion.columna() % 2 != 0)
                     {//posicion impares
-                        if ((casilla.columna() > jIzq /*|| casilla.columna() > jIzq - 1*/) && (casilla.columna() < jDrcha /*|| casilla.columna() < jDrcha + 1*/))
+                        if (casilla.columna() > jIzq && casilla.columna() < jDrcha)
                             enCono = true;
                     }
                     else
                     {//posicion pares
-                        if ((/*casilla.columna() > jIzq ||*/ casilla.columna() > jIzq + 1) && (/*casilla.columna() < jDrcha ||*/ casilla.columna() < jDrcha - 1))
+                        if ( casilla.columna() > jIzq + 1 && casilla.columna() < jDrcha - 1)
                             enCono = true;
                     }
                 }
@@ -876,41 +880,41 @@ namespace ico {
                     //Vemos si la casilla a observar esta dentro de esos limites
                     if (_posicion.columna() % 2 == 0)
                     {//posicion pares
-                        if ((casilla.columna() < jIzq /*|| casilla.columna() < jIzq - 1*/))
+                        if ( casilla.columna() < jIzq - 1)
                             enCono = true;
                     }
                     else
                     {//posicion impar
-                        if ((casilla.columna() < jIzq /*|| casilla.columna() < jIzq + 1*/))
+                        if (casilla.columna() < jIzq )
                             enCono = true;
                     }
                 } 
             }//Si tiene el encaramiento 3
             else if (encaramiento == 3)
             {
-                if (casilla.columna() < _posicion.columna())
-                {//Si esta mas a la izquierda que la casilla donde me encuentro
+                if (casilla.columna() >= _posicion.columna())
+                {//Si esta mas a la derecha que la casilla donde me encuentro
                     enCono = false;
                 }
-                else if (casilla.fila() >= _posicion.fila())
+                else if (casilla.fila() < _posicion.fila())
                 {
-                    //Vemos esta en la zona inferior
+                    //Vemos esta en la zona superior
                     enCono = true;
                 }
                 else
                 {
                     //Vemos si la casilla a observar esta dentro de esos limites
-                    if (_posicion.columna() % 2 == 0)
-                    {//posicion pares
-                        if (casilla.columna() >= jDrcha || casilla.columna() >= jDrcha + 1)
+                    if (_posicion.columna() % 2 != 0)
+                    {//posicion impares
+                        if ( casilla.columna() < jIzq - 1)
                             enCono = true;
                     }
                     else
-                    {//posicion impar
-                        if (casilla.columna() >= jDrcha || casilla.columna() >= jDrcha - 1)
+                    {//posicion pares
+                        if (casilla.columna() < jIzq )
                             enCono = true;
                     }
-                }
+                } 
 
             }//Si tiene el encaramiento 4
             else if (encaramiento == 4)
@@ -924,12 +928,12 @@ namespace ico {
                     //Vemos si la casilla a observar esta dentro de esos limites
                     if (_posicion.columna() % 2 == 0)
                     {//posicion pares
-                        if ((casilla.columna() > jIzq /*|| casilla.columna() > jIzq - 1*/) && (casilla.columna() < jDrcha /*|| casilla.columna() < jDrcha + 1*/))
+                        if (casilla.columna() > jIzq && casilla.columna() < jDrcha )
                             enCono = true;
                     }
                     else
                     {//posicion impar
-                        if ((/*casilla.columna() > jIzq ||*/ casilla.columna() > jIzq + 1) && (/*casilla.columna() < jDrcha ||*/ casilla.columna() < jDrcha - 1))
+                        if ( casilla.columna() > jIzq + 1 && casilla.columna() < jDrcha - 1)
                             enCono = true;
                     }
                 }
@@ -951,12 +955,12 @@ namespace ico {
                     //Vemos si la casilla a observar esta dentro de esos limites
                     if (_posicion.columna() % 2 != 0)
                     {//posicion impares
-                        if (casilla.columna() > jDrcha /*|| casilla.columna() > jDrcha + 1*/)
+                        if ( casilla.columna() > jDrcha + 1)
                             enCono = true;
                     }
                     else
                     {//posicion pares
-                        if (/*casilla.columna() > jDrcha ||*/ casilla.columna() > jDrcha - 1)
+                        if (casilla.columna() > jDrcha )
                             enCono = true;
                     }
                 }
@@ -964,34 +968,87 @@ namespace ico {
             }//Si tiene el encaramiento 6
             else if (encaramiento == 6)
             {
-                if (casilla.columna() > _posicion.columna())
-                {//Si esta mas a la derecha que la casilla donde me encuentro
+                if (casilla.columna() <= _posicion.columna())
+                {//Si esta mas a la izquierda que la casilla donde me encuentro
                     enCono = false;
                 }
-                else if (casilla.fila() <= _posicion.fila())
+                else if (casilla.fila() > _posicion.fila())
                 {
-                    //Vemos esta en la zona superior
+                    //Vemos esta en la zona inferior
                     enCono = true;
                 }
                 else
                 {
                     //Vemos si la casilla a observar esta dentro de esos limites
-                    if (_posicion.columna() % 2 != 0)
-                    {//posicion impares
-                        if (casilla.columna() <= jIzq || casilla.columna() <= jIzq - 1)
+                    if (_posicion.columna() % 2 == 0)
+                    {//posicion pares
+                        if ( casilla.columna() > jDrcha + 1)
                             enCono = true;
                     }
                     else
-                    {//posicion pares
-                        if (casilla.columna() <= jIzq || casilla.columna() <= jIzq + 1)
+                    {//posicion impar
+                        if (casilla.columna() > jDrcha )
                             enCono = true;
                     }
                 }
-
             }
 
             return enCono;
         }
+
+        /*
+         * Indica si una posicion esta dentro del cono derecho de vision de un mech
+         */
+        public Boolean conoDerecho(Posicion casilla, int encaramiento) 
+        {
+            Boolean enCono = false;
+
+            if (!conoDelantero(casilla, encaramiento) && !conoTrasero(casilla, encaramiento)) {
+                if (encaramiento == 1) {
+                    if (_posicion.columna() < casilla.columna())
+                        enCono = true;
+                }
+                else if (encaramiento == 2) {
+                    if (_posicion.fila() < casilla.fila())
+                        enCono = true;
+                }
+                else if (encaramiento == 3) {
+                    if (_posicion.fila() < casilla.fila())
+                        enCono = true;
+                }
+                else if (encaramiento == 4) {
+                    if (_posicion.columna() > casilla.columna())
+                        enCono = true;
+                }
+                else if (encaramiento == 5) {
+                    if (_posicion.fila() > casilla.fila())
+                        enCono = true;
+                }
+                else {
+                    if (_posicion.fila() > casilla.fila())
+                        enCono = true;
+                }  
+            
+            }
+
+            return enCono;
+        }
+
+        /*
+         * Indica si una posicion esta dentro del cono izquierdo de vision de un mech
+         */
+        public Boolean conoIzquierdo(Posicion casilla, int encaramiento)
+        {
+            Boolean enCono = false;
+
+            if (!conoDelantero(casilla, encaramiento) && !conoTrasero(casilla, encaramiento) && !conoDerecho(casilla,encaramiento) )
+            {
+                enCono = true;
+            }
+
+            return enCono;
+        }
+
         #endregion
 
         //METODOS PARA VER LA SITUACION DEL MECH
