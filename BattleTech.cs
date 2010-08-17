@@ -99,8 +99,11 @@ namespace ico
 					p1 = new Posicion(c1);
                     //Casilla aux = _tablero.Casilla(p1);
                     Console.WriteLine("La distancia es:"+_mechs[_myJugador].posicion().distancia(p1));
-                    if (_mechs[_myJugador].conoVision(p1, _mechs[_myJugador].ladoEncaramiento()))
-                        Console.WriteLine("En cono delantero");
+                    if (_mechs[_myJugador].conoTrasero(p1, _mechs[_myJugador].ladoEncaramiento()))
+                    {
+                        Console.WriteLine("En cono trasero");
+                    }else
+                        Console.WriteLine("No esta en cono trasero");
 					//_tablero.casillaInfo(p1.fila(),p1.columna());
 				}else
 					fin=true;
@@ -180,7 +183,7 @@ namespace ico
             if (objetivos.Count > 0)
             {
                 for (int i = 0; i < objetivos.Count; i++)
-                    if (!_mechs[_myJugador].conoVision(((Mech)objetivos[i]).posicion(), _mechs[_myJugador].ladoEncaramientoTorso()))
+                    if (!_mechs[_myJugador].conoDelantero(((Mech)objetivos[i]).posicion(), _mechs[_myJugador].ladoEncaramientoTorso()))
                     {
                         objetivos.RemoveAt(i);
                         i--;
