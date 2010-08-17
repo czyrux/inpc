@@ -415,3 +415,7 @@ Ataque fisico (mech):
 		- (antonio) No si el problema no es que falle, si hace bien los numeros, el problema es que no se como lo calcula xD. Voi a hacer mas pruebas ahora para asegurarme que funciona perfectamente.
 
 		- (antonio) Oye lo e estado probando en profundidad y no falla, mientras que el tuyo en ciertos casos tenia errores, asike utiliza el que yo e puesto y que es la funcion "misteriosa" xD.
+
+		-(antonio) Estoi haciendo ahora las funciones para que te digan donde esta situado una posicion respecto a un mech
+		La funcion conoVision, pasa a llamarse conoDelantero.
+		Voi a añadir conoTrasero, conoDerecho , conoIzquierda

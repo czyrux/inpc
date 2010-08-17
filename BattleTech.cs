@@ -97,9 +97,10 @@ namespace ico
 				c1=Console.ReadLine();
 				if (c1!="q"){
 					p1 = new Posicion(c1);
-                    Casilla aux = _tablero.Casilla(p1);
+                    //Casilla aux = _tablero.Casilla(p1);
                     Console.WriteLine("La distancia es:"+_mechs[_myJugador].posicion().distancia(p1));
-                    
+                    if (_mechs[_myJugador].conoVision(p1, _mechs[_myJugador].ladoEncaramiento()))
+                        Console.WriteLine("En cono delantero");
 					//_tablero.casillaInfo(p1.fila(),p1.columna());
 				}else
 					fin=true;
