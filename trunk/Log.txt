@@ -414,8 +414,16 @@ Ataque fisico (mech):
 
 		- (antonio) No si el problema no es que falle, si hace bien los numeros, el problema es que no se como lo calcula xD. Voi a hacer mas pruebas ahora para asegurarme que funciona perfectamente.
 
-		- (antonio) Oye lo e estado probando en profundidad y no falla, mientras que el tuyo en ciertos casos tenia errores, asike utiliza el que yo e puesto y que es la funcion "misteriosa" xD.
+		- (antonio) Oye lo e estado probando en profundidad mi funcion distancia, y no falla, mientras que el tuyo en ciertos casos tenia errores, asike utiliza el que yo e puesto y que es la funcion "misteriosa" xD.
 
 		-(antonio) Estoi haciendo ahora las funciones para que te digan donde esta situado una posicion respecto a un mech
 		La funcion conoVision, pasa a llamarse conoDelantero.
 		Voi a añadir conoTrasero, conoDerecho , conoIzquierda
+
+		-(antonio) Ya estan hechos los conos. Estan son las cabeceras de las funciones, por si quieres usarlas para la heuristica
+				       public Boolean conoDelantero( Posicion casilla , int encaramiento )
+					   public Boolean conoTrasero(Posicion casilla, int encaramiento)
+					   public Boolean conoDerecho(Posicion casilla, int encaramiento)
+					   public Boolean conoIzquierdo(Posicion casilla, int encaramiento)
+		Te recuerdo que meti el encaramiento como parametro para que valiera para el encaramiento del mech y tamb de su torso.
+		Por hoy termino, Tchüs
