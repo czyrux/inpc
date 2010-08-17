@@ -427,3 +427,6 @@ Ataque fisico (mech):
 					   public Boolean conoIzquierdo(Posicion casilla, int encaramiento)
 		Te recuerdo que meti el encaramiento como parametro para que valiera para el encaramiento del mech y tamb de su torso.
 		Por hoy termino, Tchüs
+
+		-(antonio) Oye una ultima cosa, habia pensado como idea que a tu funcion colindante, podias pasarle como parametro un array (en vez del encaramiento), y que la funcion meta dentro del array todas las casillas colindantes (en vez de devolver solo una) a una dada
+		(asi alli dentro podrias mirar lo de que salga del tablero o no), piensalo por si te interesa.
