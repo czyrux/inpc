@@ -441,6 +441,12 @@ Ataque fisico (mech):
 		-(antonio) He puesto en tu funcion pathfinder que la distancia aproximada sea la funcion que tu hiciste, dado que la heuristica es una aproximacion y quiza con eso salga algo mejor. Porque la mia es distancia real. De todas maneras creo que tiene que haber algo mal
 		en tu codigo puesto que se va alejando de la casilla y luego vuelve, en vez de coger el camino mas recto. Ademas, tambien se mete por el agua, asike a lo mejor no estas teniendo bien en cuenta el coste del terreno. Aparte creo que deberiamos meter de alguna manera 
 		el encaramiento, para que intente ir lo mas recto posible. En el documento que te pase utilizaba de alguna manera el encaramiento para calcular h, pero no me fije mucho.
+		De todas maneras creo que se acerca a la solucion, asi que me gusta que se vaya avanzando :)
 
 		-(antonio) En la funcion faseArmas() he puesto al principio comentado los pasos que voi a seguir y que de hecho ya estoi siguiendo.
 		Por cierto he usado la coleccion List<> que te permite especificar el tipo de objetos que vas a meter (lo que hace que luego no tengas que poner castings), pero en la documentacion de Msdn pone que tiene compatibilidad solo con framework 2.0 Habra algun problema?¿
+
+		-(antonio) Por cierto, otro problema: al hacer mis pruebas para la fase de Armas he visto que a la hora de hacer la LdV al objetivo, me sale que la linea tiene 15 casillas, pero mi distancia dice que hay 11. Que distancia tomo como referencia?¿ (Es la distancia que
+		sale en la captura que te he mandado por mail)
+
+		-(antonio) He visto que en la practica esta del amigo de Fruela que uso su distancia... asi que yo voi a usar la nuestra.

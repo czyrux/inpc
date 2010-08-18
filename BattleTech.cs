@@ -152,6 +152,7 @@ namespace ico
             Console.WriteLine();
 
             Console.WriteLine("Alcance de tiro maximo: " + _mechs[_myJugador].maxAlcanceTiro());
+            Console.WriteLine("Alcance de tiro largo medio: " + _mechs[_myJugador].distanciaTiroLarga());
 
             List<Mech> objetivos = new List<Mech>();
             for (int i = 0; i < _mechs.Length; i++)

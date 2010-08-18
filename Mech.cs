@@ -571,7 +571,6 @@ namespace ico {
 			_distanciaTiroLarga=larga/_armas.Count;
 		}
 
-
         /*
          * Metodo que calcula la media de tirada que se necesita para impactar al objetivo
          */
