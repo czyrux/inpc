@@ -46,7 +46,7 @@ namespace ico
                 _camino[i] = tablero.Casilla(new Posicion(nodos[i - 1]));
             }
             _camino[nodos.Length+1] = tablero.Casilla(p2.posicion());
-
+            _length = _camino.Length;
             //rellenamos heuristica?¿
             /*for (int i = 0; i < _length; i++) {
                 if (_camino[i].tipoTerreno() == 2) {
@@ -77,15 +77,18 @@ namespace ico
               _camino[j] = i;
               j++;
           }
+
+          //Rellenamos el resto de atributos privados
           _ldv = _cobertura = false;
           _nldv = _movimientos = 0;
         }
+
 #endregion
 
 #region Propiedades
 
         public int longitud() {
-            return _camino.Length;
+            return _length;
         }
         public Casilla[] getCamino() {
             return _camino;
@@ -97,6 +100,7 @@ namespace ico
             return _cobertura;
         }
 #endregion
+
 #region Funciones
         public  ArrayList  pathFinder(Casilla a, Casilla b, Tablero Tablero)
         {
@@ -190,8 +194,8 @@ namespace ico
         }
 
         
-        public int costoMovimiento() {
-            
+        public int costoMovimiento() 
+        {    
                 for (int i = 0; i < _length; i++){
 
                     _movimientos = _camino[i].costoMovimiento();
@@ -208,18 +212,22 @@ namespace ico
 
                 return _movimientos;
         }
+
         public Casilla casilla(int i) {
             return _camino[i];
         }
+
         public int movimentos() { return _movimientos; }
 
-        public void print() { 
+        public void print()
+        { 
             string str="El camino es: ";
             foreach (Casilla i in _camino)
                 str += i.posicion().ToString() + "->";
             str += "FIN";
             Console.WriteLine(str);
         }
+
 #endregion
         #region Privado
         private int _length;
@@ -236,8 +244,10 @@ namespace ico
         {
             float h = 0;
 
-           //h = DistanciaAB(a.posicion(), b.posicion());// Calculo de la distancia aproximada al objetivo.
-            h = a.posicion().distancia(b.posicion());
+            //Distancia aproximada
+            h = Posicion.distancia(a.posicion(), b.posicion());// Calculo de la distancia aproximada al objetivo.
+            //Distancia real
+            //h = a.posicion().distancia(b.posicion());
 
             return h;
         }

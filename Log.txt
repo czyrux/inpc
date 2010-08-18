@@ -438,3 +438,6 @@ Ataque fisico (mech):
 		de pie en la casilla o tumbado, solo eso. Ya la arreglo io.
 
 		-(antonio) IMPORTANTE!! He hecho una prueba con tu pathfinder. Te mando al correo la captura de pantalla que me ha salido, te he coloreado en el paint las casillas que marcaba. Tienes que ver donde falla, xk no va directo
+		-(antonio) He puesto en tu funcion pathfinder que la distancia aproximada sea la funcion que tu hiciste, dado que la heuristica es una aproximacion y quiza con eso salga algo mejor. Porque la mia es distancia real. De todas maneras creo que tiene que haber algo mal
+		en tu codigo puesto que se va alejando de la casilla y luego vuelve, en vez de coger el camino mas recto. Aparte creo que deberiamos meter de alguna manera el encaramiento, para que intente ir lo mas recto posible. En el documento que te pase utilizaba de alguna manera
+		el encaramiento para calcular h, pero no me fije mucho.
