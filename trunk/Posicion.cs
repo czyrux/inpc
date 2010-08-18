@@ -75,6 +75,7 @@ namespace ico
 
             return colD + fmod;
         }
+
         //Funcion que devuelve la distancia aproximada entre el punto a y el punto b. (revisada)
         public static float distancia(Posicion a, Posicion b)
         {
