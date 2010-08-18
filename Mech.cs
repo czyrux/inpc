@@ -15,8 +15,8 @@ namespace ico {
 		protected int _numeroJ;
 		protected Boolean _operativo; //***
         protected Boolean _desconectado; //***
-        protected Boolean _atascado;
-		protected Boolean _enSuelo;
+        protected Boolean _atascado; //***
+		protected Boolean _enSuelo; //***
 		protected Posicion _posicion; // clase posicion
         protected int _ladoEncaramiento; //***
         protected int _ladoEncaramientoTorso; //***
@@ -38,7 +38,7 @@ namespace ico {
 		protected int _BlindAtrasTorsoDerecho;
 		protected int _BlindAtrasTorsoCentral;
 
-        protected int _BlindTotal;
+        //protected int _BlindTotal;
 		
 		//puntos estructura interna
 		protected int _EstrucBrazoIzquierdo;
@@ -187,7 +187,7 @@ namespace ico {
 			_BlindAtrasTorsoDerecho=Convert.ToInt32(f.ReadLine());
             _BlindAtrasTorsoCentral = Convert.ToInt32(f.ReadLine());
 
-            _BlindTotal = _BlindBrazoIzquierdo + _BlindTorsoIzquierdo + _BlindPiernaIzquierda + _BlindPiernaDerecha + _BlindTorsoDerecho + _BlindBrazoDerecho + _BlindTorsoCentral + _BlindCabeza + _BlindAtrasTorsoIzquierdo + _BlindAtrasTorsoDerecho + _BlindAtrasTorsoCentral;
+            //_BlindTotal = _BlindBrazoIzquierdo + _BlindTorsoIzquierdo + _BlindPiernaIzquierda + _BlindPiernaDerecha + _BlindTorsoDerecho + _BlindBrazoDerecho + _BlindTorsoCentral + _BlindCabeza + _BlindAtrasTorsoIzquierdo + _BlindAtrasTorsoDerecho + _BlindAtrasTorsoCentral;
 
 			//datos esctructura interna
 			_EstrucBrazoIzquierdo=Convert.ToInt32(f.ReadLine());
@@ -546,65 +546,53 @@ namespace ico {
             Console.WriteLine("Blindaje torso atras izq: "+_BlindAtrasTorsoIzquierdo);
             Console.WriteLine("Blindaje torso atras drcha: "+_BlindAtrasTorsoDerecho);
             Console.WriteLine("Blindaje torso central atras: "+_BlindAtrasTorsoCentral);
-            Console.WriteLine("Blindaje total: " + _BlindTotal);
+            //Console.WriteLine("Blindaje total: " + _BlindTotal);
             estadoBlindajeMech();
 
             Console.WriteLine(); Console.WriteLine();
 		}
-		
-		/*
-         * Metodo que calcula la media de la distancia por armas del mech
-         */
-		private void calculoDistanciaTiro() {
-			int media=0 , larga=0 , corta=0 ;
-            _maxAlcanceDisparo=0;
-			for ( int i=0 ; i<_armas.Count ; i++ ) {
-				corta+=((Componente)_armas[i]).distanciaCorta();
-				media+=((Componente)_armas[i]).distanciaMedia();
-				larga+=((Componente)_armas[i]).distanciaLarga();
-                if (((Componente)_armas[i]).distanciaLarga() > _maxAlcanceDisparo) _maxAlcanceDisparo = ((Componente)_armas[i]).distanciaLarga();
-                
-			}
-			
-			_distanciaTiroCorta=corta/_armas.Count;
-			_distanciaTiroMedia=media/_armas.Count;
-			_distanciaTiroLarga=larga/_armas.Count;
-		}
 
         /*
-         * Metodo que calcula la media de tirada que se necesita para impactar al objetivo
+         * Metodo que calcula la media de la distancia por armas del mech
          */
-        public int tiradaParaImpactoMedia( int distancia , Mech objetivo , Tablero mapa , int movimientoPropio=1 , int movimientoObjetivo=1 ) 
+        private void calculoDistanciaTiro()
         {
-            /** MODIFICADORES PARA DISPARO
-             * modificador distancia
-             * " alcance minimo
-             * " movimiento atacante
-             * " movimiento objetivo
-             * " terreno
-             * " calor y daños
-             * " objetivos inmoviles
-             * " en suelo
-             */
-            return 0;
+            int media = 0, larga = 0, corta = 0;
+            _maxAlcanceDisparo = 0;
+            for (int i = 0; i < _armas.Count; i++)
+            {
+                corta += ((Componente)_armas[i]).distanciaCorta();
+                media += ((Componente)_armas[i]).distanciaMedia();
+                larga += ((Componente)_armas[i]).distanciaLarga();
+                if ( ((Componente)_armas[i]).distanciaLarga() > _maxAlcanceDisparo) _maxAlcanceDisparo = ((Componente)_armas[i]).distanciaLarga();
+
+            }
+
+            _distanciaTiroCorta = corta / _armas.Count;
+            _distanciaTiroMedia = media / _armas.Count;
+            _distanciaTiroLarga = larga / _armas.Count;
         }
 
         /*
-         * Metodo que calcula, para el arma pasada como argumento, la media de tirada que se necesita para impactar al objetivo
+         * Indica si un arma tiene municion para ser disparada 
          */
-        public int tiradaImpacto( Componente arma , int distancia, Mech objetivo, Tablero mapa, int movimientoPropio = 1, int movimientoObjetivo = 1)
+        private bool tieneMunicion(Componente arma)
         {
-            /** MODIFICADORES PARA DISPARO
-             * modificador distancia
-             * " alcance minimo
-             * " movimiento atacante
-             * " movimiento objetivo
-             * " terreno
-             * " calor y daños
-             * " objetivos inmoviles
-             * " en suelo
-             */
-            return 0;
+            bool municion = false;
+            if (arma.tipoArma() == "Energía" || arma.tipoArma() == "Nada")
+            {
+                municion = true;
+            }
+            else
+            {
+                for (int i = 0; i < _componentes.Length && !municion; i++)
+                {
+                    if (_componentes[i].tipoArma() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > 0)
+                        municion = true;
+                }
+
+            }
+            return municion;
         }
 
         /*
@@ -1319,6 +1307,44 @@ namespace ico {
 
         #endregion
 
+        #region PENDIENTES
+
+        /*
+         * Metodo que calcula, para el arma pasada como argumento, la media de tirada que se necesita para impactar al objetivo
+         */
+        public int tiradaImpacto(Componente arma, int distancia, Mech objetivo, Tablero mapa, int movimientoPropio = 1, int movimientoObjetivo = 1)
+        {
+            /** MODIFICADORES PARA DISPARO
+             * modificador distancia
+             * " alcance minimo
+             * " movimiento atacante
+             * " movimiento objetivo
+             * " terreno
+             * " calor y daños
+             * " objetivos inmoviles
+             * " en suelo
+             */
+            return 0;
+        }
+
+        /*
+         * Metodo que calcula la media de tirada que se necesita para impactar al objetivo
+         */
+        public int tiradaParaImpactoMedia(int distancia, Mech objetivo, Tablero mapa, int movimientoPropio = 1, int movimientoObjetivo = 1)
+        {
+            /** MODIFICADORES PARA DISPARO
+             * modificador distancia
+             * " alcance minimo
+             * " movimiento atacante
+             * " movimiento objetivo
+             * " terreno
+             * " calor y daños
+             * " objetivos inmoviles
+             * " en suelo
+             */
+            return 0;
+        }
+        #endregion
     }
 
 }
