@@ -141,10 +141,6 @@ namespace ico
 
         #region faseAtaqueArmas
         private void faseAtaqueArmas() {
-            Console.WriteLine("Fase Ataque con Armas");
-            Console.WriteLine();
-
-            Console.WriteLine("Alcance de tiro maximo: " + _mechs[_myJugador].maxAlcanceTiro());
             /*
              * 1º Eleccion de rivales dentro de radio accion
              * 2º Ver si hay linea de vision con ellos
@@ -152,6 +148,11 @@ namespace ico
              * 4º Ver las armas a dispararle
              * 5º Escribir el fichero
              */
+            Console.WriteLine("Fase Ataque con Armas");
+            Console.WriteLine();
+
+            Console.WriteLine("Alcance de tiro maximo: " + _mechs[_myJugador].maxAlcanceTiro());
+
             List<Mech> objetivos = new List<Mech>();
             for (int i = 0; i < _mechs.Length; i++)
                 //Si estan dentro del alcance de tiro
