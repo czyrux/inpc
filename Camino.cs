@@ -37,11 +37,11 @@ namespace ico
             _camino[nodos.Length+1] = tablero.Casilla(p2);
 
             //rellenamos heuristica?¿
-            for (int i = 0; i < _length; i++) {
+            /*for (int i = 0; i < _length; i++) {
                 if (_camino[i].tipoTerreno() == 2) {
 
                 }
-            }
+            }*/
         }
 
         public Camino(ArrayList camino)
@@ -74,7 +74,7 @@ namespace ico
 #region Propiedades
 
         public int longitud() {
-            return _length;
+            return _camino.Length;
         }
         public Casilla[] getCamino() {
             return _camino;

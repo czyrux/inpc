@@ -1127,7 +1127,7 @@ namespace ico {
             else
                 e = estadoBlindaje.Nulo;*/
 
-            Console.WriteLine("Estado brazo izq " + heridas);
+            //Console.WriteLine("Estado brazo izq " + heridas);
             return heridas;
         }
 
@@ -1135,7 +1135,7 @@ namespace ico {
         {
             float heridas = _BlindTorsoIzquierdo * 10 / _BlindTorsoIzquierdoInicial;
 
-            Console.WriteLine("estado torso izq " + heridas);
+            //Console.WriteLine("estado torso izq " + heridas);
             return heridas;
         }
 
@@ -1143,7 +1143,7 @@ namespace ico {
         {
             float heridas = _BlindPiernaIzquierda * 10 / _BlindPiernaIzquierdaInicial;
 
-            Console.WriteLine("estado pierna izq " + heridas);
+            //Console.WriteLine("estado pierna izq " + heridas);
             return heridas;
         }
 
@@ -1151,7 +1151,7 @@ namespace ico {
         {
             float heridas = _BlindPiernaDerecha * 10 / _BlindPiernaDerechaInicial;
 
-            Console.WriteLine("estado pierna drcha " + heridas);
+            //Console.WriteLine("estado pierna drcha " + heridas);
             return heridas;
         }
 
@@ -1159,7 +1159,7 @@ namespace ico {
         {
             float heridas = _BlindTorsoDerecho * 10 / _BlindTorsoDerechoInicial;
 
-            Console.WriteLine("estado torso drcha " + heridas);
+            //Console.WriteLine("estado torso drcha " + heridas);
             return heridas;
         }
 
@@ -1167,7 +1167,7 @@ namespace ico {
         {
             float heridas = _BlindBrazoDerecho * 10 / _BlindBrazoDerechoInicial;
 
-            Console.WriteLine("estado brazo drcha " + heridas);
+            //Console.WriteLine("estado brazo drcha " + heridas);
             return heridas;
         }
 
@@ -1175,7 +1175,7 @@ namespace ico {
         {
             float heridas = _BlindTorsoCentral * 10 / _BlindTorsoCentralInicial;
 
-            Console.WriteLine("estado torso central " + heridas);
+            //Console.WriteLine("estado torso central " + heridas);
             return heridas;
         }
 
@@ -1183,7 +1183,7 @@ namespace ico {
         {
             float heridas = _BlindCabeza * 10 / _BlindCabezaInicial;
 
-            Console.WriteLine("estado cabeza " + heridas);
+            //Console.WriteLine("estado cabeza " + heridas);
             return heridas;
         }
 
@@ -1191,7 +1191,7 @@ namespace ico {
         {
             float heridas = _BlindAtrasTorsoIzquierdo * 10 / _BlindAtrasTorsoIzquierdoInicial;
 
-            Console.WriteLine("estado atras izq " + heridas);
+            //Console.WriteLine("estado atras izq " + heridas);
             return heridas;
         }
 
@@ -1199,7 +1199,7 @@ namespace ico {
         {
             float heridas = _BlindAtrasTorsoDerecho * 10 / _BlindAtrasTorsoDerechoInicial;
 
-            Console.WriteLine("estado atras drcha " + heridas);
+            //Console.WriteLine("estado atras drcha " + heridas);
             return heridas;
         }
 
@@ -1207,7 +1207,7 @@ namespace ico {
         {
             int heridas = _BlindAtrasTorsoCentral * 10 / _BlindAtrasTorsoCentralInicial;
 
-            Console.WriteLine("estado atras central " + heridas);
+            //Console.WriteLine("estado atras central " + heridas);
             return heridas;
         }
 
@@ -1232,7 +1232,7 @@ namespace ico {
                 estadoEsctructuraTC() * TC +
                 estadoEsctructuraCAB() * CAB;
 
-            Console.WriteLine("Estado del blindaje es: " + estado);
+            Console.WriteLine("Estado de la estructura interna es: " + estado);
 
             return estado;
         }
@@ -1241,7 +1241,7 @@ namespace ico {
         {
             float heridas = _EstrucBrazoIzquierdo * 10 / _EstrucBrazoIzquierdoInicial;
 
-            Console.WriteLine("Estado brazo izq " + heridas);
+            //Console.WriteLine("Estado brazo izq " + heridas);
             return heridas;
         }
 
@@ -1249,7 +1249,7 @@ namespace ico {
         {
             float heridas = _EstrucTorsoIzquierdo * 10 / _EstrucTorsoIzquierdoInicial;
 
-            Console.WriteLine("estado torso izq " + heridas);
+            //Console.WriteLine("estado torso izq " + heridas);
             return heridas;
         }
 
@@ -1257,7 +1257,7 @@ namespace ico {
         {
             float heridas = _EstrucPiernaIzquierda * 10 / _EstrucPiernaIzquierdaInicial;
 
-            Console.WriteLine("estado pierna izq " + heridas);
+            //Console.WriteLine("estado pierna izq " + heridas);
             return heridas;
         }
 
@@ -1265,7 +1265,7 @@ namespace ico {
         {
             float heridas = _EstrucPiernaDerecha * 10 / _EstrucPiernaDerechaInicial;
 
-            Console.WriteLine("estado pierna drcha " + heridas);
+            //Console.WriteLine("estado pierna drcha " + heridas);
             return heridas;
         }
 
@@ -1273,7 +1273,7 @@ namespace ico {
         {
             float heridas = _EstrucTorsoDerecho * 10 / _EstrucTorsoDerechoInicial;
 
-            Console.WriteLine("estado torso drcha " + heridas);
+            //Console.WriteLine("estado torso drcha " + heridas);
             return heridas;
         }
 
@@ -1281,7 +1281,7 @@ namespace ico {
         {
             float heridas = _EstrucBrazoDerecho * 10 / _EstrucBrazoDerechoInicial;
 
-            Console.WriteLine("estado brazo drcha " + heridas);
+            //Console.WriteLine("estado brazo drcha " + heridas);
             return heridas;
         }
 
@@ -1289,7 +1289,7 @@ namespace ico {
         {
             float heridas = _EstrucTorsoCentral * 10 / _EstrucTorsoCentralInicial;
 
-            Console.WriteLine("estado torso central " + heridas);
+            //Console.WriteLine("estado torso central " + heridas);
             return heridas;
         }
 
@@ -1297,7 +1297,7 @@ namespace ico {
         {
             float heridas = _EstrucCabeza * 10 / _EstrucCabezaInicial;
 
-            Console.WriteLine("estado cabeza " + heridas);
+            //Console.WriteLine("estado cabeza " + heridas);
             return heridas;
         }
 

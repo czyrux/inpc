@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
@@ -24,10 +25,10 @@ namespace ico
 			_config = new ConfiguracionJuego( _myJugador );
 
             //PRuebas de ÑIKO
-            Console.WriteLine("eres ñiko y/n ");
+           /* Console.WriteLine("eres ñiko y/n ");
             string str = Console.ReadLine();
             if(str=="yes" || str=="y" || str=="Y" || str=="Yes" || str=="si" || str=="s" || str=="Si" || str=="S")
-                pruebas(); 
+                pruebas(); */
 
             //Elegimos la accion a realizar
             if (fase == "Movimiento")
@@ -143,38 +144,52 @@ namespace ico
             Console.WriteLine("Fase Ataque con Armas");
             Console.WriteLine();
 
-            
+            Console.WriteLine("Alcance de tiro maximo: " + _mechs[_myJugador].maxAlcanceTiro());
             /*
-             * 1º Eleccion de rivales dentro de cono vision
+             * 1º Eleccion de rivales dentro de radio accion
              * 2º Ver si hay linea de vision con ellos
-             * 3º De los restantes escoger al mas debil
+             * 3º De los restantes escoger al mas debil y cercano
              * 4º Ver las armas a dispararle
              * 5º Escribir el fichero
              */
-            ArrayList objetivos = new ArrayList();
+            List<Mech> objetivos = new List<Mech>();
             for (int i = 0; i < _mechs.Length; i++)
-                if (i != _myJugador)
+                //Si estan dentro del alcance de tiro
+                if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].maxAlcanceTiro())
                     objetivos.Add(_mechs[i]);
-
+ 
             Console.WriteLine("Al principio tenemos:");
             for (int i = 0; i < objetivos.Count; i++)
-                Console.WriteLine(i + ": " + ((Mech)objetivos[i]).nombre());
+                Console.WriteLine(i + ": " + objetivos[i].nombre());
             Console.WriteLine();
 
             //Dejamos solo con los que tengamos linea de vision
-            objetivosLdV(objetivos);
+            List<Camino> ldv = new List<Camino>();
+            objetivosLdV(objetivos,ldv);
+
+            Console.WriteLine();
             Console.WriteLine("En LdV tenemos:" + objetivos.Count);
             for (int i = 0; i < objetivos.Count; i++)
-                Console.WriteLine(i + ": " + ((Mech)objetivos[i]).nombre());
+            {
+                Console.WriteLine(i + ": " + objetivos[i].nombre());
+                Console.WriteLine("Distancia: " + _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()));
+                Console.WriteLine("Nota: " + objetivos[i].nota());
+                if ( _mechs[_myJugador].conoDelantero(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) || _mechs[_myJugador].conoDerecho(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) || _mechs[_myJugador].conoIzquierdo(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) )
+                    Console.WriteLine("Se le puede disparar");
+                Console.WriteLine("Distancia camino: " + ldv[i].longitud());
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Numero caminos " + ldv.Count);
             Console.WriteLine();
 
             //Dejamos solo los que esten en el cono de vision
-            objetivosConoVision(objetivos);
+            /*objetivosConoVision(objetivos);
 
             Console.WriteLine("En Cono vision tenemos:"+objetivos.Count);
             for (int i = 0; i < objetivos.Count; i++)
                 Console.WriteLine(i + ": " + ((Mech)objetivos[i]).nombre());
-            Console.WriteLine();
+            Console.WriteLine();*/
 
             Console.ReadLine();
         }
@@ -192,19 +207,21 @@ namespace ico
             }
         }
 
-        private void objetivosLdV(ArrayList objetivos)
+        private void objetivosLdV(List<Mech> objetivos , List<Camino> ldv )
         {
             Camino c;
             if (objetivos.Count > 0)
             {
                 for (int i = 0; i < objetivos.Count; i++)
                 {
-                    c = new Camino(_mechs[_myJugador].posicion(), ((Mech)objetivos[i]).posicion(), _tablero, _myJugador);
+                    c = new Camino(_mechs[_myJugador].posicion(), objetivos[i].posicion(), _tablero, _myJugador);
                     if (!c.ldv())
                     {
                         objetivos.RemoveAt(i);
                         i--;
                     }
+                    else
+                        ldv.Add(c);
                 }
             }
         }
