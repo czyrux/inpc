@@ -182,8 +182,11 @@ namespace ico
                 Console.WriteLine();
             }
 
-            Console.WriteLine("Numero caminos " + ldv.Count);
-            Console.WriteLine();
+            //Escogemos al mas cercano, siempre que no este a nuestra espalda
+
+
+            /*Console.WriteLine("Numero caminos " + ldv.Count);
+            Console.WriteLine();*/
 
             //Dejamos solo los que esten en el cono de vision
             /*objetivosConoVision(objetivos);
