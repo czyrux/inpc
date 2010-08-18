@@ -182,19 +182,12 @@ namespace ico
                 Console.WriteLine();
             }
 
-            //Escogemos al mas cercano, siempre que no este a nuestra espalda
+            //Escogemos al los que no esten a nuestra espalda
+            // Calculamos tirada impacto media por jugador, o el que sea mas debil o el que este mas cerca ¿? Algo ponderado¿?
 
+            //Vemos las armas a dispararle
 
-            /*Console.WriteLine("Numero caminos " + ldv.Count);
-            Console.WriteLine();*/
-
-            //Dejamos solo los que esten en el cono de vision
-            /*objetivosConoVision(objetivos);
-
-            Console.WriteLine("En Cono vision tenemos:"+objetivos.Count);
-            for (int i = 0; i < objetivos.Count; i++)
-                Console.WriteLine(i + ": " + ((Mech)objetivos[i]).nombre());
-            Console.WriteLine();*/
+            //Escribimos las ordenes
 
             Console.ReadLine();
         }
