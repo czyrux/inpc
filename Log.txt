@@ -436,3 +436,5 @@ Ataque fisico (mech):
 
 		-(antonio) Por cierto el constructor de camino, para llamara a LdV.exe esta mal. Hay que pasarle los jugadores xk en la llamada al programa no tienes que pasarle el nivel a que se encuentran las casillas, sino un 1 o 0 si el jugador esta
 		de pie en la casilla o tumbado, solo eso. Ya la arreglo io.
+
+		-(antonio) He hecho una prueba con tu pathfinder. Te mando al correo la captura de pantalla que me ha salido, te he coloreado en el paint las casillas que marcaba. Tienes que ver donde falla
