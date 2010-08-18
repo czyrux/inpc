@@ -8,13 +8,13 @@ namespace ico
     public class Camino
     {
 #region Constructores
-        public Camino(Mech p1, Mech p2,Tablero tablero,int jugador) {
+        public Camino(Mech p1, Mech p2,Tablero tablero) {
             Process proc = new Process();
             _movimientos = _nldv = 0;
             String[] nodos;
             proc.StartInfo.WorkingDirectory = @".";
             proc.StartInfo.FileName = "LDVyC.exe";
-            string str= "mapaJ"+jugador.ToString()+".sbt " + p1.posicion().ToString() + " ";
+            string str= "mapaJ"+p1.numeroJ().ToString()+".sbt " + p1.posicion().ToString() + " ";
             if (p1.enSuelo()) {
                 str += "0 ";
             } else
