@@ -8,13 +8,24 @@ namespace ico
     public class Camino
     {
 #region Constructores
-        public Camino(Posicion p1, Posicion p2,Tablero tablero,int jugador) {
+        public Camino(Mech p1, Mech p2,Tablero tablero,int jugador) {
             Process proc = new Process();
             _movimientos = _nldv = 0;
             String[] nodos;
             proc.StartInfo.WorkingDirectory = @".";
             proc.StartInfo.FileName = "LDVyC.exe";
-            proc.StartInfo.Arguments = "mapaJ"+jugador.ToString()+".sbt " + p1.ToString() + " " + tablero.Casilla(p1).nivel().ToString() + " " + p2.ToString() + " " + tablero.Casilla(p2).nivel().ToString() + "";
+            string str= "mapaJ"+jugador.ToString()+".sbt " + p1.posicion().ToString() + " ";
+            if (p1.enSuelo()) {
+                str += "0 ";
+            } else
+                str += "1 ";
+            str += p2.posicion().ToString() + " ";
+            if (p2.enSuelo()) {
+                str += "0";
+            } else
+                str += "1";
+
+            proc.StartInfo.Arguments = str ;
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.RedirectStandardOutput = false;
             proc.StartInfo.RedirectStandardError = true;
@@ -30,11 +41,11 @@ namespace ico
             _camino = new Casilla[nodos.Length + 2];
 
 
-            _camino[0] = tablero.Casilla(p1);
+            _camino[0] = tablero.Casilla(p1.posicion());
             for (int i = 1; i <= nodos.Length; i++) {
                 _camino[i] = tablero.Casilla(new Posicion(nodos[i - 1]));
             }
-            _camino[nodos.Length+1] = tablero.Casilla(p2);
+            _camino[nodos.Length+1] = tablero.Casilla(p2.posicion());
 
             //rellenamos heuristica?¿
             /*for (int i = 0; i < _length; i++) {
