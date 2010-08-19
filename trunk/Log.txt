@@ -452,3 +452,16 @@ Ataque fisico (mech):
 		-(antonio) He visto que en la practica esta del amigo de Fruela que uso su distancia... asi que yo voi a usar la nuestra.
 
 		-(antonio) Weno yo me piro ia, dew.
+
+
+		19/8/10
+		- (antonio) Sigo haciendo la fase de armas. Estos son los pasos que voi a seguir
+			/*
+             * 1º Eleccion de rivales dentro de radio accion (rango alcance: distancia tiro larga media) y que no esten en el cono trasero
+             *    Si no hay ninguno metemos los que esten a distancia de tiro de alcance maximo?¿ (TODAVIA NO SE SI HACERLO)
+             * 2º Seleccionar los que tengan linea de vision
+             * 3º a. De los restantes escoger si hay algunos en un radio de 3 casillas, y de ellos al que menos puntuacion tenga
+             *    b. En caso opuesto escoger al mas debil (nota mas baja)
+             * 4º Ver las armas a dispararle
+             * 5º Escribir el fichero
+             */
