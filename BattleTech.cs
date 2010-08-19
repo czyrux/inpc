@@ -211,14 +211,15 @@ namespace ico
             //Escogemos al mas debil
             objetivoMasDebil(objetivos, ldv);
 
-            Console.WriteLine("El mas debil es:"+objetivos.Count);
+            Console.WriteLine("El objetivo es:"+objetivos.Count);
             for (int i = 0; i < objetivos.Count; i++)
                 Console.WriteLine(i + ": " + objetivos[i].nombre());
             Console.WriteLine();
 
-            // Calculamos tirada impacto media por jugador, o el que sea mas debil o el que este mas cerca ¿? Algo ponderado¿?
+            List<Componente> armasDisparo = new List<Componente>();
 
             //Vemos las armas a dispararle
+            seleccionArmas(objetivos, ldv, armasDisparo);
 
             //Escribimos las ordenes
 
@@ -229,6 +230,7 @@ namespace ico
         {
             if (objetivos.Count > 1)
             {
+                //SE PUEDEN OBTENER OTROS PARAMETROS PARA LA ELECCION DEL OBJETIVO FINAL, COMO LA DISTANCIA O LA TIRADA IMPACTO MEDIA
                 float valor = int.MaxValue;
                 List<Mech> objetivosDebil = new List<Mech>();
                 List<Camino> ldvAux = new List<Camino>(); ;
@@ -263,6 +265,11 @@ namespace ico
                         ldv.Add(c);
                 }
             }
+        }
+
+        private void seleccionArmas(List<Mech> objetivo, List<Camino> ldv, List<Componente> armas) 
+        { 
+        
         }
 
         #endregion

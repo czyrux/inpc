@@ -41,24 +41,6 @@ namespace ico
 		Bueno, //100%-60%
 	};
 
-    /*
-     * Estructura usada para conocer el estado de las distintas partes de un mech
-     */
-    /*public struct vitalidad 
-    {
-        public estadoBlindaje brazoIzquierdo;
-        public estadoBlindaje torsoIzquierdo;
-        public estadoBlindaje piernaIzquierda;
-        public estadoBlindaje piernaDerecha;
-        public estadoBlindaje torsoDerecho;
-        public estadoBlindaje brazoDerecho;
-        public estadoBlindaje torsoCentral;
-        public estadoBlindaje cabeza;
-        public estadoBlindaje atrasTorsoIzquierdo;
-        public estadoBlindaje atrasTorsoDerecho;
-        public estadoBlindaje atrasTorsoCentral;
-    };*/
-
 
     /**
      * Enumerado utilizado para clasificar al tipo de mech segun su armadura 
