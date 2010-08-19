@@ -142,9 +142,10 @@ namespace ico
         #region faseAtaqueArmas
         private void faseAtaqueArmas() {
             /*
-             * 1º Eleccion de rivales dentro de radio accion y que no esten en el cono trasero
+             * 1º Eleccion de rivales dentro de radio accion (rango alcance maximo) y que no esten en el cono trasero
              * 2º Ver si hay linea de vision con ellos
-             * 3º De los restantes escoger al mas debil y cercano
+             * 3º a. De los restantes escoger si hay algunos en un radio de 3 casillas, y de ellos al que menos puntuacion tenga
+             *    b. En caso opuesto escoger al mas debil (nota mas baja)
              * 4º Ver las armas a dispararle
              * 5º Escribir el fichero
              */
@@ -177,13 +178,39 @@ namespace ico
                 Console.WriteLine(i + ": " + objetivos[i].nombre());
                 Console.WriteLine("Distancia: " + _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()));
                 Console.WriteLine("Nota: " + objetivos[i].nota());
-                if ( _mechs[_myJugador].conoDelantero(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) || _mechs[_myJugador].conoDerecho(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) || _mechs[_myJugador].conoIzquierdo(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) )
-                    Console.WriteLine("Se le puede disparar");
-                Console.WriteLine("Distancia camino: " + ldv[i].longitud());
+                //if ( _mechs[_myJugador].conoDelantero(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) || _mechs[_myJugador].conoDerecho(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) || _mechs[_myJugador].conoIzquierdo(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) )
+                //    Console.WriteLine("Se le puede disparar");
+                //Console.WriteLine("Distancia camino: " + ldv[i].longitud());
                 Console.WriteLine();
             }
 
-            //Escogemos al que tenga las nota mas baja, o si hay alguno a una distancia de 3 o menos casillas nuestro
+            //Escogemos si hay alguno a una distancia de 3 o menos casillas nuestro
+            List<Mech> objetivosCerca = new List<Mech>();
+            List<Camino> ldvAux = new List<Camino>();
+            for (int i = 0; i < objetivos.Count; i++)
+            {
+                if (_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) <= 3)
+                {
+                    objetivosCerca.Add(_mechs[i]);
+                    ldvAux.Add(ldv[i]);
+                }
+            }
+
+
+            if (objetivosCerca.Count > 0)
+            {
+                Console.WriteLine("Hay alguno en el rango cercano");
+                ldv.Clear();
+                objetivos.Clear();
+                ldv = ldvAux;
+                objetivos = objetivosCerca;
+
+            }
+            else {
+                Console.WriteLine("No hay ninguno en rango");
+            }
+
+            //Escogemos al mas debil
 
             // Calculamos tirada impacto media por jugador, o el que sea mas debil o el que este mas cerca ¿? Algo ponderado¿?
 
@@ -194,16 +221,24 @@ namespace ico
                 Console.ReadLine();
         }
 
-        private void objetivosConoVision (ArrayList objetivos) 
+        private void objetivoMasDebil (List<Mech> objetivos , List<Camino> ldv ) 
         {
-            if (objetivos.Count > 0)
+            if (objetivos.Count > 1)
             {
+                float valor = int.MaxValue;
+                Mech objetivo ;
+                Camino c;
+
                 for (int i = 0; i < objetivos.Count; i++)
-                    if (!_mechs[_myJugador].conoDelantero(((Mech)objetivos[i]).posicion(), _mechs[_myJugador].ladoEncaramientoTorso()))
+                    if (objetivos[i].nota() < valor)
                     {
-                        objetivos.RemoveAt(i);
-                        i--;
+                        objetivos.
+                        objetivo = objetivos[i];
+                        c = ldv[i];
                     }
+                objetivos.Clear();
+                ldv.Clear();
+                objetivos.Add(objetivo);
             }
         }
 
