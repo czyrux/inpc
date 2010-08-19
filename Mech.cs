@@ -580,9 +580,9 @@ namespace ico {
         }
 
         /*
-         * Indica si un arma tiene municion para ser disparada 
+         * Indica si un componente tipo arma tiene municion para ser disparada 
          */
-        private bool tieneMunicion(Componente arma)
+        public bool tieneMunicion(Componente arma)
         {
             bool municion = false;
             if (arma.tipoArma() == "Energía" || arma.tipoArma() == "Nada")
