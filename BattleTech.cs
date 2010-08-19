@@ -142,7 +142,8 @@ namespace ico
         #region faseAtaqueArmas
         private void faseAtaqueArmas() {
             /*
-             * 1º Eleccion de rivales dentro de radio accion (rango alcance maximo) y que no esten en el cono trasero
+             * 1º Eleccion de rivales dentro de radio accion (rango alcance: distancia tiro larga media) y que no esten en el cono trasero
+             *    Si no hay ninguno metemos los que esten a distancia de tiro de alcance maximo?¿
              * 2º Ver si hay linea de vision con ellos
              * 3º a. De los restantes escoger si hay algunos en un radio de 3 casillas, y de ellos al que menos puntuacion tenga
              *    b. En caso opuesto escoger al mas debil (nota mas baja)
@@ -157,8 +158,8 @@ namespace ico
 
             List<Mech> objetivos = new List<Mech>();
             for (int i = 0; i < _mechs.Length; i++)
-                //Si estan dentro del alcance de tiro y no estan en la espalda
-                if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].maxAlcanceTiro() &&
+                //Si estan dentro del alcance de tiro largo medio y no estan en la espalda
+                if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].distanciaTiroLarga() &&
                     !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) )
                     objetivos.Add(_mechs[i]);
  
@@ -178,9 +179,6 @@ namespace ico
                 Console.WriteLine(i + ": " + objetivos[i].nombre());
                 Console.WriteLine("Distancia: " + _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()));
                 Console.WriteLine("Nota: " + objetivos[i].nota());
-                //if ( _mechs[_myJugador].conoDelantero(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) || _mechs[_myJugador].conoDerecho(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) || _mechs[_myJugador].conoIzquierdo(objetivos[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) )
-                //    Console.WriteLine("Se le puede disparar");
-                //Console.WriteLine("Distancia camino: " + ldv[i].longitud());
                 Console.WriteLine();
             }
 
@@ -213,7 +211,7 @@ namespace ico
             //Escogemos al mas debil
             objetivoMasDebil(objetivos, ldv);
 
-            Console.WriteLine("El mas debil es:");
+            Console.WriteLine("El mas debil es:"+objetivos.Count);
             for (int i = 0; i < objetivos.Count; i++)
                 Console.WriteLine(i + ": " + objetivos[i].nombre());
             Console.WriteLine();
@@ -238,15 +236,13 @@ namespace ico
                 for (int i = 0; i < objetivos.Count; i++)
                     if (objetivos[i].nota() < valor)
                     {
-                        objetivosDebil.Clear();
-                        ldvAux.Clear();
-                        objetivosDebil.Add(objetivos[i]);
-                        ldvAux.Add(ldv[i]);
+                        objetivosDebil.Insert(0,objetivos[i]);
+                        ldvAux.Insert(0,ldv[i]);
                     }
                 objetivos.Clear();
                 ldv.Clear();
-                objetivos = objetivosDebil;
-                ldv = ldvAux;
+                objetivos.Add( objetivosDebil[0]);
+                ldv.Add(ldvAux[0]);
             }
         }
 
