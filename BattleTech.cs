@@ -142,7 +142,7 @@ namespace ico
         #region faseAtaqueArmas
         private void faseAtaqueArmas() {
             /*
-             * 1º Eleccion de rivales dentro de radio accion
+             * 1º Eleccion de rivales dentro de radio accion y que no esten en el cono trasero
              * 2º Ver si hay linea de vision con ellos
              * 3º De los restantes escoger al mas debil y cercano
              * 4º Ver las armas a dispararle
@@ -156,8 +156,9 @@ namespace ico
 
             List<Mech> objetivos = new List<Mech>();
             for (int i = 0; i < _mechs.Length; i++)
-                //Si estan dentro del alcance de tiro
-                if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].maxAlcanceTiro())
+                //Si estan dentro del alcance de tiro y no estan en la espalda
+                if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].maxAlcanceTiro() &&
+                    !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) )
                     objetivos.Add(_mechs[i]);
  
             Console.WriteLine("Al principio tenemos:");
@@ -182,14 +183,15 @@ namespace ico
                 Console.WriteLine();
             }
 
-            //Escogemos al los que no esten a nuestra espalda
+            //Escogemos al que tenga las nota mas baja, o si hay alguno a una distancia de 3 o menos casillas nuestro
+
             // Calculamos tirada impacto media por jugador, o el que sea mas debil o el que este mas cerca ¿? Algo ponderado¿?
 
             //Vemos las armas a dispararle
 
             //Escribimos las ordenes
 
-            Console.ReadLine();
+                Console.ReadLine();
         }
 
         private void objetivosConoVision (ArrayList objetivos) 
