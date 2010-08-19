@@ -277,16 +277,16 @@ namespace ico
             int distancia = _mechs[_myJugador].posicion().distancia(objetivo.posicion());
 
             //Vemos la localizacion del objetivo respecto a nuestro mech
-            if (_mechs[_myJugador].conoDerecho(objetivo.posicion(), encTorso))
-            {
+            if (_mechs[_myJugador].conoDerecho(objetivo.posicion(), encTorso)) {
                 situacion = "DRCHA";
             }
-            else if (_mechs[_myJugador].conoIzquierdo(objetivo.posicion(), encTorso))
-            {
+            else if (_mechs[_myJugador].conoIzquierdo(objetivo.posicion(), encTorso)) {
                 situacion = "IZQ";
             }
             else
                 situacion = "DNTE";
+
+            Console.WriteLine("Situacion " + situacion);
             //(0=BI,1=TI,2=PI,3=PD,4=TD,5=BD,6=TC,7=CAB,8=TIa,9=TDa,10=TCa) 
             //Vemos las armas que podria disparar
             ArrayList armas = _mechs[_myJugador].armas();
@@ -294,13 +294,19 @@ namespace ico
             for (int i = 0; i < armas.Count; i++) 
             {
                 localizacion = ((Componente)armas[i]).localizacion();
-                if (_mechs[_myJugador].tieneMunicion((Componente)armas[i]) && ((Componente)armas[i]).operativo() && 
+                if (_mechs[_myJugador].tieneMunicion((Componente)armas[i]) /*&& ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() < distancia &&
                    ( ((localizacion==0 || localizacion==1 || localizacion==2) && (situacion=="IZQ" || situacion=="DNTE"))
                    || ((localizacion==3 || localizacion==4 || localizacion==5) && (situacion=="DRCHA" || situacion=="DNTE"))
                    || ((localizacion != 8 || localizacion != 9 || localizacion != 10) && situacion == "DNTE" )
-                    ) )
+                    )*/ )
                     seleccionArmas.Add((Componente)armas[i]);
             }
+
+            Console.WriteLine("Las armas que podrian dispararse son:"+seleccionArmas.Count);
+            for (int i = 0; i < seleccionArmas.Count; i++) {
+                Console.WriteLine(i + ": " + seleccionArmas[i].nombre() + " localizacion: " + seleccionArmas[i].localizacion());
+            }
+            Console.WriteLine();
         }
 
         #endregion
