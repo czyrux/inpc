@@ -142,6 +142,9 @@ namespace ico {
         protected int _EstrucBrazoDerechoInicial;
         protected int _EstrucTorsoCentralInicial;
         protected int _EstrucCabezaInicial;
+
+        protected float _notaMech;
+
         #endregion
 
         #region constructores
@@ -203,6 +206,9 @@ namespace ico {
 			for ( int i=0 ; i<numeroJugadores*2 ; i++) {
 				Convert.ToBoolean(f.ReadLine());
 			}
+
+            //Damos un valor por defecto a la nota
+            _notaMech = -1;
 		}
 		
 		protected void fichero_definicion( StreamReader f){
@@ -1297,10 +1303,17 @@ namespace ico {
         {
             //porcentajes
             float Blindaje = 0.4f, Estructura = 0.2f, Tipo = 0.4f;
+            float nota;
 
-            float nota = estadoBlindajeMech() * Blindaje +
-                estadoEsctructuraMech() * Estructura +
-                tipo() * Tipo;
+            if (_notaMech == -1) //Si no ha sido calculada con anterioridad
+            {
+                nota = estadoBlindajeMech() * Blindaje +
+                   estadoEsctructuraMech() * Estructura +
+                   tipo() * Tipo;
+                _notaMech = nota;
+            }
+            else
+                nota = _notaMech;
 
             return nota;
         }
