@@ -465,3 +465,5 @@ Ataque fisico (mech):
              * 4º Ver las armas a dispararle
              * 5º Escribir el fichero
              */
+
+		-(antonio) Lo dejo por oi, ya me selecciona el objetivo a disparar. Dew
