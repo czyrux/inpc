@@ -293,13 +293,21 @@ namespace ico
             int localizacion;
             for (int i = 0; i < armas.Count; i++) 
             {
+                Console.WriteLine("Arma: " + ((Componente)armas[i]).nombre());
+                Console.WriteLine("Operativo: " + ((Componente)armas[i]).operativo());
+                Console.WriteLine("Municion: " + _mechs[_myJugador].tieneMunicion((Componente)armas[i]));
+                Console.WriteLine("Distancia arma: " + ((Componente)armas[i]).distanciaLarga());
+                Console.WriteLine("Distancia: " + distancia);
                 localizacion = ((Componente)armas[i]).localizacion();
-                if (_mechs[_myJugador].tieneMunicion((Componente)armas[i]) /*&& ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() < distancia &&
+                if (/*_mechs[_myJugador].tieneMunicion((Componente)armas[i]) &&*/ ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
                    ( ((localizacion==0 || localizacion==1 || localizacion==2) && (situacion=="IZQ" || situacion=="DNTE"))
                    || ((localizacion==3 || localizacion==4 || localizacion==5) && (situacion=="DRCHA" || situacion=="DNTE"))
                    || ((localizacion != 8 || localizacion != 9 || localizacion != 10) && situacion == "DNTE" )
-                    )*/ )
+                    ) )
+                {
+                    Console.WriteLine("Añadida");
                     seleccionArmas.Add((Componente)armas[i]);
+                }
             }
 
             Console.WriteLine("Las armas que podrian dispararse son:"+seleccionArmas.Count);
