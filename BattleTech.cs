@@ -211,6 +211,12 @@ namespace ico
             }
 
             //Escogemos al mas debil
+            objetivoMasDebil(objetivos, ldv);
+
+            Console.WriteLine("El mas debil es:");
+            for (int i = 0; i < objetivos.Count; i++)
+                Console.WriteLine(i + ": " + objetivos[i].nombre());
+            Console.WriteLine();
 
             // Calculamos tirada impacto media por jugador, o el que sea mas debil o el que este mas cerca ¿? Algo ponderado¿?
 
@@ -226,19 +232,21 @@ namespace ico
             if (objetivos.Count > 1)
             {
                 float valor = int.MaxValue;
-                Mech objetivo ;
-                Camino c;
+                List<Mech> objetivosDebil = new List<Mech>();
+                List<Camino> ldvAux = new List<Camino>(); ;
 
                 for (int i = 0; i < objetivos.Count; i++)
                     if (objetivos[i].nota() < valor)
                     {
-                        objetivos.
-                        objetivo = objetivos[i];
-                        c = ldv[i];
+                        objetivosDebil.Clear();
+                        ldvAux.Clear();
+                        objetivosDebil.Add(objetivos[i]);
+                        ldvAux.Add(ldv[i]);
                     }
                 objetivos.Clear();
                 ldv.Clear();
-                objetivos.Add(objetivo);
+                objetivos = objetivosDebil;
+                ldv = ldvAux;
             }
         }
 
