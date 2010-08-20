@@ -9,9 +9,9 @@ namespace ico {
     class Inpc {
 			
         static void Main(string[] args) {
-			
-			int numeroJugador=1 ;
-            string fase = "Movimiento";
+
+            int numeroJugador = 3;//=1;
+            string fase = "AtaqueArmas";//"Movimiento";
             
             //En caso de tener argumentos
             if (args.Length > 0) {
