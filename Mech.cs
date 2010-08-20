@@ -119,7 +119,8 @@ namespace ico {
         protected int _distanciaTiroCorta; //***
         protected int _distanciaTiroMedia; //***
         protected int _distanciaTiroLarga; //***
-        protected int _maxAlcanceDisparo;
+        protected int _maxAlcanceDisparo; //***
+        protected int _danioMaximo; //***
 
         //DATOS DE ARMADURA INICIALES DEL MECH
         protected int _BlindBrazoIzquierdoInicial;
@@ -264,9 +265,13 @@ namespace ico {
 			_componentes = new Componente[_numeroComponentes];
 			_armas = new ArrayList();
 			Componente aux1;
+            _danioMaximo = 0;
 			for ( int i=0 ; i<_numeroComponentes ; i++){
 				aux1 = new Componente(f);
-                if (aux1.clase() == "ARMA") _armas.Add(aux1);
+                if (aux1.clase() == "ARMA") { 
+                    _armas.Add(aux1);
+                    _danioMaximo += aux1.danio();
+                }
 				_componentes[i]=aux1;
 			}
 			
@@ -505,6 +510,7 @@ namespace ico {
 		public int distanciaTiroMedia() { return _distanciaTiroMedia;}
 		public int distanciaTiroLarga() { return _distanciaTiroLarga;}
         public int maxAlcanceTiro() { return _maxAlcanceDisparo; }
+        public int danioMaximo() { return _danioMaximo; }
 		
         #endregion
 

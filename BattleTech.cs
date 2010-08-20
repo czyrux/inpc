@@ -25,10 +25,10 @@ namespace ico
 			_config = new ConfiguracionJuego( _myJugador );
 
             //PRuebas de ÑIKO
-           /* Console.WriteLine("eres ñiko y/n ");
+            /*Console.WriteLine("eres ñiko y/n ");
             string str = Console.ReadLine();
-            if(str=="yes" || str=="y" || str=="Y" || str=="Yes" || str=="si" || str=="s" || str=="Si" || str=="S")
-                pruebas(); */
+            if (str == "yes" || str == "y" || str == "Y" || str == "Yes" || str == "si" || str == "s" || str == "Si" || str == "S")
+                pruebas();*/
 
             //Elegimos la accion a realizar
             if (fase == "Movimiento")
@@ -287,6 +287,7 @@ namespace ico
                 situacion = "DNTE";
 
             Console.WriteLine("Situacion " + situacion);
+            Console.WriteLine("Daño maximo: " + _mechs[_myJugador].danioMaximo());
             //(0=BI,1=TI,2=PI,3=PD,4=TD,5=BD,6=TC,7=CAB,8=TIa,9=TDa,10=TCa) 
             //Vemos las armas que podria disparar
             ArrayList armas = _mechs[_myJugador].armas();
