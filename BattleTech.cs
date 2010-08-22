@@ -14,7 +14,16 @@ namespace ico
             string path = "C:/ficheros/";
             _myJugador = Jugador;
             _faseJuego = fase;
-          
+
+            //PRuebas de ÑIKO
+            Console.WriteLine("eres ñiko y/n ");
+            string str = Console.ReadLine();
+            if (str == "yes" || str == "y" || str == "Y" || str == "Yes" || str == "si" || str == "s" || str == "Si" || str == "S")
+            {
+                _myJugador = 3;
+                fase = "AtaqueArmas";
+            }
+
 			//Leemos los mech
             readMechs();
 
@@ -24,16 +33,13 @@ namespace ico
 			//Leemos el fichero de configuracion
 			_config = new ConfiguracionJuego( _myJugador );
 
-            //PRuebas de ÑIKO
-            /*Console.WriteLine("eres ñiko y/n ");
-            string str = Console.ReadLine();
-            if (str == "yes" || str == "y" || str == "Y" || str == "Yes" || str == "si" || str == "s" || str == "Si" || str == "S")
-                pruebas();*/
+
 
             //Elegimos la accion a realizar
             if (fase == "Movimiento")
             {
-                faseMovimiento();
+                //faseMovimiento();
+                
             }
             else if (fase=="AtaqueArmas")
                 faseAtaqueArmas();
@@ -183,7 +189,7 @@ namespace ico
             }
 
             //Escogemos si hay alguno a una distancia de 3 o menos casillas nuestro
-            List<Mech> objetivosCerca = new List<Mech>();
+            /*List<Mech> objetivosCerca = new List<Mech>();
             List<Camino> ldvAux = new List<Camino>();
             for (int i = 0; i < objetivos.Count; i++)
             {
@@ -206,7 +212,7 @@ namespace ico
             }
             else {
                 Console.WriteLine("No hay ninguno en rango");
-            }
+            }*/
 
             //Escogemos al mas debil
             objetivoMasDebil(objetivos, ldv);
