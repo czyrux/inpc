@@ -10,7 +10,7 @@ namespace ico {
 			
         static void Main(string[] args) {
 
-            int numeroJugador = 3;//=1;
+            int numeroJugador = 0;//=1;
             string fase = "AtaqueArmas";//"Movimiento";
             
             //En caso de tener argumentos
