@@ -307,6 +307,7 @@ namespace ico
                 Console.WriteLine("Distancia: " + distancia);
                 localizacion = ((Componente)armas[i]).localizacion();
                 if (/*_mechs[_myJugador].tieneMunicion((Componente)armas[i]) &&*/ ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
+                    ((Componente)armas[i]).distanciaMedia() > distancia && 
                    ( ((localizacion==0 || localizacion==1 || localizacion==2) && (situacion=="IZQ" || situacion=="DNTE"))
                    || ((localizacion==3 || localizacion==4 || localizacion==5) && (situacion=="DRCHA" || situacion=="DNTE"))
                    || ((localizacion != 8 || localizacion != 9 || localizacion != 10) && situacion == "DNTE" )
