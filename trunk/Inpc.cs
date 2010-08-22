@@ -10,8 +10,8 @@ namespace ico {
 			
         static void Main(string[] args) {
 
-            int numeroJugador = 0;//=1;
-            string fase = "AtaqueArmas";//"Movimiento";
+            int numeroJugador = 1 ;
+            string fase = "Movimiento";
             
             //En caso de tener argumentos
             if (args.Length > 0) {
