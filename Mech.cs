@@ -591,19 +591,19 @@ namespace ico {
         public bool tieneMunicion(Componente arma)
         {
             bool municion = false;
-            if (arma.tipoArma() == "Energía" || arma.tipoArma() == "Nada")
+            /*if (arma.tipoArma() == "Energía" || arma.tipoArma() == "Nada")
             {
                 municion = true;
             }
             else
-            {
+            {*/
                 for (int i = 0; i < _componentes.Length && !municion; i++)
                 {
-                    if (_componentes[i].tipoArma() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > 0)
+                    if (_componentes[i].tipoArma() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() /*&& _componentes[i].cantidadMunicion() > 0*/)
                         municion = true;
                 }
 
-            }
+            //}
             return municion;
         }
 
