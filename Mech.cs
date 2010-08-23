@@ -274,8 +274,8 @@ namespace ico {
                 }
 				_componentes[i]=aux1;
 			}
-			
-			_numeroArmas=Convert.ToInt32(f.ReadLine());
+
+            _numeroArmas = Convert.ToInt32(f.ReadLine());
 			_numeroActuadores=Convert.ToInt32(f.ReadLine());
 			_actuadores = new Actuador[_numeroActuadores];
 			Actuador aux2;
@@ -591,19 +591,20 @@ namespace ico {
         public bool tieneMunicion(Componente arma)
         {
             bool municion = false;
-            /*if (arma.tipoArma() == "Energía" || arma.tipoArma() == "Nada")
+            if ( arma.tipoArma().Contains("Energ") || arma.tipoArma() == "Nada")
             {
                 municion = true;
             }
             else
-            {*/
+            {
                 for (int i = 0; i < _componentes.Length && !municion; i++)
                 {
-                    if (_componentes[i].tipoArma() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() /*&& _componentes[i].cantidadMunicion() > 0*/)
+                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > 0) {
                         municion = true;
-                }
+                    }
 
-            //}
+                }
+            }
             return municion;
         }
 

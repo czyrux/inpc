@@ -64,7 +64,7 @@ namespace ico
 		public int localizacionSecundaria() { return _localizacionSecundaria; }
 		public string tipoArma() { return _tipoArma; }
 		public int calor() { return _calor; }
-		public int danio() { return _danio; }
+		public int danio() { return _danio*_disparosTurno; }
 		public int disparosTurno() { return _disparosTurno; }
 		public int distanciaMinima() { return _distanciaMinima; }
 		public int distanciaCorta() { return _distanciaCorta; }
