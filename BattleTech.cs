@@ -258,7 +258,7 @@ namespace ico
 
                     //Añadimos la nota del danio y la seleccion de armas para ese mech
                     List<Componente> arm = new List<Componente>();
-                    danio = seleccionArmas(objetivos[i], arm);
+                    danio = armasPermitidas(objetivos[i], arm);
                     armamento.Add(arm);
                     notaAux = 10 - (danio * 10.0f / _mechs[_myJugador].danioMaximo());
                     //Console.WriteLine("danio: " + danio);
@@ -301,7 +301,7 @@ namespace ico
             }
             else if (objetivos.Count == 1)
             {
-                seleccionArmas(objetivos[0], armas);
+                armasPermitidas(objetivos[0], armas);
             }
             else
                 armas = null;
@@ -326,7 +326,7 @@ namespace ico
             }
         }
 
-        private int seleccionArmas( Mech objetivo, List<Componente> seleccionArmas) 
+        private int armasPermitidas( Mech objetivo, List<Componente> seleccionArmas) 
         {        
             string situacion;
             int encTorso = _mechs[_myJugador].ladoEncaramientoTorso();
