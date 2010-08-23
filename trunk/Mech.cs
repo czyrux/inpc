@@ -1306,7 +1306,7 @@ namespace ico {
         /*
          * Indica una nota con el estado del mech 0-10
          */
-        public float nota()
+        public float notaEstado()
         {
             //porcentajes
             float Blindaje = 0.4f, Estructura = 0.2f, Tipo = 0.4f;

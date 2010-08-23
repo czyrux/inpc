@@ -189,7 +189,7 @@ namespace ico
             {
                 Console.WriteLine(i + ": " + objetivos[i].nombre());
                 Console.WriteLine("Distancia: " + _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()));
-                Console.WriteLine("Nota: " + objetivos[i].nota());
+                Console.WriteLine("Nota: " + objetivos[i].notaEstado());
                 Console.WriteLine();
             }
 
@@ -231,10 +231,7 @@ namespace ico
 
 
             //Vemos las armas a dispararle
-            /*if (objetivos.Count>0)
-            {
-                seleccionArmas(objetivos[0], armasDisparo);
-            }*/
+
 
             //Escribimos las ordenes
 
@@ -249,47 +246,58 @@ namespace ico
                 float NOTA = 0.4f, DANIO = 0.3f, DISTANCIA = 0.3f;
                 float[] notasParciales = new float[objetivos.Count];
                 List<List<Componente>> armamento = new List<List<Componente>>();
-                int danio;
-                float notaDanio;
+                int danio , index;
+                float notaAux ;
 
                 //Calculamos el array de notas para cada mech
                 for (int i = 0; i < objetivos.Count; i++) {
                     Console.WriteLine("Mech: "+objetivos[i].nombre());
                     //Añadimos las notas
-                    notasParciales[i] = objetivos[i].nota() * NOTA;
-                    Console.WriteLine("Nota mech: " + objetivos[i].nota());
+                    notasParciales[i] = objetivos[i].notaEstado() * NOTA;
+                    Console.WriteLine("Nota mech: " + objetivos[i].notaEstado());
 
                     //Añadimos la nota del danio y la seleccion de armas para ese mech
                     List<Componente> arm = new List<Componente>();
                     danio = seleccionArmas(objetivos[i], arm);
                     armamento.Add(arm);
-                    notaDanio = 10 -(danio * 10.0f / _mechs[_myJugador].danioMaximo());
-                    Console.WriteLine("danio: " + danio);
-                    Console.WriteLine("danio total: " + _mechs[_myJugador].danioMaximo());
-                    Console.WriteLine("Nota danio: " + notaDanio);
-                    notasParciales[i] += ( notaDanio * DANIO);
+                    notaAux = 10 - (danio * 10.0f / _mechs[_myJugador].danioMaximo());
+                    //Console.WriteLine("danio: " + danio);
+                    //Console.WriteLine("danio total: " + _mechs[_myJugador].danioMaximo());
+                    Console.WriteLine("Nota danio: " + notaAux);
+                    notasParciales[i] += (notaAux * DANIO);
 
                     //Añadimos la nota de la distancia
+                    notaAux = (_mechs[_myJugador].posicion().distancia(objetivos[i].posicion()) * 10.0f) / _mechs[_myJugador].distanciaTiroLarga();
+                    notasParciales[i] += notaAux * DISTANCIA;
+                    Console.WriteLine("Nota distancia: " + notaAux);
+
+                    //Si estamos a su espalda, tenemos un bonus
+                    if (objetivos[i].conoTrasero(_mechs[_myJugador].posicion(), objetivos[i].ladoEncaramiento()))
+                        notasParciales[i] -= 1;
 
                     Console.WriteLine("Nota parcial: " + notasParciales[i]);
                     Console.WriteLine();
                 }
 
-                
-                /*float valor = int.MaxValue;
-                List<Mech> objetivosDebil = new List<Mech>();
-                List<Camino> ldvAux = new List<Camino>(); ;
-
-                for (int i = 0; i < objetivos.Count; i++)
-                    if (objetivos[i].nota() < valor)
-                    {
-                        objetivosDebil.Insert(0, objetivos[i]);
-                        ldvAux.Insert(0, ldv[i]);
+                //Escogemos como objetivo le que tenga una nota menor
+                notaAux = notasParciales[0];
+                index = 0 ;
+                for (int i = 1; i < notasParciales.Length; i++) {
+                    if (notasParciales[i] < notaAux) {
+                        index = i;
+                        notaAux = notasParciales[i];
                     }
-                objetivos.Clear();
-                ldv.Clear();
-                objetivos.Add(objetivosDebil[0]);
-                ldv.Add(ldvAux[0]);*/
+                }
+                armas = armamento[index];
+
+                //Borramos el resto de objetivos
+                for (int i = 0; i < objetivos.Count; i++)
+                    if (i != index) {
+                        objetivos.RemoveAt(i);
+                        ldv.RemoveAt(i);
+                        index--;
+                        i--;
+                    }
             }
             else if (objetivos.Count == 1)
             {
@@ -355,7 +363,6 @@ namespace ico
                    || ((localizacion != 8 || localizacion != 9 || localizacion != 10) && situacion == "DNTE" )
                     ) )
                 {
-                    Console.WriteLine("Añadida: " + ((Componente)armas[i]).nombre() + " " + ((Componente)armas[i]).danio());
                     danio += ((Componente)armas[i]).danio();
                     seleccionArmas.Add((Componente)armas[i]);
                 }
@@ -367,7 +374,6 @@ namespace ico
             for (int i = 0; i < seleccionArmas.Count; i++) {
                 Console.WriteLine(i + ": " + seleccionArmas[i].nombre() + " localizacion: " + seleccionArmas[i].localizacion());
             }*/
-            Console.WriteLine(danio);
             return danio;
         }
 
