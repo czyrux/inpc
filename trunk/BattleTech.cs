@@ -34,11 +34,11 @@ namespace ico
 			_config = new ConfiguracionJuego( _myJugador );
 
 
-
+            //pruebas();
             //Elegimos la accion a realizar
             if (fase == "Movimiento")
             {
-                //faseMovimiento();
+                faseMovimiento();
                 
             }
             else if (fase=="AtaqueArmas")
@@ -93,8 +93,13 @@ namespace ico
 				else
                     ((Mech)_mechs[i]).datos();
 			}*/
-			
-			string c1 ;
+
+            ArrayList aux = _mechs[_myJugador].armas();
+            for ( int i=0 ; i<aux.Count ;i++ ){
+                _mechs[_myJugador].tieneMunicion((Componente)aux[i]);
+            }
+
+			/*string c1 ;
 			Posicion p1 ;
 			Boolean fin=false;
 			
@@ -115,7 +120,7 @@ namespace ico
 					//_tablero.casillaInfo(p1.fila(),p1.columna());
 				}else
 					fin=true;
-			}
+			}*/
 		}
 
         //Para la fase de movimiento del juego
@@ -159,12 +164,12 @@ namespace ico
             Console.WriteLine("Fase Ataque con Armas");
             Console.WriteLine();
 
-            Console.WriteLine("Alcance de tiro maximo: " + _mechs[_myJugador].maxAlcanceTiro());
-            Console.WriteLine("Alcance de tiro largo medio: " + _mechs[_myJugador].distanciaTiroLarga());
+            //Console.WriteLine("Alcance de tiro maximo: " + _mechs[_myJugador].maxAlcanceTiro());
+            //Console.WriteLine("Alcance de tiro largo medio: " + _mechs[_myJugador].distanciaTiroLarga());
 
             List<Mech> objetivos = new List<Mech>();
             for (int i = 0; i < _mechs.Length; i++)
-                //Si estan dentro del alcance de tiro largo medio y no estan en la espalda
+                //Si estan dentro del alcance de tiro largo y no estan en la espalda
                 if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].distanciaTiroLarga() &&
                     !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) )
                     objetivos.Add(_mechs[i]);
@@ -215,46 +220,83 @@ namespace ico
             }*/
 
             //Escogemos al mas debil
-            objetivoMasDebil(objetivos, ldv);
+            List<Componente> armasADisparar = new List<Componente>();
+            objetivoMasDebil(objetivos, ldv, armasADisparar);
 
             Console.WriteLine("El objetivo es:"+objetivos.Count);
             for (int i = 0; i < objetivos.Count; i++)
                 Console.WriteLine(i + ": " + objetivos[i].nombre());
             Console.WriteLine();
 
-            List<Componente> armasDisparo = new List<Componente>();
+
 
             //Vemos las armas a dispararle
-            if (objetivos.Count>0)
+            /*if (objetivos.Count>0)
             {
-                seleccionArmas(objetivos[0], ldv[0], armasDisparo);
-            }
+                seleccionArmas(objetivos[0], armasDisparo);
+            }*/
 
             //Escribimos las ordenes
 
-                Console.ReadLine();
+            Console.ReadLine();
         }
 
-        private void objetivoMasDebil (List<Mech> objetivos , List<Camino> ldv ) 
+        private void objetivoMasDebil (List<Mech> objetivos , List<Camino> ldv , List<Componente> armas) 
         {
             if (objetivos.Count > 1)
             {
-                //SE PUEDEN OBTENER OTROS PARAMETROS PARA LA ELECCION DEL OBJETIVO FINAL, COMO LA DISTANCIA O LA TIRADA IMPACTO MEDIA
-                float valor = int.MaxValue;
+                //La nota de cada mech para saber a cual disparamos sera la siguiente: nota propia=40%, danio=30% , distancia=30%
+                float NOTA = 0.4f, DANIO = 0.3f, DISTANCIA = 0.3f;
+                float[] notasParciales = new float[objetivos.Count];
+                List<List<Componente>> armamento = new List<List<Componente>>();
+                int danio;
+                float notaDanio;
+
+                //Calculamos el array de notas para cada mech
+                for (int i = 0; i < objetivos.Count; i++) {
+                    Console.WriteLine("Mech: "+objetivos[i].nombre());
+                    //Añadimos las notas
+                    notasParciales[i] = objetivos[i].nota() * NOTA;
+                    Console.WriteLine("Nota mech: " + objetivos[i].nota());
+
+                    //Añadimos la nota del danio y la seleccion de armas para ese mech
+                    List<Componente> arm = new List<Componente>();
+                    danio = seleccionArmas(objetivos[i], arm);
+                    armamento.Add(arm);
+                    notaDanio = 10 -(danio * 10.0f / _mechs[_myJugador].danioMaximo());
+                    Console.WriteLine("danio: " + danio);
+                    Console.WriteLine("danio total: " + _mechs[_myJugador].danioMaximo());
+                    Console.WriteLine("Nota danio: " + notaDanio);
+                    notasParciales[i] += ( notaDanio * DANIO);
+
+                    //Añadimos la nota de la distancia
+
+                    Console.WriteLine("Nota parcial: " + notasParciales[i]);
+                    Console.WriteLine();
+                }
+
+                
+                /*float valor = int.MaxValue;
                 List<Mech> objetivosDebil = new List<Mech>();
                 List<Camino> ldvAux = new List<Camino>(); ;
 
                 for (int i = 0; i < objetivos.Count; i++)
                     if (objetivos[i].nota() < valor)
                     {
-                        objetivosDebil.Insert(0,objetivos[i]);
-                        ldvAux.Insert(0,ldv[i]);
+                        objetivosDebil.Insert(0, objetivos[i]);
+                        ldvAux.Insert(0, ldv[i]);
                     }
                 objetivos.Clear();
                 ldv.Clear();
-                objetivos.Add( objetivosDebil[0]);
-                ldv.Add(ldvAux[0]);
+                objetivos.Add(objetivosDebil[0]);
+                ldv.Add(ldvAux[0]);*/
             }
+            else if (objetivos.Count == 1)
+            {
+                seleccionArmas(objetivos[0], armas);
+            }
+            else
+                armas = null;
         }
 
         private void objetivosLdV(List<Mech> objetivos , List<Camino> ldv )
@@ -276,11 +318,12 @@ namespace ico
             }
         }
 
-        private void seleccionArmas( Mech objetivo, Camino ldv, List<Componente> seleccionArmas) 
+        private int seleccionArmas( Mech objetivo, List<Componente> seleccionArmas) 
         {        
             string situacion;
             int encTorso = _mechs[_myJugador].ladoEncaramientoTorso();
             int distancia = _mechs[_myJugador].posicion().distancia(objetivo.posicion());
+            int danio = 0;
 
             //Vemos la localizacion del objetivo respecto a nuestro mech
             if (_mechs[_myJugador].conoDerecho(objetivo.posicion(), encTorso)) {
@@ -292,37 +335,40 @@ namespace ico
             else
                 situacion = "DNTE";
 
-            Console.WriteLine("Situacion " + situacion);
-            Console.WriteLine("Daño maximo: " + _mechs[_myJugador].danioMaximo());
             //(0=BI,1=TI,2=PI,3=PD,4=TD,5=BD,6=TC,7=CAB,8=TIa,9=TDa,10=TCa) 
             //Vemos las armas que podria disparar
             ArrayList armas = _mechs[_myJugador].armas();
             int localizacion;
             for (int i = 0; i < armas.Count; i++) 
             {
-                Console.WriteLine("Arma: " + ((Componente)armas[i]).nombre());
-                Console.WriteLine("Operativo: " + ((Componente)armas[i]).operativo());
-                Console.WriteLine("Municion: " + _mechs[_myJugador].tieneMunicion((Componente)armas[i]));
-                Console.WriteLine("Distancia arma: " + ((Componente)armas[i]).distanciaLarga());
-                Console.WriteLine("Distancia: " + distancia);
+                //Console.WriteLine("Arma: " + ((Componente)armas[i]).nombre());
+                //Console.WriteLine("Operativo: " + ((Componente)armas[i]).operativo());
+                //Console.WriteLine("Municion: " + _mechs[_myJugador].tieneMunicion((Componente)armas[i]));
+                //Console.WriteLine("Distancia arma: " + ((Componente)armas[i]).distanciaLarga());
+                //Console.WriteLine("Distancia: " + distancia);
                 localizacion = ((Componente)armas[i]).localizacion();
-                if (/*_mechs[_myJugador].tieneMunicion((Componente)armas[i]) &&*/ ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
-                    ((Componente)armas[i]).distanciaMedia() > distancia && 
+                //Console.WriteLine("Localizacion:" + localizacion);
+                if (_mechs[_myJugador].tieneMunicion((Componente)armas[i]) && ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
+                    ((Componente)armas[i]).distanciaMinima() < distancia && 
                    ( ((localizacion==0 || localizacion==1 || localizacion==2) && (situacion=="IZQ" || situacion=="DNTE"))
                    || ((localizacion==3 || localizacion==4 || localizacion==5) && (situacion=="DRCHA" || situacion=="DNTE"))
                    || ((localizacion != 8 || localizacion != 9 || localizacion != 10) && situacion == "DNTE" )
                     ) )
                 {
-                    Console.WriteLine("Añadida");
+                    Console.WriteLine("Añadida: " + ((Componente)armas[i]).nombre() + " " + ((Componente)armas[i]).danio());
+                    danio += ((Componente)armas[i]).danio();
                     seleccionArmas.Add((Componente)armas[i]);
                 }
+                //Console.WriteLine();
             }
+            
 
-            Console.WriteLine("Las armas que podrian dispararse son:"+seleccionArmas.Count);
+            /*Console.WriteLine("Las armas que podrian dispararse son:"+seleccionArmas.Count);
             for (int i = 0; i < seleccionArmas.Count; i++) {
                 Console.WriteLine(i + ": " + seleccionArmas[i].nombre() + " localizacion: " + seleccionArmas[i].localizacion());
-            }
-            Console.WriteLine();
+            }*/
+            Console.WriteLine(danio);
+            return danio;
         }
 
         #endregion
