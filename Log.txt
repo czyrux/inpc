@@ -460,7 +460,7 @@ Ataque fisico (mech):
              * 1º Eleccion de rivales dentro de radio accion (rango alcance: distancia tiro larga media) y que no esten en el cono trasero
              *    Si no hay ninguno metemos los que esten a distancia de tiro de alcance maximo?¿ (TODAVIA NO SE SI HACERLO)
              * 2º Seleccionar los que tengan linea de vision
-             * 3º Escoger al mas debil (Para ello consiguire una nota para cada mech, que sera la siguiente: NOTA=40%, DANIO QUE PUEDO HACERLE=30%, DISTANCIA=30%)
+             * 3º Escoger al mas debil
              * 4º Ver las armas a dispararle finales
              * 5º Escribir el fichero
              */
@@ -470,3 +470,8 @@ Ataque fisico (mech):
 
 		23/8/10
 		- (antonio) Estos dias he seguido haciendo la fase de armas, que me kede anclado en un fallo tonto. Seguire con ella. Donde estas?¿
+
+		-(antonio) He reformulado la forma de calcular quien es el objetivo, ahora es un conjunto de la nota del mech (40%), la distancia que nos separa (30%) y el danio
+		que puedo hacerle (30%). De todo eso escojo el que tenga la nota mas baja.
+
+		-(antonio) Eleccion de objetivo acabada. Le he añadido un bonus, para aquellos a los que estamos situados a su espalda
