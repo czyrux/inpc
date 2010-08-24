@@ -82,6 +82,15 @@ namespace ico
         #endregion
 
         #region metodos
+        private void determinarEstrategia() {
+            if (_mechs[_myJugador].notaEstado() > 7.3)
+            {
+                _estrategia = Estrategia.Ofensiva;
+            }
+            else
+                _estrategia = Estrategia.Defensiva;
+        }
+
         public void pruebas () 
         {
 			/*Console.WriteLine("Numero de jugadores: " + _numeroJugadores);
@@ -201,7 +210,7 @@ namespace ico
 
 
             //Vemos las armas a dispararle
-            seleccionArmasDisparar(objetivos[0], armasADisparar);
+            seleccionArmasDisparar(objetivos, armasADisparar);
 
             //Escribimos las ordenes
 
@@ -347,9 +356,14 @@ namespace ico
             return danio;
         }
 
-        private void seleccionArmasDisparar(Mech objetivo, List<Componente> seleccionArmas) 
-        { 
-        
+        private void seleccionArmasDisparar(List<Mech> objetivos, List<Componente> seleccionArmas) 
+        {
+            if (objetivos.Count > 0)
+            {
+
+            }
+            else
+                seleccionArmas = null;
         }
         #endregion
 
