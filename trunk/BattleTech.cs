@@ -173,6 +173,8 @@ namespace ico
             Console.WriteLine("Fase Ataque con Armas");
             Console.WriteLine();
 
+            determinarEstrategia();
+
             List<Mech> objetivos = new List<Mech>();
             //Escogemos a los mech si estan dentro del alcance de tiro largo y no estan en nuestra espalda
             for (int i = 0; i < _mechs.Length; i++)
@@ -360,7 +362,7 @@ namespace ico
         {
             if (objetivos.Count > 0)
             {
-
+                int limiteCalor;
             }
             else
                 seleccionArmas = null;

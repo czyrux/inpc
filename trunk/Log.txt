@@ -478,4 +478,5 @@ Ataque fisico (mech):
 
 		24/8/10
 		- (antonio) Añadida funcion en Battletech private void determinarEstrategia(). Lo que hace es rellenar la variable _estrategia a ofensiva o defensiva, en funcion de
-		la nota que tengamos. He puesto que la nota sea por encima de 7.3
+		la nota que tengamos. He puesto que la nota sea por encima de 7.3 El problema que tiene esta forma de determinarlo es que una vez que estemos dañados, ya siempre estaremos
+		en defensiva. Una opcion podria ser que si somos el mech con mas nota, ponernos a ofensivos.
