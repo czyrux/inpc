@@ -477,3 +477,5 @@ Ataque fisico (mech):
 		-(antonio) Eleccion de objetivo acabada. Le he añadido un bonus, para aquellos a los que estamos situados a su espalda
 
 		24/8/10
+		- (antonio) Añadida funcion en Battletech private void determinarEstrategia(). Lo que hace es rellenar la variable _estrategia a ofensiva o defensiva, en funcion de
+		la nota que tengamos. He puesto que la nota sea por encima de 7.3
