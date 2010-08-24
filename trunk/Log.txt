@@ -475,3 +475,5 @@ Ataque fisico (mech):
 		que puedo hacerle (30%). De todo eso escojo el que tenga la nota mas baja.
 
 		-(antonio) Eleccion de objetivo acabada. Le he añadido un bonus, para aquellos a los que estamos situados a su espalda
+
+		24/8/10
