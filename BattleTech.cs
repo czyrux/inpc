@@ -173,6 +173,7 @@ namespace ico
             Console.WriteLine("Fase Ataque con Armas");
             Console.WriteLine();
 
+            //HACERLO SOLO SI ESTAMOS OPERATIVOS?¿
             determinarEstrategia();
 
             List<Mech> objetivos = new List<Mech>();
@@ -242,8 +243,6 @@ namespace ico
                     danio = armasPermitidas(objetivos[i], arm);
                     armamento.Add(arm);
                     notaAux = 10 - (danio * 10.0f / _mechs[_myJugador].danioMaximo());
-                    //Console.WriteLine("danio: " + danio);
-                    //Console.WriteLine("danio total: " + _mechs[_myJugador].danioMaximo());
                     Console.WriteLine("Nota danio: " + notaAux);
                     notasParciales[i] += (notaAux * DANIO);
 
@@ -255,6 +254,10 @@ namespace ico
                     //Si estamos a su espalda, tenemos un bonus
                     if (objetivos[i].conoTrasero(_mechs[_myJugador].posicion(), objetivos[i].ladoEncaramiento()))
                         notasParciales[i] -= 1;
+
+                    //Si esta atascado o en el suelo, tenemos un bonus
+                    if (objetivos[i].atascado() || (objetivos[i].enSuelo() && _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()) == 1))
+                        notasParciales[i] -= 0.5f;
 
                     Console.WriteLine("Nota parcial: " + notasParciales[i]);
                     Console.WriteLine();
@@ -360,9 +363,17 @@ namespace ico
 
         private void seleccionArmasDisparar(List<Mech> objetivos, List<Componente> seleccionArmas) 
         {
+            int calorOfensivo = 7, calorDefensivo = 4;//calorOfensivo = 21, calorDefensivo = 14;
+            int limiteCalor;
+
             if (objetivos.Count > 0)
             {
-                int limiteCalor;
+                //Establecemos le limite hasta el que podemos llegar
+                if (_estrategia == Estrategia.Ofensiva)
+                {
+                    limiteCalor = calorOfensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp();
+                }else
+                    limiteCalor = calorDefensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp();
             }
             else
                 seleccionArmas = null;
