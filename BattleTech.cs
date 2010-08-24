@@ -164,12 +164,9 @@ namespace ico
             Console.WriteLine("Fase Ataque con Armas");
             Console.WriteLine();
 
-            //Console.WriteLine("Alcance de tiro maximo: " + _mechs[_myJugador].maxAlcanceTiro());
-            //Console.WriteLine("Alcance de tiro largo medio: " + _mechs[_myJugador].distanciaTiroLarga());
-
             List<Mech> objetivos = new List<Mech>();
+            //Escogemos a los mech si estan dentro del alcance de tiro largo y no estan en nuestra espalda
             for (int i = 0; i < _mechs.Length; i++)
-                //Si estan dentro del alcance de tiro largo y no estan en la espalda
                 if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].distanciaTiroLarga() &&
                     !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) )
                     objetivos.Add(_mechs[i]);
@@ -193,32 +190,6 @@ namespace ico
                 Console.WriteLine();
             }
 
-            //Escogemos si hay alguno a una distancia de 3 o menos casillas nuestro
-            /*List<Mech> objetivosCerca = new List<Mech>();
-            List<Camino> ldvAux = new List<Camino>();
-            for (int i = 0; i < objetivos.Count; i++)
-            {
-                if (_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) <= 3)
-                {
-                    objetivosCerca.Add(_mechs[i]);
-                    ldvAux.Add(ldv[i]);
-                }
-            }
-
-
-            if (objetivosCerca.Count > 0)
-            {
-                Console.WriteLine("Hay alguno en el rango cercano");
-                ldv.Clear();
-                objetivos.Clear();
-                ldv = ldvAux;
-                objetivos = objetivosCerca;
-
-            }
-            else {
-                Console.WriteLine("No hay ninguno en rango");
-            }*/
-
             //Escogemos al mas debil
             List<Componente> armasADisparar = new List<Componente>();
             objetivoMasDebil(objetivos, ldv, armasADisparar);
@@ -229,9 +200,8 @@ namespace ico
             Console.WriteLine();
 
 
-
             //Vemos las armas a dispararle
-
+            seleccionArmasDisparar(objetivos[0], armasADisparar);
 
             //Escribimos las ordenes
 
@@ -377,6 +347,10 @@ namespace ico
             return danio;
         }
 
+        private void seleccionArmasDisparar(Mech objetivo, List<Componente> seleccionArmas) 
+        { 
+        
+        }
         #endregion
 
         private void faseAtaquesFisico() { 
