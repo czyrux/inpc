@@ -22,6 +22,7 @@ namespace ico {
 	    private Boolean _explosionMunicion;
 	    private Boolean _apagarRadiadores;
 		private int[] _iniciativa;
+        private String[] _movimientos;
         #endregion
 
         #region constructor
@@ -29,6 +30,7 @@ namespace ico {
 			_numeroJugador = numeroJugador;
 			leerConfiguracion();
 			leerIniciativa();
+            leerMovimiento();
 		}
         #endregion
 
@@ -64,6 +66,22 @@ namespace ico {
 			}
 			f.Close();
 		}
+
+        private void leerMovimiento() {
+            string path = "C:/ficheros/";
+            StreamReader f = new StreamReader(path + "mov.sbt");
+            f.ReadLine(); //nombre del fichero movSBT
+
+            int cantidad;
+            cantidad = Convert.ToInt32(f.ReadLine());
+            _movimientos = new String[cantidad];
+
+            for (int i = 0; i < cantidad; i++)
+                _movimientos[i] = f.ReadLine();
+            
+            f.Close();
+        }
+
 #endregion
 		
         #region metodosGet
@@ -82,6 +100,7 @@ namespace ico {
 	    public Boolean explosionMunicion() { return _explosionMunicion; }
 	    public Boolean apagarRadiadores() { return _apagarRadiadores; }
 		public int[] iniciativa() { return _iniciativa; }
+        public String[] movimientos() { return _movimientos; }
         #endregion
 		
 	}
