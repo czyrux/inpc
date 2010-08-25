@@ -174,50 +174,53 @@ namespace ico
             Console.WriteLine();
 
             //HACERLO SOLO SI ESTAMOS OPERATIVOS?¿
-            determinarEstrategia();
-
-            List<Mech> objetivos = new List<Mech>();
-            //Escogemos a los mech si estan dentro del alcance de tiro largo y no estan en nuestra espalda
-            for (int i = 0; i < _mechs.Length; i++)
-                if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].distanciaTiroLarga() &&
-                    !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(),_mechs[_myJugador].ladoEncaramientoTorso()) )
-                    objetivos.Add(_mechs[i]);
- 
-            Console.WriteLine("Al principio tenemos:");
-            for (int i = 0; i < objetivos.Count; i++)
-                Console.WriteLine(i + ": " + objetivos[i].nombre());
-            Console.WriteLine();
-
-            //Dejamos solo con los que tengamos linea de vision
-            List<Camino> ldv = new List<Camino>();
-            objetivosLdV(objetivos,ldv);
-
-            Console.WriteLine();
-            Console.WriteLine("En LdV tenemos:" + objetivos.Count);
-            for (int i = 0; i < objetivos.Count; i++)
+            if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
-                Console.WriteLine(i + ": " + objetivos[i].nombre());
-                Console.WriteLine("Distancia: " + _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()));
-                Console.WriteLine("Nota: " + objetivos[i].notaEstado());
+                determinarEstrategia();
+
+                List<Mech> objetivos = new List<Mech>();
+                //Escogemos a los mech si estan dentro del alcance de tiro largo y no estan en nuestra espalda
+                for (int i = 0; i < _mechs.Length; i++)
+                    if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].distanciaTiroLarga() &&
+                        !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(), _mechs[_myJugador].ladoEncaramientoTorso()))
+                        objetivos.Add(_mechs[i]);
+
+                Console.WriteLine("Al principio tenemos:");
+                for (int i = 0; i < objetivos.Count; i++)
+                    Console.WriteLine(i + ": " + objetivos[i].nombre());
                 Console.WriteLine();
+
+                //Dejamos solo con los que tengamos linea de vision
+                List<Camino> ldv = new List<Camino>();
+                objetivosLdV(objetivos, ldv);
+
+                Console.WriteLine();
+                Console.WriteLine("En LdV tenemos:" + objetivos.Count);
+                for (int i = 0; i < objetivos.Count; i++)
+                {
+                    Console.WriteLine(i + ": " + objetivos[i].nombre());
+                    Console.WriteLine("Distancia: " + _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()));
+                    Console.WriteLine("Nota: " + objetivos[i].notaEstado());
+                    Console.WriteLine();
+                }
+
+                //Escogemos al mas debil
+                List<Componente> armasADisparar = new List<Componente>();
+                objetivoMasDebil(objetivos, ldv, armasADisparar);
+
+                Console.WriteLine("El objetivo es:" + objetivos.Count);
+                for (int i = 0; i < objetivos.Count; i++)
+                    Console.WriteLine(i + ": " + objetivos[i].nombre());
+                Console.WriteLine();
+
+
+                //Vemos las armas a dispararle
+                seleccionArmasDisparar(objetivos, armasADisparar);
+
+                //Escribimos las ordenes
+
+                Console.ReadLine();
             }
-
-            //Escogemos al mas debil
-            List<Componente> armasADisparar = new List<Componente>();
-            objetivoMasDebil(objetivos, ldv, armasADisparar);
-
-            Console.WriteLine("El objetivo es:"+objetivos.Count);
-            for (int i = 0; i < objetivos.Count; i++)
-                Console.WriteLine(i + ": " + objetivos[i].nombre());
-            Console.WriteLine();
-
-
-            //Vemos las armas a dispararle
-            seleccionArmasDisparar(objetivos, armasADisparar);
-
-            //Escribimos las ordenes
-
-            Console.ReadLine();
         }
 
         private void objetivoMasDebil (List<Mech> objetivos , List<Camino> ldv , List<Componente> armas) 
