@@ -101,6 +101,13 @@ namespace ico {
 	    public Boolean apagarRadiadores() { return _apagarRadiadores; }
 		public int[] iniciativa() { return _iniciativa; }
         public String[] movimientos() { return _movimientos; }
+        public String movimiento(int indice) {
+            if (indice < _movimientos.Length) {
+                return _movimientos[indice];
+            }
+
+            return null;
+        }
         #endregion
 		
 	}
