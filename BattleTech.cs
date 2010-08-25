@@ -255,7 +255,7 @@ namespace ico
                     if (objetivos[i].conoTrasero(_mechs[_myJugador].posicion(), objetivos[i].ladoEncaramiento()))
                         notasParciales[i] -= 1;
 
-                    //Si esta atascado o en el suelo, tenemos un bonus
+                    //Si esta atascado o en el suelo (y nos encontramos en una casilla colindante), tenemos un bonus
                     if (objetivos[i].atascado() || (objetivos[i].enSuelo() && _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()) == 1))
                         notasParciales[i] -= 0.5f;
 
