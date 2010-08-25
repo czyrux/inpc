@@ -83,7 +83,8 @@ namespace ico
 
         #region metodos
         private void determinarEstrategia() {
-            if (_mechs[_myJugador].notaEstado() > 7.3)
+            Console.WriteLine(_mechs[_myJugador].notaEstado());
+            if (_mechs[_myJugador].notaEstado() >= 7.3)
             {
                 _estrategia = Estrategia.Ofensiva;
             }
@@ -369,17 +370,32 @@ namespace ico
 
         private void seleccionArmasDisparar(List<Mech> objetivos, List<Componente> seleccionArmas) 
         {
-            int calorOfensivo = 16, calorDefensivo = 13;//calorOfensivo = 21, calorDefensivo = 14;
+            int calorOfensivo = 16, calorDefensivo = 9;//calorOfensivo = 21, calorDefensivo = 14;
+            int calorMovimiento;
             int limiteCalor;
 
             if (objetivos.Count > 0)
             {
+                //Vemos el calor por el movimiento consumido
+                if (_config.movimiento(_myJugador) == "Inmovil") {
+                    calorMovimiento = 0;
+                }
+                else if (_config.movimiento(_myJugador) == "Andar") {
+                    calorMovimiento = 1;
+                }
+                else if (_config.movimiento(_myJugador) == "Correr") {
+                    calorMovimiento = 2;
+                }
+                else {
+                    calorMovimiento = 3;
+                }
+                Console.WriteLine(_estrategia);
                 //Establecemos le limite hasta el que podemos llegar
                 if (_estrategia == Estrategia.Ofensiva)
                 {
-                    limiteCalor = calorOfensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp();
+                    limiteCalor = calorOfensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
                 }else
-                    limiteCalor = calorDefensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp();
+                    limiteCalor = calorDefensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
 
                 //Calculamos la relacion de las armas daño/calor
                 float[] potencia = new float[seleccionArmas.Count];
@@ -413,7 +429,22 @@ namespace ico
                 }
 
                 //Seleccionamos las armas mientras no se pasen del limite de calor
-
+                List<Componente> conjuntoFinal = new List<Componente>();
+                int calor=0 , itr=0;
+                Boolean salir = false;
+                while (!salir) {
+                    if ( itr<seleccionArmas.Count && calor + seleccionArmas[orden[itr]].calor() < limiteCalor )
+                    {
+                        calor += seleccionArmas[orden[itr]].calor();
+                        conjuntoFinal.Add(seleccionArmas[orden[itr]]);
+                        itr++;
+                    }
+                    else
+                        salir = true;
+                }
+                Console.WriteLine("Limite calor: " + limiteCalor + " calor llevado: " + calor + " radiadores: "+_mechs[_myJugador].numeroRadiadores());
+                for (int i = 0; i < conjuntoFinal.Count; i++)
+                    Console.WriteLine(conjuntoFinal[i].nombre());
             }
             else
                 seleccionArmas = null;
