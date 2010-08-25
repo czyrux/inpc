@@ -1101,33 +1101,14 @@ namespace ico {
                 estadoBlindajeATD() * ATD +
                 estadoBlindajeATC() * ATC;
 
-            Console.WriteLine("Estado del blindaje es: " + estado);
+            //Console.WriteLine("Estado del blindaje es: " + estado);
 
             return estado;
         }
 
         public float estadoBlindajeBI()
         {
-            //estadoBlindaje e;
-            //int heridas = _BlindBrazoIzquierdo * 100 / _BlindBrazoIzquierdoInicial;
             float heridas = _BlindBrazoIzquierdo * 10 / _BlindBrazoIzquierdoInicial;
-            //Vemos el estado en que se encuentra
-            /*if (heridas > 60)
-            {
-                e = estadoBlindaje.Bueno;
-            }
-            else if (heridas > 30)
-            {
-                e = estadoBlindaje.Medio;
-            }
-            else if (heridas > 0)
-            {
-                e = estadoBlindaje.Malo;
-            }
-            else
-                e = estadoBlindaje.Nulo;*/
-
-            //Console.WriteLine("Estado brazo izq " + heridas);
             return heridas;
         }
 
@@ -1232,7 +1213,7 @@ namespace ico {
                 estadoEsctructuraTC() * TC +
                 estadoEsctructuraCAB() * CAB;
 
-            Console.WriteLine("Estado de la estructura interna es: " + estado);
+            //Console.WriteLine("Estado de la estructura interna es: " + estado);
 
             return estado;
         }
