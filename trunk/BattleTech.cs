@@ -173,7 +173,6 @@ namespace ico
             Console.WriteLine("Fase Ataque con Armas");
             Console.WriteLine();
 
-            //HACERLO SOLO SI ESTAMOS OPERATIVOS?¿
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
                 determinarEstrategia();
@@ -199,16 +198,17 @@ namespace ico
                 for (int i = 0; i < objetivos.Count; i++)
                 {
                     Console.WriteLine(i + ": " + objetivos[i].nombre());
-                    Console.WriteLine("Distancia: " + _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()));
-                    Console.WriteLine("Nota: " + objetivos[i].notaEstado());
-                    Console.WriteLine();
+                    //Console.WriteLine("Distancia: " + _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()));
+                    //Console.WriteLine("Nota: " + objetivos[i].notaEstado());
                 }
 
                 //Escogemos al mas debil
                 List<Componente> armasADisparar = new List<Componente>();
+                Console.WriteLine();
                 objetivoMasDebil(objetivos, ldv, armasADisparar);
 
-                Console.WriteLine("El objetivo es:" + objetivos.Count);
+                Console.WriteLine();
+                Console.WriteLine("El objetivo es:" + armasADisparar.Count );
                 for (int i = 0; i < objetivos.Count; i++)
                     Console.WriteLine(i + ": " + objetivos[i].nombre());
                 Console.WriteLine();
@@ -275,7 +275,10 @@ namespace ico
                         notaAux = notasParciales[i];
                     }
                 }
-                armas = armamento[index];
+
+                //Copiamos las armas
+                for (int i=0 ; i<armamento[index].Count ;i++)
+                    armas.Add(armamento[index][i]);
 
                 //Borramos el resto de objetivos
                 for (int i = 0; i < objetivos.Count; i++)
@@ -366,7 +369,7 @@ namespace ico
 
         private void seleccionArmasDisparar(List<Mech> objetivos, List<Componente> seleccionArmas) 
         {
-            int calorOfensivo = 7, calorDefensivo = 4;//calorOfensivo = 21, calorDefensivo = 14;
+            int calorOfensivo = 16, calorDefensivo = 13;//calorOfensivo = 21, calorDefensivo = 14;
             int limiteCalor;
 
             if (objetivos.Count > 0)
@@ -377,6 +380,40 @@ namespace ico
                     limiteCalor = calorOfensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp();
                 }else
                     limiteCalor = calorDefensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp();
+
+                //Calculamos la relacion de las armas daño/calor
+                float[] potencia = new float[seleccionArmas.Count];
+                int[] orden = new int[seleccionArmas.Count];
+                for (int i = 0; i < seleccionArmas.Count; i++)
+                {
+                    orden[i] = i;
+                    if (seleccionArmas[i].calor() == 0)
+                    {
+                        potencia[i] = seleccionArmas[i].danio();
+                    }
+                    else
+                        potencia[i] = seleccionArmas[i].danio() * 1.0f / seleccionArmas[i].calor();
+                }
+
+                //Ordenamos las armas de mayor a menor (metodo Burbuja O(n^2))
+                float tmp2;
+                int tmp1;
+                for (int i = 1; i < potencia.Length; i++ ){
+                    for (int j = potencia.Length-1; j >= i; j--) {
+                        if (potencia[j] > potencia[j-1]) {
+                            tmp2 = potencia[j-1];
+                            potencia[j-1] = potencia[j];
+                            potencia[j] = tmp2;
+
+                            tmp1 = orden[j-1];
+                            orden[j-1] = orden[j];
+                            orden[j] = tmp1;
+                        }
+                    } 
+                }
+
+                //Seleccionamos las armas mientras no se pasen del limite de calor
+
             }
             else
                 seleccionArmas = null;
