@@ -39,12 +39,22 @@ namespace ico
             if (fase == "Movimiento")
             {
                 faseMovimiento();
-                
             }
-            else if (fase=="AtaqueArmas")
+            else if (fase == "Reaccion")
+            {
+                faseReaccion();
+            }
+            else if (fase == "AtaqueArmas")
+            {
                 faseAtaqueArmas();
+            }
+            else if (fase == "AtaqueFisico")
+            {
+                faseAtaquesFisico();
+            }
+            else
+                faseFinalTurno();
 
-//>>>>>>> .r116
         }
         #endregion
 
@@ -156,8 +166,9 @@ namespace ico
         }
         #endregion
 
-        private void faseReaccion() { 
-        
+        private void faseReaccion() {
+            Console.WriteLine("Fase Reaccion");
+            Console.WriteLine();
         }
 
         #region faseAtaqueArmas
@@ -217,6 +228,9 @@ namespace ico
 
                 //Vemos las armas a dispararle
                 seleccionArmasDisparar(objetivos, armasADisparar);
+
+                for (int i = 0; i < armasADisparar.Count; i++)
+                    Console.WriteLine(armasADisparar[i].nombre());
 
                 //Escribimos las ordenes
 
@@ -372,7 +386,7 @@ namespace ico
         {
             int calorOfensivo = 16, calorDefensivo = 9;//calorOfensivo = 21, calorDefensivo = 14;
             int calorMovimiento;
-            int limiteCalor;
+            int limiteCalor; 
 
             if (objetivos.Count > 0)
             {
@@ -389,7 +403,7 @@ namespace ico
                 else {
                     calorMovimiento = 3;
                 }
-                Console.WriteLine(_estrategia);
+
                 //Establecemos le limite hasta el que podemos llegar
                 if (_estrategia == Estrategia.Ofensiva)
                 {
@@ -442,21 +456,25 @@ namespace ico
                     else
                         salir = true;
                 }
-                Console.WriteLine("Limite calor: " + limiteCalor + " calor llevado: " + calor + " radiadores: "+_mechs[_myJugador].numeroRadiadores());
+
+                //Dejamos las armas seleccionadas en la seleccion de armas
+                seleccionArmas.Clear();
                 for (int i = 0; i < conjuntoFinal.Count; i++)
-                    Console.WriteLine(conjuntoFinal[i].nombre());
+                    seleccionArmas.Add(conjuntoFinal[i]);
             }
             else
                 seleccionArmas = null;
         }
         #endregion
 
-        private void faseAtaquesFisico() { 
-        
+        private void faseAtaquesFisico() {
+            Console.WriteLine("Fase Ataque Fisico");
+            Console.WriteLine();
         }
 
-        private void faseFinalTurno() { 
-        
+        private void faseFinalTurno() {
+            Console.WriteLine("Fase Final de Turno");
+            Console.WriteLine();
         }
 
         #endregion
