@@ -51,7 +51,6 @@ namespace ico {
 		protected int _EstrucCabeza;
 		
 
-
         //ATRIBUTOS DE FICHERO DEFINICION
 		protected string _nombre;
 		protected string _modelo;
@@ -74,27 +73,6 @@ namespace ico {
         protected Boolean _conAntebrazoDerecho; //***
         protected Boolean _conManoDerecha; //***
 		
-		/*protected int _BlindBrazoIzquierdoDefinicion;
-		protected int _BlindTorsoIzquierdoDefinicion;
-		protected int _BlindPiernaIzquierdaDefinicion;
-		protected int _BlindPiernaDerechaDefinicion;
-		protected int _BlindTorsoDerechoDefinicion;
-		protected int _BlindBrazoDerechoDefinicion;
-		protected int _BlindTorsoCentralDefinicion;
-		protected int _BlindCabezaDefinicion;
-		protected int _BlindAtrasTorsoIzquierdoDefinicion;
-		protected int _BlindAtrasTorsoDerechoDefinicion;
-		protected int _BlindAtrasTorsoCentralDefinicion;
-		
-		protected int _EstrucBrazoIzquierdoDefinicion;
-		protected int _EstrucTorsoIzquierdoDefinicion;
-		protected int _EstrucPiernaIzquierdaDefinicion;
-		protected int _EstrucPiernaDerechaDefinicion;
-		protected int _EstrucTorsoDerechoDefinicion;
-		protected int _EstrucBrazoDerechoDefinicion;
-		protected int _EstrucTorsoCentralDefinicion;
-		protected int _EstrucCabezaDefinicion;*/
-		
 		protected int _numeroComponentes;
 		protected Componente[] _componentes;
 		
@@ -102,19 +80,21 @@ namespace ico {
 		protected ArrayList _armas;
 		protected int _numeroActuadores;
 		protected Actuador[] _actuadores;
-		
-		protected LocalizacionMech _slotsBrazoIzquierdo;
+
+        protected LocalizacionMech[] _slots;
+		/*protected LocalizacionMech _slotsBrazoIzquierdo;
 		protected LocalizacionMech _slotsTorsoIzquierdo;
 		protected LocalizacionMech _slotsPiernaIzquierda;
 		protected LocalizacionMech _slotsPiernaDerecha;
 		protected LocalizacionMech _slotsTorsoDerecho;
 		protected LocalizacionMech _slotsBrazoDerecho;
 		protected LocalizacionMech _slotsTorsoCentral;
-		protected LocalizacionMech _slotsCabeza;
-        protected int _andarDefinicion; //***
-        protected int _correrDefinicion; //***
-        protected int _saltarDefinicion; //***
-        protected int _tipoRadiador; //***
+		protected LocalizacionMech _slotsCabeza;*/
+
+        protected int _andarDefinicion;
+        protected int _correrDefinicion;
+        protected int _saltarDefinicion;
+        protected int _tipoRadiador;
 
         protected int _distanciaTiroCorta; //***
         protected int _distanciaTiroMedia; //***
@@ -239,27 +219,6 @@ namespace ico {
 
             //readline correspondientes a los datos de blindaje y estructura interna del fichero de definicion, que son repetidos
             for (int i = 0; i < 19; i++) f.ReadLine();
-
-			/*_BlindBrazoIzquierdoDefinicion=Convert.ToInt32(f.ReadLine());
-			_BlindTorsoIzquierdoDefinicion=Convert.ToInt32(f.ReadLine());
-			_BlindPiernaIzquierdaDefinicion=Convert.ToInt32(f.ReadLine());
-			_BlindPiernaDerechaDefinicion=Convert.ToInt32(f.ReadLine());
-			_BlindTorsoDerechoDefinicion=Convert.ToInt32(f.ReadLine());
-			_BlindBrazoDerechoDefinicion=Convert.ToInt32(f.ReadLine());
-			_BlindTorsoCentralDefinicion=Convert.ToInt32(f.ReadLine());
-			_BlindCabezaDefinicion=Convert.ToInt32(f.ReadLine());
-			_BlindAtrasTorsoIzquierdoDefinicion=Convert.ToInt32(f.ReadLine());
-		 	_BlindAtrasTorsoDerechoDefinicion=Convert.ToInt32(f.ReadLine());
-			_BlindAtrasTorsoCentralDefinicion=Convert.ToInt32(f.ReadLine());
-			
-			_EstrucBrazoIzquierdoDefinicion=Convert.ToInt32(f.ReadLine());
-			_EstrucTorsoIzquierdoDefinicion=Convert.ToInt32(f.ReadLine());
-			_EstrucPiernaIzquierdaDefinicion=Convert.ToInt32(f.ReadLine());
-			_EstrucPiernaDerechaDefinicion=Convert.ToInt32(f.ReadLine());
-			_EstrucTorsoDerechoDefinicion=Convert.ToInt32(f.ReadLine());
-			_EstrucBrazoDerechoDefinicion=Convert.ToInt32(f.ReadLine());
-			_EstrucTorsoCentralDefinicion=Convert.ToInt32(f.ReadLine());
-			_EstrucCabezaDefinicion=Convert.ToInt32(f.ReadLine());*/
 			
 			_numeroComponentes=Convert.ToInt32(f.ReadLine());
 			_componentes = new Componente[_numeroComponentes];
@@ -283,15 +242,24 @@ namespace ico {
 				aux2 = new Actuador(f);
 				_actuadores[i]=aux2;
 			}
-			
-			_slotsBrazoIzquierdo = new LocalizacionMech(f);
+
+            _slots = new LocalizacionMech[8];
+            _slots[0] = new LocalizacionMech(f);
+            _slots[1] = new LocalizacionMech(f);
+            _slots[2] = new LocalizacionMech(f);
+            _slots[3] = new LocalizacionMech(f);
+            _slots[4] = new LocalizacionMech(f);
+            _slots[5] = new LocalizacionMech(f);
+            _slots[6] = new LocalizacionMech(f);
+            _slots[7] = new LocalizacionMech(f);
+			/*_slotsBrazoIzquierdo = new LocalizacionMech(f);
 			_slotsTorsoIzquierdo = new LocalizacionMech(f);
 			_slotsPiernaIzquierda = new LocalizacionMech(f);
 			_slotsPiernaDerecha = new LocalizacionMech(f);
 			_slotsTorsoDerecho = new LocalizacionMech(f);
 			_slotsBrazoDerecho = new LocalizacionMech(f);
 			_slotsTorsoCentral = new LocalizacionMech(f);
-			_slotsCabeza = new LocalizacionMech(f);
+			_slotsCabeza = new LocalizacionMech(f);*/
 			
 			_andarDefinicion=Convert.ToInt32(f.ReadLine());
 			_correrDefinicion=Convert.ToInt32(f.ReadLine());
@@ -463,27 +431,6 @@ namespace ico {
 		public Boolean conAntebrazoDerecho() { return _conAntebrazoDerecho; }
 		public Boolean conManoDerecha() { return _conManoDerecha; }
 		
-		/*public int BlindBrazoIzquierdoDefinicion() { return _BlindBrazoIzquierdoDefinicion; }
-		public int BlindTorsoIzquierdoDefinicion() { return _BlindTorsoIzquierdoDefinicion; }
-		public int BlindPiernaIzquierdaDefinicion() { return _BlindPiernaIzquierdaDefinicion; }
-		public int BlindPiernaDerechaDefinicion() { return _BlindPiernaDerechaDefinicion; }
-		public int BlindTorsoDerechoDefinicion() { return _BlindTorsoDerechoDefinicion; }
-		public int BlindBrazoDerechoDefinicion() { return _BlindBrazoDerechoDefinicion; }
-		public int BlindTorsoCentralDefinicion() { return _BlindTorsoCentralDefinicion; }
-		public int BlindCabezaDefinicion() { return _BlindCabezaDefinicion; }
-		public int BlindAtrasTorsoIzquierdoDefinicion() { return _BlindAtrasTorsoIzquierdoDefinicion; }
-		public int BlindAtrasTorsoDerechoDefinicion() { return _BlindAtrasTorsoDerechoDefinicion; }
-		public int BlindAtrasTorsoCentralDefinicion() { return _BlindAtrasTorsoCentralDefinicion; }
-		
-		public int EstrucBrazoIzquierdoDefinicion() { return _EstrucBrazoIzquierdoDefinicion; }
-		public int EstrucTorsoIzquierdoDefinicion() { return _EstrucTorsoIzquierdoDefinicion; }
-		public int EstrucPiernaIzquierdaDefinicion() { return _EstrucPiernaIzquierdaDefinicion; }
-		public int EstrucPiernaDerechaDefinicion() { return _EstrucPiernaDerechaDefinicion; }
-		public int EstrucTorsoDerechoDefinicion() { return _EstrucTorsoDerechoDefinicion; }
-		public int EstrucBrazoDerechoDefinicion() { return _EstrucBrazoDerechoDefinicion; }
-		public int EstrucTorsoCentralDefinicion() { return _EstrucTorsoCentralDefinicion; }
-		public int EstrucCabezaDefinicion() { return _EstrucCabezaDefinicion; }*/
-		
 		public int numeroComponentes() { return _numeroComponentes; }
 		public Componente[] componentes() { return _componentes; }
 		
@@ -492,15 +439,23 @@ namespace ico {
 
 		public int numeroActuadores() { return _numeroActuadores; }
 		public Actuador[] actuadores() { return _actuadores; }
-		
-		public LocalizacionMech slotsBrazoIzquierdo() { return _slotsBrazoIzquierdo; }
+
+        public LocalizacionMech slots(int i) {
+            if (i < 8)
+            {
+                return _slots[i];
+            }
+            else return null;
+        }
+		/*public LocalizacionMech slotsBrazoIzquierdo() { return _slotsBrazoIzquierdo; }
 		public LocalizacionMech slotsTorsoIzquierdo() { return _slotsTorsoIzquierdo; }
 		public LocalizacionMech slotsPiernaIzquierda() { return _slotsPiernaIzquierda; }
 		public LocalizacionMech slotsPiernaDerecha() { return _slotsPiernaDerecha; }
 		public LocalizacionMech slotsTorsoDerecho() { return _slotsTorsoDerecho; }
 		public LocalizacionMech slotsBrazoDerecho() { return _slotsBrazoDerecho; }
 		public LocalizacionMech slotsTorsoCentral() { return _slotsTorsoCentral; }
-		public LocalizacionMech slotsCabeza() { return _slotsCabeza; }
+		public LocalizacionMech slotsCabeza() { return _slotsCabeza; }*/
+
 	/*	public int andarDefinicion() { return _andarDefinicion; }
 		public int correrDefinicion() { return _correrDefinicion; }
 		public int saltarDefinicion() { return _saltarDefinicion; } */
@@ -585,6 +540,7 @@ namespace ico {
             _distanciaTiroLarga = larga / _armas.Count;
         }
 
+        #region Funciones para componentes
         /*
          * Indica si un componente tipo arma tiene municion para ser disparada 
          */
@@ -608,32 +564,85 @@ namespace ico {
             return municion;
         }
 
+        public int slotArma (Componente c) {
+
+            LocalizacionMech l = _slots[c.localizacionINT()];
+            int slot=0 ;
+            Boolean salir = false;
+            Slot[] slots = l.slots();
+
+            for (int i = 0; i < slots.Length && !salir ; i++)
+                if (c.codigo() == slots[i].codigo())
+                {
+                    slot = i;
+                    salir = true;
+                }
+            return slot;
+        }
+
+        public int slotMunicion(Componente arma) {
+            int codigo = 0, localizacion = 0, slot = 0;
+            Boolean salir = false;
+
+            if (arma.energia() || arma.tipoArma() == "Nada")
+            {
+                slot = -1;
+            }
+            else
+            {
+                //Buscamos la localizacion y el codigo de la municion
+                for (int i = 0; i < _componentes.Length && !salir; i++)
+                {
+                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > 0)
+                    {
+                        localizacion = _componentes[i].localizacionINT();
+                        codigo = _componentes[i].codigo();
+                    }
+                }
+
+                //Buscamos el slot
+                LocalizacionMech l = _slots[localizacion];
+                Slot[] slots = l.slots();
+
+                salir = false;
+                for (int i = 0; i < slots.Length && !salir; i++)
+                    if (codigo == slots[i].codigo())
+                    {
+                        slot = i;
+                        salir = true;
+                    }
+            }
+
+            return slot;
+        }
+
+        public String localizacionMunicion(Componente arma) {
+            Boolean salir = false;
+            String localizacion="";
+            if (arma.energia() || arma.tipoArma() == "Nada")
+            {
+                localizacion = "-1";
+            }
+            else
+            {
+                for (int i = 0; i < _componentes.Length && !salir; i++)
+                {
+                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > 0)
+                    {
+                        localizacion = _componentes[i].localizacionSTRING();
+                        salir = true;
+                    }
+                }
+            }
+
+            return localizacion;
+        }
+
+        #endregion
         /*
          * indica el tipo mech
          */
-        /*public tipoMech tipo() {
-            tipoMech t;
-            /*Ligeros: 20 a 35 toneladas.
-		    Medios: 40 a 55 toneladas.
-		    Pesados: 60 a 75 toneladas.
-		    Asalto: 80 a 100 toneladas.
-            if (_toneladas >= 20 && _toneladas <= 35)
-            {
-                t = tipoMech.Ligero;
-            }
-            else if (_toneladas >= 40 && _toneladas <= 55)
-            {
-                t = tipoMech.Medio;
-            }
-            else if (_toneladas >= 60 && _toneladas <= 75)
-            {
-                t = tipoMech.Pesado;
-            }
-            else
-                t = tipoMech.Asalto;
 
-            return t;
-        }*/
 
         public float tipo()
         {
