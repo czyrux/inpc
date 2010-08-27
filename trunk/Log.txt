@@ -483,3 +483,6 @@ Ataque fisico (mech):
 
 		25/8/10
 		- (antonio) Añadido la lectura del fichero mov.sbt, que nos decia que movimiento habia realizado el mech. La informacion esta en un array de String dentro de la clase configuracion.
+
+		27/8/10
+		-(antonio) Estoy escribiendo ya la fase de armas en fichero. Es algo lenta, pero se debe a las llamadas a la ldv.exe
