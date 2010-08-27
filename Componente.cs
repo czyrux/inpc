@@ -60,7 +60,7 @@ namespace ico
 		public string nombre() { return _nombre; }
 		public string clase() { return _clase; }
 		public Boolean parteTrasera() { return _parteTrasera; }
-		public int localizacion() { return _localizacion; }
+		//public int localizacion() { return _localizacion; }
 		public int localizacionSecundaria() { return _localizacionSecundaria; }
 		public string tipoArma() { return _tipoArma; }
 		public int calor() { return _calor; }
@@ -75,6 +75,61 @@ namespace ico
 		public int cantidadMunicion() { return _cantidadMunicion; }
 		public Boolean municionEspecial() { return _municionEspecial; }
 		public int modificadorDisparo() { return _modificadorDisparo; }
+
+        public String localizacion() {
+            String ubicacion;
+            //(0=BI,1=TI,2=PI,3=PD,4=TD,5=BD,6=TC,7=CAB,8=TIa,9=TDa,10=TCa) 
+            switch (_localizacion) { 
+                case 0:
+                    ubicacion="BI";
+                    break;
+                case 1:
+                    ubicacion="TI";
+                    break;
+                case 2:
+                    ubicacion="PI";
+                    break;
+                case 3:
+                    ubicacion="PD";
+                    break;
+                case 4:
+                    ubicacion="TD";
+                    break;
+                case 5:
+                    ubicacion="BD";
+                    break;
+                case 6:
+                    ubicacion="TC";
+                    break;
+                case 7:
+                    ubicacion="CAB";
+                    break;
+                case 8:
+                    ubicacion="TIa";
+                    break;
+                case 9:
+                    ubicacion="TDa";
+                    break;
+                case 10:
+                    ubicacion="TCa";
+                    break;
+                default:
+                    ubicacion=null;
+                    break;
+            }
+
+            return ubicacion;
+        }
+
+        public Boolean energia() {
+
+            if (_tipoArma.Contains("Energ") && _clase == "ARMA")
+            {
+                return true;
+            }
+            else
+                return false;
+        }
 
 	}
 }
