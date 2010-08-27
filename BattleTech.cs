@@ -93,7 +93,7 @@ namespace ico
 
         #region metodos
         private void determinarEstrategia() {
-            Console.WriteLine(_mechs[_myJugador].notaEstado());
+
             if (_mechs[_myJugador].notaEstado() >= 7.3)
             {
                 _estrategia = Estrategia.Ofensiva;
@@ -208,11 +208,7 @@ namespace ico
                 Console.WriteLine();
                 Console.WriteLine("En LdV tenemos:" + objetivos.Count);
                 for (int i = 0; i < objetivos.Count; i++)
-                {
                     Console.WriteLine(i + ": " + objetivos[i].nombre());
-                    //Console.WriteLine("Distancia: " + _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()));
-                    //Console.WriteLine("Nota: " + objetivos[i].notaEstado());
-                }
 
                 //Escogemos al mas debil
                 List<Componente> armasADisparar = new List<Componente>();
@@ -349,19 +345,12 @@ namespace ico
             else
                 situacion = "DNTE";
 
-            //(0=BI,1=TI,2=PI,3=PD,4=TD,5=BD,6=TC,7=CAB,8=TIa,9=TDa,10=TCa) 
             //Vemos las armas que podria disparar
             ArrayList armas = _mechs[_myJugador].armas();
             String localizacion;
             for (int i = 0; i < armas.Count; i++) 
             {
-                //Console.WriteLine("Arma: " + ((Componente)armas[i]).nombre());
-                //Console.WriteLine("Operativo: " + ((Componente)armas[i]).operativo());
-                //Console.WriteLine("Municion: " + _mechs[_myJugador].tieneMunicion((Componente)armas[i]));
-                //Console.WriteLine("Distancia arma: " + ((Componente)armas[i]).distanciaLarga());
-                //Console.WriteLine("Distancia: " + distancia);
                 localizacion = ((Componente)armas[i]).localizacion();
-                //Console.WriteLine("Localizacion:" + localizacion);
                 if (_mechs[_myJugador].tieneMunicion((Componente)armas[i]) && ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
                     ((Componente)armas[i]).distanciaMinima() < distancia && 
                    ( ((localizacion == "BI" || localizacion == "TI" || localizacion == "PI") && (situacion == "IZQ" || situacion == "DNTE"))
@@ -372,14 +361,8 @@ namespace ico
                     danio += ((Componente)armas[i]).danio();
                     seleccionArmas.Add((Componente)armas[i]);
                 }
-                //Console.WriteLine();
             }
             
-
-            /*Console.WriteLine("Las armas que podrian dispararse son:"+seleccionArmas.Count);
-            for (int i = 0; i < seleccionArmas.Count; i++) {
-                Console.WriteLine(i + ": " + seleccionArmas[i].nombre() + " localizacion: " + seleccionArmas[i].localizacion());
-            }*/
             return danio;
         }
 
@@ -473,7 +456,7 @@ namespace ico
             f.WriteLine("False");
             if ( objetivo.Count>0) {
                 f.WriteLine(objetivo[0].posicion().ToString());
-                f.WriteLine("0");
+                f.WriteLine(seleccionArmas.Count);
             }else {
                 f.WriteLine("0000");
                 f.WriteLine(0);
