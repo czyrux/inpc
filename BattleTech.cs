@@ -233,6 +233,7 @@ namespace ico
                     Console.WriteLine(armasADisparar[i].nombre());
 
                 //Escribimos las ordenes
+                escribirOrdenesArmas(objetivos, armasADisparar);
 
                 Console.ReadLine();
             }
@@ -465,6 +466,11 @@ namespace ico
             else
                 seleccionArmas = null;
         }
+
+        private void escribirOrdenesArmas(List<Mech> objetivo, List<Componente> seleccionArmas) { 
+        
+        }
+
         #endregion
 
         private void faseAtaquesFisico() {
