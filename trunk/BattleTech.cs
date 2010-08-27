@@ -467,8 +467,20 @@ namespace ico
                 seleccionArmas = null;
         }
 
-        private void escribirOrdenesArmas(List<Mech> objetivo, List<Componente> seleccionArmas) { 
-        
+        private void escribirOrdenesArmas(List<Mech> objetivo, List<Componente> seleccionArmas) {
+            StreamWriter f = new StreamWriter("accionJ" + _myJugador.ToString() + ".sbt", false);
+
+            f.WriteLine("False");
+            if ( objetivo.Count>0) {
+                f.WriteLine(objetivo[0].posicion().ToString());
+                f.WriteLine("0");
+            }else {
+                f.WriteLine("0000");
+                f.WriteLine(0);
+            }
+            
+
+            f.Close();
         }
 
         #endregion
