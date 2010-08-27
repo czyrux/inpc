@@ -486,3 +486,7 @@ Ataque fisico (mech):
 
 		27/8/10
 		-(antonio) Estoy escribiendo ya la fase de armas en fichero. Es algo lenta, pero se debe a las llamadas a la ldv.exe
+
+		-(antonio) Ya he terminado de escribir el fichero de acciones, me ha costado mas de lo que pensaba xk tenia que buscar el slot de la municion y cada arma y demas.
+		Aunque este hecha, no lo e probado con el simulador, eso lo hare mañn y asi cierro ya esta fase.
+		Total que en principio la fase de armas ya esta lista, salvo la ultima revision en el simulador y salvo retoques en funcion de resultados empiricos. 
