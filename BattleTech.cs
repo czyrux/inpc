@@ -350,7 +350,7 @@ namespace ico
             String localizacion;
             for (int i = 0; i < armas.Count; i++) 
             {
-                localizacion = ((Componente)armas[i]).localizacion();
+                localizacion = ((Componente)armas[i]).localizacionSTRING();
                 if (_mechs[_myJugador].tieneMunicion((Componente)armas[i]) && ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
                     ((Componente)armas[i]).distanciaMinima() < distancia && 
                    ( ((localizacion == "BI" || localizacion == "TI" || localizacion == "PI") && (situacion == "IZQ" || situacion == "DNTE"))
@@ -453,10 +453,27 @@ namespace ico
         private void escribirOrdenesArmas(List<Mech> objetivo, List<Componente> seleccionArmas) {
             StreamWriter f = new StreamWriter("accionJ" + _myJugador.ToString() + ".sbt", false);
 
-            f.WriteLine("False");
+            f.WriteLine("False");//coger garrote
             if ( objetivo.Count>0) {
-                f.WriteLine(objetivo[0].posicion().ToString());
-                f.WriteLine(seleccionArmas.Count);
+                f.WriteLine(objetivo[0].posicion().ToString()); //Posicion del objetivo primario
+                f.WriteLine(seleccionArmas.Count); //Numero de armas a disparar
+                for (int i = 0; i < seleccionArmas.Count; i++) 
+                {
+                    //Localizacion arma
+                    f.WriteLine(seleccionArmas[i].localizacionSTRING());
+                    //Slot arma
+                    f.WriteLine(_mechs[_myJugador].slotArma(seleccionArmas[i]));
+                    //Doble cadencia (booleano)
+                    f.WriteLine("False");//f.WriteLine("Doble cadencia ");
+                    //Localizacion municion
+                    f.WriteLine(_mechs[_myJugador].localizacionMunicion(seleccionArmas[i]));
+                    //Slot municion
+                    f.WriteLine(_mechs[_myJugador].slotMunicion(seleccionArmas[i]));
+                    //Hexagono objtivo
+                    f.WriteLine(objetivo[0].posicion().ToString());
+                    //Tipo objetivo
+                    f.WriteLine("Mech");
+                }
             }else {
                 f.WriteLine("0000");
                 f.WriteLine(0);
