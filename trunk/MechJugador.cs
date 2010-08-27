@@ -156,6 +156,7 @@ namespace ico
 				Convert.ToBoolean(f.ReadLine());
 			}
 
+            _notaMech = -1.0f;
 		}
         #endregion
 		
