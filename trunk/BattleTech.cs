@@ -352,7 +352,7 @@ namespace ico
             //(0=BI,1=TI,2=PI,3=PD,4=TD,5=BD,6=TC,7=CAB,8=TIa,9=TDa,10=TCa) 
             //Vemos las armas que podria disparar
             ArrayList armas = _mechs[_myJugador].armas();
-            int localizacion;
+            String localizacion;
             for (int i = 0; i < armas.Count; i++) 
             {
                 //Console.WriteLine("Arma: " + ((Componente)armas[i]).nombre());
@@ -364,9 +364,9 @@ namespace ico
                 //Console.WriteLine("Localizacion:" + localizacion);
                 if (_mechs[_myJugador].tieneMunicion((Componente)armas[i]) && ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
                     ((Componente)armas[i]).distanciaMinima() < distancia && 
-                   ( ((localizacion==0 || localizacion==1 || localizacion==2) && (situacion=="IZQ" || situacion=="DNTE"))
-                   || ((localizacion==3 || localizacion==4 || localizacion==5) && (situacion=="DRCHA" || situacion=="DNTE"))
-                   || ((localizacion != 8 || localizacion != 9 || localizacion != 10) && situacion == "DNTE" )
+                   ( ((localizacion == "BI" || localizacion == "TI" || localizacion == "PI") && (situacion == "IZQ" || situacion == "DNTE"))
+                   || ((localizacion == "PD" || localizacion == "TD" || localizacion == "BD") && (situacion == "DRCHA" || situacion == "DNTE"))
+                   || ((localizacion != "TIa" || localizacion != "TDa" || localizacion != "TCa") && situacion == "DNTE" )
                     ) )
                 {
                     danio += ((Componente)armas[i]).danio();

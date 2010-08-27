@@ -591,7 +591,7 @@ namespace ico {
         public bool tieneMunicion(Componente arma)
         {
             bool municion = false;
-            if ( arma.tipoArma().Contains("Energ") || arma.tipoArma() == "Nada")
+            if ( arma.energia() || arma.tipoArma() == "Nada")
             {
                 municion = true;
             }
