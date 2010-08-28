@@ -16,13 +16,13 @@ namespace ico
             _faseJuego = fase;
 
             //PRuebas de ÑIKO
-            Console.WriteLine("eres ñiko y/n ");
+            /*Console.WriteLine("eres ñiko y/n ");
             string str = Console.ReadLine();
             if (str == "yes" || str == "y" || str == "Y" || str == "Yes" || str == "si" || str == "s" || str == "Si" || str == "S")
             {
                 _myJugador = 3;
                 fase = "AtaqueArmas";
-            }
+            }*/
 
 			//Leemos los mech
             readMechs();
@@ -353,8 +353,8 @@ namespace ico
                 localizacion = ((Componente)armas[i]).localizacionSTRING();
                 if (_mechs[_myJugador].tieneMunicion((Componente)armas[i]) && ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
                     ((Componente)armas[i]).distanciaMinima() < distancia && 
-                   ( ((localizacion == "BI" || localizacion == "TI" || localizacion == "PI") && (situacion == "IZQ" || situacion == "DNTE"))
-                   || ((localizacion == "PD" || localizacion == "TD" || localizacion == "BD") && (situacion == "DRCHA" || situacion == "DNTE"))
+                   ( ((localizacion == "BI" /*|| localizacion == "TI"*/ || localizacion == "PI") && (situacion == "IZQ" || situacion == "DNTE"))
+                   || ((localizacion == "PD" /*|| localizacion == "TD" */|| localizacion == "BD") && (situacion == "DRCHA" || situacion == "DNTE"))
                    || ((localizacion != "TIa" || localizacion != "TDa" || localizacion != "TCa") && situacion == "DNTE" )
                     ) )
                 {
@@ -394,7 +394,7 @@ namespace ico
                     limiteCalor = calorOfensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
                 }else
                     limiteCalor = calorDefensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
-
+                Console.WriteLine("Limite calor= " + limiteCalor + " (calorOfensivo:" + calorOfensivo + " numero radiadores:" + _mechs[_myJugador].numeroRadiadores() + " temp:" + _mechs[_myJugador].nivelTemp() + " mov:"+calorMovimiento+" )");
                 //Calculamos la relacion de las armas daño/calor
                 float[] potencia = new float[seleccionArmas.Count];
                 int[] orden = new int[seleccionArmas.Count];
@@ -428,11 +428,13 @@ namespace ico
 
                 //Seleccionamos las armas mientras no se pasen del limite de calor
                 List<Componente> conjuntoFinal = new List<Componente>();
-                int calor=0 , itr=0;
+                int calor=0 , itr=0 ;
                 Boolean salir = false;
                 while (!salir) {
-                    if ( itr<seleccionArmas.Count && calor + seleccionArmas[orden[itr]].calor() < limiteCalor )
+                    if ( itr<seleccionArmas.Count && calor + seleccionArmas[orden[itr]].calor() < limiteCalor 
+                        && _mechs[_myJugador].tiradaImpacto(seleccionArmas[orden[itr]],objetivos[0],_tablero,_config.movimiento(_myJugador),_config.movimiento(objetivos[0].numeroJ())) <9 )
                     {
+                        Console.WriteLine("Se dispara");
                         calor += seleccionArmas[orden[itr]].calor();
                         conjuntoFinal.Add(seleccionArmas[orden[itr]]);
                         itr++;
