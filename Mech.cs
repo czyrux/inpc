@@ -415,7 +415,16 @@ namespace ico {
 		public int tonelados() { return _toneladas; }
 		public int potencia() { return _potencia; }
 		public int numeroRadiadoresInternos() { return _numeroRadiadoresInternos; }
-		public int numeroRadiadores() { return _numeroRadiadores; }
+
+		public int numeroRadiadores() {
+            if (_tipoRadiador == 1)
+            {
+                return _numeroRadiadores * 2;
+            }
+            else
+                return _numeroRadiadores;
+         }
+
 		/*public Boolean masc() { return _masc; }
 		public Boolean dacmtd() { return _dacmtd; }
 		public Boolean dacmti() { return _dacmti; }
@@ -555,7 +564,7 @@ namespace ico {
             {
                 for (int i = 0; i < _componentes.Length && !municion; i++)
                 {
-                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > 0) {
+                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > 0 && _componentes[i].operativo() ) {
                         municion = true;
                     }
 
@@ -639,11 +648,10 @@ namespace ico {
         }
 
         #endregion
+
         /*
          * indica el tipo mech
          */
-
-
         public float tipo()
         {
             float t;
@@ -1061,7 +1069,7 @@ namespace ico {
         #endregion
 
         //METODOS PARA VER LA SITUACION DEL MECH
-        public situacion situacionMech() {
+        /*public situacion situacionMech() {
             situacion e;
 
             if ( _desconectado ) {
@@ -1081,7 +1089,7 @@ namespace ico {
                 e = situacion.Activo;
 
             return e;
-        }
+        }*/
 
 
         //METODOS PARA VER EL ESTADO DEL MECH
@@ -1322,8 +1330,117 @@ namespace ico {
         /*
          * Metodo que calcula, para el arma pasada como argumento, la media de tirada que se necesita para impactar al objetivo
          */
-        public int tiradaImpacto(Componente arma, int distancia, Mech objetivo, Tablero mapa, int movimientoPropio = 1, int movimientoObjetivo = 1)
+        public int tiradaImpacto(Componente arma, Mech objetivo, Tablero mapa, String movimientoPropio = "Andar", String movimientoObjetivo = "Andar")
         {
+            int puntuacion = 0 , distancia= _posicion.distancia(objetivo.posicion()) ;
+
+            //Añadimos el modificador de distancia
+            if (distancia < arma.distanciaCorta())
+            {
+                puntuacion += 4;
+            }
+            else if (distancia < arma.distanciaMedia())
+            {
+                puntuacion += 6;
+            }
+            else
+                puntuacion += 8;
+
+            Console.WriteLine("Distancia: " + puntuacion);
+            //El modificador de distancia minima no lo tenemos en cuenta puesto que las armas elegidas como condicion no estarna en 
+            //distancia minima
+            
+            //Modificador de movimiento atacante
+            switch (movimientoPropio) {
+                case "Inmovil":
+                    puntuacion += 0;
+                    break;
+                case "Andar":
+                    puntuacion += 1;
+                    break;
+                case "Correr":
+                    puntuacion += 2;
+                    break;
+                case "Saltar":
+                    puntuacion += 3;
+                    break;
+                default:
+                    break;
+            }
+            Console.WriteLine("Movimiento propio: " + puntuacion);
+            //Modificadores atacante en suelo
+            if (_enSuelo) puntuacion += 2;
+            Console.WriteLine("En suelo: " + puntuacion);
+            //Modificador de movimiento objetivo
+            switch (movimientoObjetivo)
+            {
+                case "Inmovil":
+                    puntuacion -= 4;
+                    break;
+                case "Andar":
+                    puntuacion += 1;
+                    break;
+                case "Correr":
+                    puntuacion += 2;
+                    break;
+                case "Saltar":
+                    puntuacion += 3;
+                    break;
+                default:
+                    break;
+            }
+            Console.WriteLine("Movimiento objetivo: " + puntuacion);
+            //Modificadores objetivo en suelo
+            if (objetivo.enSuelo() && distancia == 1)
+            {
+                puntuacion -= 2;
+            }
+            else if (objetivo.enSuelo())
+                puntuacion += 1;
+            Console.WriteLine("Objetivo en suelo: " + puntuacion);
+            //Modificadores del terreno
+            int tipoTerreno = mapa.Casilla(objetivo.posicion()).objetoTerreno();
+            switch (tipoTerreno)
+            {
+                case 1://bosque ligero
+                    puntuacion += 1;
+                    break;
+                case 2://bosque denso
+                    puntuacion += 2;
+                    break;
+                default:
+                    break;
+            }
+            //si el terreno es agua
+            if (mapa.Casilla(objetivo.posicion()).tipoTerreno() == 2) {
+                if (mapa.Casilla(objetivo.posicion()).nivel() == 1)
+                {
+                    puntuacion -= 1;
+                }else if (mapa.Casilla(objetivo.posicion()).nivel() >= 2 )
+                    puntuacion += int.MaxValue;
+            
+            }
+            Console.WriteLine("Terreno: " + puntuacion);
+            //Modificadores de calor
+            if ( _nivelTemp >= 0 && _nivelTemp <= 7)
+            {
+                puntuacion += 0;
+            }
+            else if (_nivelTemp >= 8 && _nivelTemp <= 12)
+            {
+                puntuacion += 1;
+            }
+            else if (_nivelTemp >= 13 && _nivelTemp <= 16)
+            {
+                puntuacion += 2;
+            }
+            else if (_nivelTemp >= 17 && _nivelTemp <= 23)
+            {
+                puntuacion += 3;
+            }
+            else // >24
+                puntuacion += 4;
+            Console.WriteLine("Calor: " + puntuacion);
             /** MODIFICADORES PARA DISPARO
              * modificador distancia
              * " alcance minimo
@@ -1334,26 +1451,10 @@ namespace ico {
              * " objetivos inmoviles
              * " en suelo
              */
-            return 0;
+            Console.WriteLine("Arma: " + arma.nombre() + " " + puntuacion);
+            return puntuacion;
         }
 
-        /*
-         * Metodo que calcula la media de tirada que se necesita para impactar al objetivo
-         */
-        public int tiradaParaImpactoMedia(int distancia, Mech objetivo, Tablero mapa, int movimientoPropio = 1, int movimientoObjetivo = 1)
-        {
-            /** MODIFICADORES PARA DISPARO
-             * modificador distancia
-             * " alcance minimo
-             * " movimiento atacante
-             * " movimiento objetivo
-             * " terreno
-             * " calor y daños
-             * " objetivos inmoviles
-             * " en suelo
-             */
-            return 0;
-        }
         #endregion
     }
 
