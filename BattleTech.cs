@@ -165,7 +165,7 @@ namespace ico
             Console.WriteLine("Fase movimiento");
             Console.WriteLine();
             //prueba de pathfinder el 9/8 - Angel
-            /*string str;
+            string str;
 
             Console.WriteLine("escribe la columnafila de ");
             str = Console.ReadLine();
@@ -177,7 +177,7 @@ namespace ico
 
             Camino.print();
 
-            Console.ReadKey();*/
+            Console.ReadKey();
         }
         #endregion
 
