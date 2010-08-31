@@ -98,8 +98,23 @@ namespace ico
             {
                 _estrategia = Estrategia.Ofensiva;
             }
-            else
-                _estrategia = Estrategia.Defensiva;
+            else {
+                //Vemos si somos el jugador con la nota mas alta
+                int max=-1;
+                float nota = 0;
+                for (int i = 0; i < _mechs.Length; i++)
+                    if (_mechs[i].operativo() && nota < _mechs[i].notaEstado()) {
+                        nota = _mechs[i].notaEstado();
+                        max = i;
+                    }
+
+                if (max == _myJugador) {
+                    _estrategia = Estrategia.Ofensiva;
+                }else
+                    _estrategia = Estrategia.Defensiva;
+            }
+
+            Console.WriteLine("Estrategia del mech: " + _estrategia);
         }
 
         public void pruebas () 
@@ -150,7 +165,7 @@ namespace ico
             Console.WriteLine("Fase movimiento");
             Console.WriteLine();
             //prueba de pathfinder el 9/8 - Angel
-            string str;
+            /*string str;
 
             Console.WriteLine("escribe la columnafila de ");
             str = Console.ReadLine();
@@ -162,7 +177,7 @@ namespace ico
 
             Camino.print();
 
-            Console.ReadKey();
+            Console.ReadKey();*/
         }
         #endregion
 
@@ -193,7 +208,7 @@ namespace ico
                 //Escogemos a los mech si estan dentro del alcance de tiro largo y no estan en nuestra espalda
                 for (int i = 0; i < _mechs.Length; i++)
                     if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].distanciaTiroLarga() &&
-                        !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(), _mechs[_myJugador].ladoEncaramientoTorso()))
+                        !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(), _mechs[_myJugador].ladoEncaramientoTorso()) && _mechs[i].operativo() )
                         objetivos.Add(_mechs[i]);
 
                 Console.WriteLine("Al principio tenemos:");
@@ -353,8 +368,8 @@ namespace ico
                 localizacion = ((Componente)armas[i]).localizacionSTRING();
                 if (_mechs[_myJugador].tieneMunicion((Componente)armas[i]) && ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
                     ((Componente)armas[i]).distanciaMinima() < distancia && 
-                   ( ((localizacion == "BI" /*|| localizacion == "TI"*/ || localizacion == "PI") && (situacion == "IZQ" || situacion == "DNTE"))
-                   || ((localizacion == "PD" /*|| localizacion == "TD" */|| localizacion == "BD") && (situacion == "DRCHA" || situacion == "DNTE"))
+                   ( ((localizacion == "BI" || localizacion == "PI") && (situacion == "IZQ" || situacion == "DNTE"))
+                   || ((localizacion == "PD"|| localizacion == "BD") && (situacion == "DRCHA" || situacion == "DNTE"))
                    || ((localizacion != "TIa" || localizacion != "TDa" || localizacion != "TCa") && situacion == "DNTE" )
                     ) )
                 {
