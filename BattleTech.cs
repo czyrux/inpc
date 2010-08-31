@@ -394,7 +394,7 @@ namespace ico
                     limiteCalor = calorOfensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
                 }else
                     limiteCalor = calorDefensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
-                Console.WriteLine("Limite calor= " + limiteCalor + " (calorOfensivo:" + calorOfensivo + " numero radiadores:" + _mechs[_myJugador].numeroRadiadores() + " temp:" + _mechs[_myJugador].nivelTemp() + " mov:"+calorMovimiento+" )");
+                //Console.WriteLine("Limite calor= " + limiteCalor + " (calorOfensivo:" + calorOfensivo + " numero radiadores:" + _mechs[_myJugador].numeroRadiadores() + " temp:" + _mechs[_myJugador].nivelTemp() + " mov:"+calorMovimiento+" )");
                 //Calculamos la relacion de las armas daño/calor
                 float[] potencia = new float[seleccionArmas.Count];
                 int[] orden = new int[seleccionArmas.Count];
@@ -432,9 +432,8 @@ namespace ico
                 Boolean salir = false;
                 while (!salir) {
                     if ( itr<seleccionArmas.Count && calor + seleccionArmas[orden[itr]].calor() < limiteCalor 
-                        && _mechs[_myJugador].tiradaImpacto(seleccionArmas[orden[itr]],objetivos[0],_tablero,_config.movimiento(_myJugador),_config.movimiento(objetivos[0].numeroJ())) <9 )
+                        && _mechs[_myJugador].tiradaImpacto(seleccionArmas[orden[itr]],objetivos[0],_tablero,_config.movimiento(_myJugador),_config.movimiento(objetivos[0].numeroJ())) <=9 )
                     {
-                        Console.WriteLine("Se dispara");
                         calor += seleccionArmas[orden[itr]].calor();
                         conjuntoFinal.Add(seleccionArmas[orden[itr]]);
                         itr++;
@@ -461,6 +460,8 @@ namespace ico
                 f.WriteLine(seleccionArmas.Count); //Numero de armas a disparar
                 for (int i = 0; i < seleccionArmas.Count; i++) 
                 {
+                    Console.WriteLine();
+                    Console.WriteLine("Arma: " + seleccionArmas[i].nombre());
                     //Localizacion arma
                     f.WriteLine(seleccionArmas[i].localizacionSTRING());
                     //Slot arma
