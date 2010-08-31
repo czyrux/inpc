@@ -460,8 +460,6 @@ namespace ico
                 f.WriteLine(seleccionArmas.Count); //Numero de armas a disparar
                 for (int i = 0; i < seleccionArmas.Count; i++) 
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("Arma: " + seleccionArmas[i].nombre());
                     //Localizacion arma
                     f.WriteLine(seleccionArmas[i].localizacionSTRING());
                     //Slot arma
