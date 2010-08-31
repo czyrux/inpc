@@ -606,6 +606,7 @@ namespace ico {
                     {
                         localizacion = _componentes[i].localizacionINT();
                         codigo = _componentes[i].codigo();
+                        salir = true;
                     }
                 }
 
@@ -614,12 +615,16 @@ namespace ico {
                 Slot[] slots = l.slots();
 
                 salir = false;
+                //Console.WriteLine("Localizacion "+localizacion+" codigo:"+codigo);
                 for (int i = 0; i < slots.Length && !salir; i++)
+                {
+                    //Console.WriteLine("Slot "+i+": "+slots[i].codigo());
                     if (codigo == slots[i].codigo())
                     {
                         slot = i;
                         salir = true;
                     }
+                }
             }
 
             return slot;
@@ -1346,7 +1351,7 @@ namespace ico {
             else
                 puntuacion += 8;
 
-            Console.WriteLine("Distancia: " + puntuacion);
+            //Console.WriteLine("Distancia: " + puntuacion);
             //El modificador de distancia minima no lo tenemos en cuenta puesto que las armas elegidas como condicion no estarna en 
             //distancia minima
             
@@ -1367,10 +1372,10 @@ namespace ico {
                 default:
                     break;
             }
-            Console.WriteLine("Movimiento propio: " + puntuacion);
+            //Console.WriteLine("Movimiento propio: " + puntuacion);
             //Modificadores atacante en suelo
             if (_enSuelo) puntuacion += 2;
-            Console.WriteLine("En suelo: " + puntuacion);
+            //Console.WriteLine("En suelo: " + puntuacion);
             //Modificador de movimiento objetivo
             switch (movimientoObjetivo)
             {
@@ -1389,7 +1394,7 @@ namespace ico {
                 default:
                     break;
             }
-            Console.WriteLine("Movimiento objetivo: " + puntuacion);
+            //Console.WriteLine("Movimiento objetivo: " + puntuacion);
             //Modificadores objetivo en suelo
             if (objetivo.enSuelo() && distancia == 1)
             {
@@ -1397,7 +1402,7 @@ namespace ico {
             }
             else if (objetivo.enSuelo())
                 puntuacion += 1;
-            Console.WriteLine("Objetivo en suelo: " + puntuacion);
+            //Console.WriteLine("Objetivo en suelo: " + puntuacion);
             //Modificadores del terreno
             int tipoTerreno = mapa.Casilla(objetivo.posicion()).objetoTerreno();
             switch (tipoTerreno)
@@ -1420,7 +1425,7 @@ namespace ico {
                     puntuacion += int.MaxValue;
             
             }
-            Console.WriteLine("Terreno: " + puntuacion);
+            //Console.WriteLine("Terreno: " + puntuacion);
             //Modificadores de calor
             if ( _nivelTemp >= 0 && _nivelTemp <= 7)
             {
@@ -1440,7 +1445,7 @@ namespace ico {
             }
             else // >24
                 puntuacion += 4;
-            Console.WriteLine("Calor: " + puntuacion);
+            //Console.WriteLine("Calor: " + puntuacion);
             /** MODIFICADORES PARA DISPARO
              * modificador distancia
              * " alcance minimo
@@ -1451,7 +1456,10 @@ namespace ico {
              * " objetivos inmoviles
              * " en suelo
              */
-            Console.WriteLine("Arma: " + arma.nombre() + " " + puntuacion);
+
+            //bonus
+            puntuacion += 4;
+            Console.WriteLine("Arma: " + arma.nombre() + " tirada para impacto:" + puntuacion);
             return puntuacion;
         }
 
