@@ -34,7 +34,7 @@ namespace ico
 			_config = new ConfiguracionJuego( _myJugador );
 
 
-            pruebas();
+            //pruebas();
             //Elegimos la accion a realizar
             if (fase == "Movimiento")
             {

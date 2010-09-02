@@ -97,35 +97,35 @@ namespace ico
       
 
        
-        public Casilla colindante(Casilla actual, Encaramiento direccion)
+        public Casilla colindante(Posicion actual, Encaramiento direccion)
         {//revisada v2
             Casilla devolver = null;
             if (direccion == Encaramiento.Arriba || direccion == Encaramiento.Abajo)
             {
                 if (direccion == Encaramiento.Arriba)
                 {
-                    devolver = _casillas[actual.posicion().fila() -2, actual.posicion().columna() - 1];
+                    devolver = _casillas[actual.fila() -2, actual.columna() - 1];
                 }
                 else
                 {
-                    devolver = _casillas[actual.posicion().fila() , actual.posicion().columna()-1];
+                    devolver = _casillas[actual.fila() , actual.columna()-1];
                 }
             }
-            else if (((actual.posicion().columna() ) % 2) == 0)//par
+            else if (((actual.columna() ) % 2) == 0)//par
             {
                 switch (direccion)
                 {
                     case Encaramiento.SuperiorDerecha:
-                        devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna()];
+                        devolver = _casillas[actual.fila() - 1, actual.columna()];
                         break;
                     case Encaramiento.InferiorDerecho:
-                        devolver = _casillas[actual.posicion().fila(), actual.posicion().columna()];
+                        devolver = _casillas[actual.fila(), actual.columna()];
                         break;
                     case Encaramiento.InferiorIzquierda:
-                        devolver = _casillas[actual.posicion().fila(), actual.posicion().columna() - 2];
+                        devolver = _casillas[actual.fila(), actual.columna() - 2];
                         break;
                     case Encaramiento.SuperiorIzquierda:
-                        devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna() - 2];
+                        devolver = _casillas[actual.fila() - 1, actual.columna() - 2];
                         break;
                 }
             }
@@ -134,16 +134,16 @@ namespace ico
                 switch (direccion)
                 {
                     case Encaramiento.SuperiorDerecha:
-                        devolver = _casillas[actual.posicion().fila() - 2, actual.posicion().columna()];
+                        devolver = _casillas[actual.fila() - 2, actual.columna()];
                         break;
                     case Encaramiento.InferiorDerecho:
-                        devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna()];
+                        devolver = _casillas[actual.fila() - 1, actual.columna()];
                         break;
                     case Encaramiento.InferiorIzquierda:
-                        devolver = _casillas[actual.posicion().fila() - 1, actual.posicion().columna() - 2];
+                        devolver = _casillas[actual.fila() - 1, actual.columna() - 2];
                         break;
                     case Encaramiento.SuperiorIzquierda:
-                        devolver = _casillas[actual.posicion().fila() - 2, actual.posicion().columna() - 2];
+                        devolver = _casillas[actual.fila() - 2, actual.columna() - 2];
                         break;
                 }
 
