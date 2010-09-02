@@ -159,11 +159,15 @@ namespace ico
 
         }*/
 
-        public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int [,] visitadas , int movimientos ) {
+        public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int movimientos ) {
             if ( movimientos != 0){
                 Posicion aux;
-                //Metemos las colindantes
-                for (int i = 0; i < 7; i++) {
+                int[,] casillasVisitadas = new int[_filas, _columnas];
+                List<Posicion> abiertas = new List<Posicion>();
+                abiertas.Add(actual);
+
+                enRadio(actual, abiertas, casillas, casillasVisitadas, movimientos);
+                /*for (int i = 0; i < 7; i++) {
                     try
                     {
                         aux = colindante(actual, (Encaramiento)i).posicion();
@@ -176,11 +180,23 @@ namespace ico
                         visitadas[aux.fila(), aux.columna()] = 1;
                     }
                         
-                }
+                }*/
 
             }
         }
 
+        private void enRadio(Posicion actual, List<Posicion> abiertas, List<Posicion> cerradas , int[,] visitadas, int movimientos)
+        {
+            cerradas.Add(abiertas[0]);
+            movimientos--;
+            Posicion aux = abiertas[0];
+            abiertas.RemoveAt(0);
+
+            if (movimientos >= 0) { 
+            
+            }
+        }
+ 
         public int filas() { return _filas; }
         public int columnas() { return _columnas; }
 
