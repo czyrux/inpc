@@ -65,7 +65,7 @@ namespace ico
                             case 0:
                                 _puntosMovimientos++;
                                 break;
-                            case -1:
+                            case 1:
                                 _puntosMovimientos += 2;
                                 break;
 
