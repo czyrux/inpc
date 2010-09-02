@@ -187,13 +187,29 @@ namespace ico
 
         private void enRadio(Posicion actual, List<Posicion> abiertas, List<Posicion> cerradas , int[,] visitadas, int movimientos)
         {
-            cerradas.Add(abiertas[0]);
+            cerradas.Add(actual);
             movimientos--;
             Posicion aux = abiertas[0];
             abiertas.RemoveAt(0);
 
-            if (movimientos >= 0) { 
-            
+            if (movimientos >= 0) {
+                for (int i = 0; i < 7; i++)
+                {
+                    try
+                    {
+                        aux = colindante(actual, (Encaramiento)i).posicion();
+                    }
+                    catch (Exception e)
+                    {
+                        continue;
+                    }
+                    if (visitadas[aux.fila(), aux.columna()] != 1)
+                    {
+                        casillas.Add(aux);
+                        visitadas[aux.fila(), aux.columna()] = 1;
+                    }
+
+                }
             }
         }
  
