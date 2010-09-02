@@ -195,6 +195,12 @@ namespace ico
                 }
 
                 //LLamamos recursivamente para cada una de las de la lista abierta
+                Boolean salir = false;
+                while (!salir) {
+                    if (abiertas.Count > 0) {
+                        salir = true;
+                    }
+                }
                 
             }
         }
