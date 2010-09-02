@@ -174,14 +174,15 @@ namespace ico
                 }
 
                 //buesca la mejor casilla entre las abiertas
-                mejor = mejorCasillaAbierta(abiertas, actual);
+                mejor = mejorCasillaAbierta(abiertas, actual,b);
                 //agrego la mejor casilla
                 cerradas.Add(abiertas[mejor]);
                 //pongo la mejor como la siguiente actual
                 actual = ((heuristica)abiertas[mejor]).casilla;
                 //borro la mejor de las abiertas
                 abiertas.RemoveAt(mejor);
-
+                if (actual.posicion().ToString() == "0606")
+                    b = b;
             } while (actual != b);
 
             camino.Add(b);
@@ -252,13 +253,17 @@ namespace ico
             return h;
         }
         
-        private int mejorCasillaAbierta(ArrayList abiertas,Casilla padre) {
+        private int mejorCasillaAbierta(ArrayList abiertas,Casilla padre, Casilla destino) {
             int max = 0;
             for (int i = 1; i < abiertas.Count; i++ )
             {
-                if(((heuristica)abiertas[i-1]).f>((heuristica)abiertas[i]).f && ((heuristica)abiertas[i]).padre==padre){
+                if (((heuristica)abiertas[i]).g<10 && ((heuristica)abiertas[i]).casilla==destino && ((heuristica)abiertas[i]).padre == padre){
                     max = i;
-                }
+                    break;
+                } 
+                if(((heuristica)abiertas[max]).f>((heuristica)abiertas[i]).f && ((heuristica)abiertas[i]).padre==padre)
+                    max = i;
+                
             }
             return max;
         }
