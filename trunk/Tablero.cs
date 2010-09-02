@@ -94,9 +94,6 @@ namespace ico
                 return _casillas[p.fila() - 1, p.columna() - 1];
         }
 
-      
-
-       
         public Casilla colindante(Posicion actual, Encaramiento direccion)
         {//revisada v2
             Casilla devolver = null;
@@ -152,7 +149,7 @@ namespace ico
         }
 
         //Funcion que devuelve la distancia aproximada entre el punto a y el punto b.
-        public int distanciaCasillas(Posicion a, Posicion b)
+        /*public int distanciaCasillas(Posicion a, Posicion b)
         {
             //dx <----La distancia entre la x de a y la x de b. Idem para la dy
             int dx = Math.Abs(a.columna() + b.columna()), dy = Math.Abs(b.fila() + a.fila());
@@ -160,21 +157,32 @@ namespace ico
             // (dx^2+dy^2)^1/2<-----La parte entera
             return (int)Math.Truncate(Math.Pow((Math.Pow(dx, 2) + Math.Pow(dx, 2)), 0.5));
 
-        }
+        }*/
 
-        public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int movimientos ) {
+        public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int [,] visitadas , int movimientos ) {
             if ( movimientos != 0){
+                Posicion aux;
+                //Metemos las colindantes
                 for (int i = 0; i < 7; i++) {
                     try
                     {
-                        casillas.Add(null);
+                        aux = colindante(actual, (Encaramiento)i).posicion();
                     }
                     catch (Exception e) {
                         continue;
                     }
+                    if (visitadas[aux.fila(), aux.columna()] != 1) {
+                        casillas.Add(aux);
+                        visitadas[aux.fila(), aux.columna()] = 1;
+                    }
+                        
                 }
+
             }
         }
+
+        public int filas() { return _filas; }
+        public int columnas() { return _columnas; }
 
         #endregion
 
@@ -182,9 +190,7 @@ namespace ico
         private Casilla[,] _casillas;
         int _filas; 
         int _columnas;
-        #region Funciones privadas
-       
-		
+        #region Funciones privadas		
 		
         public Casilla desplazamientoRecto(Casilla actual, Encaramiento direccion ,int movimiento) {
             Casilla devolver = null;

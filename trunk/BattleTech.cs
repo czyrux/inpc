@@ -256,8 +256,9 @@ namespace ico
             if (_estrategia == Estrategia.Ofensiva)
             {
                 List<Posicion> posiblesDestinos = new List<Posicion>();
+                int [,] casillasVisitadas = new int[_tablero.filas(),_tablero.columnas()];
                 //Escogemos las casillas alrededor
-                _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,Radio);
+                _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,casillasVisitadas,Radio);
 
                 //Puntuamos las casillas
 
