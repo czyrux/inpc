@@ -17,11 +17,11 @@ namespace ico
         public Casilla casilla;
         public Casilla padre;
 
-        heuristica() {
-            g = 0;
-            h = f = 0;
-            casilla = padre = null;
-        }
+       /*  heuristica(int g=0 , float h=0,float f=0, Casilla casilla=null,Casilla padre=null) {
+            this.g = 0;
+            this.h = this.f = 0;
+            this.casilla = this.padre = null;
+        }*/
     };
 
     /*
