@@ -65,7 +65,7 @@ namespace ico
                             case 0:
                                 _puntosMovimientos++;
                                 break;
-                            case 1:
+                            case -1:
                                 _puntosMovimientos += 2;
                                 break;
 
@@ -122,7 +122,7 @@ namespace ico
                         costo++;
                         break;
                     case 2:
-                        if (de.tipoTerreno() != a.tipoTerreno())
+                        if (de.tipoTerreno() == 2)
                             costo = int.MaxValue;
                         else
                             costo += 2;
@@ -142,7 +142,7 @@ namespace ico
             int costo = 0;
             if (Math.Abs(_posicion.columna() - a.columna()) < 2 || Math.Abs(_posicion.fila() - a.fila()) < 2)
             {
-                switch (Math.Abs(a.nivel() - _nivel))
+                switch (a.nivel() - _nivel)
                 {
                     case 0:
                         ;
@@ -151,14 +151,18 @@ namespace ico
                         costo++;
                         break;
                     case 2:
-                        if (_tipoTerreno != a.tipoTerreno())
+                        if (_tipoTerreno == 2)
                             costo = int.MaxValue;
                         else
                             costo += 2;
                         break;
                     default:
-                        return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
-
+                        if (a.nivel() - _nivel < 0)
+                            costo = 0;
+                        else
+                            return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
+                        
+                        break;
                 }
             }
             else return int.MaxValue;
