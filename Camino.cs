@@ -122,7 +122,7 @@ namespace ico
                 for (int i = 1; i < 7; i++) {
                     try
                     {
-                        elemento.casilla = Tablero.colindante(actual, (Encaramiento)i);//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
+                        elemento.casilla = Tablero.colindante(actual.posicion(), (Encaramiento)i);//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
                     }
                     catch (Exception e) {
                         continue;
