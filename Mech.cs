@@ -1418,7 +1418,7 @@ namespace ico {
             }
             //si el terreno es agua
             if (mapa.Casilla(objetivo.posicion()).tipoTerreno() == 2) {
-                if (mapa.Casilla(objetivo.posicion()).nivel() == 1)
+                if (mapa.Casilla(objetivo.posicion()).nivel() == -1)
                 {
                     puntuacion -= 1;
                 }else if (mapa.Casilla(objetivo.posicion()).nivel() >= 2 )
