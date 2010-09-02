@@ -160,16 +160,31 @@ namespace ico
 
         //Para la fase de movimiento del juego
         #region faseMovimiento
+        //La nota de cada mech para saber a cual disparamos sera la siguiente: nota propia=40% y distancia=60%
+        const float NOTA_MOV = 0.4f, DISTANCIA_MOV = 0.6f;
+
         private void faseMovimiento() 
         {
             Console.WriteLine("Fase movimiento");
             Console.WriteLine();
             Mech objetivo;
+            Casilla destino;
 
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
                 determinarEstrategia();
-                objetivo = eleccionObjetivo();
+
+                //Seleccionamos el objetivo hacia el que vamos a dirigirnos en caso de ser una estrategia ofensiva
+                if (_estrategia == Estrategia.Ofensiva)
+                {
+                    objetivo = eleccionObjetivo();
+                }
+                else {
+                    objetivo = null;
+                }
+
+                //Seleccionamos la casilla destino
+                destino = seleccionDestino(objetivo);
 
                 //prueba de pathfinder el 9/8 - Angel
                 string str;
@@ -189,9 +204,61 @@ namespace ico
         }
 
         private Mech eleccionObjetivo() {
-            Mech objetivo=null;
+            int objetivo=0;
 
-            return objetivo;
+            if (_mechs.Length > 2)
+            {
+                float[] notasParciales = new float[_numeroJugadores];
+
+                //Vemos cual la distancia maxima de los enemigos
+                int max = 0;
+                for (int i = 0; i < _mechs.Length; i++) {
+                    if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) > max)
+                        max = _mechs[_myJugador].posicion().distancia(_mechs[i].posicion());
+                }
+
+                //Asignamos una nota a cada mech en funcion de la distancia que nos separa y su puntuacion
+                for (int i = 0; i < _mechs.Length; i++)
+                {
+                    if ( i != _myJugador)
+                    {
+                        Console.WriteLine("Mech: " + _mechs[i].nombre());
+                        //Nota estado
+                        notasParciales[i] = _mechs[i].notaEstado() * NOTA_MOV;
+                        Console.WriteLine("Nota estado: " + _mechs[i].notaEstado());
+                        //Nota distancia
+                        notasParciales[i] += ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * DISTANCIA_MOV;
+                        Console.WriteLine("Nota distancia: " + ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * DISTANCIA_MOV);
+                        Console.WriteLine("Nota parcial:" + notasParciales[i]);
+                        Console.WriteLine();
+                    }
+                }
+
+                //Nos quedamos con el mech que tenga la nota menor
+                float nota = float.MaxValue ;
+                for (int i = 0; i < _mechs.Length; i++ )
+                    if (i != _myJugador && notasParciales[i] < nota) {
+                        nota = notasParciales[i];
+                        objetivo = i;
+                    }
+            }
+            else
+                objetivo = (_myJugador + 1) % 2;
+
+            Console.WriteLine("El objetivo elegido es: " + _mechs[objetivo].nombre());
+            return _mechs[objetivo];
+        }
+
+        private Casilla seleccionDestino(Mech objetivo) {
+            if (_estrategia == Estrategia.Ofensiva)
+            {
+
+            }
+            else { 
+            
+            }
+
+            return null;
         }
 
         #endregion
@@ -202,6 +269,9 @@ namespace ico
         }
 
         #region faseAtaqueArmas
+        //La nota de cada mech para saber a cual disparamos sera la siguiente: nota propia=40%, danio=30% , distancia=30%
+        const float NOTA_ARMAS = 0.4f, DANIO_ARMAS = 0.3f, DISTANCIA_ARMAS = 0.3f;
+
         private void faseAtaqueArmas() {
             /*
              * 1º Eleccion de rivales dentro de radio accion (rango alcance: distancia tiro larga media) y que no esten en el cono trasero
@@ -264,8 +334,6 @@ namespace ico
                 Console.ReadLine();
             }
         }
-        //La nota de cada mech para saber a cual disparamos sera la siguiente: nota propia=40%, danio=30% , distancia=30%
-        const float NOTA = 0.4f, DANIO = 0.3f, DISTANCIA = 0.3f;
 
         private void objetivoMasDebil (List<Mech> objetivos , List<Camino> ldv , List<Componente> armas) 
         {
@@ -281,7 +349,7 @@ namespace ico
                 for (int i = 0; i < objetivos.Count; i++) {
                     Console.WriteLine("Mech: "+objetivos[i].nombre());
                     //Añadimos las notas
-                    notasParciales[i] = objetivos[i].notaEstado() * NOTA;
+                    notasParciales[i] = objetivos[i].notaEstado() * NOTA_ARMAS;
                     Console.WriteLine("Nota mech: " + objetivos[i].notaEstado());
 
                     //Añadimos la nota del danio y la seleccion de armas para ese mech
@@ -290,11 +358,11 @@ namespace ico
                     armamento.Add(arm);
                     notaAux = 10 - (danio * 10.0f / _mechs[_myJugador].danioMaximo());
                     Console.WriteLine("Nota danio: " + notaAux);
-                    notasParciales[i] += (notaAux * DANIO);
+                    notasParciales[i] += (notaAux * DANIO_ARMAS);
 
                     //Añadimos la nota de la distancia
                     notaAux = (_mechs[_myJugador].posicion().distancia(objetivos[i].posicion()) * 10.0f) / _mechs[_myJugador].distanciaTiroLarga();
-                    notasParciales[i] += notaAux * DISTANCIA;
+                    notasParciales[i] += notaAux * DISTANCIA_ARMAS;
                     Console.WriteLine("Nota distancia: " + notaAux);
 
                     //Si estamos a su espalda, tenemos un bonus
