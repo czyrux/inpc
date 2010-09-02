@@ -168,7 +168,7 @@ namespace ico
             Console.WriteLine("Fase movimiento");
             Console.WriteLine();
             Mech objetivo;
-            Casilla destino;
+            Posicion destino;
 
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
@@ -249,10 +249,12 @@ namespace ico
             return _mechs[objetivo];
         }
 
-        private Casilla seleccionDestino(Mech objetivo) {
+        const int Radio = 5;
+        private Posicion seleccionDestino(Mech objetivo) {
             if (_estrategia == Estrategia.Ofensiva)
             {
-
+                List<Posicion> posiblesDestinos = new List<Posicion>();
+                _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,Radio);
             }
             else { 
             
