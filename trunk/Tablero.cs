@@ -165,7 +165,13 @@ namespace ico
         public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int movimientos ) {
             if ( movimientos != 0){
                 for (int i = 0; i < 7; i++) {
-                    casillas.Add(null);
+                    try
+                    {
+                        casillas.Add(null);
+                    }
+                    catch (Exception e) {
+                        continue;
+                    }
                 }
             }
         }
