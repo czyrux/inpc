@@ -164,33 +164,17 @@ namespace ico
                 int[,] casillasVisitadas = new int[_filas, _columnas];
                 Queue<Posicion> abiertas = new Queue<Posicion>();
                 abiertas.Enqueue(actual);
-
                 enRadio( abiertas, casillas, casillasVisitadas, movimientos+1);
-                /*for (int i = 0; i < 7; i++) {
-                    try
-                    {
-                        aux = colindante(actual, (Encaramiento)i).posicion();
-                    }
-                    catch (Exception e) {
-                        continue;
-                    }
-                    if (visitadas[aux.fila(), aux.columna()] != 1) {
-                        casillas.Add(aux);
-                        visitadas[aux.fila(), aux.columna()] = 1;
-                    }
-                        
-                }*/
-
             }
         }
 
         private void enRadio( Queue<Posicion> abiertas, List<Posicion> cerradas , int[,] visitadas, int movimientos)
         {
-            cerradas.Add(abiertas.Dequeue());
+            cerradas.Add(abiertas.Peek());
             movimientos--;
-            Posicion aux;
+            Posicion aux , actual = abiertas.Dequeue();
 
-            if (movimientos >= 0) {
+            if (movimientos > 0) {
 
                 //Añadimos las casillas a visitar
                 for (int i = 0; i < 7; i++)
@@ -211,7 +195,7 @@ namespace ico
                 }
 
                 //LLamamos recursivamente para cada una de las de la lista abierta
-                while( abiertas.em)
+                
             }
         }
  
