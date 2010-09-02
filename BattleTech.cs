@@ -164,21 +164,36 @@ namespace ico
         {
             Console.WriteLine("Fase movimiento");
             Console.WriteLine();
-            //prueba de pathfinder el 9/8 - Angel
-            string str;
+            Mech objetivo;
 
-            Console.WriteLine("escribe la columnafila de ");
-            str = Console.ReadLine();
-            Posicion de = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
-            Console.WriteLine("escribe la columnafila a ");
-            str = Console.ReadLine();
-            Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
-            Camino Camino = new Camino(_tablero.Casilla(de), _tablero.Casilla(a), _tablero);
+            if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
+            {
+                determinarEstrategia();
+                objetivo = eleccionObjetivo();
 
-            Camino.print();
+                //prueba de pathfinder el 9/8 - Angel
+                string str;
 
-            Console.ReadKey();
+                Console.WriteLine("escribe la columnafila de ");
+                str = Console.ReadLine();
+                Posicion de = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
+                Console.WriteLine("escribe la columnafila a ");
+                str = Console.ReadLine();
+                Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
+                Camino Camino = new Camino(_tablero.Casilla(de), _tablero.Casilla(a), _tablero);
+
+                Camino.print();
+
+                Console.ReadKey();
+            }
         }
+
+        private Mech eleccionObjetivo() {
+            Mech objetivo=null;
+
+            return objetivo;
+        }
+
         #endregion
 
         private void faseReaccion() {
