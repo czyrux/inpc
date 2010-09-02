@@ -16,6 +16,12 @@ namespace ico
         public float f;
         public Casilla casilla;
         public Casilla padre;
+
+        heuristica() {
+            g = 0;
+            h = f = 0;
+            casilla = padre = null;
+        }
     };
 
     /*

@@ -1422,7 +1422,7 @@ namespace ico {
                 {
                     puntuacion -= 1;
                 }else if (mapa.Casilla(objetivo.posicion()).nivel() >= 2 )
-                    puntuacion += int.MaxValue;
+                    puntuacion = 100;
             
             }
             //Console.WriteLine("Terreno: " + puntuacion);

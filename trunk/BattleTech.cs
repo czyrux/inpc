@@ -249,13 +249,14 @@ namespace ico
                 Console.ReadLine();
             }
         }
+        //La nota de cada mech para saber a cual disparamos sera la siguiente: nota propia=40%, danio=30% , distancia=30%
+        const float NOTA = 0.4f, DANIO = 0.3f, DISTANCIA = 0.3f;
 
         private void objetivoMasDebil (List<Mech> objetivos , List<Camino> ldv , List<Componente> armas) 
         {
             if (objetivos.Count > 1)
             {
-                //La nota de cada mech para saber a cual disparamos sera la siguiente: nota propia=40%, danio=30% , distancia=30%
-                float NOTA = 0.4f, DANIO = 0.3f, DISTANCIA = 0.3f;
+               
                 float[] notasParciales = new float[objetivos.Count];
                 List<List<Componente>> armamento = new List<List<Componente>>();
                 int danio , index;
@@ -380,10 +381,10 @@ namespace ico
             
             return danio;
         }
-
+        const int calorOfensivo = 16, calorDefensivo = 9;//calorOfensivo = 21, calorDefensivo = 14;
         private void seleccionArmasDisparar(List<Mech> objetivos, List<Componente> seleccionArmas) 
         {
-            int calorOfensivo = 16, calorDefensivo = 9;//calorOfensivo = 21, calorDefensivo = 14;
+
             int calorMovimiento;
             int limiteCalor; 
 
