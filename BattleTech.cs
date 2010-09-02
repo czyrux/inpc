@@ -34,7 +34,7 @@ namespace ico
 			_config = new ConfiguracionJuego( _myJugador );
 
 
-            //pruebas();
+            pruebas();
             //Elegimos la accion a realizar
             if (fase == "Movimiento")
             {
@@ -127,14 +127,14 @@ namespace ico
                     ((MechJugador)_mechs[i]).datos();
 				else
                     ((Mech)_mechs[i]).datos();
-			}*/
+			}
 
             ArrayList aux = _mechs[_myJugador].armas();
             for ( int i=0 ; i<aux.Count ;i++ ){
                 _mechs[_myJugador].tieneMunicion((Componente)aux[i]);
-            }
+            }*/
 
-			/*string c1 ;
+			string c1 ;
 			Posicion p1 ;
 			Boolean fin=false;
 			
@@ -146,16 +146,16 @@ namespace ico
 					p1 = new Posicion(c1);
                     //Casilla aux = _tablero.Casilla(p1);
                     Console.WriteLine("La distancia es:"+_mechs[0].posicion().distancia(p1));
-                    if (_mechs[0].conoDerecho(p1, _mechs[0].ladoEncaramiento()))
+                   /* if (_mechs[0].conoDerecho(p1, _mechs[0].ladoEncaramiento()))
                     {
                         Console.WriteLine("cono drcha");
                     }
                     else if (_mechs[0].conoIzquierdo(p1, _mechs[0].ladoEncaramiento()))
-                        Console.WriteLine("cono izq");
-					//_tablero.casillaInfo(p1.fila(),p1.columna());
+                        Console.WriteLine("cono izq");*/
+					_tablero.casillaInfo(p1.fila(),p1.columna());
 				}else
 					fin=true;
-			}*/
+			}
 		}
 
         //Para la fase de movimiento del juego
@@ -188,18 +188,20 @@ namespace ico
 
                 //prueba de pathfinder el 9/8 - Angel
                 string str;
+                do
+                {
+                    Console.WriteLine("escribe la columnafila de ");
+                    str = Console.ReadLine();
+                    Posicion de = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
+                    Console.WriteLine("escribe la columnafila a ");
+                    str = Console.ReadLine();
+                    Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
+                    Camino Camino = new Camino(_tablero.Casilla(de), _tablero.Casilla(a), _tablero);
 
-                Console.WriteLine("escribe la columnafila de ");
-                str = Console.ReadLine();
-                Posicion de = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
-                Console.WriteLine("escribe la columnafila a ");
-                str = Console.ReadLine();
-                Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
-                Camino Camino = new Camino(_tablero.Casilla(de), _tablero.Casilla(a), _tablero);
+                    Camino.print();
 
-                Camino.print();
-
-                Console.ReadKey();
+                    Console.ReadKey();
+                } while (true);
             }
         }
 

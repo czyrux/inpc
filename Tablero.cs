@@ -27,9 +27,9 @@ namespace ico
                 _filas = Convert.ToInt32(fich.ReadLine());
                 _columnas = Convert.ToInt32(fich.ReadLine());
                 _casillas = new Casilla[_filas, _columnas];
-                for (int f = 0; f < _filas; f++)
+                for (int c = 0; c < _columnas; c++)
                 {
-                    for (int c = 0; c < _columnas; c++)
+                    for (int f = 0; f < _filas; f++)
                     {
 
                         _casillas[f, c] = new Casilla();
@@ -44,7 +44,11 @@ namespace ico
                         _casillas[f, c].nGarrotes(Convert.ToInt32(fich.ReadLine()));
                         for (int i = 0; i < 6; i++)
                         {
-                            _casillas[f, c].caras(Convert.ToBoolean(fich.ReadLine()), Convert.ToBoolean(fich.ReadLine()), i);
+                            _casillas[f, c].caras(Convert.ToBoolean(fich.ReadLine()), false, i);
+                        }
+                        for (int i = 0; i < 6; i++)
+                        {
+                            _casillas[f, c].caras(false, Convert.ToBoolean(fich.ReadLine()), i);
                         }
                     }
                 }

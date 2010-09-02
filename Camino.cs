@@ -181,8 +181,8 @@ namespace ico
                 actual = ((heuristica)abiertas[mejor]).casilla;
                 //borro la mejor de las abiertas
                 abiertas.RemoveAt(mejor);
-                if (actual.posicion().ToString() == "0606")
-                    b = b;
+                //if (actual.posicion().ToString() == "0606")
+                  //  b = b;
             } while (actual != b);
 
             camino.Add(b);
@@ -246,9 +246,9 @@ namespace ico
             float h = 0;
 
             //Distancia aproximada
-            h = Posicion.distancia(a.posicion(), b.posicion());// Calculo de la distancia aproximada al objetivo.
+            //h = Posicion.distancia(a.posicion(), b.posicion());// Calculo de la distancia aproximada al objetivo.
             //Distancia real
-            //h = a.posicion().distancia(b.posicion());
+            h = a.posicion().distancia(b.posicion());
 
             return h;
         }
@@ -257,7 +257,7 @@ namespace ico
             int max = 0;
             for (int i = 1; i < abiertas.Count; i++ )
             {
-                if (((heuristica)abiertas[i]).g<10 && ((heuristica)abiertas[i]).casilla==destino && ((heuristica)abiertas[i]).padre == padre){
+                if (((heuristica)abiertas[i]).g<20 && ((heuristica)abiertas[i]).casilla==destino && ((heuristica)abiertas[i]).padre == padre){
                     max = i;
                     break;
                 } 
