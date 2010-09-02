@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
@@ -155,6 +156,10 @@ namespace ico
             // (dx^2+dy^2)^1/2<-----La parte entera
             return (int)Math.Truncate(Math.Pow((Math.Pow(dx, 2) + Math.Pow(dx, 2)), 0.5));
 
+        }
+
+        public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int movimientos ) { 
+        
         }
 
         #endregion
