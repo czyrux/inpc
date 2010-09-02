@@ -256,7 +256,12 @@ namespace ico
             if (_estrategia == Estrategia.Ofensiva)
             {
                 List<Posicion> posiblesDestinos = new List<Posicion>();
+                //Escogemos las casillas alrededor
                 _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,Radio);
+
+                //Puntuamos las casillas
+
+                //Escogemos la mejor
             }
             else { 
             
