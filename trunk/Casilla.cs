@@ -140,6 +140,8 @@ namespace ico
         public int costoMovimiento( Casilla a)
         {
             int costo = 0;
+            if (a.tipoTerreno() == 2)
+                costo = 10;
             if (Math.Abs(_posicion.columna() - a.columna()) < 2 || Math.Abs(_posicion.fila() - a.fila()) < 2)
             {
                 switch (a.nivel() - _nivel)
@@ -155,6 +157,7 @@ namespace ico
                             costo = int.MaxValue;
                         else
                             costo += 2;
+                        
                         break;
                     default:
                         if (a.nivel() - _nivel < 0)
