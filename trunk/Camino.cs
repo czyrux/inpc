@@ -102,7 +102,7 @@ namespace ico
 #endregion
 
 #region Funciones
-        public  ArrayList  pathFinder(Casilla a, Mech yo, Casilla b, Tablero Tablero)
+        public  ArrayList  pathFinder(Casilla a, Mech ich, Casilla b, Tablero Tablero)
         {
             ArrayList cerradas = new ArrayList();
             ArrayList abiertas = new ArrayList();
@@ -115,7 +115,7 @@ namespace ico
             elemento.g = 0;
             elemento.h = a.posicion().distancia(b.posicion());
             elemento.f = elemento.h;
-            elemento.direccion = (Encaramiento)yo.ladoEncaramiento();
+            elemento.direccion = (Encaramiento)ich.ladoEncaramiento();
             elemento.padre = null;
 
             cerradas.Add(elemento);
@@ -133,7 +133,7 @@ namespace ico
                         continue;
 
                     // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
-                    aux=actual.costoMovimiento(elemento.casilla);
+                    aux=actual.costoMovimiento(elemento.casilla) + costoEncaramiento(actual,(Encaramiento)i,elemento.casilla, Tablero);
                     //aux = actual.posicion().distancia(elemento.casilla.posicion());
                     if (aux > 100)
                         continue;
