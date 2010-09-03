@@ -251,21 +251,26 @@ namespace ico
             return _mechs[objetivo];
         }
 
-        const int Radio = 3;
+        const int Radio = 2;
         private Posicion seleccionDestino(Mech objetivo) {
             if (_estrategia == Estrategia.Ofensiva)
             {
                 List<Posicion> posiblesDestinos = new List<Posicion>();
+                int[] puntuacion;
                 //Escogemos las casillas alrededor
                 _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,Radio);
 
-                Console.WriteLine("Casillas escogidas: "+posiblesDestinos.Count);
-                for (int i = 0; i < posiblesDestinos.Count; i++) {
-                    Console.WriteLine(i+": "+posiblesDestinos[i].ToString());
-                }
+                puntuacion = new int[posiblesDestinos.Count];
                 //Puntuamos las casillas
+                Console.WriteLine("Casillas escogidas: " + posiblesDestinos.Count);
+                for (int i = 0; i < posiblesDestinos.Count; i++)
+                {
+                    puntuacion[i]=puntuacionCasilla(posiblesDestinos[i]);
+                    Console.WriteLine(i + ": " + posiblesDestinos[i].ToString()+" punt:"+puntuacion[i]);
+                }
 
                 //Escogemos la mejor
+
             }
             else { 
             
@@ -274,6 +279,11 @@ namespace ico
             return null;
         }
 
+        private int puntuacionCasilla ( Posicion p) 
+        {
+
+            return 0;
+        }
         #endregion
 
         private void faseReaccion() {
