@@ -134,7 +134,8 @@ namespace ico
                     // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
                     aux=actual.costoMovimiento(elemento.casilla);
                     //aux = actual.posicion().distancia(elemento.casilla.posicion());
-
+                    if (aux > 100)
+                        continue;
                     // verifico si es intrancitable
                     if (/*elemento.casilla.costoMovimiento() >= 0 ||*/  aux >= 0){
 
