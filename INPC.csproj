@@ -48,6 +48,7 @@
     <Compile Include="Casilla.cs" />
     <Compile Include="Componente.cs" />
     <Compile Include="ConfiguracionJuego.cs" />
+    <Compile Include="Heuristica.cs" />
     <Compile Include="Inpc.cs" />
     <Compile Include="LocalizacionMech.cs" />
     <Compile Include="Mech.cs" />

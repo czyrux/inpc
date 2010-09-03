@@ -76,7 +76,7 @@ namespace ico
                         break;
 
                     case 3://pantanoso
-                        _puntosMovimientos++;
+                        _puntosMovimientos+=2;
                         break;
                 }
                 switch (_objetoTerreno)
