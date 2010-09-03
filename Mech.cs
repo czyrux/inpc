@@ -374,7 +374,6 @@ namespace ico {
 			
         #region metodosGet
 				
-	//METODOS GET ESTADO
         /// <summary>
         /// Indica el numero de jugador
         /// </summary>
@@ -482,7 +481,6 @@ namespace ico {
 		public int EstrucTorsoCentral() { return _EstrucTorsoCentral; }		
 		public int EstrucCabeza() { return _EstrucCabeza; }*/
 		
-	//METODOS GET FICHERO DEFINICION
 		public string nombre() { return _nombre; }
 		public string modelo() { return _modelo; }
 		public int tonelados() { return _toneladas; }
@@ -529,14 +527,6 @@ namespace ico {
             }
             else return null;
         }
-		/*public LocalizacionMech slotsBrazoIzquierdo() { return _slotsBrazoIzquierdo; }
-		public LocalizacionMech slotsTorsoIzquierdo() { return _slotsTorsoIzquierdo; }
-		public LocalizacionMech slotsPiernaIzquierda() { return _slotsPiernaIzquierda; }
-		public LocalizacionMech slotsPiernaDerecha() { return _slotsPiernaDerecha; }
-		public LocalizacionMech slotsTorsoDerecho() { return _slotsTorsoDerecho; }
-		public LocalizacionMech slotsBrazoDerecho() { return _slotsBrazoDerecho; }
-		public LocalizacionMech slotsTorsoCentral() { return _slotsTorsoCentral; }
-		public LocalizacionMech slotsCabeza() { return _slotsCabeza; }*/
 
         public int puntosAndar() { return _andarDefinicion; }
 		public int puntosCorrer() { return _correrDefinicion; }
