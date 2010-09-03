@@ -382,8 +382,6 @@ namespace ico {
 		public int posicionColumna() { return _posicion.columna();}
 		public int ladoEncaramiento() { return _ladoEncaramiento; }
 		public int ladoEncaramientoTorso() { return _ladoEncaramientoTorso; }
-        public Encaramiento ladoEncaramiento() { return (Encaramiento)_ladoEncaramiento; }
-        public Encaramiento ladoEncaramientoTorso() { return (Encaramiento)_ladoEncaramientoTorso; }
 		public int nivelTemp() { return _nivelTemp; }
 		public Boolean ardiendo() { return _ardiendo; }
 		public Boolean garrote() { return _garrote; }
