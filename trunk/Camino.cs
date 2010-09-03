@@ -67,9 +67,9 @@ namespace ico
             _nldv = _movimientos = 0;
         }
 
-        public Camino(Casilla de, Casilla a, Tablero tablero) {
+        public Camino(Casilla de,Mech ich, Casilla a, Tablero tablero) {
 
-           ArrayList camino = pathFinder(de, a, tablero);
+           ArrayList camino = pathFinder(de, ich, a, tablero);
            int j = 0;
           _length = camino.Count;
           _camino = new Casilla[_length];
@@ -158,6 +158,7 @@ namespace ico
                                 elemento.h = ((heuristica)abiertas[iaux]).h;
                                 elemento.f = elemento.g + elemento.h;
                                 elemento.padre = actual;
+                                elemento.direccion = (Encaramiento)i;
                                 abiertas[iaux] = elemento;
                             }
 
@@ -167,6 +168,7 @@ namespace ico
                             elemento.h = heuristica(elemento.casilla,b);
                             elemento.f = elemento.g + elemento.h;
                             elemento.padre = actual;
+                            elemento.direccion = (Encaramiento)i;
                             abiertas.Add(elemento);
                         }
                         
@@ -201,6 +203,16 @@ namespace ico
             return camino;
         }
 
+        private int costoEncaramiento(Casilla origenCasilla, Encaramiento direccion, Casilla destinoCasilla, Tablero t) {
+            if (t.colindante(origenCasilla.posicion(), direccion) == destinoCasilla)
+                return 0;
+            else if (t.colindante(origenCasilla.posicion(), direccion + 1) == destinoCasilla || t.colindante(origenCasilla.posicion(), direccion + 5) == destinoCasilla)
+                return 1;
+            else if (t.colindante(origenCasilla.posicion(), direccion + 2) == destinoCasilla || t.colindante(origenCasilla.posicion(), direccion + 4) == destinoCasilla)
+                return 2;
+            else 
+                return 3;
+        }
         private heuristica quienEsMiPadre(heuristica hijo, ArrayList lista) {
             foreach (heuristica i in lista) {
                 if (hijo.padre == i.casilla)

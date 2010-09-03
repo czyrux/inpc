@@ -196,7 +196,7 @@ namespace ico
                     Console.WriteLine("escribe la columnafila a ");
                     str = Console.ReadLine();
                     Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
-                    Camino Camino = new Camino(_tablero.Casilla(de), _tablero.Casilla(a), _tablero);
+                    Camino Camino = new Camino(_tablero.Casilla(de), _mechs[_myJugador], _tablero.Casilla(a), _tablero);
 
                     Camino.print();
 
