@@ -156,7 +156,18 @@ namespace ico
                         casillas.Add(_casillas[i, j].posicion());
                 }
         }
- 
+
+        public void casillasEnMov(Posicion actual, List<Posicion> casillas, int puntMov) 
+        {
+            for (int i = 0; i < _filas; i++)
+                for (int j = 0; j < _columnas; j++)
+                {
+
+                    if (this._casillas[i, j].posicion().distancia(actual) <= radio)
+                        casillas.Add(_casillas[i, j].posicion());
+                }
+
+        }
         public int filas() { return _filas; }
         public int columnas() { return _columnas; }
 
