@@ -194,10 +194,10 @@ namespace ico
                     }
                 }
 
-                //LLamamos recursivamente para cada una de las de la lista abierta
-                /*while (abiertas.Count > 0) {
-
-                }*/
+                //LLamamos recursivamente para cada una de las posiciones de la lista abierta
+                while (abiertas.Count > 0) {
+                    enRadio(abiertas, cerradas, visitadas, movimientos);
+                }
                 
             }
         }
