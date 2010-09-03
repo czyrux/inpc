@@ -161,7 +161,7 @@ namespace ico
                         break;
                     default:
                         if (a.nivel() - _nivel < 0)
-                            costo = 0;
+                            costo += 0;
                         else
                             return 1000;//<--- Es inaccesible devuelve el maximo valor posible
                         
@@ -293,7 +293,10 @@ namespace ico
         public int columna() {
             return _posicion.columna();
         }
-
+        public override string ToString()
+        {
+            return _posicion.ToString();
+        }
        /* public heuristica heuristica() {
             return _heuristica;
         }
