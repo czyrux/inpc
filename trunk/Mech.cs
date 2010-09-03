@@ -410,13 +410,53 @@ namespace ico {
         /// </summary>
         /// <returns>Variable de clase Posicion</returns>
 		public Posicion posicion() { return _posicion; }
-		public int posicionFila() { return _posicion.fila();} //POSICIONES
+
+        /// <summary>
+        /// Indica la fila donde se encuentra el mech
+        /// </summary>
+        /// <returns>Entero con el valor de la fila</returns>
+		public int posicionFila() { return _posicion.fila();}
+
+        /// <summary>
+        /// Indica la columna donde se encuentra el mech
+        /// </summary>
+        /// <returns>Entero con el valor de la columna</returns>
 		public int posicionColumna() { return _posicion.columna();}
+
+        /// <summary>
+        /// Indica el lado de encaramiento del mech
+        /// </summary>
+        /// <returns>Entero del 1-6</returns>
 		public int ladoEncaramiento() { return _ladoEncaramiento; }
+
+        /// <summary>
+        /// Indica el lado de encaramiento del torso del mech
+        /// </summary>
+        /// <returns>Entero 1-6</returns>
 		public int ladoEncaramientoTorso() { return _ladoEncaramientoTorso; }
+
+        /// <summary>
+        /// Indica el nivel de temperatura acumulada del mech
+        /// </summary>
+        /// <returns>Entero que indica el nivel de temp.</returns>
 		public int nivelTemp() { return _nivelTemp; }
+
+        /// <summary>
+        /// Indica si el mech esta ardiendo
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean ardiendo() { return _ardiendo; }
+
+        /// <summary>
+        /// Indica si el mech tiene garrote
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean garrote() { return _garrote; }
+
+        /// <summary>
+        /// Indica el tipo de garrote en caso de poseerlo
+        /// </summary>
+        /// <returns>Entero que indica el tipo de garrote</returns>
 		public int tipoGarrote() { return _tipoGarrote; }
 		
 		//puntos blindaje
