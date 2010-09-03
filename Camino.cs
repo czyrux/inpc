@@ -115,7 +115,7 @@ namespace ico
             elemento.g = 0;
             elemento.h = a.posicion().distancia(b.posicion());
             elemento.f = elemento.h;
-            elemento.direccion = yo.ladoEncaramiento();
+            elemento.direccion = (Encaramiento)yo.ladoEncaramiento();
             elemento.padre = null;
 
             cerradas.Add(elemento);
