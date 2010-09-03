@@ -149,48 +149,12 @@ namespace ico
         }
 
 
-        public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int movimientos ) {
-            if ( movimientos != 0){
-                int[,] casillasVisitadas = new int[_filas, _columnas];
-                Queue<Posicion> abiertas = new Queue<Posicion>();
-                abiertas.Enqueue(actual);
-                casillasVisitadas[actual.fila() - 1, actual.columna() - 1] = 1;
-                enRadio( abiertas, casillas, casillasVisitadas, movimientos+1);
-            }
-        }
-
-        private void enRadio( Queue<Posicion> abiertas, List<Posicion> cerradas , int[,] visitadas, int movimientos)
-        {
-            cerradas.Add(abiertas.Peek());
-            movimientos--;
-            Posicion aux , actual = abiertas.Dequeue();
-
-            if (movimientos > 0) {
-
-                //Añadimos las casillas a visitar
-                for (int i = 0; i < 7; i++)
-                {
-                    try
-                    {
-                        aux = colindante(actual, (Encaramiento)i).posicion();
-                    }
-                    catch (Exception e)
-                    {
-                        continue;
-                    }
-                    if (visitadas[aux.fila()-1, aux.columna()-1] != 1)
-                    {
-                        abiertas.Enqueue(aux);
-                        visitadas[aux.fila()-1, aux.columna()-1] = 1;
-                    }
+        public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int radio ) {
+            for (int i = 0; i < _filas; i++)
+                for (int j = 0; j < _columnas; j++) {
+                    if (this._casillas[i, j].posicion().distancia(actual) <= radio)
+                        casillas.Add(_casillas[i, j].posicion());
                 }
-
-                //LLamamos recursivamente para cada una de las posiciones de la lista abierta
-                while (abiertas.Count > 0) {
-                    enRadio(abiertas, cerradas, visitadas, movimientos);
-                }
-                
-            }
         }
  
         public int filas() { return _filas; }
