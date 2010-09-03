@@ -179,6 +179,7 @@ namespace ico
                     }
                 }
         }
+
         public int filas() { return _filas; }
         public int columnas() { return _columnas; }
 
