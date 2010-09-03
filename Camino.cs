@@ -74,8 +74,8 @@ namespace ico
            int j = 0;
           _length = camino.Count;
           _camino = new Casilla[_length];
-          foreach (Casilla i in camino) {
-              _camino[j] = i;
+          foreach (Heuristica i in camino) {
+              _camino[j] = i.casilla();
               j++;
           }
 
@@ -113,31 +113,32 @@ namespace ico
             int aux = 0, iaux=0, mejor=-1, gAcumulada=0;
             Boolean nueva = false;
 
-            elemento.casilla = a;
-            elemento.g = 0;
-            elemento.h = a.posicion().distancia(b.posicion());
-            elemento.f = elemento.h;
-            elemento.direccion = (Encaramiento)ich.ladoEncaramiento();
-            elemento.padre = elemento;
+            elemento.casilla(a);
+            elemento.g(0);
+            elemento.h(a.posicion().distancia(b.posicion()));
+            elemento.f(elemento.h());
+            elemento.direccion((Encaramiento)ich.ladoEncaramiento());
+            elemento.padre(elemento);
 
             Heuristica actual = elemento;
 
             cerradas.Add(elemento);
             do {
                 for (int i = 1; i < 7; i++) {
+                    elemento = new Heuristica();
                     try
                     {
-                        elemento.casilla = Tablero.colindante(actual.casilla.posicion(), (Encaramiento)i);//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
+                        elemento.casilla(Tablero.colindante(actual.casilla().posicion(), (Encaramiento)i));//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
                     }
                     catch (Exception e) {
                         continue;
                     }
                     // Ignoro las casillas que ya estan en la lista de cerradas.
-                    if (esta(cerradas,elemento.casilla))
+                    if (esta(cerradas,elemento.casilla()))
                         continue;
 
                     // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
-                    aux=actual.casilla.costoMovimiento(elemento.casilla) + costoEncaramiento(actual.casilla,(Encaramiento)i,elemento.casilla, Tablero);
+                    aux = actual.casilla().costoMovimiento(elemento.casilla()) + costoEncaramiento(actual.casilla(), (Encaramiento)i, elemento.casilla(), Tablero);
                     //aux = actual.posicion().distancia(elemento.casilla.posicion());
                     if (aux > 100)
                         continue;
@@ -145,13 +146,15 @@ namespace ico
                     if (/*elemento.casilla.costoMovimiento() >= 0 ||*/  aux >= 0){
 
                         // precalculo el costo de movimiento total a esa casilla desde la actual
-                        elemento.g = elemento.casilla.costoMovimiento() + aux + gAcumulada;
+                        elemento.g(elemento.casilla().costoMovimiento() + aux + gAcumulada);
 
                         // verifico si la casilla actual ya esta entre las abiertas
-                        if ((iaux = estaEn(abiertas, elemento.casilla)) >= 0){
+                        if ((iaux = estaEn(abiertas, elemento.casilla())) >= 0)
+                        {
 
                             // compruebo si desde la aterior era mejor que esta
-                            if (elemento.g >= ((Heuristica)abiertas[iaux]).g){
+                            if (elemento.g() >= ((Heuristica)abiertas[iaux]).g())
+                            {
                                 // si, si continuo sin hacer cambios
                                 continue;
                             }
@@ -159,20 +162,20 @@ namespace ico
                             else
                             {
                                 nueva = true;
-                                elemento.h = ((Heuristica)abiertas[iaux]).h;
-                                elemento.f = elemento.g + elemento.h;
-                                elemento.padre = actual;
-                                elemento.direccion = (Encaramiento)i;
+                                elemento.h(((Heuristica)abiertas[iaux]).h());
+                                elemento.f(elemento.g() + elemento.h());
+                                elemento.padre(actual);
+                                elemento.direccion((Encaramiento)i);
                                 abiertas[iaux] = elemento;
                             }
 
                         }
                         else {//si no estaba entre las abiertas inserto la nueva casilla
                             nueva = true;
-                            elemento.h = heuristica(elemento.casilla,b);
-                            elemento.f = elemento.g + elemento.h;
-                            elemento.padre = actual;
-                            elemento.direccion = (Encaramiento)i;
+                            elemento.h(heuristica(elemento.casilla(), b));
+                            elemento.f(elemento.g() + elemento.h());
+                            elemento.padre(actual);
+                            elemento.direccion((Encaramiento)i);
                             abiertas.Add(elemento);
                         }
                         
@@ -184,9 +187,9 @@ namespace ico
                 }
 
                 //buesca la mejor casilla entre las abiertas
-                mejor = mejorCasillaAbierta(abiertas, actual.casilla,b);
+                mejor = mejorCasillaAbierta(abiertas, actual.casilla(), b);
                 //actualizo la acomulacion de la g
-                gAcumulada = ((Heuristica)abiertas[mejor]).g;
+                gAcumulada = ((Heuristica)abiertas[mejor]).g();
                 //agrego la mejor casilla
                 cerradas.Add(abiertas[mejor]);
                 //pongo la mejor como la siguiente actual
@@ -194,22 +197,23 @@ namespace ico
                 //borro la mejor de las abiertas
                 abiertas.RemoveAt(mejor);
 
-            } while (actual.casilla != b);
+            } while (actual.casilla() != b);
 
+            elemento = new Heuristica();
 
-            elemento.casilla = b;
-            elemento.g = 0;
-            elemento.h = 0;
-            elemento.f = 0;
-            elemento.direccion = (Encaramiento)ich.ladoEncaramiento();
-            elemento.padre = (Heuristica)cerradas[cerradas.Count - 1];
+            elemento.casilla(b);
+            elemento.g(0);
+            elemento.h(0);
+            elemento.f(0);
+            elemento.direccion((Encaramiento)ich.ladoEncaramiento());
+            elemento.padre((Heuristica)cerradas[cerradas.Count - 1]);
             camino.Add(elemento);
 
             Heuristica padre = (Heuristica)cerradas[cerradas.Count - 1];
            do{
-                camino.Add(padre.padre);
-                padre = padre.padre;
-           }while(padre.casilla!=a);
+               camino.Add(padre.padre());
+               padre = padre.padre();
+           } while (padre.casilla() != a);
             
             
 
@@ -228,15 +232,15 @@ namespace ico
                 if (puntos - i >= camino.Count)
                     continue;
 
-                if (((Heuristica)camino[puntos - i]).g < puntos)
+                if (((Heuristica)camino[puntos - i]).g() < puntos)
                 {
                     l = posiblesEncaramientos((Heuristica)camino[puntos - i], destino, t);
 
                     for (int c = 1; c < l.Count; c++) {
-                        tmpC = costoEncaramiento(((Heuristica)camino[puntos - i]).casilla, ((Heuristica)camino[puntos - i]).direccion, (Encaramiento)l[c]);
-                        tmpJ = costoEncaramiento(((Heuristica)camino[puntos - i]).casilla, ((Heuristica)camino[puntos - i]).direccion, (Encaramiento)l[j]);
+                        tmpC = costoEncaramiento(((Heuristica)camino[puntos - i]).casilla(), ((Heuristica)camino[puntos - i]).direccion(), (Encaramiento)l[c]);
+                        tmpJ = costoEncaramiento(((Heuristica)camino[puntos - i]).casilla(), ((Heuristica)camino[puntos - i]).direccion(), (Encaramiento)l[j]);
 
-                        if (((Heuristica)camino[puntos - i]).g - tmpC < ich.puntosAndar())
+                        if (((Heuristica)camino[puntos - i]).g() - tmpC < ich.puntosAndar())
                             flag = true;
 
                         if (tmpJ>tmpC){
@@ -262,7 +266,7 @@ namespace ico
             List<int> l= new List<int>();
 
             for (int i = 1; i < 7; i++){
-                tmp=t.colindante(o.casilla.posicion(), (Encaramiento)i).posicion().distancia(destino.posicion());
+                tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino.posicion());
                 if (tmp <= min) {
                     l.Add(i);
                 }
@@ -374,9 +378,9 @@ namespace ico
                 }
                 else
                 {*/
-                if (/*((heuristica)abiertas[i]).g<20 && */((Heuristica)abiertas[i]).casilla == destino && ((Heuristica)abiertas[i]).padre.casilla == padre)
+                if (/*((heuristica)abiertas[i]).g<20 && */((Heuristica)abiertas[i]).casilla() == destino && ((Heuristica)abiertas[i]).padre().casilla() == padre)
                         return i;
-                if (((Heuristica)abiertas[max]).f > ((Heuristica)abiertas[i]).f /*&& ((heuristica)abiertas[i]).padre == padre*/)
+                if (((Heuristica)abiertas[max]).f() > ((Heuristica)abiertas[i]).f() /*&& ((heuristica)abiertas[i]).padre == padre*/)
                         max = i;
                 //}
             }
@@ -387,7 +391,7 @@ namespace ico
             int n = 0;
             foreach (Heuristica i in lista)
             {
-                if (i.casilla == elem)
+                if (i.casilla() == elem)
                     return n;
                 n++;
             }
@@ -397,7 +401,7 @@ namespace ico
         private Boolean esta(ArrayList lista, Casilla elem) {
             foreach (Heuristica i in lista)
             {
-                if (i.casilla == elem)
+                if (i.casilla() == elem)
                     return true;
             }
             return false;
