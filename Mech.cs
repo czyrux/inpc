@@ -5,6 +5,9 @@ using System.Collections;
 
 namespace ico {
 	
+    /// <summary>
+    /// Clase que tendra todos los parametros relacionados con el mech
+    /// </summary>
 	public class Mech {
 
         #region atributos
@@ -529,9 +532,9 @@ namespace ico {
             Console.WriteLine(); Console.WriteLine();
 		}
 
-        /*
-         * Metodo que calcula la media de la distancia por armas del mech
-         */
+        /// <summary>
+        /// Metodo que calcula la media de la distancia por armas del mech
+        /// </summary>
         private void calculoDistanciaTiro()
         {
             int media = 0, larga = 0, corta = 0;
@@ -551,9 +554,11 @@ namespace ico {
         }
 
         #region Funciones para componentes
-        /*
-         * Indica si un componente tipo arma tiene municion para ser disparada 
-         */
+        /// <summary>
+        /// Metodo que indica si un arma tiene municion para poder ser disparada
+        /// </summary>
+        /// <param name="arma">Componente del que se desea saber si tiene municion</param>
+        /// <returns>True en caso de poseer municion. False en caso opuesto.</returns>
         public bool tieneMunicion(Componente arma)
         {
             bool municion = false;
@@ -574,6 +579,11 @@ namespace ico {
             return municion;
         }
 
+        /// <summary>
+        /// Metodo que devuelve el slot donde esta hubicado un componente de tipo Arma
+        /// </summary>
+        /// <param name="c">Componente de tipo arma del que se desea saber el slot</param>
+        /// <returns>Entero correspondiente al slot</returns>
         public int slotArma (Componente c) {
 
             LocalizacionMech l = _slots[c.localizacionINT()];
@@ -590,6 +600,11 @@ namespace ico {
             return slot;
         }
 
+        /// <summary>
+        /// Metodo que indica el slot donde esta hubicada la municion del arma pasada como argumento
+        /// </summary>
+        /// <param name="arma">Componente del tipo arma a la que hay que encontrar el slot de la municion</param>
+        /// <returns>Entero correspondiente al slot</returns>
         public int slotMunicion(Componente arma) {
             int codigo = 0, localizacion = 0, slot = 0;
             Boolean salir = false;
@@ -631,6 +646,11 @@ namespace ico {
             return slot;
         }
 
+        /// <summary>
+        /// Metodo que nos indica la localizacion donde esta hubicada la municion del arma pasada como argumento
+        /// </summary>
+        /// <param name="arma">Componente del tipo arma a la que hay que encontrar la localizacion de la municion</param>
+        /// <returns>Cadena que indica la localizacion de la municion</returns>
         public String localizacionMunicion(Componente arma) {
             Boolean salir = false;
             String localizacion="";
@@ -655,9 +675,15 @@ namespace ico {
 
         #endregion
 
-        /*
-         * indica el tipo mech
-         */
+        /// <summary>
+        /// Metodo que devuelve un la puntuacion asociada al tipo de Mech en funcion de su tonelaje.
+        /// La nota sera la siguiente:
+        /// - Ligero: 3.0
+        /// - Medio: 5.0
+        /// - Pesado: 7.0
+        /// - Asalto: 10.0
+        /// </summary>
+        /// <returns>Flotante correspondiente a la puntuacion</returns>
         public float tipo()
         {
             float t;
@@ -680,10 +706,13 @@ namespace ico {
             return t;
         }
 
-        #region conosVision
-        /*
-         * Indica si una posicion esta dentro del cono delantero de vision de un mech
-         */
+        #region Metodos de los conosVision
+        /// <summary>
+        /// Metodo que indica si una posicion esta dentro del cono delantero de vision de un mech
+        /// </summary>
+        /// <param name="casilla">Posicion a observar</param>
+        /// <param name="encaramiento">Encaramiento hacia donde estamos mirando</param>
+        /// <returns>True en caso de estar en el cono delantero, false en caso opuesto</returns>
         public Boolean conoDelantero( Posicion casilla , int encaramiento ) 
         {
             Boolean enCono = false;
@@ -847,9 +876,12 @@ namespace ico {
             return enCono;
         }
 
-        /*
-         * Indica si una posicion esta dentro del cono trasero de vision de un mech
-         */
+        /// <summary>
+        /// Metodo que indica si una posicion esta dentro del cono trasero de vision de un mech
+        /// </summary>
+        /// <param name="casilla">Posicion a observar</param>
+        /// <param name="encaramiento">Encaramiento hacia donde estamos mirando</param>
+        /// <returns>True en caso de estar en el cono delantero, false en caso opuesto</returns>
         public Boolean conoTrasero(Posicion casilla, int encaramiento)
         {
             Boolean enCono = false;
@@ -1019,9 +1051,12 @@ namespace ico {
             return enCono;
         }
 
-        /*
-         * Indica si una posicion esta dentro del cono derecho de vision de un mech
-         */
+        /// <summary>
+        /// Metodo que indica si una posicion esta dentro del cono derecho de vision de un mech
+        /// </summary>
+        /// <param name="casilla">Posicion a observar</param>
+        /// <param name="encaramiento">Encaramiento hacia donde estamos mirando</param>
+        /// <returns>True en caso de estar en el cono delantero, false en caso opuesto</returns>
         public Boolean conoDerecho(Posicion casilla, int encaramiento) 
         {
             Boolean enCono = false;
@@ -1057,9 +1092,12 @@ namespace ico {
             return enCono;
         }
 
-        /*
-         * Indica si una posicion esta dentro del cono izquierdo de vision de un mech
-         */
+        /// <summary>
+        /// Metodo que indica si una posicion esta dentro del cono izquierdo de vision de un mech
+        /// </summary>
+        /// <param name="casilla">Posicion a observar</param>
+        /// <param name="encaramiento">Encaramiento hacia donde estamos mirando</param>
+        /// <returns>True en caso de estar en el cono delantero, false en caso opuesto</returns>
         public Boolean conoIzquierdo(Posicion casilla, int encaramiento)
         {
             Boolean enCono = false;
@@ -1074,34 +1112,13 @@ namespace ico {
 
         #endregion
 
-        //METODOS PARA VER LA SITUACION DEL MECH
-        /*public situacion situacionMech() {
-            situacion e;
 
-            if ( _desconectado ) {
-                e = situacion.Desconectado;
-            }
-            else if (_EstrucBrazoIzquierdo == 0 || _EstrucBrazoDerecho == 0 || _EstrucPiernaDerecha == 0 || _EstrucPiernaIzquierda == 0) {
-                //Le falta alguna extremidad
-                e = situacion.Incapacitado;
-            }
-            else if (_atascado) {
-                e = situacion.Atascado;
-            }
-            else if (_enSuelo) {
-                e = situacion.Tumbado;
-            }
-            else
-                e = situacion.Activo;
+        #region Metodos del estado del Mech
 
-            return e;
-        }*/
-
-
-        //METODOS PARA VER EL ESTADO DEL MECH
-        #region estadoMech
-
-        //ESTADO BLINDAJE
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajeMech() 
         {
             //tantos por ciento
@@ -1124,99 +1141,114 @@ namespace ico {
                 estadoBlindajeATD() * ATD +
                 estadoBlindajeATC() * ATC;
 
-            //Console.WriteLine("Estado del blindaje es: " + estado);
-
             return estado;
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del BI del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajeBI()
         {
-            float heridas = _BlindBrazoIzquierdo * 10 / _BlindBrazoIzquierdoInicial;
-            return heridas;
+            return (_BlindBrazoIzquierdo * 10 / _BlindBrazoIzquierdoInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del TI del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajeTI() 
         {
-            float heridas = _BlindTorsoIzquierdo * 10 / _BlindTorsoIzquierdoInicial;
-
-            //Console.WriteLine("estado torso izq " + heridas);
-            return heridas;
+            return (_BlindTorsoIzquierdo * 10 / _BlindTorsoIzquierdoInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del PI del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajePI() 
         {
-            float heridas = _BlindPiernaIzquierda * 10 / _BlindPiernaIzquierdaInicial;
-
-            //Console.WriteLine("estado pierna izq " + heridas);
-            return heridas;
+            return (_BlindPiernaIzquierda * 10 / _BlindPiernaIzquierdaInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del PD del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajePD() 
         {
-            float heridas = _BlindPiernaDerecha * 10 / _BlindPiernaDerechaInicial;
-
-            //Console.WriteLine("estado pierna drcha " + heridas);
-            return heridas;
+            return (_BlindPiernaDerecha * 10 / _BlindPiernaDerechaInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del TD del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajeTD()
         {
-            float heridas = _BlindTorsoDerecho * 10 / _BlindTorsoDerechoInicial;
-
-            //Console.WriteLine("estado torso drcha " + heridas);
-            return heridas;
+            return (_BlindTorsoDerecho * 10 / _BlindTorsoDerechoInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del BD del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajeBD()
         {
-            float heridas = _BlindBrazoDerecho * 10 / _BlindBrazoDerechoInicial;
-
-            //Console.WriteLine("estado brazo drcha " + heridas);
-            return heridas;
+            return (_BlindBrazoDerecho * 10 / _BlindBrazoDerechoInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del TC del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajeTC()
         {
-            float heridas = _BlindTorsoCentral * 10 / _BlindTorsoCentralInicial;
-
-            //Console.WriteLine("estado torso central " + heridas);
-            return heridas;
+            return (_BlindTorsoCentral * 10 / _BlindTorsoCentralInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del CAB del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajeCAB()
         {
-            float heridas = _BlindCabeza * 10 / _BlindCabezaInicial;
-
-            //Console.WriteLine("estado cabeza " + heridas);
-            return heridas;
+            return (_BlindCabeza * 10 / _BlindCabezaInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del ATI del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajeATI()
         {
-            float heridas = _BlindAtrasTorsoIzquierdo * 10 / _BlindAtrasTorsoIzquierdoInicial;
-
-            //Console.WriteLine("estado atras izq " + heridas);
-            return heridas;
+            return (_BlindAtrasTorsoIzquierdo * 10 / _BlindAtrasTorsoIzquierdoInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del ATD del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajeATD()
         {
-            float heridas = _BlindAtrasTorsoDerecho * 10 / _BlindAtrasTorsoDerechoInicial;
-
-            //Console.WriteLine("estado atras drcha " + heridas);
-            return heridas;
+            return (_BlindAtrasTorsoDerecho * 10 / _BlindAtrasTorsoDerechoInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre el blindaje del ATC del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajeATC()
         {
-            int heridas = _BlindAtrasTorsoCentral * 10 / _BlindAtrasTorsoCentralInicial;
-
-            //Console.WriteLine("estado atras central " + heridas);
-            return heridas;
+            return (_BlindAtrasTorsoCentral * 10 / _BlindAtrasTorsoCentralInicial);
         }
 
         
         //ESTADO ESTRUCTURA INTERNA
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre la estructura interna del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoEsctructuraMech()
         {
             //tantos por ciento
@@ -1236,73 +1268,79 @@ namespace ico {
                 estadoEsctructuraTC() * TC +
                 estadoEsctructuraCAB() * CAB;
 
-            //Console.WriteLine("Estado de la estructura interna es: " + estado);
-
             return estado;
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre la estructura interna del BI del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoEsctructuraBI()
         {
-            float heridas = _EstrucBrazoIzquierdo * 10 / _EstrucBrazoIzquierdoInicial;
-
-            //Console.WriteLine("Estado brazo izq " + heridas);
-            return heridas;
+            return (_EstrucBrazoIzquierdo * 10 / _EstrucBrazoIzquierdoInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre la estructura interna del TI del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoEsctructuraTI()
         {
-            float heridas = _EstrucTorsoIzquierdo * 10 / _EstrucTorsoIzquierdoInicial;
-
-            //Console.WriteLine("estado torso izq " + heridas);
-            return heridas;
+            return (_EstrucTorsoIzquierdo * 10 / _EstrucTorsoIzquierdoInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre la estructura interna del PI del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoEsctructuraPI()
         {
-            float heridas = _EstrucPiernaIzquierda * 10 / _EstrucPiernaIzquierdaInicial;
-
-            //Console.WriteLine("estado pierna izq " + heridas);
-            return heridas;
+            return (_EstrucPiernaIzquierda * 10 / _EstrucPiernaIzquierdaInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre la estructura interna del PD del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoEsctructuraPD()
         {
-            float heridas = _EstrucPiernaDerecha * 10 / _EstrucPiernaDerechaInicial;
-
-            //Console.WriteLine("estado pierna drcha " + heridas);
-            return heridas;
+            return (_EstrucPiernaDerecha * 10 / _EstrucPiernaDerechaInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre la estructura interna del TD del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoEsctructuraTD()
         {
-            float heridas = _EstrucTorsoDerecho * 10 / _EstrucTorsoDerechoInicial;
-
-            //Console.WriteLine("estado torso drcha " + heridas);
-            return heridas;
+            return (_EstrucTorsoDerecho * 10 / _EstrucTorsoDerechoInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre la estructura interna del BD del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoEsctructuraBD()
         {
-            float heridas = _EstrucBrazoDerecho * 10 / _EstrucBrazoDerechoInicial;
-
-            //Console.WriteLine("estado brazo drcha " + heridas);
-            return heridas;
+            return (_EstrucBrazoDerecho * 10 / _EstrucBrazoDerechoInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre la estructura interna del TC del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoEsctructuraTC()
         {
-            float heridas = _EstrucTorsoCentral * 10 / _EstrucTorsoCentralInicial;
-
-            //Console.WriteLine("estado torso central " + heridas);
-            return heridas;
+            return (_EstrucTorsoCentral * 10 / _EstrucTorsoCentralInicial);
         }
 
+        /// <summary>
+        /// Metodo que devuelve una nota entre 0-10 sobre la estructura interna del CAB del Mech
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float estadoEsctructuraCAB()
         {
-            float heridas = _EstrucCabeza * 10 / _EstrucCabezaInicial;
-
-            //Console.WriteLine("estado cabeza " + heridas);
-            return heridas;
+            return (_EstrucCabeza * 10 / _EstrucCabezaInicial);
         }
 
         #endregion
