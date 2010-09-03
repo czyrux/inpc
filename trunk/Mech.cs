@@ -375,11 +375,40 @@ namespace ico {
         #region metodosGet
 				
 	//METODOS GET ESTADO
+        /// <summary>
+        /// Indica el numero de jugador
+        /// </summary>
+        /// <returns>Entero</returns>
 		public int numeroJ() { return _numeroJ; }
+
+        /// <summary>
+        /// Indica si el mech esta operativo
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean operativo() { return _operativo; }
+
+        /// <summary>
+        /// Indica si el mech esta desconectado
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean desconectado(){return _desconectado; }
+
+        /// <summary>
+        /// Indica si el mech esta atascado
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean atascado(){ return _atascado; }
+
+        /// <summary>
+        /// Indica si el mech esta en el suelo
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean enSuelo(){ return _enSuelo; }
+
+        /// <summary>
+        /// Posicion que ocupa el mech en el tablero
+        /// </summary>
+        /// <returns>Variable de clase Posicion</returns>
 		public Posicion posicion() { return _posicion; }
 		public int posicionFila() { return _posicion.fila();} //POSICIONES
 		public int posicionColumna() { return _posicion.columna();}
@@ -413,7 +442,7 @@ namespace ico {
 		public int EstrucTorsoCentral() { return _EstrucTorsoCentral; }		
 		public int EstrucCabeza() { return _EstrucCabeza; }*/
 		
-	//METODOS GET DEFINICION
+	//METODOS GET FICHERO DEFINICION
 		public string nombre() { return _nombre; }
 		public string modelo() { return _modelo; }
 		public int tonelados() { return _toneladas; }
@@ -1345,9 +1374,11 @@ namespace ico {
 
         #endregion
 
-        /*
-         * Indica una nota con el estado del mech 0-10
-         */
+
+        /// <summary>
+        /// Metodo que indica la nota global del estado del Mech. Comprendida entre 0-10
+        /// </summary>
+        /// <returns>Flotante que indica la nota</returns>
         public float notaEstado()
         {
             //porcentajes
@@ -1367,16 +1398,19 @@ namespace ico {
             return nota;
         }
 
-        #endregion
 
-        #region PENDIENTES
-
-        /*
-         * Metodo que calcula, para el arma pasada como argumento, la media de tirada que se necesita para impactar al objetivo
-         */
+        /// <summary>
+        /// Metodo que calcula, para el arma pasada como argumento, la nota de tirada aproximada que se necesita para impactar al objetivo
+        /// </summary>
+        /// <param name="arma">Componente de tipo arma que se desea disparar</param>
+        /// <param name="objetivo">Mech al cual se va a disparar</param>
+        /// <param name="mapa">Tablero del juego</param>
+        /// <param name="movimientoPropio">Cadena que indica el tipo de movimiento realizado por el mech atacante</param>
+        /// <param name="movimientoObjetivo">Cadena que indica el tipo de movimiento realizado por el mech objetivo</param>
+        /// <returns>Entero correspondiente a la puntuacion calculada</returns>
         public int tiradaImpacto(Componente arma, Mech objetivo, Tablero mapa, String movimientoPropio = "Andar", String movimientoObjetivo = "Andar")
         {
-            int puntuacion = 0 , distancia= _posicion.distancia(objetivo.posicion()) ;
+            int puntuacion = 0, distancia = _posicion.distancia(objetivo.posicion());
 
             //Añadimos el modificador de distancia
             if (distancia < arma.distanciaCorta())
@@ -1393,9 +1427,10 @@ namespace ico {
             //Console.WriteLine("Distancia: " + puntuacion);
             //El modificador de distancia minima no lo tenemos en cuenta puesto que las armas elegidas como condicion no estarna en 
             //distancia minima
-            
+
             //Modificador de movimiento atacante
-            switch (movimientoPropio) {
+            switch (movimientoPropio)
+            {
                 case "Inmovil":
                     puntuacion += 0;
                     break;
@@ -1456,17 +1491,19 @@ namespace ico {
                     break;
             }
             //si el terreno es agua
-            if (mapa.Casilla(objetivo.posicion()).tipoTerreno() == 2) {
+            if (mapa.Casilla(objetivo.posicion()).tipoTerreno() == 2)
+            {
                 if (mapa.Casilla(objetivo.posicion()).nivel() == -1)
                 {
                     puntuacion -= 1;
-                }else if (mapa.Casilla(objetivo.posicion()).nivel() >= 2 )
+                }
+                else if (mapa.Casilla(objetivo.posicion()).nivel() >= 2)
                     puntuacion = 100;
-            
+
             }
             //Console.WriteLine("Terreno: " + puntuacion);
             //Modificadores de calor
-            if ( _nivelTemp >= 0 && _nivelTemp <= 7)
+            if (_nivelTemp >= 0 && _nivelTemp <= 7)
             {
                 puntuacion += 0;
             }
@@ -1501,7 +1538,6 @@ namespace ico {
             Console.WriteLine("Arma: " + arma.nombre() + " tirada para impacto:" + puntuacion);
             return puntuacion;
         }
-
         #endregion
     }
 
