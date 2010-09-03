@@ -3,6 +3,7 @@ using System.Collections;
 using System.Text;
 using System.Diagnostics;
 using System.IO;
+using System.Collections.Generic;
 namespace ico
 {
     public class Camino
@@ -102,28 +103,31 @@ namespace ico
 #endregion
 
 #region Funciones
+     
         public  ArrayList  pathFinder(Casilla a, Mech ich, Casilla b, Tablero Tablero)
         {
             ArrayList cerradas = new ArrayList();
             ArrayList abiertas = new ArrayList();
             ArrayList camino = new ArrayList();
-            heuristica elemento;
+            Heuristica elemento=new Heuristica();
             int aux = 0, iaux=0, mejor=-1, gAcumulada=0;
-            Casilla actual = a;
             Boolean nueva = false;
+
             elemento.casilla = a;
             elemento.g = 0;
             elemento.h = a.posicion().distancia(b.posicion());
             elemento.f = elemento.h;
             elemento.direccion = (Encaramiento)ich.ladoEncaramiento();
-            elemento.padre = null;
+            elemento.padre = elemento;
+
+            Heuristica actual = elemento;
 
             cerradas.Add(elemento);
             do {
                 for (int i = 1; i < 7; i++) {
                     try
                     {
-                        elemento.casilla = Tablero.colindante(actual.posicion(), (Encaramiento)i);//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
+                        elemento.casilla = Tablero.colindante(actual.casilla.posicion(), (Encaramiento)i);//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
                     }
                     catch (Exception e) {
                         continue;
@@ -133,7 +137,7 @@ namespace ico
                         continue;
 
                     // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
-                    aux=actual.costoMovimiento(elemento.casilla) + costoEncaramiento(actual,(Encaramiento)i,elemento.casilla, Tablero);
+                    aux=actual.casilla.costoMovimiento(elemento.casilla) + costoEncaramiento(actual.casilla,(Encaramiento)i,elemento.casilla, Tablero);
                     //aux = actual.posicion().distancia(elemento.casilla.posicion());
                     if (aux > 100)
                         continue;
@@ -147,7 +151,7 @@ namespace ico
                         if ((iaux = estaEn(abiertas, elemento.casilla)) >= 0){
 
                             // compruebo si desde la aterior era mejor que esta
-                            if (elemento.g > ((heuristica)abiertas[iaux]).g){
+                            if (elemento.g >= ((Heuristica)abiertas[iaux]).g){
                                 // si, si continuo sin hacer cambios
                                 continue;
                             }
@@ -155,7 +159,7 @@ namespace ico
                             else
                             {
                                 nueva = true;
-                                elemento.h = ((heuristica)abiertas[iaux]).h;
+                                elemento.h = ((Heuristica)abiertas[iaux]).h;
                                 elemento.f = elemento.g + elemento.h;
                                 elemento.padre = actual;
                                 elemento.direccion = (Encaramiento)i;
@@ -180,29 +184,93 @@ namespace ico
                 }
 
                 //buesca la mejor casilla entre las abiertas
-                mejor = mejorCasillaAbierta(abiertas, actual,b);
+                mejor = mejorCasillaAbierta(abiertas, actual.casilla,b);
                 //actualizo la acomulacion de la g
-                gAcumulada = ((heuristica)abiertas[mejor]).g;
+                gAcumulada = ((Heuristica)abiertas[mejor]).g;
                 //agrego la mejor casilla
                 cerradas.Add(abiertas[mejor]);
                 //pongo la mejor como la siguiente actual
-                actual = ((heuristica)abiertas[mejor]).casilla;
+                actual = (Heuristica)abiertas[mejor];
                 //borro la mejor de las abiertas
                 abiertas.RemoveAt(mejor);
-                //if (actual.posicion().ToString() == "0606")
-                  //  b = b;
-            } while (actual != b);
 
-            camino.Add(b);
-            heuristica padre=(heuristica)cerradas[cerradas.Count-1];
+            } while (actual.casilla != b);
+
+
+            elemento.casilla = b;
+            elemento.g = 0;
+            elemento.h = 0;
+            elemento.f = 0;
+            elemento.direccion = (Encaramiento)ich.ladoEncaramiento();
+            elemento.padre = (Heuristica)cerradas[cerradas.Count - 1];
+            camino.Add(elemento);
+
+            Heuristica padre = (Heuristica)cerradas[cerradas.Count - 1];
            do{
                 camino.Add(padre.padre);
-                padre = quienEsMiPadre(padre,cerradas);
+                padre = padre.padre;
            }while(padre.casilla!=a);
+            
+            
+
             camino.Reverse();
+
             return camino;
         }
 
+        private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t) {
+
+            int puntos = ich.puntosAndar()/2, j=0,tmpC=0,tmpJ=0;
+            Boolean flag=false, flagj=false;
+            List<int> l;
+
+            for (int i = 0; i < camino.Count - (1 + puntos); i++) {
+                if (puntos - i >= camino.Count)
+                    continue;
+
+                if (((Heuristica)camino[puntos - i]).g < puntos)
+                {
+                    l = posiblesEncaramientos((Heuristica)camino[puntos - i], destino, t);
+
+                    for (int c = 1; c < l.Count; c++) {
+                        tmpC = costoEncaramiento(((Heuristica)camino[puntos - i]).casilla, ((Heuristica)camino[puntos - i]).direccion, (Encaramiento)l[c]);
+                        tmpJ = costoEncaramiento(((Heuristica)camino[puntos - i]).casilla, ((Heuristica)camino[puntos - i]).direccion, (Encaramiento)l[j]);
+
+                        if (((Heuristica)camino[puntos - i]).g - tmpC < ich.puntosAndar())
+                            flag = true;
+
+                        if (tmpJ>tmpC){
+                            flagj = true;
+                            j = c;
+                        } 
+                    }
+
+                    if (!flag)
+                        flagj = false;
+                    else
+                        return j;
+
+                    j = 0;
+                }
+            }
+
+            return -1;
+        }
+        private List<int> posiblesEncaramientos(Heuristica o, Casilla destino, Tablero t)
+        {
+            int min=10000, tmp=0;
+            List<int> l= new List<int>();
+
+            for (int i = 1; i < 7; i++){
+                tmp=t.colindante(o.casilla.posicion(), (Encaramiento)i).posicion().distancia(destino.posicion());
+                if (tmp <= min) {
+                    l.Add(i);
+                }
+            }
+
+            return l;
+        }
+        
         private int costoEncaramiento(Casilla origenCasilla, Encaramiento direccion, Casilla destinoCasilla, Tablero t) {
             if (t.colindante(origenCasilla.posicion(), direccion) == destinoCasilla)
                 return 0;
@@ -213,13 +281,31 @@ namespace ico
             else 
                 return 3;
         }
-        private heuristica quienEsMiPadre(heuristica hijo, ArrayList lista) {
+        private int costoEncaramiento(Casilla origenCasilla, Encaramiento o, Encaramiento des)
+        {
+           switch (Math.Abs(o-des)){
+               case 0:
+                   return 0;
+               case 1:
+                   return 1;
+               case 2:
+                   return 2;
+               case 3:
+                   return 3;
+               case 4:
+                   return 2;
+               case 5:
+                   return 1;
+           }
+           return -1;
+        }
+        /*private heuristica quienEsMiPadre(heuristica hijo, ArrayList lista) {
             foreach (heuristica i in lista) {
                 if (hijo.padre == i.casilla)
                     return i;
             }
             return hijo;
-        }
+        }*/
         public int costoMovimiento() 
         {    
                 for (int i = 0; i < _length; i++){
@@ -282,24 +368,25 @@ namespace ico
             int max = 0;
             for (int i = 1; i < abiertas.Count; i++ )
             {
-                if (max < 0){
+               /* if (max < 0){
                     if (((heuristica)abiertas[i]).padre == padre)
                         max = i;
                 }
                 else
-                {
-                    if (/*((heuristica)abiertas[i]).g<20 && */((heuristica)abiertas[i]).casilla == destino && ((heuristica)abiertas[i]).padre == padre)
+                {*/
+                if (/*((heuristica)abiertas[i]).g<20 && */((Heuristica)abiertas[i]).casilla == destino && ((Heuristica)abiertas[i]).padre.casilla == padre)
                         return i;
-                    if (((heuristica)abiertas[max]).f > ((heuristica)abiertas[i]).f /*&& ((heuristica)abiertas[i]).padre == padre*/)
+                if (((Heuristica)abiertas[max]).f > ((Heuristica)abiertas[i]).f /*&& ((heuristica)abiertas[i]).padre == padre*/)
                         max = i;
-                }
+                //}
             }
             return max;
         }
 
         private int estaEn(ArrayList lista, Casilla  elem) {
             int n = 0;
-            foreach (heuristica i in lista) {
+            foreach (Heuristica i in lista)
+            {
                 if (i.casilla == elem)
                     return n;
                 n++;
@@ -308,7 +395,8 @@ namespace ico
         }
 
         private Boolean esta(ArrayList lista, Casilla elem) {
-            foreach(heuristica i in lista){
+            foreach (Heuristica i in lista)
+            {
                 if (i.casilla == elem)
                     return true;
             }
