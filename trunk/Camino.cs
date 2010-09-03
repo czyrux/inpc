@@ -214,8 +214,8 @@ namespace ico
                camino.Add(padre.padre());
                padre = padre.padre();
            } while (padre.casilla() != a);
-            
-            
+           aux = caminoReal(camino, a, ich, Tablero);
+           camino = camino.GetRange(0, aux+1);
 
             camino.Reverse();
 
@@ -230,7 +230,7 @@ namespace ico
 
             for (int i = 0; i < camino.Count - (1 + puntos); i++) {
                 if (puntos - i >= camino.Count)
-                    continue;
+                    puntos = camino.Count - 1;
 
                 if (((Heuristica)camino[puntos - i]).g() < puntos)
                 {
@@ -252,7 +252,10 @@ namespace ico
                     if (!flag)
                         flagj = false;
                     else
-                        return j;
+                    {
+                        ((Heuristica)camino[puntos - i]).direccion((Encaramiento)l[j]);
+                        return puntos - i;
+                    }
 
                     j = 0;
                 }
@@ -339,7 +342,7 @@ namespace ico
         { 
             string str="El camino es: ";
             foreach (Casilla i in _camino)
-                str += i.posicion().ToString() + "->";
+                str += "("+i.posicion().ToString()+", "+ "dir" +")"+ "->";
             str += "FIN";
             Console.WriteLine(str);
         }
