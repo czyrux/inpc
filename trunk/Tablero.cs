@@ -195,9 +195,9 @@ namespace ico
                 }
 
                 //LLamamos recursivamente para cada una de las de la lista abierta
-                while (abiertas.Count > 0) {
+                /*while (abiertas.Count > 0) {
 
-                }
+                }*/
                 
             }
         }
