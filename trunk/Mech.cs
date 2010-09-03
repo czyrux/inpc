@@ -466,9 +466,9 @@ namespace ico {
 		public LocalizacionMech slotsTorsoCentral() { return _slotsTorsoCentral; }
 		public LocalizacionMech slotsCabeza() { return _slotsCabeza; }*/
 
-	/*	public int andarDefinicion() { return _andarDefinicion; }
-		public int correrDefinicion() { return _correrDefinicion; }
-		public int saltarDefinicion() { return _saltarDefinicion; } */
+        public int puntosAndar() { return _andarDefinicion; }
+		public int puntosCorrer() { return _correrDefinicion; }
+		public int puntosSaltar() { return _saltarDefinicion; }
 		public int tipoRadiador() { return _tipoRadiador; }
 		
 		public int distanciaTiroCorta() { return _distanciaTiroCorta;}

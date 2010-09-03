@@ -258,10 +258,10 @@ namespace ico
                 List<Posicion> posiblesDestinos = new List<Posicion>();
                 int[] puntuacion;
                 //Escogemos las casillas alrededor
-                _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,Radio);
-
-                puntuacion = new int[posiblesDestinos.Count];
+                //_tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,Radio);
+                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosCorrer());
                 //Puntuamos las casillas
+                puntuacion = new int[posiblesDestinos.Count];
                 Console.WriteLine("Casillas escogidas: " + posiblesDestinos.Count);
                 for (int i = 0; i < posiblesDestinos.Count; i++)
                 {

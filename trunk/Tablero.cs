@@ -157,16 +157,27 @@ namespace ico
                 }
         }
 
-        public void casillasEnMov(Posicion actual, List<Posicion> casillas, int puntMov) 
+        public void casillasEnMov(Mech ich, List<Posicion> casillas, int puntMov) 
         {
+            int dist;
             for (int i = 0; i < _filas; i++)
                 for (int j = 0; j < _columnas; j++)
                 {
-
-                    if (this._casillas[i, j].posicion().distancia(actual) <= radio)
-                        casillas.Add(_casillas[i, j].posicion());
+                    dist = this._casillas[i, j].posicion().distancia(ich.posicion());
+                    if ( dist <= puntMov) {
+                        //si esta en cono derecho o izquierdo
+                        if ( (ich.conoDerecho(this._casillas[i, j].posicion(), ich.ladoEncaramiento()) || ich.conoIzquierdo(this._casillas[i, j].posicion(), ich.ladoEncaramiento())) && dist<=puntMov-2)
+                        {
+                            casillas.Add(_casillas[i, j].posicion());
+                        }
+                        else if (ich.conoTrasero(this._casillas[i, j].posicion(), ich.ladoEncaramiento()) && dist <= puntMov - 3)
+                        {
+                            casillas.Add(_casillas[i, j].posicion());
+                        }
+                        else
+                            casillas.Add(_casillas[i, j].posicion());
+                    }
                 }
-
         }
         public int filas() { return _filas; }
         public int columnas() { return _columnas; }
