@@ -251,7 +251,7 @@ namespace ico
             return _mechs[objetivo];
         }
 
-        const int Radio = 5;
+        const int Radio = 3;
         private Posicion seleccionDestino(Mech objetivo) {
             if (_estrategia == Estrategia.Ofensiva)
             {
@@ -259,6 +259,10 @@ namespace ico
                 //Escogemos las casillas alrededor
                 _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,Radio);
 
+                Console.WriteLine("Casillas escogidas: "+posiblesDestinos.Count);
+                for (int i = 0; i < posiblesDestinos.Count; i++) {
+                    Console.WriteLine(i+": "+posiblesDestinos[i].ToString());
+                }
                 //Puntuamos las casillas
 
                 //Escogemos la mejor

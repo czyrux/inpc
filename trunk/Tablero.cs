@@ -148,16 +148,6 @@ namespace ico
             return devolver;
         }
 
-        //Funcion que devuelve la distancia aproximada entre el punto a y el punto b.
-        /*public int distanciaCasillas(Posicion a, Posicion b)
-        {
-            //dx <----La distancia entre la x de a y la x de b. Idem para la dy
-            int dx = Math.Abs(a.columna() + b.columna()), dy = Math.Abs(b.fila() + a.fila());
-
-            // (dx^2+dy^2)^1/2<-----La parte entera
-            return (int)Math.Truncate(Math.Pow((Math.Pow(dx, 2) + Math.Pow(dx, 2)), 0.5));
-
-        }*/
 
         public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int movimientos ) {
             if ( movimientos != 0){
@@ -187,10 +177,10 @@ namespace ico
                     {
                         continue;
                     }
-                    if (visitadas[aux.fila(), aux.columna()] != 1)
+                    if (visitadas[aux.fila()-1, aux.columna()-1] != 1)
                     {
                         abiertas.Enqueue(aux);
-                        visitadas[aux.fila(), aux.columna()] = 1;
+                        visitadas[aux.fila()-1, aux.columna()-1] = 1;
                     }
                 }
 
