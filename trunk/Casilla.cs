@@ -108,7 +108,7 @@ namespace ico
             return _puntosMovimientos;
         }
 
-        public static int costoMovimiento(Casilla de, Casilla a)
+       /* public static int costoMovimiento(Casilla de, Casilla a)
         {
             int costo = 0;
             if (Math.Abs(de.columna() - a.columna()) < 2 || Math.Abs(de.fila() - a.fila()) < 2)
@@ -123,19 +123,19 @@ namespace ico
                         break;
                     case 2:
                         if (de.tipoTerreno() == 2)
-                            costo = int.MaxValue;
+                            costo = 1000;
                         else
                             costo += 2;
                         break;
                     default:
-                        return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
+                        return 1000;//<--- Es inaccesible devuelve el maximo valor posible
 
                 }
             }
             else return int.MaxValue;
 
             return costo;
-        }
+        }*/
 
         public int costoMovimiento( Casilla a)
         {
@@ -154,7 +154,7 @@ namespace ico
                         break;
                     case 2:
                         if (_tipoTerreno == 2)
-                            costo = int.MaxValue;
+                            costo = 1000;
                         else
                             costo += 2;
                         
@@ -163,12 +163,12 @@ namespace ico
                         if (a.nivel() - _nivel < 0)
                             costo = 0;
                         else
-                            return int.MaxValue;//<--- Es inaccesible devuelve el maximo valor posible
+                            return 1000;//<--- Es inaccesible devuelve el maximo valor posible
                         
                         break;
                 }
             }
-            else return int.MaxValue;
+            else return 1000;
 
             return costo;
         }
