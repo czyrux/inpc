@@ -80,7 +80,7 @@ namespace ico
      * Enumerado que define las posibles estrategias que puede tomar un mech
      */ 
     public enum Estrategia { 
-        Ofensiva ,
+        Agresiva ,
         Defensiva ,
     };
 }

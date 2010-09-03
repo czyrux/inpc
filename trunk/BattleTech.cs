@@ -96,7 +96,7 @@ namespace ico
 
             if (_mechs[_myJugador].notaEstado() >= 7.3)
             {
-                _estrategia = Estrategia.Ofensiva;
+                _estrategia = Estrategia.Agresiva;
             }
             else {
                 //Vemos si somos el jugador con la nota mas alta
@@ -109,7 +109,7 @@ namespace ico
                     }
 
                 if (max == _myJugador) {
-                    _estrategia = Estrategia.Ofensiva;
+                    _estrategia = Estrategia.Agresiva;
                 }else
                     _estrategia = Estrategia.Defensiva;
             }
@@ -175,7 +175,7 @@ namespace ico
                 determinarEstrategia();
 
                 //Seleccionamos el objetivo hacia el que vamos a dirigirnos en caso de ser una estrategia ofensiva
-                if (_estrategia == Estrategia.Ofensiva)
+                if (_estrategia == Estrategia.Agresiva)
                 {
                     objetivo = eleccionObjetivo();
                 }
@@ -251,38 +251,192 @@ namespace ico
             return _mechs[objetivo];
         }
 
-        const int Radio = 2;
-        private Posicion seleccionDestino(Mech objetivo) {
-            if (_estrategia == Estrategia.Ofensiva)
+        const int Radio = 5;
+        private Posicion seleccionDestino(Mech objetivo) 
+        {
+            List<Posicion> posiblesDestinos = new List<Posicion>();
+            int[] puntuacion;
+            Posicion destino = null;
+
+            if (_estrategia == Estrategia.Agresiva)
             {
-                List<Posicion> posiblesDestinos = new List<Posicion>();
-                int[] puntuacion;
+
                 //Escogemos las casillas alrededor
-                //_tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,Radio);
-                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosCorrer());
+                _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,Radio);
+
                 //Puntuamos las casillas
                 puntuacion = new int[posiblesDestinos.Count];
-                Console.WriteLine("Casillas escogidas: " + posiblesDestinos.Count);
+                //Console.WriteLine("Casillas escogidas: " + posiblesDestinos.Count);
                 for (int i = 0; i < posiblesDestinos.Count; i++)
                 {
-                    puntuacion[i]=puntuacionCasilla(posiblesDestinos[i]);
-                    Console.WriteLine(i + ": " + posiblesDestinos[i].ToString()+" punt:"+puntuacion[i]);
+                    puntuacion[i]=puntuacionCasilla(posiblesDestinos[i],objetivo);
+                    //Console.WriteLine(i + ": " + posiblesDestinos[i].ToString()+" punt:"+puntuacion[i]);
                 }
 
-                //Escogemos la mejor
+                //Escogemos las que tienen mejores puntuaciones
+                int max = 0;
+                for (int i = 0; i < puntuacion.Length; i++)
+                    if (puntuacion[i] > max)
+                        max = puntuacion[i];
 
+                for (int i = 0; i < puntuacion.Length; i++) {
+                    if (puntuacion[i] != max) {
+                        posiblesDestinos[i] = null;
+                    }
+                }
+
+                Console.WriteLine("Casillas finales: " + posiblesDestinos.Count);
+                for (int i = 0; i < posiblesDestinos.Count; i++)
+                {
+                    if ( posiblesDestinos[i]!=null)
+                        Console.WriteLine(i + ": " + posiblesDestinos[i].ToString() + " punt:" + puntuacion[i]);
+                }
+
+                //De las que tienen mejores puntuaciones escogemos la mas cercana al objetivo
+                int min = int.MaxValue;
+                int posicion=0;
+                for (int i = 0; i < posiblesDestinos.Count; i++)
+                {
+                    if (posiblesDestinos[i] != null && objetivo.posicion().distancia(posiblesDestinos[i]) < min)
+                    {
+                        posicion = i;
+                        destino = posiblesDestinos[i];
+                        min = objetivo.posicion().distancia(posiblesDestinos[i]);
+                    }
+                }
+
+                Console.WriteLine("Destino: "+destino.ToString()+" i:"+posicion);
             }
-            else { 
-            
+            else {
+                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosCorrer());
             }
 
             return null;
         }
+        
 
-        private int puntuacionCasilla ( Posicion p) 
+        private int puntuacionCasilla ( Posicion p , Mech objetivo ) 
         {
+            int puntuacion = 0;
 
-            return 0;
+            //Estrategia agresiva
+            if (_estrategia == Estrategia.Agresiva)
+            {
+                //Puntuacion por tipo terreno
+                switch (_tablero.Casilla(p).tipoTerreno()) { 
+                    case 0://despejado
+                        puntuacion += 3;
+                        break;
+                    case 1://pavimentado
+                        puntuacion += 3;
+                        break;
+                    case 2://agua
+                        puntuacion += 0;
+                        break;
+                    case 3://pantanoso
+                        puntuacion += 1;
+                        break;
+                    default:
+                        break;
+                }
+
+                //Puntuacion por objeto en el terreno
+                switch (_tablero.Casilla(p).objetoTerreno()) {
+                    case 0://escombros
+                        puntuacion += 0;
+                        break;
+                    case 1://bosque ligero
+                        puntuacion += 2;
+                        break;
+                    case 2://bosque denso
+                        puntuacion += 2;
+                        break;
+                    case 3://edificio ligero
+                        puntuacion += 1;
+                        break;
+                    case 4://edificio medio
+                        puntuacion += 1;
+                        break;
+                    case 5://edificio pesado
+                        puntuacion += 1;
+                        break;
+                    case 6://edificio reforzado
+                        puntuacion += 1;
+                        break;
+                    case 7://bunker
+                        puntuacion += 2;
+                        break;
+                    default:
+                        break;
+                }
+
+                //Puntuacion por nivel
+                puntuacion += _tablero.Casilla(p).nivel();
+
+                //Bonus por estar a la espalda del enemigo
+                if (objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
+                    puntuacion += 4;
+            }
+            else //Estrategia defensiva
+            {
+                //Puntuacion por tipo terreno
+                switch (_tablero.Casilla(p).tipoTerreno())
+                {
+                    case 0://despejado
+                        puntuacion += 1;
+                        break;
+                    case 1://pavimentado
+                        puntuacion += 3;
+                        break;
+                    case 2://agua
+                        puntuacion += 0;
+                        break;
+                    case 3://pantanoso
+                        puntuacion += 1;
+                        break;
+                    default:
+                        break;
+                }
+
+                //Puntuacion por objeto en el terreno
+                switch (_tablero.Casilla(p).objetoTerreno())
+                {
+                    case 0://escombros
+                        puntuacion += 0;
+                        break;
+                    case 1://bosque ligero
+                        puntuacion += 4;
+                        break;
+                    case 2://bosque denso
+                        puntuacion += 5;
+                        break;
+                    case 3://edificio ligero
+                        puntuacion += 0;
+                        break;
+                    case 4://edificio medio
+                        puntuacion += 0;
+                        break;
+                    case 5://edificio pesado
+                        puntuacion += 0;
+                        break;
+                    case 6://edificio reforzado
+                        puntuacion += 0;
+                        break;
+                    case 7://bunker
+                        puntuacion += 0;
+                        break;
+                    default:
+                        break;
+                }
+
+                //Puntuacion por nivel
+                puntuacion -= _tablero.Casilla(p).nivel();
+
+                //Bonus por distancia que nos separa?¿
+
+            }
+
+            return puntuacion;
         }
         #endregion
 
@@ -487,7 +641,10 @@ namespace ico
             
             return danio;
         }
+
+        //Constantes para establecer el limite de calor
         const int calorOfensivo = 16, calorDefensivo = 9;//calorOfensivo = 21, calorDefensivo = 14;
+
         private void seleccionArmasDisparar(List<Mech> objetivos, List<Componente> seleccionArmas) 
         {
 
@@ -511,7 +668,7 @@ namespace ico
                 }
 
                 //Establecemos le limite hasta el que podemos llegar
-                if (_estrategia == Estrategia.Ofensiva)
+                if (_estrategia == Estrategia.Agresiva)
                 {
                     limiteCalor = calorOfensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
                 }else
