@@ -154,7 +154,7 @@ namespace ico
                 int[,] casillasVisitadas = new int[_filas, _columnas];
                 Queue<Posicion> abiertas = new Queue<Posicion>();
                 abiertas.Enqueue(actual);
-                casillasVisitadas[,];
+                casillasVisitadas[actual.fila() - 1, actual.columna() - 1] = 1;
                 enRadio( abiertas, casillas, casillasVisitadas, movimientos+1);
             }
         }
