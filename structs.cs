@@ -12,10 +12,15 @@ namespace ico
     public struct heuristica
     {
         public int g;
-        public float h;
-        public float f;
+        public int h;
+        public int f;
+        public Encaramiento direccion;
         public Casilla casilla;
         public Casilla padre;
+
+        public override string ToString() {
+            return padre.ToString() + "->" + casilla.ToString() + " <=> " + g.ToString()+"g + "+h.ToString()+"h = "+f.ToString()+"f";
+        }
 
        /*  heuristica(int g=0 , float h=0,float f=0, Casilla casilla=null,Casilla padre=null) {
             this.g = 0;

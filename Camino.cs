@@ -102,19 +102,20 @@ namespace ico
 #endregion
 
 #region Funciones
-        public  ArrayList  pathFinder(Casilla a, Casilla b, Tablero Tablero)
+        public  ArrayList  pathFinder(Casilla a, Mech yo, Casilla b, Tablero Tablero)
         {
             ArrayList cerradas = new ArrayList();
             ArrayList abiertas = new ArrayList();
             ArrayList camino = new ArrayList();
             heuristica elemento;
-            int aux = 0, iaux=0, mejor=-1;
+            int aux = 0, iaux=0, mejor=-1, gAcumulada=0;
             Casilla actual = a;
             Boolean nueva = false;
             elemento.casilla = a;
             elemento.g = 0;
             elemento.h = a.posicion().distancia(b.posicion());
             elemento.f = elemento.h;
+            elemento.direccion = yo.ladoEncaramiento();
             elemento.padre = null;
 
             cerradas.Add(elemento);
@@ -140,22 +141,24 @@ namespace ico
                     if (/*elemento.casilla.costoMovimiento() >= 0 ||*/  aux >= 0){
 
                         // precalculo el costo de movimiento total a esa casilla desde la actual
-                        elemento.g = elemento.casilla.costoMovimiento() + aux;
+                        elemento.g = elemento.casilla.costoMovimiento() + aux + gAcumulada;
 
                         // verifico si la casilla actual ya esta entre las abiertas
                         if ((iaux = estaEn(abiertas, elemento.casilla)) >= 0){
 
                             // compruebo si desde la aterior era mejor que esta
-                            if (elemento.g > ((heuristica)abiertas[iaux]).g)
+                            if (elemento.g > ((heuristica)abiertas[iaux]).g){
                                 // si, si continuo sin hacer cambios
                                 continue;
-                            //si no modifico la casilla antigua
-                            else {
+                            }
+                            //sino modifico la casilla antigua
+                            else
+                            {
                                 nueva = true;
                                 elemento.h = ((heuristica)abiertas[iaux]).h;
                                 elemento.f = elemento.g + elemento.h;
                                 elemento.padre = actual;
-                                abiertas[iaux] = (elemento);
+                                abiertas[iaux] = elemento;
                             }
 
                         }
@@ -176,6 +179,8 @@ namespace ico
 
                 //buesca la mejor casilla entre las abiertas
                 mejor = mejorCasillaAbierta(abiertas, actual,b);
+                //actualizo la acomulacion de la g
+                gAcumulada = ((heuristica)abiertas[mejor]).g;
                 //agrego la mejor casilla
                 cerradas.Add(abiertas[mejor]);
                 //pongo la mejor como la siguiente actual
@@ -187,15 +192,22 @@ namespace ico
             } while (actual != b);
 
             camino.Add(b);
-            for (int i = cerradas.Count - 1; i > 0; i--)
-            {
-                camino.Add(((heuristica)cerradas[i]).padre);
-            }
+            heuristica padre=(heuristica)cerradas[cerradas.Count-1];
+           do{
+                camino.Add(padre.padre);
+                padre = quienEsMiPadre(padre,cerradas);
+           }while(padre.casilla!=a);
             camino.Reverse();
             return camino;
         }
 
-        
+        private heuristica quienEsMiPadre(heuristica hijo, ArrayList lista) {
+            foreach (heuristica i in lista) {
+                if (hijo.padre == i.casilla)
+                    return i;
+            }
+            return hijo;
+        }
         public int costoMovimiento() 
         {    
                 for (int i = 0; i < _length; i++){
@@ -242,9 +254,9 @@ namespace ico
 
 
         // funcion que calcula los valores euristicos siendo menos el mejor.
-        private float heuristica(Casilla a, Casilla b)
+        private int heuristica(Casilla a, Casilla b)
         {
-            float h = 0;
+            int h = 0;
 
             //Distancia aproximada
             //h = Posicion.distancia(a.posicion(), b.posicion());// Calculo de la distancia aproximada al objetivo.
@@ -258,13 +270,17 @@ namespace ico
             int max = 0;
             for (int i = 1; i < abiertas.Count; i++ )
             {
-                if (((heuristica)abiertas[i]).g<20 && ((heuristica)abiertas[i]).casilla==destino && ((heuristica)abiertas[i]).padre == padre){
-                    max = i;
-                    break;
-                } 
-                if(((heuristica)abiertas[max]).f>((heuristica)abiertas[i]).f && ((heuristica)abiertas[i]).padre==padre)
-                    max = i;
-                
+                if (max < 0){
+                    if (((heuristica)abiertas[i]).padre == padre)
+                        max = i;
+                }
+                else
+                {
+                    if (/*((heuristica)abiertas[i]).g<20 && */((heuristica)abiertas[i]).casilla == destino && ((heuristica)abiertas[i]).padre == padre)
+                        return i;
+                    if (((heuristica)abiertas[max]).f > ((heuristica)abiertas[i]).f /*&& ((heuristica)abiertas[i]).padre == padre*/)
+                        max = i;
+                }
             }
             return max;
         }
