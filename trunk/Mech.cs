@@ -167,26 +167,62 @@ namespace ico {
         /// </summary>
 		protected string _modelo;
         /// <summary>
-        /// 
+        /// Tonelaje del mech
         /// </summary>
 		protected int _toneladas;
+        /// <summary>
+        /// Potencia del mech
+        /// </summary>
 		protected int _potencia;
+        /// <summary>
+        /// Numero de radiadores internos
+        /// </summary>
 		protected int _numeroRadiadoresInternos;
+        /// <summary>
+        /// Numero de radiadores
+        /// </summary>
 		protected int _numeroRadiadores;
-		protected Boolean _masc;
+		/*protected Boolean _masc;
 		protected Boolean _dacmtd;
 		protected Boolean _dacmti;
 		protected Boolean _dacmtc;
-		protected int _maximoCalorGenerado;
-        protected Boolean _conBrazos; //***
-        protected Boolean _conHombroIzquierdo; //***
-        protected Boolean _conBrazoIzquierdo; //***
-        protected Boolean _conAntebrazoIzquierdo; //***
-        protected Boolean _conManoIzquierda; //***
-        protected Boolean _conHombroDerecho; //***
-        protected Boolean _conBrazoDerecho; //***
-        protected Boolean _conAntebrazoDerecho; //***
-        protected Boolean _conManoDerecha; //***
+		protected int _maximoCalorGenerado;*/
+        /// <summary>
+        /// Atributo booleano para indicar si el mech tiene brazos
+        /// </summary>
+        protected Boolean _conBrazos;
+        /// <summary>
+        /// Atributo booleano para indicar si el mech tiene hombro izquierdo
+        /// </summary>
+        protected Boolean _conHombroIzquierdo;
+        /// <summary>
+        /// Atributo booleano para indicar si el mech tiene brazo izquierdo
+        /// </summary>
+        protected Boolean _conBrazoIzquierdo;
+        /// <summary>
+        /// Atributo booleano para indicar si el mech tiene antebrazo izquierdo
+        /// </summary> 
+        protected Boolean _conAntebrazoIzquierdo;
+        /// <summary>
+        /// Atributo booleano para indicar si el mech tiene mano izquierda
+        /// </summary>
+        protected Boolean _conManoIzquierda;
+        /// <summary>
+        /// Atributo booleano para indicar si el mech tiene hombro derecho
+        /// </summary>
+        protected Boolean _conHombroDerecho;
+        /// <summary>
+        /// Atributo booleano para indicar si el mech tiene brazo derecho
+        /// </summary>
+        protected Boolean _conBrazoDerecho;
+        /// <summary>
+        /// Atributo booleano para indicar si el mech tiene antebrazo derecho
+        /// </summary>
+        protected Boolean _conAntebrazoDerecho;
+        /// <summary>
+        /// Atributo booleano para indicar si el mech mano derecha
+        /// </summary>
+        protected Boolean _conManoDerecha;
 		
 		protected int _numeroComponentes;
 		protected Componente[] _componentes;
@@ -332,11 +368,11 @@ namespace ico {
 			_potencia=Convert.ToInt32(f.ReadLine());
 			_numeroRadiadoresInternos=Convert.ToInt32(f.ReadLine());
 			_numeroRadiadores=Convert.ToInt32(f.ReadLine());
-			_masc=Convert.ToBoolean(f.ReadLine());
-			_dacmtd=Convert.ToBoolean(f.ReadLine());
-			_dacmti=Convert.ToBoolean(f.ReadLine());
-			_dacmtc=Convert.ToBoolean(f.ReadLine());
-			_maximoCalorGenerado=Convert.ToInt32(f.ReadLine());
+			f.ReadLine();//_masc=Convert.ToBoolean(f.ReadLine());
+			f.ReadLine();//_dacmtd=Convert.ToBoolean(f.ReadLine());
+			f.ReadLine();//_dacmti=Convert.ToBoolean(f.ReadLine());
+			f.ReadLine();//_dacmtc=Convert.ToBoolean(f.ReadLine());
+			f.ReadLine();//_maximoCalorGenerado=Convert.ToInt32(f.ReadLine());
 			_conBrazos=Convert.ToBoolean(f.ReadLine());
 			_conHombroIzquierdo=Convert.ToBoolean(f.ReadLine());
 			_conBrazoIzquierdo=Convert.ToBoolean(f.ReadLine());
