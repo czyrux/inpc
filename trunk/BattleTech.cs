@@ -185,7 +185,7 @@ namespace ico
 
                 //Seleccionamos la casilla destino
                 destino = seleccionDestino(objetivo);
-
+                Console.WriteLine("Destino" + destino.ToString());
                 //prueba de pathfinder el 9/8 - Angel
                 string str;
                 do

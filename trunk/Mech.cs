@@ -54,41 +54,113 @@ namespace ico {
         protected int _ladoEncaramiento;
 
         /// <summary>
-        /// Lado dentro del hexagono hacia el que esta encarado el mech
+        /// Lado dentro del hexagono hacia el que esta encarado el torso del mech
         /// </summary>
-        protected int _ladoEncaramientoTorso; //***
-        protected int _nivelTemp; //***
+        protected int _ladoEncaramientoTorso;
+
+        /// <summary>
+        /// Indica el nivel de temperatura acumulada que tiene el mech
+        /// </summary>
+        protected int _nivelTemp;
+
+        /// <summary>
+        /// Indica si el mech esta ardiendo
+        /// </summary>
 		protected Boolean _ardiendo;
+
+        /// <summary>
+        /// Indica si el mech tiene cogido un garrote
+        /// </summary>
 		protected Boolean _garrote;
+
+        /// <summary>
+        /// Indica el tipo de garrote que tiene cogido el mech
+        /// </summary>
 		protected int _tipoGarrote;
 		
-		//puntos blindaje
+
+        /// <summary>
+        /// Indica los puntos de blindaje de BI
+        /// </summary>
 		protected int _BlindBrazoIzquierdo;
+        /// <summary>
+        /// Indica los puntos de blindaje de TI
+        /// </summary>
 		protected int _BlindTorsoIzquierdo;
+        /// <summary>
+        /// Indica los puntos de blindaje de PI
+        /// </summary>
 		protected int _BlindPiernaIzquierda;
+        /// <summary>
+        /// Indica los puntos de blindaje de PD
+        /// </summary>
 		protected int _BlindPiernaDerecha;
+        /// <summary>
+        /// Indica los puntos de blindaje de TD
+        /// </summary>
 		protected int _BlindTorsoDerecho;
+        /// <summary>
+        /// Indica los puntos de blindaje de BD
+        /// </summary>
 		protected int _BlindBrazoDerecho;
+        /// <summary>
+        /// Indica los puntos de blindaje de TC
+        /// </summary>
 		protected int _BlindTorsoCentral;
+        /// <summary>
+        /// Indica los puntos de blindaje de CAB
+        /// </summary>
 		protected int _BlindCabeza;
+        /// <summary>
+        /// Indica los puntos de blindaje de ATI
+        /// </summary>
 		protected int _BlindAtrasTorsoIzquierdo;
+        /// <summary>
+        /// Indica los puntos de blindaje de ATD
+        /// </summary>
 		protected int _BlindAtrasTorsoDerecho;
+        /// <summary>
+        /// Indica los puntos de blindaje de ATC
+        /// </summary>
 		protected int _BlindAtrasTorsoCentral;
 
-        //protected int _BlindTotal;
 		
-		//puntos estructura interna
+        /// <summary>
+        /// Indica los puntos de estructura interna de BI
+        /// </summary>
 		protected int _EstrucBrazoIzquierdo;
+        /// <summary>
+        /// Indica los puntos de estructura interna de TI
+        /// </summary>
 		protected int _EstrucTorsoIzquierdo;
+        /// <summary>
+        /// Indica los puntos de estructura interna de PI
+        /// </summary>
 		protected int _EstrucPiernaIzquierda;
+        /// <summary>
+        /// Indica los puntos de estructura interna de PD
+        /// </summary>
 		protected int _EstrucPiernaDerecha;
+        /// <summary>
+        /// Indica los puntos de estructura interna de TD
+        /// </summary>
 		protected int _EstrucTorsoDerecho;
+        /// <summary>
+        /// Indica los puntos de estructura interna de BD
+        /// </summary>
 		protected int _EstrucBrazoDerecho;
+        /// <summary>
+        /// Indica los puntos de estructura interna de TC
+        /// </summary>
 		protected int _EstrucTorsoCentral;
+        /// <summary>
+        /// Indica los puntos de estructura interna de CAB
+        /// </summary>
 		protected int _EstrucCabeza;
 		
-
-        //ATRIBUTOS DE FICHERO DEFINICION
+        /// <summary>
+        /// Nombre del mech
+        /// </summary>
 		protected string _nombre;
 		protected string _modelo;
 		protected int _toneladas;
