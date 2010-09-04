@@ -8,8 +8,14 @@ namespace ico
 		public string _localizacion;
 		public int _slotMunicion;
 	};
-	
-  
+
+    public enum tipoMovimiento
+    {
+        Inmovil,
+        Andar,
+        Correr,
+        Saltar
+    };
 
 
 

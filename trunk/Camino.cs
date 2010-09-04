@@ -21,8 +21,8 @@ namespace ico
             _nldv = _movimientos = 0;
         }
 
-        public Camino(Casilla de,Mech ich, Casilla a, Tablero tablero) {
-
+        public Camino(Casilla de,Mech ich, Casilla a, Tablero tablero, Estrategia estrategia) {
+           _estrategia=estrategia;
            ArrayList camino = pathFinder(de, ich, a, tablero);
            int j = 0;
 
@@ -65,6 +65,7 @@ namespace ico
             Nodo elemento = new Nodo();
             int aux = 0, iaux=0, mejor=-1, gAcumulada=0;
             Boolean nueva = false;
+            _original = (Encaramiento)ich.ladoEncaramiento();
 
             elemento.casilla(a);
             elemento.g(0);
@@ -170,12 +171,11 @@ namespace ico
 
 
 
-           aux = caminoReal(limpiarAgua(camino), a, ich, Tablero);
+           aux = caminoReal(limpiarAgua(camino), b, ich, Tablero);
            camino = camino.GetRange(aux, camino.Count -aux);
 
             camino.Reverse();
 
-            _original = (Encaramiento)ich.ladoEncaramiento();
 
             return camino;
         }
@@ -219,13 +219,69 @@ namespace ico
             Console.WriteLine(str);
         }
 
+
         public override string ToString()
         {
+            string str,str2="";
+            int i = 0, pasos=0;
 
+            if (_estrategia == Estrategia.Agresiva)
+                str = "Andar\n";
+            else
+                str = "Correr\n";
 
-            return base.ToString();
+            str += _camino[_camino.Count - 1].casilla().ToString()+"\n";
+
+            str += ((int)_final).ToString()+"\n";
+
+            str += "False\n";
+
+            if (_seLevanto) {
+                str2 += "Levantarse\n";
+                str2 += ((int)_original).ToString();
+            }
+
+            if (_camino[i].direccion() != _original) {
+                str2 += izqOdrch(_camino[i].direccion(), _original) + "\n";
+                str2 += costoEncaramiento(_original, _camino[i].direccion()).ToString()+"\n";
+                pasos++;
+            }
+
+            i++;
+            do{
+
+                if (_camino[i-1].direccion() != _camino[i].direccion())
+                {
+                    int tmp = costoEncaramiento(_camino[i - 1].direccion(), _camino[i].direccion());
+                    str2 += izqOdrch(_camino[i-1].direccion(), _camino[i].direccion()) + "\n";
+                    str2 += tmp.ToString() + "\n";
+                    pasos+=tmp;
+                }
+                str2 += "Adelante\n";
+                str2 += "1\n";
+                pasos++;
+                i++;
+                
+            }while(i!=_camino.Count);
+
+            if (_camino[i-1].direccion() != _final)
+            {
+                str2 += izqOdrch(_camino[i].direccion(),_final) + "\n";
+                str2 += costoEncaramiento(_camino[i].direccion(), _final).ToString() + "\n";
+                pasos++;
+            }
+            
+            str += pasos.ToString()+"\n";
+
+            str += str2;
+
+            return str;
         }
 
+        public void ToFile(){
+            StreamWriter fich = new StreamWriter(PanelControl.movimientoArchivo);
+            fich.Write(this.ToString());
+        }
 #endregion
         #region Privado
         //private int _length;
@@ -235,7 +291,64 @@ namespace ico
         private int _nldv;
         private int _movimientos;
         private Encaramiento _original;
+        private Encaramiento _final;
+        private tipoMovimiento _tipoMovimiento;
+        private Estrategia _estrategia;
+        private Boolean _seLevanto;
 
+        private string izqOdrch(Encaramiento o, Encaramiento d) {
+            switch (o) { 
+                case Encaramiento.Abajo:
+                        if(d==o){
+                            if((int)d>4)
+                                return "Derecha";
+                            else
+                                return "Izquierda";
+                        }
+                   
+                    break;
+                case Encaramiento.Arriba:
+
+                    if ((int)d < 4)
+                        return "Derecha";
+                    else
+                        return "Izquierda";
+                    
+                    break;
+                case Encaramiento.InferiorDerecho:
+
+                    if ((int)d <3 || d==Encaramiento.SuperiorIzquierda)
+                        return "Izquierda";
+                    else
+                        return "Derecha";
+                    
+                    break;
+                case Encaramiento.InferiorIzquierda:
+
+                    if ((int)d > 4 || d == Encaramiento.Arriba)
+                        return "Izquierda";
+                    else
+                        return "Derecha";
+
+                    break;
+                case Encaramiento.SuperiorDerecha:
+                    if (d == Encaramiento.SuperiorIzquierda || d == Encaramiento.Arriba)
+                        return "Izquierda";
+                    else
+                        return "Derecha";
+
+                    break;
+                case Encaramiento.SuperiorIzquierda:
+                    if (d == Encaramiento.SuperiorDerecha || d == Encaramiento.Arriba)
+                        return "Izquierda";
+                    else
+                        return "Derecha";
+                    break;
+            
+            }
+            return "";
+
+        }
 
         private ArrayList limpiarAgua(ArrayList camino)
         {
@@ -251,41 +364,69 @@ namespace ico
 
         private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t)
         {
-
-            int puntos = ich.puntosAndar() / 2, j = 0, tmpC = 0, tmpJ = 0;
+            int puntosM, puntosMR, suelo = 0;
+            if (ich.enSuelo()){
+                suelo = 2;
+                _original = _camino[0].direccion();
+                _seLevanto = true;
+            }
+            if (_estrategia == Estrategia.Defensiva)
+            {
+                puntosM = ich.puntosCorrer() - suelo / 2;
+                puntosMR = ich.puntosCorrer();
+            }
+            else {
+                puntosM = ich.puntosAndar() - suelo / 2;
+                puntosMR = ich.puntosAndar();
+            }
+            int j = 0, tmpC = 0, tmpJ = 0;
             Boolean flag = false, flagj = false;
             List<int> l;
 
-            for (int i = 0; i < camino.Count - (1 + puntos); i++)
+            for (int i = 0; i < camino.Count - (1 + puntosM); i++)
             {
-                if (puntos + i >= camino.Count)
-                    puntos = camino.Count - 1;
+                if (puntosM + i >= camino.Count)
+                    puntosM = camino.Count - 1;
 
-                if (((Nodo)camino[puntos + i]).g() < ich.puntosAndar())
+                if (((Nodo)camino[puntosM + i]).g() < puntosMR)
                 {
-                    l = posiblesEncaramientos((Nodo)camino[puntos + i], destino, t);
+                    l = posiblesEncaramientos((Nodo)camino[puntosM + i], destino, t);
 
                     for (int c = 1; c < l.Count; c++)
                     {
-                        tmpC = costoEncaramiento(((Nodo)camino[puntos + i]).casilla(), ((Nodo)camino[puntos + i]).direccion(), (Encaramiento)l[c]);
-                        tmpJ = costoEncaramiento(((Nodo)camino[puntos + i]).casilla(), ((Nodo)camino[puntos + i]).direccion(), (Encaramiento)l[j]);
+                        tmpC = costoEncaramiento(((Nodo)camino[puntosM + i]).direccion(), (Encaramiento)l[c]);
+                        tmpJ = costoEncaramiento(((Nodo)camino[puntosM + i]).direccion(), (Encaramiento)l[j]);
 
-                        if (((Nodo)camino[puntos + i]).g() - tmpC < ich.puntosAndar())
+                        if (((Nodo)camino[puntosM + i]).g() + tmpC < ich.puntosAndar())
+                        {
                             flag = true;
 
-                        if (tmpJ > tmpC)
-                        {
-                            flagj = true;
-                            j = c;
+                            if (tmpJ > tmpC)
+                            {
+                                //flagj = true;
+                                j = c;
+                            }
                         }
                     }
 
+
+                    if (l.Count == 1) {
+                            j = 0;
+
+                        tmpJ = costoEncaramiento(((Nodo)camino[puntosM + i]).direccion(), (Encaramiento)l[j]);
+
+                        if (((Nodo)camino[puntosM + i]).g() + tmpC < ich.puntosAndar())
+                            flag = true;                            
+
+                    }
+
                     if (!flag)
-                        flagj = false;
+                        flag = false;
                     else
                     {
-                        ((Nodo)camino[puntos + i]).direccion((Encaramiento)l[j]);
-                        return puntos + i;
+                        _final = (Encaramiento)l[j];
+                        ((Nodo)camino[puntosM + i]).direccion((Encaramiento)l[j]);
+                        return puntosM + i;
                     }
 
                     j = 0;
@@ -296,15 +437,17 @@ namespace ico
         }
         private List<int> posiblesEncaramientos(Nodo o, Casilla destino, Tablero t)
         {
-            int min = 10000, tmp = 0;
+            int min = t.colindante(o.casilla().posicion(), (Encaramiento)6).posicion().distancia(destino.posicion()), tmp = 0;
             List<int> l = new List<int>();
 
             for (int i = 1; i < 7; i++)
             {
                 try { 
                 tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino.posicion());
+
                 if (tmp <= min)
                 {
+                    min = tmp;
                     l.Add(i);
                 }
                 }
@@ -326,7 +469,7 @@ namespace ico
             else
                 return 3;
         }
-        private int costoEncaramiento(Casilla origenCasilla, Encaramiento o, Encaramiento des)
+        private int costoEncaramiento( Encaramiento o, Encaramiento des)
         {
             switch (Math.Abs(o - des))
             {
