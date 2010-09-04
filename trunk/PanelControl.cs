@@ -13,7 +13,7 @@ namespace ico
          */
     #region constantes del Pathfinder
 
-        public static const int penalizadorAgua = 10;
+        public  const int penalizadorAgua = 10;
 
     #endregion
     }

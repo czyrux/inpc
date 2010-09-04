@@ -170,22 +170,22 @@ namespace ico
 
 
 
-           aux = caminoReal(camino, a, ich, Tablero);
-           camino = camino.GetRange(0, aux+1);
+           aux = caminoReal(limpiarAgua(camino), a, ich, Tablero);
+           camino = camino.GetRange(aux, camino.Count -aux);
 
             camino.Reverse();
 
             return camino;
         }
 
-        private void limpiarAgua(ArrayList camino) {
+        private ArrayList limpiarAgua(ArrayList camino) {
             int veces = 0;
-            foreach (Nodo i in camino) {
-                if (i.casilla().tipoTerreno() == 2) { 
-
-                }
-                i.g(i.g()-agua
+            for(int i=camino.Count-2; i>1;i--){
+                ((Nodo)camino[i]).g(((Nodo)camino[i]).g()-PanelControl.penalizadorAgua*veces);
+                if (((Nodo)camino[i]).casilla().tipoTerreno() == 2) 
+                    veces++;
             }
+            return camino;
         }
 
         private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t) {
@@ -195,18 +195,18 @@ namespace ico
             List<int> l;
 
             for (int i = 0; i < camino.Count - (1 + puntos); i++) {
-                if (puntos - i >= camino.Count)
+                if (puntos + i >= camino.Count)
                     puntos = camino.Count - 1;
 
-                if (((Nodo)camino[puntos - i]).g() < puntos)
+                if (((Nodo)camino[puntos + i]).g() < puntos)
                 {
-                    l = posiblesEncaramientos((Nodo)camino[puntos - i], destino, t);
+                    l = posiblesEncaramientos((Nodo)camino[puntos + i], destino, t);
 
                     for (int c = 1; c < l.Count; c++) {
-                        tmpC = costoEncaramiento(((Nodo)camino[puntos - i]).casilla(), ((Nodo)camino[puntos - i]).direccion(), (Encaramiento)l[c]);
-                        tmpJ = costoEncaramiento(((Nodo)camino[puntos - i]).casilla(), ((Nodo)camino[puntos - i]).direccion(), (Encaramiento)l[j]);
+                        tmpC = costoEncaramiento(((Nodo)camino[puntos + i]).casilla(), ((Nodo)camino[puntos + i]).direccion(), (Encaramiento)l[c]);
+                        tmpJ = costoEncaramiento(((Nodo)camino[puntos + i]).casilla(), ((Nodo)camino[puntos + i]).direccion(), (Encaramiento)l[j]);
 
-                        if (((Nodo)camino[puntos - i]).g() - tmpC < ich.puntosAndar())
+                        if (((Nodo)camino[puntos + i]).g() - tmpC < ich.puntosAndar())
                             flag = true;
 
                         if (tmpJ>tmpC){
@@ -219,8 +219,8 @@ namespace ico
                         flagj = false;
                     else
                     {
-                        ((Nodo)camino[puntos - i]).direccion((Encaramiento)l[j]);
-                        return puntos - i;
+                        ((Nodo)camino[puntos + i]).direccion((Encaramiento)l[j]);
+                        return puntos + i;
                     }
 
                     j = 0;
