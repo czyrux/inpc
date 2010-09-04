@@ -465,9 +465,9 @@ namespace ico
         }
 
         #region faseAtaqueArmas
-        //La nota de cada mech para saber a cual disparamos sera la siguiente: nota propia=40%, danio=30% , distancia=30%
-        const float NOTA_ARMAS = 0.4f, DANIO_ARMAS = 0.3f, DISTANCIA_ARMAS = 0.3f;
-
+        /// <summary>
+        /// Metodo que realiza la fase de Ataque con Armas
+        /// </summary>
         private void faseAtaqueArmas() {
             /*
              * 1º Eleccion de rivales dentro de radio accion (rango alcance: distancia tiro larga media) y que no esten en el cono trasero
@@ -531,6 +531,13 @@ namespace ico
             }
         }
 
+        /// <summary>
+        /// Metodo que escoge al objetivo mas debil de la lista de <paramref name="objetivos"/>, y devuelve en <paramref name="armas"/> las armas
+        /// que se le pueden disparar
+        /// </summary>
+        /// <param name="objetivos">Lista de objetivos a evaluar</param>
+        /// <param name="ldv">LdV con los objetivos</param>
+        /// <param name="armas">Lista de armas. Vacia</param>
         private void objetivoMasDebil (List<Mech> objetivos , List<LdV> ldv , List<Componente> armas) 
         {
             if (objetivos.Count > 1)
@@ -545,7 +552,7 @@ namespace ico
                 for (int i = 0; i < objetivos.Count; i++) {
                     Console.WriteLine("Mech: "+objetivos[i].nombre());
                     //Añadimos las notas
-                    notasParciales[i] = objetivos[i].notaEstado() * NOTA_ARMAS;
+                    notasParciales[i] = objetivos[i].notaEstado() * PanelControl.NOTA_ARMAS;
                     Console.WriteLine("Nota mech: " + objetivos[i].notaEstado());
 
                     //Añadimos la nota del danio y la seleccion de armas para ese mech
@@ -554,11 +561,11 @@ namespace ico
                     armamento.Add(arm);
                     notaAux = 10 - (danio * 10.0f / _mechs[_myJugador].danioMaximo());
                     Console.WriteLine("Nota danio: " + notaAux);
-                    notasParciales[i] += (notaAux * DANIO_ARMAS);
+                    notasParciales[i] += (notaAux * PanelControl.DANIO_ARMAS);
 
                     //Añadimos la nota de la distancia
                     notaAux = (_mechs[_myJugador].posicion().distancia(objetivos[i].posicion()) * 10.0f) / _mechs[_myJugador].distanciaTiroLarga();
-                    notasParciales[i] += notaAux * DISTANCIA_ARMAS;
+                    notasParciales[i] += notaAux * PanelControl.DISTANCIA_ARMAS;
                     Console.WriteLine("Nota distancia: " + notaAux);
 
                     //Si estamos a su espalda, tenemos un bonus
@@ -604,6 +611,11 @@ namespace ico
                 armas = null;
         }
 
+        /// <summary>
+        /// Metodo que deja en la lista de <paramref name="objetivos"/> solo a los que tengan ldV con nuestro Mech
+        /// </summary>
+        /// <param name="objetivos">Lista de objetivos a evaluar</param>
+        /// <param name="ldv">Lista de linea de vision para cada mech de la lista de objetivos. Vacia</param>
         private void objetivosLdV(List<Mech> objetivos , List<LdV> ldv )
         {
             LdV c;
@@ -623,6 +635,13 @@ namespace ico
             }
         }
 
+        /// <summary>
+        /// Selecciona dentro del parametro <paramref name="seleccionArmas"/> todas aquellas armas que se le puedan
+        /// disparar al <paramref name="objetivo"/>
+        /// </summary>
+        /// <param name="objetivo">Objetivo al que se quiere disparar</param>
+        /// <param name="seleccionArmas">Lista de armas. Vacia</param>
+        /// <returns>LA cantidad de daño que hacen las armas escogidas</returns>
         private int armasPermitidas( Mech objetivo, List<Componente> seleccionArmas) 
         {        
             string situacion;
@@ -661,9 +680,12 @@ namespace ico
             return danio;
         }
 
-        //Constantes para establecer el limite de calor
-        const int calorOfensivo = 16, calorDefensivo = 9;//calorOfensivo = 21, calorDefensivo = 14;
-
+        /// <summary>
+        /// Metodo que selecciona de la lista de armas a disparar, aquellas que finalmente dispararemos al Mech
+        /// <paramref name="objetivo"/>
+        /// </summary>
+        /// <param name="objetivos">Lista de objetivos. Un unico elemento</param>
+        /// <param name="seleccionArmas">List de componentes tipo arma</param>
         private void seleccionArmasDisparar(List<Mech> objetivos, List<Componente> seleccionArmas) 
         {
 
@@ -689,9 +711,9 @@ namespace ico
                 //Establecemos le limite hasta el que podemos llegar
                 if (_estrategia == Estrategia.Agresiva)
                 {
-                    limiteCalor = calorOfensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
+                    limiteCalor = PanelControl.calorOfensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
                 }else
-                    limiteCalor = calorDefensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
+                    limiteCalor = PanelControl.calorDefensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
                 //Console.WriteLine("Limite calor= " + limiteCalor + " (calorOfensivo:" + calorOfensivo + " numero radiadores:" + _mechs[_myJugador].numeroRadiadores() + " temp:" + _mechs[_myJugador].nivelTemp() + " mov:"+calorMovimiento+" )");
                 //Calculamos la relacion de las armas daño/calor
                 float[] potencia = new float[seleccionArmas.Count];
@@ -749,6 +771,11 @@ namespace ico
                 seleccionArmas = null;
         }
 
+        /// <summary>
+        /// Metodo que escribe la tarea que va a realizar nuestro mech en esta fase del juego
+        /// </summary>
+        /// <param name="objetivo">List de mech de un solo elemento, el objetivo a disparar</param>
+        /// <param name="seleccionArmas">List de armas a disparar</param>
         private void escribirOrdenesArmas(List<Mech> objetivo, List<Componente> seleccionArmas) {
             StreamWriter f = new StreamWriter("accionJ" + _myJugador.ToString() + ".sbt", false);
 
@@ -784,11 +811,17 @@ namespace ico
 
         #endregion
 
+        /// <summary>
+        /// Metodo que realiza la fase de Ataques Fisicos
+        /// </summary>
         private void faseAtaquesFisico() {
             Console.WriteLine("Fase Ataque Fisico");
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Metodo que realiza la fase final del turno
+        /// </summary>
         private void faseFinalTurno() {
             Console.WriteLine("Fase Final de Turno");
             Console.WriteLine();
@@ -796,7 +829,8 @@ namespace ico
 
         #endregion
 
-#region atributos
+        #region atributos
+
         /// <summary>
         /// Numero de nuestro jugador dentro del array de mech
         /// </summary>
@@ -831,7 +865,8 @@ namespace ico
         /// Variable que determina la estrategia a seguir por nuestro mech
         /// </summary>
         private Estrategia _estrategia;
-#endregion
+
+        #endregion
 
     }
 
