@@ -144,5 +144,30 @@ namespace ico
         /// </summary>
         public const int calorDefensivo = 9;
         #endregion
+
+        #region constantes fase de Movimientos
+
+        /// <summary>
+        /// Tanto por ciento de la nota del objetivo usado para el calculo del enemigo al que encararse.
+        /// </summary>
+        public const float NOTA_MOV = 0.4f;
+
+        /// <summary>
+        /// Tanto por ciento de la distancia al objetivo usado para el calculo del enemigo al que encararse.
+        /// </summary>
+        public const float DISTANCIA_MOV = 0.6f;
+
+        /// <summary>
+        /// Radio usado para ver el numero de casillas alrededor de un mech mirar para la seleccion de
+        /// casillas
+        /// </summary>
+        public const int radio = 5;
+
+        /// <summary>
+        /// Importancia que se le da a la distancia de la casilla a nuestro mech, para la eleccion de casilla
+        /// </summary>
+        public const float pesoDistancia = .20f;
+
+        #endregion
     }
 }
