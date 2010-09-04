@@ -258,8 +258,8 @@ namespace ico
             int[] puntuacion;
             Posicion destino = null;
 
-            if (_estrategia == Estrategia.Agresiva)
-            {
+            //if (_estrategia == Estrategia.Agresiva)
+            //{
 
                 //Escogemos las casillas alrededor
                 _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,Radio);
@@ -306,12 +306,12 @@ namespace ico
                 }
 
                 Console.WriteLine("Destino: "+destino.ToString()+" i:"+posicion);
-            }
-            else {
-                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosCorrer());
-            }
+            //}
+            //else {
+            //    _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosCorrer());
+            //}
 
-            return null;
+            return destino;
         }
         
 
