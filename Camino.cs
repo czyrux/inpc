@@ -74,8 +74,7 @@ namespace ico
            int j = 0;
           _length = camino.Count;
           _camino = new Casilla[_length];
-          foreach (Nodo i in camino)
-          {
+          foreach (Nodo i in camino) {
               _camino[j] = i.casilla();
               j++;
           }
