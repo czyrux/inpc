@@ -481,12 +481,40 @@ namespace ico {
 		public int EstrucTorsoCentral() { return _EstrucTorsoCentral; }		
 		public int EstrucCabeza() { return _EstrucCabeza; }*/
 		
+        /// <summary>
+        /// Metodo que devuelve el nombre del Mech
+        /// </summary>
+        /// <returns>String con el nombre del Mech</returns>
 		public string nombre() { return _nombre; }
+
+        /// <summary>
+        /// Metodo que devuelve el modelo del mech
+        /// </summary>
+        /// <returns>String con el modelo del mech</returns>
 		public string modelo() { return _modelo; }
+
+        /// <summary>
+        /// Indica el tonelaje del mech
+        /// </summary>
+        /// <returns>Entero que indica el tonelaje</returns>
 		public int tonelados() { return _toneladas; }
+
+        /// <summary>
+        /// Indica la potencia del mech
+        /// </summary>
+        /// <returns>Entero que indica la potencia</returns>
 		public int potencia() { return _potencia; }
+
+        /// <summary>
+        /// Indica el numero de radiadores internos del mech
+        /// </summary>
+        /// <returns>Entero con el numero de radiadores</returns>
 		public int numeroRadiadoresInternos() { return _numeroRadiadoresInternos; }
 
+        /// <summary>
+        /// Devuelve el numero radiadores que posee el Mech para poder disipar calor
+        /// </summary>
+        /// <returns>Entero que indica el nº de radiadores</returns>
 		public int numeroRadiadores() {
             if (_tipoRadiador == 1)
             {
@@ -499,27 +527,101 @@ namespace ico {
 		/*public Boolean masc() { return _masc; }
 		public Boolean dacmtd() { return _dacmtd; }
 		public Boolean dacmti() { return _dacmti; }
-		public Boolean dacmtc() { return _dacmtc; }*/
-		public int maximoCalorGenerado() { return _maximoCalorGenerado; }
+		public Boolean dacmtc() { return _dacmtc; }
+		public int maximoCalorGenerado() { return _maximoCalorGenerado; }*/
+
+        /// <summary>
+        /// Indica si el mech tiene brazoas
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean conBrazos() { return _conBrazos; }
+
+        /// <summary>
+        /// Indica si el mech tiene hombro izquierdo
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean conHombroIzquierdo() { return _conHombroIzquierdo; }
+
+        /// <summary>
+        /// Indica si el mech tiene brazo izquierdo
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean conBrazoIzquierdo() { return _conBrazoIzquierdo; }
+
+        /// <summary>
+        /// Indica si el mech tiene antebrazo izquierdo
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean conAntebrazoIzquierdo() { return _conAntebrazoIzquierdo; }
+
+        /// <summary>
+        /// Indica si el mech tiene mano izquierda
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean conManoIzquierda() { return _conManoIzquierda; }
+
+        /// <summary>
+        /// Indica si el mech tiene hombro derecho
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean conHombroDerecho() { return _conHombroDerecho; }
+
+        /// <summary>
+        /// Indica si el mech tiene brazo derecho
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean conBrazoDerecho() { return _conBrazoDerecho; }
+
+        /// <summary>
+        /// Indica si el mech tiene antebrazo derecho
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean conAntebrazoDerecho() { return _conAntebrazoDerecho; }
+
+        /// <summary>
+        /// Indica si el mech tiene mano derecha
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
 		public Boolean conManoDerecha() { return _conManoDerecha; }
 		
+        /// <summary>
+        /// Indica el numero de componentes de que dispone el mech
+        /// </summary>
+        /// <returns>Entero con el numero de componentes</returns>
 		public int numeroComponentes() { return _numeroComponentes; }
+        /// <summary>
+        /// Devuelve el array que contiene los componentes del mech
+        /// </summary>
+        /// <returns>Array de tipo Componente</returns>
 		public Componente[] componentes() { return _componentes; }
 		
+        /// <summary>
+        /// Indica el numero de componentes de tipo arma que posee el mech
+        /// </summary>
+        /// <returns>Entero con el numero de armas</returns>
 		public int numeroArmas() { return _numeroArmas; }
+        /// <summary>
+        /// Devuelve un arrayList con las armas del mech
+        /// </summary>
+        /// <returns>ArrayList de Componentes</returns>
 		public ArrayList armas() { return _armas;}
 
+        /// <summary>
+        /// Indica el numero de actuadores que posee el mech
+        /// </summary>
+        /// <returns>Entero con le nº de actuadores</returns>
 		public int numeroActuadores() { return _numeroActuadores; }
+        /// <summary>
+        /// Devuelve el array con los actuadores
+        /// </summary>
+        /// <returns>Array de Actuador</returns>
 		public Actuador[] actuadores() { return _actuadores; }
 
+        /// <summary>
+        /// Devuelve la localizacion del mech
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
         public LocalizacionMech slots(int i) {
             if (i < 8)
             {
