@@ -1062,7 +1062,6 @@ namespace ico {
         /// <param name="c">Componente de tipo arma del que se desea saber el slot</param>
         /// <returns>Entero correspondiente al slot</returns>
         public int slotArma (Componente c) {
-
             LocalizacionMech l = _slots[c.localizacionINT()];
             int slot=0 ;
             Boolean salir = false;

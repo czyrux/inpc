@@ -6,10 +6,19 @@ using System.IO;
 
 namespace ico
 {
+    /// <summary>
+    /// Clase principal del programa. Sera la encargada de actuar segun las distintas fase  del juego.
+    /// </summary>
     class BattleTech
     {
 
         #region constructores
+        /// <summary>
+        /// Constructor con parametros. Se encargara de leer todos los datos necesarios para la fase de juego, asi
+        /// como de llamar a los correspodientes metodos que solventara dicha fase.
+        /// </summary>
+        /// <param name="Jugador">Numero del jugador</param>
+        /// <param name="fase">Fase del juego en que nos encontramos</param>
         public BattleTech(int Jugador, String  fase) {
             string path = "C:/ficheros/";
             _myJugador = Jugador;
@@ -59,6 +68,9 @@ namespace ico
         #endregion
 
         #region lectura parametros juego
+        /// <summary>
+        /// Metodo usado para leer los parametros de los mechs
+        /// </summary>
         private void readMechs () {
 
 			StreamReader f1, f2;
@@ -92,6 +104,9 @@ namespace ico
         #endregion
 
         #region metodos
+        /// <summary>
+        /// Determina si la estrategia del mech jugador ha de ser ofensiva o defensiva
+        /// </summary>
         private void determinarEstrategia() {
 
             if (_mechs[_myJugador].notaEstado() >= 7.3)
@@ -782,12 +797,39 @@ namespace ico
         #endregion
 
 #region atributos
+        /// <summary>
+        /// Numero de nuestro jugador dentro del array de mech
+        /// </summary>
         private int _myJugador;
+
+        /// <summary>
+        /// Fase de juego donde nos encontramos
+        /// </summary>
         private String _faseJuego;
+
+        /// <summary>
+        /// Numero de jugadores que tiene la partida
+        /// </summary>
         private int _numeroJugadores;
+
+        /// <summary>
+        /// Tablero de la partida
+        /// </summary>
         private Tablero _tablero;
+
+        /// <summary>
+        /// Array con los Mechs
+        /// </summary>
         private Mech[] _mechs;
+
+        /// <summary>
+        /// Variable con la configuracion del juego
+        /// </summary>
 		private ConfiguracionJuego _config;
+
+        /// <summary>
+        /// Variable que determina la estrategia a seguir por nuestro mech
+        /// </summary>
         private Estrategia _estrategia;
 #endregion
 

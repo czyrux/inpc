@@ -7,12 +7,23 @@ using System.Collections.Generic;
 
 namespace ico
 {
+    /// <summary>
+    /// Clase usada para llamar al programa LDVyC.exe, y obtener los datos que de su ejecucion
+    /// derivan
+    /// </summary>
     public class LdV
     {     
         #region Constructores
+        /// <summary>
+        /// Constructor con parametros. Se encarga de llamar al programa LDVyC.exe, y de leer 
+        /// los resultados de su ejecucion
+        /// </summary>
+        /// <param name="p1">Mech manejado por el jugador</param>
+        /// <param name="p2">Mech objetivo</param>
+        /// <param name="tablero">Tablero de la partida</param>
         public LdV(Mech p1, Mech p2,Tablero tablero) {
             Process proc = new Process();
-            _movimientos = _nldv = 0;
+            //_movimientos = _nldv = 0;
             String[] nodos;
             proc.StartInfo.WorkingDirectory = @".";
             proc.StartInfo.FileName = "LDVyC.exe";
@@ -51,43 +62,74 @@ namespace ico
             _length = _camino.Length;
         }
 
-        public LdV(ArrayList camino)
+        /// <summary>
+        /// Constructor con parametros
+        /// </summary>
+        /// <param name="LdV">ArrayList con una LdV</param>
+        public LdV(ArrayList LdV)
         {
-            _length = camino.Count;
+            _length = LdV.Count;
             _camino = new Casilla[_length];
             for (int i = 0; i < _length; i++)
             {
-                _camino[i] = (Casilla)camino[i];
+                _camino[i] = (Casilla)LdV[i];
             }
             _ldv =_cobertura= false;
-            _nldv = _movimientos = 0;
+            //_nldv = _movimientos = 0;
         }
         #endregion
 
         #region Propiedades
 
+        /// <summary>
+        /// Devuelve la longitud de la LdV
+        /// </summary>
+        /// <returns>Entero</returns>
         public int longitud() {
             return _length;
         }
-        public Casilla[] getCamino() {
+
+        /// <summary>
+        /// Devuelve el array de casillas que componen la LdV
+        /// </summary>
+        /// <returns>Array Casilla</returns>
+        public Casilla[] getLdV() {
             return _camino;
         }
+
+        /// <summary>
+        /// Indica si hay linea de vision con el objetivo
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
         public Boolean ldv() {
             return _ldv;
         }
+
+        /// <summary>
+        /// Indica si el objetivo tiene cobertura parcial
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
         public Boolean cobertura() {
             return _cobertura;
         }
         #endregion
 
-        #region Funciones
+        #region Metodos
      
+        /// <summary>
+        /// Devuelve la casilla del indice
+        /// </summary>
+        /// <param name="i">Indice</param>
+        /// <returns>Casilla</returns>
         public Casilla casilla(int i) {
             return _camino[i];
         }
 
-        public int movimentos() { return _movimientos; }
+        //public int movimentos() { return _movimientos; }
 
+        /// <summary>
+        /// Imprime en la consola el camino
+        /// </summary>
         public void print()
         { 
             string str="El camino es: ";
@@ -100,12 +142,28 @@ namespace ico
         #endregion
 
         #region Atributos
+        /// <summary>
+        /// Longitud del camino
+        /// </summary>
         private int _length;
+
+        /// <summary>
+        /// Array de casillas que componen el camino
+        /// </summary>
         private Casilla[] _camino;
+
+        /// <summary>
+        /// Booleano para indicar si hay linea de vision
+        /// </summary>
         private Boolean _ldv;
+
+        /// <summary>
+        /// Booleano para indicar si hay cobertura
+        /// </summary>
         private Boolean _cobertura;
-        private int _nldv;
-        private int _movimientos;
+
+        //private int _nldv;
+        //private int _movimientos;
         #endregion
 
     }

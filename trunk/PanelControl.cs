@@ -4,17 +4,19 @@ using System.Text;
 
 namespace ico
 {
+    /// <summary>
+    /// Clase encargada de almacenar las distintas constantes del programa
+    /// </summary>
     static public class PanelControl
     {
-        /*
-         * 
-         * aqui iran las constantes del programa
-         * 
-         */
-    #region constantes del Pathfinder
+        #region constantes del Pathfinder
 
         public  const int penalizadorAgua = 10;
 
-    #endregion
+        #endregion
+
+        #region constantes de Mechs
+
+        #endregion
     }
 }
