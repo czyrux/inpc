@@ -1597,25 +1597,20 @@ namespace ico {
         /// <returns>Flotante que indica la nota</returns>
         public float estadoBlindajeMech() 
         {
-            //tantos por ciento
-            float TC = 0.15f, CAB = 0.15f, 
-                BD = 0.08f, BI = 0.08f, ATD = 0.08f, ATI = 0.08f, ATC = 0.08f, 
-                TI = 0.1f, TD = 0.1f, 
-                PI = 0.05f, PD = 0.05f;
             float estado = 0;
 
             //Vemos los datos de las diferentes partes
-            estado = estadoBlindajeBI() * BI +
-                estadoBlindajeTI() * TI +
-                estadoBlindajePI() * PI +
-                estadoBlindajePD() * PD +
-                estadoBlindajeTD() * TD +
-                estadoBlindajeBD() * BD +
-                estadoBlindajeTC() * TC +
-                estadoBlindajeCAB() * CAB +
-                estadoBlindajeATI() * ATI +
-                estadoBlindajeATD() * ATD +
-                estadoBlindajeATC() * ATC;
+            estado = estadoBlindajeBI() * PanelControl.B_BI +
+                estadoBlindajeTI() * PanelControl.B_TI +
+                estadoBlindajePI() * PanelControl.B_PI +
+                estadoBlindajePD() * PanelControl.B_PD +
+                estadoBlindajeTD() * PanelControl.B_TD +
+                estadoBlindajeBD() * PanelControl.B_BD +
+                estadoBlindajeTC() * PanelControl.B_TC +
+                estadoBlindajeCAB() * PanelControl.B_CAB +
+                estadoBlindajeATI() * PanelControl.B_ATI +
+                estadoBlindajeATD() * PanelControl.B_ATD +
+                estadoBlindajeATC() * PanelControl.B_ATC;
 
             return estado;
         }
@@ -1727,22 +1722,17 @@ namespace ico {
         /// <returns>Flotante que indica la nota</returns>
         public float estadoEsctructuraMech()
         {
-            //tantos por ciento
-            float TC = 0.2f, CAB = 0.2f,
-                BD = 0.1f, BI = 0.1f,
-                TI = 0.15f, TD = 0.15f,
-                PI = 0.05f, PD = 0.05f;
             float estado = 0;
 
             //Vemos los datos de las diferentes partes
-            estado = estadoEsctructuraBI() * BI +
-                estadoEsctructuraTI() * TI +
-                estadoEsctructuraPI() * PI +
-                estadoEsctructuraPD() * PD +
-                estadoEsctructuraTD() * TD +
-                estadoEsctructuraBD() * BD +
-                estadoEsctructuraTC() * TC +
-                estadoEsctructuraCAB() * CAB;
+            estado = estadoEsctructuraBI() * PanelControl.E_BI +
+                estadoEsctructuraTI() * PanelControl.E_TI +
+                estadoEsctructuraPI() * PanelControl.E_PI +
+                estadoEsctructuraPD() * PanelControl.E_PD +
+                estadoEsctructuraTD() * PanelControl.E_TD +
+                estadoEsctructuraBD() * PanelControl.E_BD +
+                estadoEsctructuraTC() * PanelControl.E_TC +
+                estadoEsctructuraCAB() * PanelControl.E_CAB;
 
             return estado;
         }
@@ -1828,15 +1818,13 @@ namespace ico {
         /// <returns>Flotante que indica la nota</returns>
         public float notaEstado()
         {
-            //porcentajes
-            float Blindaje = 0.4f, Estructura = 0.2f, Tipo = 0.4f;
             float nota;
 
             if (_notaMech == -1) //Si no ha sido calculada con anterioridad
             {
-                nota = estadoBlindajeMech() * Blindaje +
-                   estadoEsctructuraMech() * Estructura +
-                   tipo() * Tipo;
+                nota = estadoBlindajeMech() * PanelControl.Nota_Blindaje +
+                   estadoEsctructuraMech() * PanelControl.Nota_Estructura +
+                   tipo() * PanelControl.Nota_Tipo;
                 _notaMech = nota;
             }
             else
