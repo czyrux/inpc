@@ -14,13 +14,6 @@ namespace ico
             _padre = null;
         }
 
-        /*public Heuristica nuevo(Heuristica cpy) {
-            _f = cpy.f();
-            _g = cpy.g();
-            _h = cpy.h();
-            _direccion = cpy.direccion();
-
-        }*/
 
         public int g() { return _g; }
         public void g(int n) { _g = n; }
