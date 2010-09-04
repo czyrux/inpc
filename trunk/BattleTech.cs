@@ -378,7 +378,7 @@ namespace ico
                 if (objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
                     puntuacion += 4;
 
-                puntuacion -= _mechs[_myJugador].posicion().distancia(p);
+                puntuacion -= _mechs[_myJugador].posicion().distancia(p)/2;
             //}
             /*else //Estrategia defensiva
             {
