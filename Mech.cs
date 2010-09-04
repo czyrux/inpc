@@ -620,8 +620,8 @@ namespace ico {
         /// <summary>
         /// Devuelve la localizacion del mech
         /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
+        /// <param name="i">Indice de la localizacion</param>
+        /// <returns>Localizacion de Mech</returns>
         public LocalizacionMech slots(int i) {
             if (i < 8)
             {
@@ -630,9 +630,30 @@ namespace ico {
             else return null;
         }
 
+        /// <summary>
+        /// Indica los puntos para andar del mech
+        /// </summary>
+        /// <returns>Entero</returns>
         public int puntosAndar() { return _andarDefinicion; }
+
+        /// <summary>
+        /// Indica los puntos para correr del mech
+        /// </summary>
+        /// <returns>Entero</returns>
 		public int puntosCorrer() { return _correrDefinicion; }
+
+        /// <summary>
+        /// Indica los puntos para saltar del mech
+        /// </summary>
+        /// <returns>Entero</returns>
 		public int puntosSaltar() { return _saltarDefinicion; }
+
+        /// <summary>
+        /// Indica el tipo de radiador del mech
+        /// - 0: simples
+        /// - 1: dobles
+        /// </summary>
+        /// <returns>Entero que indica el tipo de radiador</returns>
 		public int tipoRadiador() { return _tipoRadiador; }
 		
 		public int distanciaTiroCorta() { return _distanciaTiroCorta;}
