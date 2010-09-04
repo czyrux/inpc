@@ -4,10 +4,10 @@ using System.Text;
 
 namespace ico
 {
-    public class Heuristica
+    public class Nodo
     {
 
-        public Heuristica()
+        public Nodo()
         {
             _g = _h = _f = 0;
             _direccion = (Encaramiento)1;
@@ -37,15 +37,15 @@ namespace ico
         public Casilla casilla() { return _casilla; }
         public void casilla(Casilla n) { _casilla = n; }
 
-        public Heuristica padre() { return _padre; }
-        public void padre(Heuristica n) { _padre = n; }
+        public Nodo padre() { return _padre; }
+        public void padre(Nodo n) { _padre = n; }
 
         private int _g;
         private int _h;
         private int _f;
         private Encaramiento _direccion;
         private Casilla _casilla;
-        private Heuristica _padre;
+        private Nodo _padre;
 
 
         public override string ToString()
