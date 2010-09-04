@@ -9,9 +9,11 @@ namespace ico
     /// </summary>
     static public class PanelControl
     {
-        #region constantes del Pathfinder
+        #region constantes del Camino
 
         public const int penalizadorAgua = 10;
+
+        public const string movimientoArchivo = "faseMovimiento.txt";
 
         #endregion
 
