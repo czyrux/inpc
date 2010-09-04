@@ -377,6 +377,8 @@ namespace ico
                 //Bonus por estar a la espalda del enemigo
                 if (objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
                     puntuacion += 4;
+
+                puntuacion -= _mechs[_myJugador].posicion().distancia(objetivo.posicion());
             //}
             /*else //Estrategia defensiva
             {
