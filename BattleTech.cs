@@ -173,10 +173,8 @@ namespace ico
 			}
 		}
 
-        //Para la fase de movimiento del juego
+
         #region faseMovimiento
-        //La nota de cada mech para saber a cual disparamos sera la siguiente: nota propia=40% y distancia=60%
-        const float NOTA_MOV = 0.4f, DISTANCIA_MOV = 0.6f;
 
         private void faseMovimiento() 
         {
@@ -243,11 +241,11 @@ namespace ico
                     {
                         Console.WriteLine("Mech: " + _mechs[i].nombre());
                         //Nota estado
-                        notasParciales[i] = _mechs[i].notaEstado() * NOTA_MOV;
+                        notasParciales[i] = _mechs[i].notaEstado() * PanelControl.NOTA_MOV;
                         Console.WriteLine("Nota estado: " + _mechs[i].notaEstado());
                         //Nota distancia
-                        notasParciales[i] += ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * DISTANCIA_MOV;
-                        Console.WriteLine("Nota distancia: " + ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * DISTANCIA_MOV);
+                        notasParciales[i] += ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV;
+                        Console.WriteLine("Nota distancia: " + ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV);
                         Console.WriteLine("Nota parcial:" + notasParciales[i]);
                         Console.WriteLine();
                     }
@@ -268,7 +266,7 @@ namespace ico
             return _mechs[objetivo];
         }
 
-        const int Radio = 5;
+        
         private Posicion seleccionDestino(Mech objetivo) 
         {
             List<Posicion> posiblesDestinos = new List<Posicion>();
@@ -279,7 +277,7 @@ namespace ico
             //{
 
                 //Escogemos las casillas alrededor
-                _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,Radio);
+                _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,PanelControl.radio);
 
                 //Puntuamos las casillas
                 puntuacion = new int[posiblesDestinos.Count];
@@ -331,7 +329,7 @@ namespace ico
             return destino;
         }
 
-        const float pesoDistancia = .20f;
+        
         private int puntuacionCasilla ( Posicion p , Mech objetivo ) 
         {
             int puntuacion = 0;
@@ -394,7 +392,7 @@ namespace ico
                 if (objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
                     puntuacion += 4;
 
-                puntuacion -= (int)Math.Truncate(_mechs[_myJugador].posicion().distancia(p)*pesoDistancia);
+                puntuacion -= (int)Math.Truncate(_mechs[_myJugador].posicion().distancia(p)*PanelControl.pesoDistancia);
             //}
             /*else //Estrategia defensiva
             {
@@ -459,6 +457,10 @@ namespace ico
         }
         #endregion
 
+
+        /// <summary>
+        /// Metodo que realiza la fase de Reaccion
+        /// </summary>
         private void faseReaccion() {
             Console.WriteLine("Fase Reaccion");
             Console.WriteLine();
