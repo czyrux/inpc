@@ -162,7 +162,13 @@ namespace ico {
         /// Nombre del mech
         /// </summary>
 		protected string _nombre;
+        /// <summary>
+        /// Modelo del mech
+        /// </summary>
 		protected string _modelo;
+        /// <summary>
+        /// 
+        /// </summary>
 		protected int _toneladas;
 		protected int _potencia;
 		protected int _numeroRadiadoresInternos;
