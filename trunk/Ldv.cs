@@ -8,9 +8,8 @@ using System.Collections.Generic;
 namespace ico
 {
     public class LdV
-    {
-        
-    #region Constructores
+    {     
+        #region Constructores
         public LdV(Mech p1, Mech p2,Tablero tablero) {
             Process proc = new Process();
             _movimientos = _nldv = 0;
@@ -50,12 +49,6 @@ namespace ico
             }
             _camino[nodos.Length+1] = tablero.Casilla(p2.posicion());
             _length = _camino.Length;
-            //rellenamos heuristica?¿
-            /*for (int i = 0; i < _length; i++) {
-                if (_camino[i].tipoTerreno() == 2) {
-
-                }
-            }*/
         }
 
         public LdV(ArrayList camino)
@@ -69,9 +62,9 @@ namespace ico
             _ldv =_cobertura= false;
             _nldv = _movimientos = 0;
         }
-#endregion
+        #endregion
 
-#region Propiedades
+        #region Propiedades
 
         public int longitud() {
             return _length;
@@ -85,9 +78,9 @@ namespace ico
         public Boolean cobertura() {
             return _cobertura;
         }
-#endregion
+        #endregion
 
-#region Funciones
+        #region Funciones
      
         public Casilla casilla(int i) {
             return _camino[i];
@@ -104,17 +97,15 @@ namespace ico
             Console.WriteLine(str);
         }
 
-#endregion
-        #region Privado
+        #endregion
+
+        #region Atributos
         private int _length;
         private Casilla[] _camino;
         private Boolean _ldv;
         private Boolean _cobertura;
         private int _nldv;
         private int _movimientos;
-
-
-
         #endregion
 
     }
