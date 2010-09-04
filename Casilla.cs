@@ -141,7 +141,7 @@ namespace ico
         {
             int costo = 0;
             if (a.tipoTerreno() == 2)
-                costo = PanelControl.agua;
+                costo = PanelControl.penalizadorAgua;
             if (Math.Abs(_posicion.columna() - a.columna()) < 2 || Math.Abs(_posicion.fila() - a.fila()) < 2)
             {
                 switch (a.nivel() - _nivel)
