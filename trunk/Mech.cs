@@ -224,57 +224,161 @@ namespace ico {
         /// </summary>
         protected Boolean _conManoDerecha;
 		
+
+        /// <summary>
+        /// Indica el numero de componentes
+        /// </summary>
 		protected int _numeroComponentes;
+        /// <summary>
+        /// Array de componentes
+        /// </summary>
 		protected Componente[] _componentes;
 		
+
+        /// <summary>
+        /// Indica el numero de armas
+        /// </summary>
 		protected int _numeroArmas;
+        /// <summary>
+        /// Arraylist de componentes tipo arma
+        /// </summary>
 		protected ArrayList _armas;
+
+        /// <summary>
+        /// Indica el numero de actuadores
+        /// </summary>
 		protected int _numeroActuadores;
+        /// <summary>
+        /// Array de actuadores
+        /// </summary>
 		protected Actuador[] _actuadores;
 
+        /// <summary>
+        /// Array de localizacionMech
+        /// </summary>
         protected LocalizacionMech[] _slots;
-		/*protected LocalizacionMech _slotsBrazoIzquierdo;
-		protected LocalizacionMech _slotsTorsoIzquierdo;
-		protected LocalizacionMech _slotsPiernaIzquierda;
-		protected LocalizacionMech _slotsPiernaDerecha;
-		protected LocalizacionMech _slotsTorsoDerecho;
-		protected LocalizacionMech _slotsBrazoDerecho;
-		protected LocalizacionMech _slotsTorsoCentral;
-		protected LocalizacionMech _slotsCabeza;*/
 
+        /// <summary>
+        /// Puntos para andar
+        /// </summary>
         protected int _andarDefinicion;
+        /// <summary>
+        /// Puntos para correr
+        /// </summary>
         protected int _correrDefinicion;
+        /// <summary>
+        /// Puntos para saltar
+        /// </summary>
         protected int _saltarDefinicion;
+        /// <summary>
+        /// Indica el tipo de radiador
+        /// </summary>
         protected int _tipoRadiador;
 
-        protected int _distanciaTiroCorta; //***
-        protected int _distanciaTiroMedia; //***
-        protected int _distanciaTiroLarga; //***
-        protected int _maxAlcanceDisparo; //***
-        protected int _danioMaximo; //***
+        /// <summary>
+        /// Indica la media de la distancia de tiro corta
+        /// </summary>
+        protected int _distanciaTiroCorta;
+        /// <summary>
+        /// Indica la media de la distancia de tiro media
+        /// </summary>
+        protected int _distanciaTiroMedia;
+        /// <summary>
+        /// Indica la media de la distancia de tiro larga
+        /// </summary>
+        protected int _distanciaTiroLarga;
+        /// <summary>
+        /// Indica el maximo alcance de tiro del Mech
+        /// </summary>
+        protected int _maxAlcanceDisparo;
+        /// <summary>
+        /// Indica el daño maximo que puede producir un mech
+        /// </summary>
+        protected int _danioMaximo;
 
-        //DATOS DE ARMADURA INICIALES DEL MECH
+        
+        /// <summary>
+        /// Indica los puntos de blindaje iniciales de BI del Mech
+        /// </summary>
         protected int _BlindBrazoIzquierdoInicial;
+        /// <summary>
+        /// Indica los puntos de blindaje iniciales de TI del Mech
+        /// </summary>
         protected int _BlindTorsoIzquierdoInicial;
+        /// <summary>
+        /// Indica los puntos de blindaje iniciales de PI del Mech
+        /// </summary>
         protected int _BlindPiernaIzquierdaInicial;
+        /// <summary>
+        /// Indica los puntos de blindaje iniciales de PD del Mech
+        /// </summary>
         protected int _BlindPiernaDerechaInicial;
+        /// <summary>
+        /// Indica los puntos de blindaje iniciales de TD del Mech
+        /// </summary>
         protected int _BlindTorsoDerechoInicial;
+        /// <summary>
+        /// Indica los puntos de blindaje iniciales de BD del Mech
+        /// </summary>
         protected int _BlindBrazoDerechoInicial;
+        /// <summary>
+        /// Indica los puntos de blindaje iniciales de TC del Mech
+        /// </summary>
         protected int _BlindTorsoCentralInicial;
+        /// <summary>
+        /// Indica los puntos de blindaje iniciales de CAB del Mech
+        /// </summary>
         protected int _BlindCabezaInicial;
+        /// <summary>
+        /// Indica los puntos de blindaje iniciales de ATI del Mech
+        /// </summary>
         protected int _BlindAtrasTorsoIzquierdoInicial;
+        /// <summary>
+        /// Indica los puntos de blindaje iniciales de ATD del Mech
+        /// </summary>
         protected int _BlindAtrasTorsoDerechoInicial;
+        /// <summary>
+        /// Indica los puntos de blindaje iniciales de ATC del Mech
+        /// </summary>
         protected int _BlindAtrasTorsoCentralInicial;
 
+
+        /// <summary>
+        /// Indica los puntos de estructura interna iniciales de BI del Mech
+        /// </summary>
         protected int _EstrucBrazoIzquierdoInicial;
+        /// <summary>
+        /// Indica los puntos de estructura interna iniciales de TI del Mech
+        /// </summary>
         protected int _EstrucTorsoIzquierdoInicial;
+        /// <summary>
+        /// Indica los puntos de estructura interna iniciales de PI del Mech
+        /// </summary>
         protected int _EstrucPiernaIzquierdaInicial;
+        /// <summary>
+        /// Indica los puntos de estructura interna iniciales de PD del Mech
+        /// </summary>
         protected int _EstrucPiernaDerechaInicial;
+        /// <summary>
+        /// Indica los puntos de estructura interna iniciales de TD del Mech
+        /// </summary>
         protected int _EstrucTorsoDerechoInicial;
+        /// <summary>
+        /// Indica los puntos de estructura interna iniciales de BD del Mech
+        /// </summary>
         protected int _EstrucBrazoDerechoInicial;
+        /// <summary>
+        /// Indica los puntos de estructura interna iniciales de TC del Mech
+        /// </summary>
         protected int _EstrucTorsoCentralInicial;
+        /// <summary>
+        /// Indica los puntos de estructura interna iniciales de CAB del Mech
+        /// </summary>
         protected int _EstrucCabezaInicial;
 
+        /// <summary>
+        /// Indica la nota de blindaje del mech
+        /// </summary>
         protected float _notaMech;
 
         #endregion
