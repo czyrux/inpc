@@ -167,12 +167,25 @@ namespace ico
                camino.Add(padre.padre());
                padre = padre.padre();
            } while (padre.casilla() != a);
-           //aux = caminoReal(camino, a, ich, Tablero);
-          // camino = camino.GetRange(0, aux+1);
+
+
+
+           aux = caminoReal(camino, a, ich, Tablero);
+           camino = camino.GetRange(0, aux+1);
 
             camino.Reverse();
 
             return camino;
+        }
+
+        private void limpiarAgua(ArrayList camino) {
+            int veces = 0;
+            foreach (Nodo i in camino) {
+                if (i.casilla().tipoTerreno() == 2) { 
+
+                }
+                i.g(i.g()-agua
+            }
         }
 
         private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t) {

@@ -136,12 +136,12 @@ namespace ico
 
             return costo;
         }*/
-        const int agua=10;
+        
         public int costoMovimiento( Casilla a)
         {
             int costo = 0;
             if (a.tipoTerreno() == 2)
-                costo = agua;
+                costo = PanelControl.agua;
             if (Math.Abs(_posicion.columna() - a.columna()) < 2 || Math.Abs(_posicion.fila() - a.fila()) < 2)
             {
                 switch (a.nivel() - _nivel)
