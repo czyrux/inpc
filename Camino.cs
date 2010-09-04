@@ -175,110 +175,11 @@ namespace ico
 
             camino.Reverse();
 
+            _original = (Encaramiento)ich.ladoEncaramiento();
+
             return camino;
         }
 
-        private ArrayList limpiarAgua(ArrayList camino) {
-            int veces = 0;
-            for(int i=camino.Count-2; i>1;i--){
-                ((Nodo)camino[i]).g(((Nodo)camino[i]).g()-PanelControl.penalizadorAgua*veces);
-                if (((Nodo)camino[i]).casilla().tipoTerreno() == 2) 
-                    veces++;
-            }
-            return camino;
-        }
-
-        private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t) {
-
-            int puntos = ich.puntosAndar()/2, j=0,tmpC=0,tmpJ=0;
-            Boolean flag=false, flagj=false;
-            List<int> l;
-
-            for (int i = 0; i < camino.Count - (1 + puntos); i++) {
-                if (puntos + i >= camino.Count)
-                    puntos = camino.Count - 1;
-
-                if (((Nodo)camino[puntos + i]).g() < puntos)
-                {
-                    l = posiblesEncaramientos((Nodo)camino[puntos + i], destino, t);
-
-                    for (int c = 1; c < l.Count; c++) {
-                        tmpC = costoEncaramiento(((Nodo)camino[puntos + i]).casilla(), ((Nodo)camino[puntos + i]).direccion(), (Encaramiento)l[c]);
-                        tmpJ = costoEncaramiento(((Nodo)camino[puntos + i]).casilla(), ((Nodo)camino[puntos + i]).direccion(), (Encaramiento)l[j]);
-
-                        if (((Nodo)camino[puntos + i]).g() - tmpC < ich.puntosAndar())
-                            flag = true;
-
-                        if (tmpJ>tmpC){
-                            flagj = true;
-                            j = c;
-                        } 
-                    }
-
-                    if (!flag)
-                        flagj = false;
-                    else
-                    {
-                        ((Nodo)camino[puntos + i]).direccion((Encaramiento)l[j]);
-                        return puntos + i;
-                    }
-
-                    j = 0;
-                }
-            }
-
-            return -1;
-        }
-        private List<int> posiblesEncaramientos(Nodo o, Casilla destino, Tablero t)
-        {
-            int min=10000, tmp=0;
-            List<int> l= new List<int>();
-
-            for (int i = 1; i < 7; i++){
-                tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino.posicion());
-                if (tmp <= min) {
-                    l.Add(i);
-                }
-            }
-
-            return l;
-        }
-        
-        private int costoEncaramiento(Casilla origenCasilla, Encaramiento direccion, Casilla destinoCasilla, Tablero t) {
-            if (t.colindante(origenCasilla.posicion(), direccion) == destinoCasilla)
-                return 0;
-            else if (t.colindante(origenCasilla.posicion(), direccion + 1) == destinoCasilla || t.colindante(origenCasilla.posicion(), direccion + 5) == destinoCasilla)
-                return 1;
-            else if (t.colindante(origenCasilla.posicion(), direccion + 2) == destinoCasilla || t.colindante(origenCasilla.posicion(), direccion + 4) == destinoCasilla)
-                return 2;
-            else 
-                return 3;
-        }
-        private int costoEncaramiento(Casilla origenCasilla, Encaramiento o, Encaramiento des)
-        {
-           switch (Math.Abs(o-des)){
-               case 0:
-                   return 0;
-               case 1:
-                   return 1;
-               case 2:
-                   return 2;
-               case 3:
-                   return 3;
-               case 4:
-                   return 2;
-               case 5:
-                   return 1;
-           }
-           return -1;
-        }
-        /*private heuristica quienEsMiPadre(heuristica hijo, ArrayList lista) {
-            foreach (heuristica i in lista) {
-                if (hijo.padre == i.casilla)
-                    return i;
-            }
-            return hijo;
-        }*/
         public int costoMovimiento() 
         {    
                 for (int i = 0; i < _camino.Count; i++){
@@ -318,6 +219,13 @@ namespace ico
             Console.WriteLine(str);
         }
 
+        public override string ToString()
+        {
+
+
+            return base.ToString();
+        }
+
 #endregion
         #region Privado
         //private int _length;
@@ -326,8 +234,118 @@ namespace ico
         private Boolean _cobertura;
         private int _nldv;
         private int _movimientos;
+        private Encaramiento _original;
 
 
+        private ArrayList limpiarAgua(ArrayList camino)
+        {
+            int veces = 0;
+            for (int i = camino.Count - 2; i > 1; i--)
+            {
+                ((Nodo)camino[i]).g(((Nodo)camino[i]).g() - PanelControl.penalizadorAgua * veces);
+                if (((Nodo)camino[i]).casilla().tipoTerreno() == 2)
+                    veces++;
+            }
+            return camino;
+        }
+
+        private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t)
+        {
+
+            int puntos = ich.puntosAndar() / 2, j = 0, tmpC = 0, tmpJ = 0;
+            Boolean flag = false, flagj = false;
+            List<int> l;
+
+            for (int i = 0; i < camino.Count - (1 + puntos); i++)
+            {
+                if (puntos + i >= camino.Count)
+                    puntos = camino.Count - 1;
+
+                if (((Nodo)camino[puntos + i]).g() < ich.puntosAndar())
+                {
+                    l = posiblesEncaramientos((Nodo)camino[puntos + i], destino, t);
+
+                    for (int c = 1; c < l.Count; c++)
+                    {
+                        tmpC = costoEncaramiento(((Nodo)camino[puntos + i]).casilla(), ((Nodo)camino[puntos + i]).direccion(), (Encaramiento)l[c]);
+                        tmpJ = costoEncaramiento(((Nodo)camino[puntos + i]).casilla(), ((Nodo)camino[puntos + i]).direccion(), (Encaramiento)l[j]);
+
+                        if (((Nodo)camino[puntos + i]).g() - tmpC < ich.puntosAndar())
+                            flag = true;
+
+                        if (tmpJ > tmpC)
+                        {
+                            flagj = true;
+                            j = c;
+                        }
+                    }
+
+                    if (!flag)
+                        flagj = false;
+                    else
+                    {
+                        ((Nodo)camino[puntos + i]).direccion((Encaramiento)l[j]);
+                        return puntos + i;
+                    }
+
+                    j = 0;
+                }
+            }
+
+            return -1;
+        }
+        private List<int> posiblesEncaramientos(Nodo o, Casilla destino, Tablero t)
+        {
+            int min = 10000, tmp = 0;
+            List<int> l = new List<int>();
+
+            for (int i = 1; i < 7; i++)
+            {
+                try { 
+                tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino.posicion());
+                if (tmp <= min)
+                {
+                    l.Add(i);
+                }
+                }
+                catch(Exception e) { }
+
+            }
+
+            return l;
+        }
+
+        private int costoEncaramiento(Casilla origenCasilla, Encaramiento direccion, Casilla destinoCasilla, Tablero t)
+        {
+            if (t.colindante(origenCasilla.posicion(), direccion) == destinoCasilla)
+                return 0;
+            else if (t.colindante(origenCasilla.posicion(), direccion + 1) == destinoCasilla || t.colindante(origenCasilla.posicion(), direccion + 5) == destinoCasilla)
+                return 1;
+            else if (t.colindante(origenCasilla.posicion(), direccion + 2) == destinoCasilla || t.colindante(origenCasilla.posicion(), direccion + 4) == destinoCasilla)
+                return 2;
+            else
+                return 3;
+        }
+        private int costoEncaramiento(Casilla origenCasilla, Encaramiento o, Encaramiento des)
+        {
+            switch (Math.Abs(o - des))
+            {
+                case 0:
+                    return 0;
+                case 1:
+                    return 1;
+                case 2:
+                    return 2;
+                case 3:
+                    return 3;
+                case 4:
+                    return 2;
+                case 5:
+                    return 1;
+            }
+            return -1;
+        }
+ 
 
         // funcion que calcula los valores euristicos siendo menos el mejor.
         private int heuristica(Casilla a, Casilla b)
