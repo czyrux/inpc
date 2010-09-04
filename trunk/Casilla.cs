@@ -8,6 +8,10 @@ namespace ico
     public class Casilla
     {
         #region Constructores
+        
+        /// <summary>
+        /// Constructor por defecto
+        /// </summary>
         public Casilla() {
             _nivel = _fceEdificio = _tipoTerreno = _objetoTerreno = _nGarrotes = /*_heuristica.g = */0;
             //_heuristica.f = _heuristica.h = 0;
@@ -17,7 +21,7 @@ namespace ico
             _puntosMovimientos = 0;
             
         }
-        public Casilla(int nivel, int tipoTerreno, int objetoTerreno, int fceEdificio, Boolean edificioDerrumbado,
+        /*public Casilla(int nivel, int tipoTerreno, int objetoTerreno, int fceEdificio, Boolean edificioDerrumbado,
         Boolean fuego, Boolean humo, int nGarrotes, Cara[] caras)
         {
             _nivel = nivel;
@@ -42,10 +46,15 @@ namespace ico
             _humo = humo;
             _nGarrotes = nGarrotes;
             _puntosMovimientos = 0;
-        }
+        }*/
 #endregion
 
         #region "publicas"
+        
+        /// <summary>
+        /// costo intrinceco en puntos de movimentos de una casilla
+        /// </summary>
+        /// <returns>costo en puntos de mvimientos, tipo Int</returns>
         public int  costoMovimiento(){
             if (_puntosMovimientos == 0)
             {
@@ -107,7 +116,11 @@ namespace ico
             return _puntosMovimientos;
         }
 
-        
+        /// <summary>
+        /// costo asociado en puntos de movimentos de una casilla
+        /// </summary>
+        /// <param name="a">casilla al cual se le calculara el costo asociado</param>
+        /// <returns>costo en puntos de mvimientos; tipo Int</returns>
         public int costoMovimiento( Casilla a)
         {
             int costo = 0;
@@ -144,87 +157,175 @@ namespace ico
             return costo;
         }
 
+        /// <summary>
+        /// Transfora la casilla en cadena, siendo esta su posicion.
+        /// </summary>
+        /// <returns>cadena de casilla; tipo String</returns>
+        public override string ToString()
+        {
+            return _posicion.ToString();
+        }
+ 
         #endregion
 
         #region Propiedades
+        /// <summary>
+        /// Propiedad que devuelve el nivel de la casilla
+        /// </summary>
+        /// <returns>nivel; tipo Int</returns>
         public int nivel() {
             return _nivel;
         }
+        /// <summary>
+        /// Establece el nivel de la casilla
+        /// </summary>
+        /// <param name="nivel">nivel; tipo Int</param>
         public void nivel(int nivel) {
             _nivel = nivel;
         }
 
+        /// <summary>
+        /// Propiedad que devuelve el tipo de terreno de la casilla
+        /// </summary>
+        /// <returns>tipo de nivel; tipo Int</returns>
         public int tipoTerreno()
         {
             return _tipoTerreno;
         }
+        /// <summary>
+        /// Establece el tipo de terreno de la casilla
+        /// </summary>
+        /// <param name="tipoTerreno"></param>
         public void tipoTerreno(int tipoTerreno)
         {
             _tipoTerreno = tipoTerreno;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int objetoTerreno()
         {
             return _objetoTerreno;
         }
+        /// <summary>
+        /// Establece el objeto en el terreno de la casilla
+        /// </summary>
+        /// <param name="objetoTerreno"></param>
         public void objetoTerreno(int objetoTerreno)
         {
             _objetoTerreno = objetoTerreno;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int fceEdificio()
         {
             return _fceEdificio;
         }
+        /// <summary>
+        /// Establece el fceEdificio de la casilla
+        /// </summary>
+        /// <param name="fceEdificio"></param>
         public void fceEdificio(int  fceEdificio)
         {
             _fceEdificio = fceEdificio;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Boolean edificioDerrumbado()
         {
             return _edificioDerrumbado;
         }
+        /// <summary>
+        /// Establece si hay edificio derrumbado en la casilla
+        /// </summary>
+        /// <param name="edificioDerrumbado"></param>
         public void edificioDerrumbado(Boolean edificioDerrumbado)
         {
             _edificioDerrumbado = edificioDerrumbado;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Boolean fuego()
         {
             return _fuego;
         }
+        /// <summary>
+        /// Establece si hay fuega en la casilla
+        /// </summary>
+        /// <param name="fuego"></param>
         public void fuego(Boolean fuego)
         {
             _fuego = fuego;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Boolean humo()
         {
             return _humo;
         }
+        /// <summary>
+        /// Establece si hay huma en la una casilla
+        /// </summary>
+        /// <param name="humo"></param>
         public void humo(Boolean humo)
         {
             _humo = humo;
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int nGarrotes()
         {
             return _nGarrotes;
         }
+        /// <summary>
+        /// Establece el numero de garrotes en la casilla
+        /// </summary>
+        /// <param name="nGarrotes"></param>
         public void nGarrotes(int nGarrotes)
         {
             _nGarrotes = nGarrotes;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Cara[] caras() {
             return _caras;
         }
+        /// <summary>
+        /// Establece las propiedades de las caras de la casilla
+        /// </summary>
+        /// <param name="caras"></param>
         public void caras(Cara[] caras) {
             if (_caras.Length!=0)
                 _caras = caras;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rio"></param>
+        /// <param name="carretera"></param>
+        /// <param name="i"></param>
         public void caras(Boolean rio, Boolean carretera, int i)
         {
             try
@@ -249,41 +350,85 @@ namespace ico
            
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Posicion posicion(){
             return _posicion;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="poscion"></param>
         public void posicion(Posicion poscion) {
             _posicion = poscion;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int fila() {
             return _posicion.fila();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int columna() {
             return _posicion.columna();
         }
         
-        public override string ToString()
-        {
-            return _posicion.ToString();
-        }
- 
 
         #endregion
 
         #region Privados
+        /// <summary>
+        /// 
+        /// </summary>
         private Posicion _posicion;
+        /// <summary>
+        /// 
+        /// </summary>
         private int _nivel;
+        /// <summary>
+        /// 
+        /// </summary>
         private int _tipoTerreno;
+        /// <summary>
+        /// 
+        /// </summary>
         private int _objetoTerreno;
+        /// <summary>
+        /// 
+        /// </summary>
         private int _fceEdificio;
+        /// <summary>
+        /// 
+        /// </summary>
         private Boolean _edificioDerrumbado;
+        /// <summary>
+        /// 
+        /// </summary>
         private Boolean _fuego;
+        /// <summary>
+        /// 
+        /// </summary>
         private Boolean _humo;
+        /// <summary>
+        /// 
+        /// </summary>
         private int _nGarrotes;
+        /// <summary>
+        /// 
+        /// </summary>
         private Cara[] _caras;
+        /// <summary>
+        /// 
+        /// </summary>
         private int _puntosMovimientos;
         #endregion
     }
