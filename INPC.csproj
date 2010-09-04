@@ -54,6 +54,7 @@
     <Compile Include="LocalizacionMech.cs" />
     <Compile Include="Mech.cs" />
     <Compile Include="MechJugador.cs" />
+    <Compile Include="PanelControl.cs" />
     <Compile Include="Posicion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Slot.cs" />
