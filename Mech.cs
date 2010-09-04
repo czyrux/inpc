@@ -13,15 +13,49 @@ namespace ico {
         #region atributos
 
 		//ATRIBUTOS	ESTADO
+        /// <summary>
+        /// Numero de jugadores en partida
+        /// </summary>
 		protected int numeroJugadores;
 		
+        /// <summary>
+        /// Numero del jugador dentro de la partida
+        /// </summary>
 		protected int _numeroJ;
-		protected Boolean _operativo; //***
-        protected Boolean _desconectado; //***
-        protected Boolean _atascado; //***
-		protected Boolean _enSuelo; //***
-		protected Posicion _posicion; // clase posicion
-        protected int _ladoEncaramiento; //***
+
+        /// <summary>
+        /// Atributo booleano para indicar si el mech esta operativo
+        /// </summary>
+		protected Boolean _operativo;
+
+        /// <summary>
+        /// Atributo booleano para indicar si el mech esta desconectado
+        /// </summary>
+        protected Boolean _desconectado;
+
+        /// <summary>
+        /// Atributo booleano para indicar si el mech esta atascado
+        /// </summary>
+        protected Boolean _atascado;
+
+        /// <summary>
+        /// Atributo booleano para indicar si el mech esta en el suelo
+        /// </summary>
+		protected Boolean _enSuelo;
+
+        /// <summary>
+        /// Atributo que guarda la posicion del mech en el tablero de juego
+        /// </summary>
+		protected Posicion _posicion;
+
+        /// <summary>
+        /// Lado dentro del hexagono hacia el que esta encarado el mech
+        /// </summary>
+        protected int _ladoEncaramiento;
+
+        /// <summary>
+        /// Lado dentro del hexagono hacia el que esta encarado el mech
+        /// </summary>
         protected int _ladoEncaramientoTorso; //***
         protected int _nivelTemp; //***
 		protected Boolean _ardiendo;
@@ -132,9 +166,17 @@ namespace ico {
         #endregion
 
         #region constructores
-        //CONSTRUCTORES
+        /// <summary>
+        /// Constructor por defecto del mech
+        /// </summary>
 		public Mech () {}
 		
+        /// <summary>
+        /// Constructor con parametros
+        /// </summary>
+        /// <param name="f1">Descriptor del fichero de estado</param>
+        /// <param name="f2">Descriptor del fichero de definicion</param>
+        /// <param name="n">Numero de mech en la partida</param>
 		public Mech ( StreamReader f1 , StreamReader f2 ,  int n) {
 			numeroJugadores=n;
 			fichero_estado(f1);
@@ -142,9 +184,12 @@ namespace ico {
 		}
         #endregion
 
-        #region Privados ficheros
-        //Metodos de lecturas de datos
+        #region Metodos para la lectura de ficheros
 
+        /// <summary>
+        /// Metodo que lee los datos del fichero de estado del mech
+        /// </summary>
+        /// <param name="f">Descriptor del fichero ya abierto</param>
 		private void fichero_estado( StreamReader f ) {
 			_numeroJ=Convert.ToInt32(f.ReadLine());
 			
@@ -195,6 +240,10 @@ namespace ico {
             _notaMech = -1;
 		}
 		
+        /// <summary>
+        /// Metodo que lee los datos del fichero de definicion del mech
+        /// </summary>
+        /// <param name="f">Descriptor del fichero ya abiero</param>
 		protected void fichero_definicion( StreamReader f){
 			
 			f.ReadLine(); //nombre fichero
@@ -276,6 +325,10 @@ namespace ico {
             calculoDistanciaTiro();
 		}
 
+        /// <summary>
+        /// Metodo que guarda los datos de armadura del mech al inicio de partida, y que en posteriores
+        /// ejecuciones, recupera dicha informacion.
+        /// </summary>
         protected void datos_armadura_inicial() {
             bool nuevo = true;
             string path = "C:/ficheros/";
@@ -656,10 +709,34 @@ namespace ico {
         /// <returns>Entero que indica el tipo de radiador</returns>
 		public int tipoRadiador() { return _tipoRadiador; }
 		
+        /// <summary>
+        /// Indica la distancia corta, en media, de todas las armas
+        /// </summary>
+        /// <returns>Entero</returns>
 		public int distanciaTiroCorta() { return _distanciaTiroCorta;}
+
+        /// <summary>
+        /// Indica la distancia media, en media, de todas las armas
+        /// </summary>
+        /// <returns>Entero</returns>
 		public int distanciaTiroMedia() { return _distanciaTiroMedia;}
+
+        /// <summary>
+        /// Indica la distancia larga, en media, de todas las armas
+        /// </summary>
+        /// <returns>Entero</returns>
 		public int distanciaTiroLarga() { return _distanciaTiroLarga;}
+
+        /// <summary>
+        /// Indica el maximo alcance al que algun arma del mech puede llegar
+        /// </summary>
+        /// <returns>Entero</returns>
         public int maxAlcanceTiro() { return _maxAlcanceDisparo; }
+
+        /// <summary>
+        /// Cantidad de daño que harian todas la armas del mech en caso de dar al objetivo
+        /// </summary>
+        /// <returns>Entero</returns>
         public int danioMaximo() { return _danioMaximo; }
 		
         #endregion
