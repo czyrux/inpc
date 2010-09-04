@@ -74,7 +74,8 @@ namespace ico
            int j = 0;
           _length = camino.Count;
           _camino = new Casilla[_length];
-          foreach (Heuristica i in camino) {
+          foreach (Nodo i in camino)
+          {
               _camino[j] = i.casilla();
               j++;
           }
@@ -109,7 +110,7 @@ namespace ico
             ArrayList cerradas = new ArrayList();
             ArrayList abiertas = new ArrayList();
             ArrayList camino = new ArrayList();
-            Heuristica elemento=new Heuristica();
+            Nodo elemento = new Nodo();
             int aux = 0, iaux=0, mejor=-1, gAcumulada=0;
             Boolean nueva = false;
 
@@ -120,12 +121,12 @@ namespace ico
             elemento.direccion((Encaramiento)ich.ladoEncaramiento());
             elemento.padre(elemento);
 
-            Heuristica actual = elemento;
+            Nodo actual = elemento;
 
             cerradas.Add(elemento);
             do {
                 for (int i = 1; i < 7; i++) {
-                    elemento = new Heuristica();
+                    elemento = new Nodo();
                     try
                     {
                         elemento.casilla(Tablero.colindante(actual.casilla().posicion(), (Encaramiento)i));//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
@@ -153,7 +154,7 @@ namespace ico
                         {
 
                             // compruebo si desde la aterior era mejor que esta
-                            if (elemento.g() >= ((Heuristica)abiertas[iaux]).g())
+                            if (elemento.g() >= ((Nodo)abiertas[iaux]).g())
                             {
                                 // si, si continuo sin hacer cambios
                                 continue;
@@ -162,7 +163,7 @@ namespace ico
                             else
                             {
                                 nueva = true;
-                                elemento.h(((Heuristica)abiertas[iaux]).h());
+                                elemento.h(((Nodo)abiertas[iaux]).h());
                                 elemento.f(elemento.g() + elemento.h());
                                 elemento.padre(actual);
                                 elemento.direccion((Encaramiento)i);
@@ -189,27 +190,27 @@ namespace ico
                 //buesca la mejor casilla entre las abiertas
                 mejor = mejorCasillaAbierta(abiertas, actual.casilla(), b);
                 //actualizo la acomulacion de la g
-                gAcumulada = ((Heuristica)abiertas[mejor]).g();
+                gAcumulada = ((Nodo)abiertas[mejor]).g();
                 //agrego la mejor casilla
                 cerradas.Add(abiertas[mejor]);
                 //pongo la mejor como la siguiente actual
-                actual = (Heuristica)abiertas[mejor];
+                actual = (Nodo)abiertas[mejor];
                 //borro la mejor de las abiertas
                 abiertas.RemoveAt(mejor);
 
             } while (actual.casilla() != b);
 
-            elemento = new Heuristica();
+            elemento = new Nodo();
 
             elemento.casilla(b);
             elemento.g(0);
             elemento.h(0);
             elemento.f(0);
             elemento.direccion((Encaramiento)ich.ladoEncaramiento());
-            elemento.padre((Heuristica)cerradas[cerradas.Count - 1]);
+            elemento.padre((Nodo)cerradas[cerradas.Count - 1]);
             camino.Add(elemento);
 
-            Heuristica padre = (Heuristica)cerradas[cerradas.Count - 1];
+            Nodo padre = (Nodo)cerradas[cerradas.Count - 1];
            do{
                camino.Add(padre.padre());
                padre = padre.padre();
@@ -232,15 +233,15 @@ namespace ico
                 if (puntos - i >= camino.Count)
                     puntos = camino.Count - 1;
 
-                if (((Heuristica)camino[puntos - i]).g() < puntos)
+                if (((Nodo)camino[puntos - i]).g() < puntos)
                 {
-                    l = posiblesEncaramientos((Heuristica)camino[puntos - i], destino, t);
+                    l = posiblesEncaramientos((Nodo)camino[puntos - i], destino, t);
 
                     for (int c = 1; c < l.Count; c++) {
-                        tmpC = costoEncaramiento(((Heuristica)camino[puntos - i]).casilla(), ((Heuristica)camino[puntos - i]).direccion(), (Encaramiento)l[c]);
-                        tmpJ = costoEncaramiento(((Heuristica)camino[puntos - i]).casilla(), ((Heuristica)camino[puntos - i]).direccion(), (Encaramiento)l[j]);
+                        tmpC = costoEncaramiento(((Nodo)camino[puntos - i]).casilla(), ((Nodo)camino[puntos - i]).direccion(), (Encaramiento)l[c]);
+                        tmpJ = costoEncaramiento(((Nodo)camino[puntos - i]).casilla(), ((Nodo)camino[puntos - i]).direccion(), (Encaramiento)l[j]);
 
-                        if (((Heuristica)camino[puntos - i]).g() - tmpC < ich.puntosAndar())
+                        if (((Nodo)camino[puntos - i]).g() - tmpC < ich.puntosAndar())
                             flag = true;
 
                         if (tmpJ>tmpC){
@@ -253,7 +254,7 @@ namespace ico
                         flagj = false;
                     else
                     {
-                        ((Heuristica)camino[puntos - i]).direccion((Encaramiento)l[j]);
+                        ((Nodo)camino[puntos - i]).direccion((Encaramiento)l[j]);
                         return puntos - i;
                     }
 
@@ -263,7 +264,7 @@ namespace ico
 
             return -1;
         }
-        private List<int> posiblesEncaramientos(Heuristica o, Casilla destino, Tablero t)
+        private List<int> posiblesEncaramientos(Nodo o, Casilla destino, Tablero t)
         {
             int min=10000, tmp=0;
             List<int> l= new List<int>();
@@ -381,9 +382,9 @@ namespace ico
                 }
                 else
                 {*/
-                if (/*((heuristica)abiertas[i]).g<20 && */((Heuristica)abiertas[i]).casilla() == destino && ((Heuristica)abiertas[i]).padre().casilla() == padre)
+                if (/*((heuristica)abiertas[i]).g<20 && */((Nodo)abiertas[i]).casilla() == destino && ((Nodo)abiertas[i]).padre().casilla() == padre)
                         return i;
-                if (((Heuristica)abiertas[max]).f() > ((Heuristica)abiertas[i]).f() /*&& ((heuristica)abiertas[i]).padre == padre*/)
+                if (((Nodo)abiertas[max]).f() > ((Nodo)abiertas[i]).f() /*&& ((heuristica)abiertas[i]).padre == padre*/)
                         max = i;
                 //}
             }
@@ -392,7 +393,7 @@ namespace ico
 
         private int estaEn(ArrayList lista, Casilla  elem) {
             int n = 0;
-            foreach (Heuristica i in lista)
+            foreach (Nodo i in lista)
             {
                 if (i.casilla() == elem)
                     return n;
@@ -402,7 +403,7 @@ namespace ico
         }
 
         private Boolean esta(ArrayList lista, Casilla elem) {
-            foreach (Heuristica i in lista)
+            foreach (Nodo i in lista)
             {
                 if (i.casilla() == elem)
                     return true;
