@@ -31,8 +31,7 @@ namespace ico
             _caras = caras;
             _puntosMovimientos = 0;
         }
-        public Casilla(int nivel, int tipoTerreno, int objetoTerreno, int fceEdificio, Boolean edificioDerrumbado,
-   Boolean fuego, Boolean humo, int nGarrotes)
+        public Casilla(int nivel, int tipoTerreno, int objetoTerreno, int fceEdificio, Boolean edificioDerrumbado, Boolean fuego, Boolean humo, int nGarrotes)
         {
             _nivel = nivel;
             _tipoTerreno = tipoTerreno;
@@ -297,13 +296,7 @@ namespace ico
         {
             return _posicion.ToString();
         }
-       /* public heuristica heuristica() {
-            return _heuristica;
-        }
-
-        public void heuristica(heuristica value) {
-            _heuristica = value;
-        }*/
+ 
 
         #endregion
 
@@ -319,7 +312,6 @@ namespace ico
         private int _nGarrotes;
         private Cara[] _caras;
         private int _puntosMovimientos;
-        //private heuristica _heuristica;
         #endregion
     }
 }
