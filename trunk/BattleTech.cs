@@ -175,13 +175,13 @@ namespace ico
                 determinarEstrategia();
 
                 //Seleccionamos el objetivo hacia el que vamos a dirigirnos en caso de ser una estrategia ofensiva
-                if (_estrategia == Estrategia.Agresiva)
-                {
+                //if (_estrategia == Estrategia.Agresiva)
+                //{
                     objetivo = eleccionObjetivo();
-                }
+                /*}
                 else {
                     objetivo = null;
-                }
+                }*/
 
                 //Seleccionamos la casilla destino
                 destino = seleccionDestino(objetivo);
