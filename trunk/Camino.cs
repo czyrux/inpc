@@ -8,7 +8,7 @@ namespace ico
 {
     public class Camino
     {
-#region Constructores
+        #region Constructores
         
         /// <summary>
         /// Constructor que crea un camino a traves del pathfinder
@@ -34,7 +34,7 @@ namespace ico
 
 #endregion
 
-#region Propiedades
+        #region Propiedades
         /// <summary>
         /// Devuelve el numero de casillas en el camino
         /// </summary>
@@ -53,7 +53,7 @@ namespace ico
 
 #endregion
 
-#region Funciones
+        #region Funciones
         /// <summary>
         /// Devuelve el costo del movimiento en puntos de movimientos
         /// </summary>
@@ -154,9 +154,10 @@ namespace ico
             fich.Write(this.ToString());
         }
 #endregion
+       
         #region Privado
 
-        #region Variables privadas
+        #region Variables
         /// <summary>
         /// Lista de nodos que representan el camino
         /// </summary>
