@@ -167,8 +167,8 @@ namespace ico
                camino.Add(padre.padre());
                padre = padre.padre();
            } while (padre.casilla() != a);
-           aux = caminoReal(camino, a, ich, Tablero);
-           camino = camino.GetRange(0, aux+1);
+           //aux = caminoReal(camino, a, ich, Tablero);
+          // camino = camino.GetRange(0, aux+1);
 
             camino.Reverse();
 
@@ -300,7 +300,7 @@ namespace ico
         { 
             string str="El camino es: ";
             foreach (Nodo i in _camino)
-                str += "("+i.casilla().posicion().ToString()+", "+ "dir" +")"+ "->";
+                str += "("+i.casilla().posicion().ToString()+", "+ i.direccion().ToString() +")"+ "->";
             str += "FIN";
             Console.WriteLine(str);
         }
