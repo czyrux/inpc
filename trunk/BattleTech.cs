@@ -479,7 +479,7 @@ namespace ico
                 Console.WriteLine();
 
                 //Dejamos solo con los que tengamos linea de vision
-                List<Camino> ldv = new List<Camino>();
+                List<LdV> ldv = new List<LdV>();
                 objetivosLdV(objetivos, ldv);
 
                 Console.WriteLine();
@@ -512,7 +512,7 @@ namespace ico
             }
         }
 
-        private void objetivoMasDebil (List<Mech> objetivos , List<Camino> ldv , List<Componente> armas) 
+        private void objetivoMasDebil (List<Mech> objetivos , List<LdV> ldv , List<Componente> armas) 
         {
             if (objetivos.Count > 1)
             {
@@ -585,14 +585,14 @@ namespace ico
                 armas = null;
         }
 
-        private void objetivosLdV(List<Mech> objetivos , List<Camino> ldv )
+        private void objetivosLdV(List<Mech> objetivos , List<LdV> ldv )
         {
-            Camino c;
+            LdV c;
             if (objetivos.Count > 0)
             {
                 for (int i = 0; i < objetivos.Count; i++)
                 {
-                    c = new Camino(_mechs[_myJugador], objetivos[i], _tablero);
+                    c = new LdV(_mechs[_myJugador], objetivos[i], _tablero);
                     if (!c.ldv())
                     {
                         objetivos.RemoveAt(i);
