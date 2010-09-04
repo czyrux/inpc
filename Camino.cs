@@ -9,60 +9,13 @@ namespace ico
     public class Camino
     {
 #region Constructores
-        public Camino(Mech p1, Mech p2,Tablero tablero) {
-            Process proc = new Process();
-            _movimientos = _nldv = 0;
-            String[] nodos;
-            proc.StartInfo.WorkingDirectory = @".";
-            proc.StartInfo.FileName = "LDVyC.exe";
-            string str= "mapaJ"+p1.numeroJ().ToString()+".sbt " + p1.posicion().ToString() + " ";
-            if (p1.enSuelo()) {
-                str += "0 ";
-            } else
-                str += "1 ";
-            str += p2.posicion().ToString() + " ";
-            if (p2.enSuelo()) {
-                str += "0";
-            } else
-                str += "1";
-
-            proc.StartInfo.Arguments = str ;
-            proc.StartInfo.UseShellExecute = false;
-            proc.StartInfo.RedirectStandardOutput = false;
-            proc.StartInfo.RedirectStandardError = true;
-            proc.Start();
-            proc.WaitForExit();
-            proc.Close();
-            StreamReader fich = new StreamReader("LDV.sbt");
-            nodos = fich.ReadLine().Split(' '); 
-            _ldv = Convert.ToBoolean(fich.ReadLine());
-            _cobertura = Convert.ToBoolean(fich.ReadLine());
-            fich.Close();
-
-            _camino = new Casilla[nodos.Length + 2];
-
-
-            _camino[0] = tablero.Casilla(p1.posicion());
-            for (int i = 1; i <= nodos.Length; i++) {
-                _camino[i] = tablero.Casilla(new Posicion(nodos[i - 1]));
-            }
-            _camino[nodos.Length+1] = tablero.Casilla(p2.posicion());
-            _length = _camino.Length;
-            //rellenamos heuristica?¿
-            /*for (int i = 0; i < _length; i++) {
-                if (_camino[i].tipoTerreno() == 2) {
-
-                }
-            }*/
-        }
+        
 
         public Camino(ArrayList camino)
         {
-            _length = camino.Count;
-            _camino = new Casilla[_length];
-            for (int i = 0; i < _length; i++)
-            {
-                _camino[i] = (Casilla)camino[i];
+            _camino= new List<Nodo>();
+             foreach (Nodo i in camino) {
+                _camino.Add((Nodo)i);
             }
             _ldv =_cobertura= false;
             _nldv = _movimientos = 0;
@@ -72,10 +25,10 @@ namespace ico
 
            ArrayList camino = pathFinder(de, ich, a, tablero);
            int j = 0;
-          _length = camino.Count;
-          _camino = new Casilla[_length];
+
+           _camino = new List<Nodo>();
           foreach (Nodo i in camino) {
-              _camino[j] = i.casilla();
+              _camino.Add(i);
               j++;
           }
 
@@ -89,9 +42,9 @@ namespace ico
 #region Propiedades
 
         public int longitud() {
-            return _length;
+            return _camino.Count;
         }
-        public Casilla[] getCamino() {
+        public List<Nodo> getCamino() {
             return _camino;
         }
         public Boolean ldv() {
@@ -315,14 +268,14 @@ namespace ico
         }*/
         public int costoMovimiento() 
         {    
-                for (int i = 0; i < _length; i++){
+                for (int i = 0; i < _camino.Count; i++){
 
-                    _movimientos = _camino[i].costoMovimiento();
+                    _movimientos = _camino[i].casilla().costoMovimiento();
 
-                    if (i < _length && _camino[i].nivel() < _camino[i + 1].nivel())
+                    if (i < _camino.Count && _camino[i].casilla().nivel() < _camino[i + 1].casilla().nivel())
                     {
 
-                        _movimientos += _camino[i].costoMovimiento(_camino[i + 1]);
+                        _movimientos += _camino[i].casilla().costoMovimiento(_camino[i + 1].casilla());
 
                         if (_movimientos < 0)//si hay intransitables en el camino
                             return _movimientos;
@@ -333,6 +286,11 @@ namespace ico
         }
 
         public Casilla casilla(int i) {
+            return _camino[i].casilla();
+        }
+
+        public Nodo nodo(int i)
+        {
             return _camino[i];
         }
 
@@ -341,16 +299,16 @@ namespace ico
         public void print()
         { 
             string str="El camino es: ";
-            foreach (Casilla i in _camino)
-                str += "("+i.posicion().ToString()+", "+ "dir" +")"+ "->";
+            foreach (Nodo i in _camino)
+                str += "("+i.casilla().posicion().ToString()+", "+ "dir" +")"+ "->";
             str += "FIN";
             Console.WriteLine(str);
         }
 
 #endregion
         #region Privado
-        private int _length;
-        private Casilla[] _camino;
+        //private int _length;
+        private List<Nodo> _camino;
         private Boolean _ldv;
         private Boolean _cobertura;
         private int _nldv;
