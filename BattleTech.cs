@@ -185,7 +185,7 @@ namespace ico
 
                 //Seleccionamos la casilla destino
                 destino = seleccionDestino(objetivo);
-                Console.WriteLine("Destino" + destino.ToString());
+                Console.WriteLine("Destino " + destino.ToString());
                 //prueba de pathfinder el 9/8 - Angel
                 string str;
                 do
@@ -321,8 +321,8 @@ namespace ico
             int puntuacion = 0;
 
             //Estrategia agresiva
-            if (_estrategia == Estrategia.Agresiva)
-            {
+            //if (_estrategia == Estrategia.Agresiva)
+            //{
                 //Puntuacion por tipo terreno
                 switch (_tablero.Casilla(p).tipoTerreno()) { 
                     case 0://despejado
@@ -377,8 +377,8 @@ namespace ico
                 //Bonus por estar a la espalda del enemigo
                 if (objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
                     puntuacion += 4;
-            }
-            else //Estrategia defensiva
+            //}
+            /*else //Estrategia defensiva
             {
                 //Puntuacion por tipo terreno
                 switch (_tablero.Casilla(p).tipoTerreno())
@@ -435,7 +435,7 @@ namespace ico
 
                 //Bonus por distancia que nos separa?¿
 
-            }
+            }*/
 
             return puntuacion;
         }
