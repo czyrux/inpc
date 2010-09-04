@@ -314,8 +314,8 @@ namespace ico
 
             return destino;
         }
-        
 
+        const float pesoDistancia = .20f;
         private int puntuacionCasilla ( Posicion p , Mech objetivo ) 
         {
             int puntuacion = 0;
@@ -378,7 +378,7 @@ namespace ico
                 if (objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
                     puntuacion += 4;
 
-                puntuacion -= _mechs[_myJugador].posicion().distancia(p)/2;
+                puntuacion -= (int)Math.Truncate(_mechs[_myJugador].posicion().distancia(p)*pesoDistancia);
             //}
             /*else //Estrategia defensiva
             {
