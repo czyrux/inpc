@@ -513,6 +513,8 @@ Ataque fisico (mech):
 
 		-(angel) se agrega la consante path, que sera donde trabaje el programa.
 
+		-(angel) el codigo se a comentado casi por completo, mirar la clase BattleTech.
+
 		-(angel) hay que: 
 						en la pathfinder al crear el camino real al terminar el movimiento antes de sea caben los puntos de movimiento; elegir una casilla con bono defensivo.
 						en el pathfinder si nos sobran puntos de movimiento y el enemigo esta lejos y nos trae beneficios tumbarnos hacerlo.
