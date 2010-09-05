@@ -9,13 +9,6 @@ namespace ico
     /// </summary>
     static public class PanelControl
     {
-        #region constantes del Camino
-
-        public const int penalizadorAgua = 10;
-
-        public const string movimientoArchivo = "faseMovimiento.txt";
-
-        #endregion
 
         #region constantes de Mechs
 
@@ -169,6 +162,20 @@ namespace ico
         /// Importancia que se le da a la distancia de la casilla a nuestro mech, para la eleccion de casilla
         /// </summary>
         public const float pesoDistancia = .20f;
+
+        #region constantes del Camino
+
+        /// <summary>
+        /// costo heuristico para evitar el agua
+        /// </summary>
+        public const int penalizadorAgua = 10;
+
+        /// <summary>
+        /// nombre del archivo donde se almacena la acion de la fase de movimiento.
+        /// </summary>
+        public const string movimientoArchivo = "faseMovimiento.txt";
+
+        #endregion
 
         #endregion
     }
