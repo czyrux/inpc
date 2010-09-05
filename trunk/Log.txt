@@ -522,4 +522,7 @@ Ataque fisico (mech):
 						en la fase de movimiento comprobar si el casilla trasera al enemigo esta a distancia de salto y si el enemigo ya se a movido.
 						falta selecionara varios posibles destinos para elegir el mejor.
 		-(angel) he modificado datos sobre la infomacion de ensamblado
+
+		-(antonio) Comprobacion de giroscopios hecha. La funcion es:
+			public bool giroscopioOperativo() 
 						 

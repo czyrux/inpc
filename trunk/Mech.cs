@@ -1973,6 +1973,22 @@ namespace ico {
             Console.WriteLine("Arma: " + arma.nombre() + " tirada para impacto:" + puntuacion);
             return puntuacion;
         }
+
+        /// <summary>
+        /// Indica si el mech tiene operativo el girospio
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
+        public bool giroscopioOperativo() 
+        {
+            bool operativo = false;
+
+            for (int i = 0; i < _actuadores.Length && !operativo ; i++) {
+                if (_actuadores[i].nombre() == "Giroscopio" && _actuadores[i].operativo() && _actuadores[i].numeroImpactos() == 0)
+                    operativo = true;
+            }
+                return operativo;
+        }
+
         #endregion
     }
 
