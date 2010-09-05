@@ -164,6 +164,11 @@ namespace ico
         /// </summary>
         public const float pesoDistancia = .20f;
 
+        /// <summary>
+        /// Indica el numero de destinos a los que habra que realizar el pathfinder
+        /// </summary>
+        public const int numeroDestinos = 5;
+
         #region constantes del Camino
 
         /// <summary>
