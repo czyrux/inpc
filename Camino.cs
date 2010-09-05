@@ -424,6 +424,8 @@ namespace ico
         private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t)
         {
             int puntosM, puntosMR, suelo = 0;
+
+            //devo comprobar si ay giroscopios
             if (ich.enSuelo()){
                 suelo = 2;
                 _original = _camino[0].direccion();
@@ -435,6 +437,9 @@ namespace ico
                 puntosMR = ich.puntosCorrer();
             }
             else {
+                /*
+                 * aqui hay que comprobar si la distancia de el enemigo y yo es muy grande entonces corro enlugar de caminar
+                 */
                 puntosM = ich.puntosAndar() - suelo / 2;
                 puntosMR = ich.puntosAndar();
             }
@@ -447,8 +452,25 @@ namespace ico
                 if (puntosM + i >= camino.Count)
                     puntosM = camino.Count - 1;
 
-                if (((Nodo)camino[puntosM + i]).g() < puntosMR)
+                if (((Nodo)camino[puntosM + i]).g() + 4 < puntosMR)
                 {
+                    Nodo elemento = new Nodo();
+                    for (int k = 1; k < 7; k++)
+                    {
+                        elemento = new Nodo();
+                        try
+                        {
+                            elemento.casilla(t.colindante(((Nodo)camino[puntosM + i]).casilla().posicion(), (Encaramiento)k));//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
+                        }
+                        catch (Exception e)
+                        {
+                            continue;
+                        }
+                        /*
+                         * hay que hacer una funcion que puntue las distintas casillas y de esta selecion la mejor para disparar y no ser disparado ademas de que no me aleje del destino final
+                         */
+                    }
+
                     l = posiblesEncaramientos((Nodo)camino[puntosM + i], destino, t);
 
                     for (int c = 1; c < l.Count; c++)
@@ -456,7 +478,7 @@ namespace ico
                         tmpC = costoEncaramiento(((Nodo)camino[puntosM + i]).direccion(), (Encaramiento)l[c]);
                         tmpJ = costoEncaramiento(((Nodo)camino[puntosM + i]).direccion(), (Encaramiento)l[j]);
 
-                        if (((Nodo)camino[puntosM + i]).g() + tmpC < ich.puntosAndar())
+                        if (((Nodo)camino[puntosM + i]).g() + tmpC  < ich.puntosAndar())
                         {
                             flag = true;
 
