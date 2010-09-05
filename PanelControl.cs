@@ -9,6 +9,7 @@ namespace ico
     /// </summary>
     static public class PanelControl
     {
+        public const String Path = "/ficheros";
 
         #region constantes de Mechs
 
