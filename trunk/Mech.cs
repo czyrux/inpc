@@ -1151,6 +1151,32 @@ namespace ico {
 
         #endregion
 
+
+        /// <summary>
+        /// Indica el tipo de mech en funcion de su tonelaje
+        /// </summary>
+        /// <returns>Enumerado tipoMech</returns>
+        public tipoMech tipo() {
+            tipoMech t;
+
+            if (_toneladas >= 20 && _toneladas <= 35)
+            {
+                t = tipoMech.Ligero; //ligero
+            }
+            else if (_toneladas >= 40 && _toneladas <= 55)
+            {
+                t = tipoMech.Medio;//medio
+            }
+            else if (_toneladas >= 60 && _toneladas <= 75)
+            {
+                t = tipoMech.Pesado;//pesado
+            }
+            else
+                t = tipoMech.Asalto;//asalto
+
+            return t;
+        }
+
         /// <summary>
         /// Metodo que devuelve un la puntuacion asociada al tipo de Mech en funcion de su tonelaje.
         /// La nota sera la siguiente:
@@ -1160,7 +1186,7 @@ namespace ico {
         /// - Asalto: 10.0
         /// </summary>
         /// <returns>Flotante correspondiente a la puntuacion</returns>
-        public float tipo()
+        public float notaTipo()
         {
             float t;
             
@@ -1824,7 +1850,7 @@ namespace ico {
             {
                 nota = estadoBlindajeMech() * PanelControl.Nota_Blindaje +
                    estadoEsctructuraMech() * PanelControl.Nota_Estructura +
-                   tipo() * PanelControl.Nota_Tipo;
+                   notaTipo() * PanelControl.Nota_Tipo;
                 _notaMech = nota;
             }
             else
