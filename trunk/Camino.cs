@@ -107,35 +107,38 @@ namespace ico
             if (_seLevanto) {
                 str2 += "Levantarse\n";
                 str2 += ((int)_original).ToString();
+                pasos++;
             }
-
+            int tmp;
             if (_camino[i].direccion() != _original) {
-                str2 += izqOdrch(_camino[i].direccion(), _original) + "\n";
-                str2 += costoEncaramiento(_original, _camino[i].direccion()).ToString()+"\n";
+                str2 += izqOdrch(_camino[i].direccion(), _original).ToString();
+                tmp = costoEncaramiento(_original, _camino[i].direccion());
+                str2 += tmp.ToString()+"\n";
                 pasos++;
             }
 
             i++;
-            do{
+            while (i != _camino.Count)
+            {
 
                 if (_camino[i-1].direccion() != _camino[i].direccion())
                 {
-                    int tmp = costoEncaramiento(_camino[i - 1].direccion(), _camino[i].direccion());
+                    tmp = costoEncaramiento(_camino[i - 1].direccion(), _camino[i].direccion());
                     str2 += izqOdrch(_camino[i-1].direccion(), _camino[i].direccion()) + "\n";
                     str2 += tmp.ToString() + "\n";
-                    pasos+=tmp;
+                    pasos++;
                 }
                 str2 += "Adelante\n";
                 str2 += "1\n";
                 pasos++;
                 i++;
                 
-            }while(i!=_camino.Count);
+            }
 
             if (_camino[i-1].direccion() != _final)
             {
-                str2 += izqOdrch(_camino[i].direccion(),_final) + "\n";
-                str2 += costoEncaramiento(_camino[i].direccion(), _final).ToString() + "\n";
+                str2 += izqOdrch(_camino[i-1].direccion(),_final) + "\n";
+                str2 += costoEncaramiento(_camino[i-1].direccion(), _final).ToString() + "\n";
                 pasos++;
             }
             
@@ -309,8 +312,11 @@ namespace ico
 
 
 
-            aux = caminoReal(limpiarAgua(camino), b, ich, Tablero);
-            camino = camino.GetRange(aux, camino.Count - aux);
+
+            if ((aux = caminoReal(limpiarAgua(camino), b, ich, Tablero)) == -1)
+                camino = camino.GetRange(camino.Count-1,1);
+            else
+                camino = camino.GetRange(aux, camino.Count - aux);
 
             camino.Reverse();
 
@@ -405,9 +411,9 @@ namespace ico
             int veces = 0;
             for (int i = camino.Count - 2; i > 1; i--)
             {
-                ((Nodo)camino[i]).g(((Nodo)camino[i]).g() - PanelControl.penalizadorAgua * veces);
                 if (((Nodo)camino[i]).casilla().tipoTerreno() == 2)
                     veces++;
+                ((Nodo)camino[i]).g(((Nodo)camino[i]).g() - PanelControl.penalizadorAgua * veces);
             }
             return camino;
         }
@@ -433,15 +439,15 @@ namespace ico
             }
             if (_estrategia == Estrategia.Defensiva)
             {
-                puntosM = ich.puntosCorrer() - suelo / 2;
                 puntosMR = ich.puntosCorrer();
+                puntosM = puntosMR / 2;
             }
             else {
                 /*
                  * aqui hay que comprobar si la distancia de el enemigo y yo es muy grande entonces corro enlugar de caminar
                  */
-                puntosM = ich.puntosAndar() - suelo / 2;
-                puntosMR = ich.puntosAndar();
+                puntosMR = 3;//ich.puntosAndar()- suelo;
+                puntosM = puntosMR / 2;
             }
             int j = 0, tmpC = 0, tmpJ = 0;
             Boolean flag = false, flagj = false;
@@ -452,8 +458,8 @@ namespace ico
                 if (puntosM + i >= camino.Count)
                     puntosM = camino.Count - 1;
 
-                if (((Nodo)camino[puntosM + i]).g() + 4 < puntosMR)
-                {
+                if (((Nodo)camino[puntosM + i]).g() /*+ 4*/ < puntosMR)
+                {/*
                     Nodo elemento = new Nodo();
                     for (int k = 1; k < 7; k++)
                     {
@@ -469,7 +475,7 @@ namespace ico
                         /*
                          * hay que hacer una funcion que puntue las distintas casillas y de esta selecion la mejor para disparar y no ser disparado ademas de que no me aleje del destino final
                          */
-                    }
+                    //}
 
                     l = posiblesEncaramientos((Nodo)camino[puntosM + i], destino, t);
 
@@ -513,6 +519,8 @@ namespace ico
                     j = 0;
                 }
             }
+
+
 
             return -1;
         }
