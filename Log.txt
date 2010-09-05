@@ -526,5 +526,7 @@ Ataque fisico (mech):
 		-(antonio) Comprobacion de giroscopios hecha. La funcion es:
 			public bool giroscopioOperativo()
 			
-		-(antonio) YA esta hecho para que elija un conjunto. El tamaño lo determina una variable dentro del panel de control. Mañana si kieres ablamos de los resultados que salen. 
+		-(antonio) YA esta hecho para que elija un conjunto. El tamaño lo determina una variable dentro del panel de control. Mañana si kieres ablamos de los resultados que salen.
+		
+		-(antonio) El pathfinde me ha estado dando problemas, el problema estaba en la funcion caminoReal, que devolvia como indice el -1. 
 						 
