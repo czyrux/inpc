@@ -226,7 +226,7 @@ namespace ico
         }
 
         /// <summary>
-        /// funcion que elige el objetivo al cual atacar, escapar preferentemente.
+        /// Metodo que elige el objetivo al cual atacar o del cual escapar.
         /// </summary>
         /// <returns>un mech rival; tipo Mech</returns>
         private Mech eleccionObjetivo() {
@@ -276,7 +276,7 @@ namespace ico
         }
 
         /// <summary>
-        /// elige el destino el cual se desa calcular el camino
+        /// elige el destino el cual se desea calcular el camino
         /// </summary>
         /// <param name="objetivo">elige el mech rival que mas peso tine; tipo Mech</param>
         /// <returns>devuelve la posicion que se desea alcanzar; tipo posicion</returns>
