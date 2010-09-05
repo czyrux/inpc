@@ -416,10 +416,10 @@ namespace ico
                         puntuacion += 1;
                         break;
                     case 1://pavimentado
-                        puntuacion += 3;
+                        puntuacion += 1;
                         break;
                     case 2://agua
-                        puntuacion += 0;
+                        puntuacion -= 2;
                         break;
                     case 3://pantanoso
                         puntuacion += 0;
@@ -435,7 +435,7 @@ namespace ico
                         puntuacion += 0;
                         break;
                     case 1://bosque ligero
-                        puntuacion += 4;
+                        puntuacion += 3;
                         break;
                     case 2://bosque denso
                         puntuacion += 4;
@@ -461,7 +461,7 @@ namespace ico
 
                 //Puntuacion por nivel
                 if ( _tablero.Casilla(p).nivel() > 0)
-                    puntuacion -= _tablero.Casilla(p).nivel();
+                    puntuacion += -_tablero.Casilla(p).nivel();
 
                 //Puntuacion por distancia
                 int distancia , bonificador;
@@ -475,15 +475,15 @@ namespace ico
 
                         if (distancia > _mechs[i].distanciaTiroLarga())
                         {
-                            puntuacion += 5*bonificador;
+                            puntuacion += 3 * bonificador;
                         }
                         else if (distancia > _mechs[i].distanciaTiroMedia())
                         {
-                            puntuacion += 4*bonificador;
+                            puntuacion += 2 * bonificador;
                         }
                         else if (distancia > _mechs[i].distanciaTiroCorta())
                         {
-                            puntuacion += 2*bonificador;
+                            puntuacion += 1 * bonificador;
                         }
                         else
                             puntuacion += 0;
