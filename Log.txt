@@ -496,3 +496,26 @@ Ataque fisico (mech):
 
 		- (antonio) Estoi teniendo problemas, la puntuacion no me la hace bien y ademas despues de un rato me dice que un arma que esta escogiendo una municion que ya esta agotada,
 		tendre que depurar.
+
+		05/09/2010
+
+		-(angel) el pathfinder esta terminado, aunque aun puede tener mejoras.
+
+		-(angel) se agrega la clase PanelControl para manejar las constantes del programa.
+
+		-(angel) se agrega la clase nodo y se retira la estructura huristica, dicha clase contendra los datos de cada nodo de un camino para la formacion del camino en pathfinder.
+
+		-(angel) se separa la clase camino en dos una es la clase camino que contendra el path finder, y otra LdV que contendra los datos de la linea de vision
+
+		-(angel) se termina la creacion de un camino real para la elaboracion de un archivo de la fase de movimiento. Para esto se crean varias funciones (mirar Clase Camino)
+
+		-(angel) se agrega las constantes a panel de control llamadas penalizadorAgua y movimientoArchivo, la primera un penalizador para evitar el agua; las segunda el archivo final de la fase de movimiento
+
+		-(angel) se agrega la consante path, que sera donde trabaje el programa.
+
+		-(angel) hay que: 
+						en la pathfinder al crear el camino real al terminar el movimiento antes de sea caben los puntos de movimiento; elegir una casilla con bono defensivo.
+						en el pathfinder si nos sobran puntos de movimiento y el enemigo esta lejos y nos trae beneficios tumbarnos hacerlo.
+						en la fase de movimiento comprobar si el casilla trasera al enemigo esta a distancia de salto y si el enemigo ya se a movido.
+						falta selecionara varios posibles destinos para elegir el mejor.
+						 
