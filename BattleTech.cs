@@ -104,6 +104,7 @@ namespace ico
         #endregion
 
         #region metodos
+
         /// <summary>
         /// Determina si la estrategia del mech jugador ha de ser ofensiva o defensiva
         /// </summary>
