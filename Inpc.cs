@@ -7,7 +7,12 @@ using System.IO;
 namespace ico {
 	
     class Inpc {
-			
+
+		/// <summary>
+		/// funcion main del programa
+		/// </summary>
+		/// <param name="args">revive en los argumentos el jugador y la fase en la que esta</param>
+	
         static void Main(string[] args) {
 
             int numeroJugador = 0 ;
