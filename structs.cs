@@ -9,6 +9,9 @@ namespace ico
 		public int _slotMunicion;
 	};
 
+    /// <summary>
+    /// tipo de movimientos que puede realizar un mech
+    /// </summary>
     public enum tipoMovimiento
     {
         Inmovil,
@@ -53,9 +56,9 @@ namespace ico
         Asalto ,
     };
 
-	/**
-	 * Enumerado que define los posibles encaramientos del mech
-	 */
+	/// <summary>
+    /// Enumerado que define los posibles encaramientos del mech
+	/// </summary>
     public enum Encaramiento
     {
         Arriba = 1,
@@ -66,9 +69,9 @@ namespace ico
         SuperiorIzquierda = 6,
     };
 
-    /*
-     * Enumerado que define las posibles estrategias que puede tomar un mech
-     */ 
+    /// <summary>
+    /// Enumerado que define las posibles estrategias que puede tomar un mech
+    /// </summary>
     public enum Estrategia { 
         Agresiva ,
         Defensiva ,
