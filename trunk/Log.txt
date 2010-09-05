@@ -518,6 +518,7 @@ Ataque fisico (mech):
 		-(angel) hay que: 
 						en la pathfinder al crear el camino real al terminar el movimiento antes de sea caben los puntos de movimiento; elegir una casilla con bono defensivo.
 						en el pathfinder si nos sobran puntos de movimiento y el enemigo esta lejos y nos trae beneficios tumbarnos hacerlo.
+						hay que comprobar hay giroscopios en caminoreal
 						en la fase de movimiento comprobar si el casilla trasera al enemigo esta a distancia de salto y si el enemigo ya se a movido.
 						falta selecionara varios posibles destinos para elegir el mejor.
 						 
