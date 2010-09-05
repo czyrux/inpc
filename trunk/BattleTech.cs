@@ -176,6 +176,9 @@ namespace ico
 
         #region faseMovimiento
 
+        /// <summary>
+        /// /funcion que engloba las acciones de la fase de movimiento
+        /// </summary>
         private void faseMovimiento() 
         {
             Console.WriteLine("Fase movimiento");
@@ -221,6 +224,10 @@ namespace ico
             }
         }
 
+        /// <summary>
+        /// funcion que elige el objetivo al cual atacar, escapar preferentemente.
+        /// </summary>
+        /// <returns>un mech rival; tipo Mech</returns>
         private Mech eleccionObjetivo() {
             int objetivo=0;
 
@@ -267,7 +274,11 @@ namespace ico
             return _mechs[objetivo];
         }
 
-        
+        /// <summary>
+        /// elige el destino el cual se desa calcular el camino
+        /// </summary>
+        /// <param name="objetivo">elige el mech rival que mas peso tine; tipo Mech</param>
+        /// <returns>devuelve la posicion que se desea alcanzar; tipo posicion</returns>
         private Posicion seleccionDestino(Mech objetivo) 
         {
             List<Posicion> posiblesDestinos = new List<Posicion>();
