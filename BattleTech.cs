@@ -185,24 +185,25 @@ namespace ico
             Console.WriteLine("Fase movimiento");
             Console.WriteLine();
             Mech objetivo;
-            Posicion destino;
+            Posicion[] destinos = new Posicion[PanelControl.numeroDestinos];
 
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
                 determinarEstrategia();
-
+  
                 //Seleccionamos el objetivo hacia el que vamos a dirigirnos en caso de ser una estrategia ofensiva
-                //if (_estrategia == Estrategia.Agresiva)
-                //{
-                    objetivo = eleccionObjetivo();
-                /*}
-                else {
-                    objetivo = null;
-                }*/
+                objetivo = eleccionObjetivo();
+                if(objetivo != null )Console.WriteLine("El objetivo elegido es: " + objetivo.nombre());
 
                 //Seleccionamos la casilla destino
-                destino = seleccionDestino(objetivo);
-                Console.WriteLine("Destino " + destino.ToString());
+                seleccionDestino(objetivo,destinos);
+                Console.WriteLine("Casillas escogidas: " + destinos.Length);
+                for (int i = 0; i < destinos.Length; i++)
+                {
+                    Console.WriteLine(i + ": " + destinos[i].ToString());
+                }
+                
+
                 //prueba de pathfinder el 9/8 - Angel
                 string str;
                 do
@@ -226,130 +227,129 @@ namespace ico
         }
 
         /// <summary>
-        /// Metodo que elige el objetivo al cual atacar o del cual escapar.
+        /// Metodo que elige el objetivo al cual atacar si la estrategia es ofensiva. Si la estrategia es defensiva
+        /// devolvera null
         /// </summary>
         /// <returns>un mech rival; tipo Mech</returns>
         private Mech eleccionObjetivo() {
-            int objetivo=0;
+            Mech objetivo=null;
 
-            if (_mechs.Length > 2)
+            if (_estrategia == Estrategia.Agresiva)
             {
-                float[] notasParciales = new float[_numeroJugadores];
-
-                //Vemos cual la distancia maxima de los enemigos
-                int max = 0;
-                for (int i = 0; i < _mechs.Length; i++) {
-                    if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) > max)
-                        max = _mechs[_myJugador].posicion().distancia(_mechs[i].posicion());
-                }
-
-                //Asignamos una nota a cada mech en funcion de la distancia que nos separa y su puntuacion
-                for (int i = 0; i < _mechs.Length; i++)
+                if (_mechs.Length > 2)
                 {
-                    if ( i != _myJugador)
-                    {
-                        Console.WriteLine("Mech: " + _mechs[i].nombre());
-                        //Nota estado
-                        notasParciales[i] = _mechs[i].notaEstado() * PanelControl.NOTA_MOV;
-                        Console.WriteLine("Nota estado: " + _mechs[i].notaEstado());
-                        //Nota distancia
-                        notasParciales[i] += ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV;
-                        Console.WriteLine("Nota distancia: " + ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV);
-                        Console.WriteLine("Nota parcial:" + notasParciales[i]);
-                        Console.WriteLine();
-                    }
-                }
+                    float[] notasParciales = new float[_numeroJugadores];
 
-                //Nos quedamos con el mech que tenga la nota menor
-                float nota = float.MaxValue ;
-                for (int i = 0; i < _mechs.Length; i++ )
-                    if (i != _myJugador && notasParciales[i] < nota) {
-                        nota = notasParciales[i];
-                        objetivo = i;
+                    //Vemos cual la distancia maxima de los enemigos
+                    int max = 0;
+                    for (int i = 0; i < _mechs.Length; i++)
+                    {
+                        if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) > max)
+                            max = _mechs[_myJugador].posicion().distancia(_mechs[i].posicion());
                     }
+
+                    //Asignamos una nota a cada mech en funcion de la distancia que nos separa y su puntuacion
+                    for (int i = 0; i < _mechs.Length; i++)
+                    {
+                        if (i != _myJugador)
+                        {
+                            //Console.WriteLine("Mech: " + _mechs[i].nombre());
+                            //Nota estado
+                            notasParciales[i] = _mechs[i].notaEstado() * PanelControl.NOTA_MOV;
+                            //Console.WriteLine("Nota estado: " + _mechs[i].notaEstado());
+                            //Nota distancia
+                            notasParciales[i] += ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV;
+                            //Console.WriteLine("Nota distancia: " + ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV);
+                            //Console.WriteLine("Nota parcial:" + notasParciales[i]);
+                            //Console.WriteLine();
+                        }
+                    }
+
+                    //Nos quedamos con el mech que tenga la nota menor
+                    float nota = float.MaxValue;
+                    for (int i = 0; i < _mechs.Length; i++)
+                        if (i != _myJugador && notasParciales[i] < nota)
+                        {
+                            nota = notasParciales[i];
+                            objetivo = _mechs[i];
+                        }
+                }
+                else
+                    objetivo = _mechs[(_myJugador + 1) % 2];
             }
             else
-                objetivo = (_myJugador + 1) % 2;
-
-            Console.WriteLine("El objetivo elegido es: " + _mechs[objetivo].nombre());
-            return _mechs[objetivo];
+                objetivo = null;
+            
+            return objetivo;
         }
 
         /// <summary>
         /// elige el destino el cual se desea calcular el camino
         /// </summary>
         /// <param name="objetivo">elige el mech rival que mas peso tine; tipo Mech</param>
+        /// <param name="destinosElegidos">Array de tamñao fijo que sera completado con los mejores destinos. Segun su tamaño
+        /// se incluiran mas o menos destinos</param>
         /// <returns>devuelve la posicion que se desea alcanzar; tipo posicion</returns>
-        private Posicion seleccionDestino(Mech objetivo) 
+        private void seleccionDestino(Mech objetivo , Posicion[] destinosElegidos)  
         {
             List<Posicion> posiblesDestinos = new List<Posicion>();
             int[] puntuacion;
-            Posicion destino = null;
+            Boolean salir = false;
+            int escogidas = 0;
 
-            //if (_estrategia == Estrategia.Agresiva)
-            //{
-
-                //Escogemos las casillas alrededor
+            //Escogemos las casillas a evaluar
+            if (_estrategia == Estrategia.Agresiva)
+            {
                 _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,PanelControl.radio);
+            }
+            else {
+                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosAndar());
+            }
 
-                //Puntuamos las casillas
-                puntuacion = new int[posiblesDestinos.Count];
-                //Console.WriteLine("Casillas escogidas: " + posiblesDestinos.Count);
-                for (int i = 0; i < posiblesDestinos.Count; i++)
+            //Puntuamos las casillas
+            puntuacion = new int[posiblesDestinos.Count];
+            for (int i = 0; i < posiblesDestinos.Count; i++)
+            {
+                puntuacion[i] = puntuacionCasilla(posiblesDestinos[i], objetivo);
+            }
+
+            //Escogemos las que tienen mejores puntuaciones mientras haya espacio en el array destinosElegidos
+            int max = 0;
+            for (int i = 0; i < puntuacion.Length; i++)
+                if (puntuacion[i] > max)
+                    max = puntuacion[i];
+
+            while (!salir)
+            {
+                for (int i = 0; i < puntuacion.Length && !salir; i++)
                 {
-                    puntuacion[i]=puntuacionCasilla(posiblesDestinos[i],objetivo);
-                    //Console.WriteLine(i + ": " + posiblesDestinos[i].ToString()+" punt:"+puntuacion[i]);
-                }
-
-                //Escogemos las que tienen mejores puntuaciones
-                int max = 0;
-                for (int i = 0; i < puntuacion.Length; i++)
-                    if (puntuacion[i] > max)
-                        max = puntuacion[i];
-
-                for (int i = 0; i < puntuacion.Length; i++) {
-                    if (puntuacion[i] != max) {
-                        posiblesDestinos[i] = null;
-                    }
-                }
-
-                Console.WriteLine("Casillas finales: " + posiblesDestinos.Count);
-                for (int i = 0; i < posiblesDestinos.Count; i++)
-                {
-                    if ( posiblesDestinos[i]!=null)
-                        Console.WriteLine(i + ": " + posiblesDestinos[i].ToString() + " punt:" + puntuacion[i]);
-                }
-
-                //De las que tienen mejores puntuaciones escogemos la mas cercana al objetivo
-                int min = int.MaxValue;
-                int posicion=0;
-                for (int i = 0; i < posiblesDestinos.Count; i++)
-                {
-                    if (posiblesDestinos[i] != null && objetivo.posicion().distancia(posiblesDestinos[i]) < min)
+                    if (puntuacion[i] == max)
                     {
-                        posicion = i;
-                        destino = posiblesDestinos[i];
-                        min = objetivo.posicion().distancia(posiblesDestinos[i]);
+                        destinosElegidos[escogidas] = posiblesDestinos[i];
+                        escogidas++;
+                        Console.WriteLine(i + ": " + posiblesDestinos[i].ToString() + " punt:" + puntuacion[i]);
                     }
+                    if (escogidas >= destinosElegidos.Length)
+                        salir = true;
                 }
-
-                Console.WriteLine("Destino: "+destino.ToString()+" i:"+posicion);
-            //}
-            //else {
-            //    _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosCorrer());
-            //}
-
-            return destino;
+                max--;
+            }
         }
 
         
+        /// <summary>
+        /// Metodo que puntua una casilla
+        /// </summary>
+        /// <param name="p">Casilla a puntuar</param>
+        /// <param name="objetivo">Enemigo al que nos enfrentamos. Para fase de ataque</param>
+        /// <returns>Entero que corresponde a la puntuacion dada</returns>
         private int puntuacionCasilla ( Posicion p , Mech objetivo ) 
         {
             int puntuacion = 0;
 
             //Estrategia agresiva
-            //if (_estrategia == Estrategia.Agresiva)
-            //{
+            if (_estrategia == Estrategia.Agresiva)
+            {
                 //Puntuacion por tipo terreno
                 switch (_tablero.Casilla(p).tipoTerreno()) { 
                     case 0://despejado
@@ -406,8 +406,8 @@ namespace ico
                     puntuacion += 4;
 
                 puntuacion -= (int)Math.Truncate(_mechs[_myJugador].posicion().distancia(p)*PanelControl.pesoDistancia);
-            //}
-            /*else //Estrategia defensiva
+            }
+            else //Estrategia defensiva
             {
                 //Puntuacion por tipo terreno
                 switch (_tablero.Casilla(p).tipoTerreno())
@@ -422,7 +422,7 @@ namespace ico
                         puntuacion += 0;
                         break;
                     case 3://pantanoso
-                        puntuacion += 1;
+                        puntuacion += 0;
                         break;
                     default:
                         break;
@@ -438,7 +438,7 @@ namespace ico
                         puntuacion += 4;
                         break;
                     case 2://bosque denso
-                        puntuacion += 5;
+                        puntuacion += 4;
                         break;
                     case 3://edificio ligero
                         puntuacion += 0;
@@ -460,11 +460,37 @@ namespace ico
                 }
 
                 //Puntuacion por nivel
-                puntuacion -= _tablero.Casilla(p).nivel();
+                if ( _tablero.Casilla(p).nivel() > 0)
+                    puntuacion -= _tablero.Casilla(p).nivel();
 
-                //Bonus por distancia que nos separa?¿
+                //Puntuacion por distancia
+                int distancia , bonificador;
+                for (int i = 0; i < _mechs.Length; i++) {
+                    if (i != _myJugador) {
+                        distancia = _mechs[i].posicion().distancia(p);
+                        if (_mechs[i].tipo() == tipoMech.Asalto) {
+                            bonificador = 2;
+                        } else
+                            bonificador = 1;
 
-            }*/
+                        if (distancia > _mechs[i].distanciaTiroLarga())
+                        {
+                            puntuacion += 5*bonificador;
+                        }
+                        else if (distancia > _mechs[i].distanciaTiroMedia())
+                        {
+                            puntuacion += 4*bonificador;
+                        }
+                        else if (distancia > _mechs[i].distanciaTiroCorta())
+                        {
+                            puntuacion += 2*bonificador;
+                        }
+                        else
+                            puntuacion += 0;
+                    }
+                }
+
+            }
 
             return puntuacion;
         }
