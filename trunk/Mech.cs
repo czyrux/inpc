@@ -1186,7 +1186,7 @@ namespace ico {
         /// - Asalto: 10.0
         /// </summary>
         /// <returns>Flotante correspondiente a la puntuacion</returns>
-        public float notaTipo()
+        private float notaTipo()
         {
             float t;
             
