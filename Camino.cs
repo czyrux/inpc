@@ -420,7 +420,7 @@ namespace ico
         /// <param name="destino">casilla destino; tipo Casilla</param>
         /// <param name="ich">mech que hara el camino; tipo Mech</param>
         /// <param name="t">tablero del juego; tipo Tablero</param>
-        /// <returns>indices sobre el camino el cual es alacansable por el mech ich</returns>
+        /// <returns>indice sobre el camino, el cual es alcanzable por el mech ich</returns>
         private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t)
         {
             int puntosM, puntosMR, suelo = 0;
