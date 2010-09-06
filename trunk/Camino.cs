@@ -341,12 +341,10 @@ namespace ico
         private string izqOdrch(Encaramiento o, Encaramiento d) {
             switch (o) { 
                 case Encaramiento.Abajo:
-                        if(d==o){
                             if((int)d>4)
                                 return "Derecha";
                             else
                                 return "Izquierda";
-                        }
                    
                     break;
                 case Encaramiento.Arriba:
@@ -454,19 +452,17 @@ namespace ico
                 /*
                  * aqui hay que comprobar si la distancia de el enemigo y yo es muy grande entonces corro enlugar de caminar
                  */
-                puntosMR = 3;//ich.puntosAndar()- suelo;
+                puntosMR=ich.puntosAndar()- suelo;
                 puntosM = puntosMR / 2;
             }
             int j = 0, tmpC = 0, tmpJ = 0;
             Boolean flag = false, flagj = false;
             List<int> l;
 
-            for (int i = 0; i < camino.Count - (1 + puntosM); i++)
+            for (int i = camino.Count - 2; i != 0; i++)
             {
-                if (puntosM + i >= camino.Count)
-                    puntosM = camino.Count - 1;
 
-                if (((Nodo)camino[puntosM + i]).g() /*+ 4*/ < puntosMR)
+                if (((Nodo)camino[ i]).g() /*+ 4*/ < puntosMR)
                 {/*
                     Nodo elemento = new Nodo();
                     for (int k = 1; k < 7; k++)
@@ -485,14 +481,18 @@ namespace ico
                          */
                     //}
 
-                    l = posiblesEncaramientos((Nodo)camino[puntosM + i], destino, t);
+                    l = posiblesEncaramientos((Nodo)camino[i], destino, t);
 
                     for (int c = 1; c < l.Count; c++)
                     {
-                        tmpC = costoEncaramiento(((Nodo)camino[puntosM + i]).direccion(), (Encaramiento)l[c]);
-                        tmpJ = costoEncaramiento(((Nodo)camino[puntosM + i]).direccion(), (Encaramiento)l[j]);
+                        tmpC = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[c]);
+                        tmpJ = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[j]);
 
+<<<<<<< .mine
+                        if (((Nodo)camino[ i]).g() + tmpC  < ich.puntosAndar())
+=======
                         if (((Nodo)camino[puntosM + i]).g() + tmpC  < puntosMR)
+>>>>>>> .r317
                         {
                             flag = true;
 
@@ -508,9 +508,9 @@ namespace ico
                     if (l.Count == 1) {
                             j = 0;
 
-                        tmpJ = costoEncaramiento(((Nodo)camino[puntosM + i]).direccion(), (Encaramiento)l[j]);
+                        tmpJ = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[j]);
 
-                        if (((Nodo)camino[puntosM + i]).g() + tmpC < ich.puntosAndar())
+                        if (((Nodo)camino[i]).g() + tmpC < ich.puntosAndar())
                             flag = true;                            
 
                     }
@@ -520,8 +520,8 @@ namespace ico
                     else
                     {
                         _final = (Encaramiento)l[j];
-                        ((Nodo)camino[puntosM + i]).direccion((Encaramiento)l[j]);
-                        return puntosM + i;
+                        ((Nodo)camino[i]).direccion((Encaramiento)l[j]);
+                        return  i;
                     }
 
                     j = 0;
