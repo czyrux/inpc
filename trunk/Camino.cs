@@ -163,6 +163,7 @@ namespace ico
         public void ToFile(int jugador){
             StreamWriter fich = new StreamWriter(PanelControl.archivoAcciones(jugador));
             fich.Write(this.ToString());
+            fich.Close();
         }
 
         /// <summary>
