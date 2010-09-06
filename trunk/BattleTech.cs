@@ -524,6 +524,28 @@ namespace ico
         private void faseReaccion() {
             Console.WriteLine("Fase Reaccion");
             Console.WriteLine();
+
+            if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
+            {
+                determinarEstrategia();
+
+                List<Mech> objetivos = new List<Mech>();
+                //Escogemos a los mech si estan dentro del alcance de tiro largo y no estan en nuestra espalda
+                for (int i = 0; i < _mechs.Length; i++)
+                    if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].distanciaTiroLarga() &&
+                        !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(), _mechs[_myJugador].ladoEncaramientoTorso()) && _mechs[i].operativo())
+                        objetivos.Add(_mechs[i]);
+
+                //Dejamos solo con los que tengamos linea de vision
+                List<LdV> ldv = new List<LdV>();
+                objetivosLdV(objetivos, ldv);
+
+                //Escogemos al mas debil
+                List<Componente> armasADisparar = new List<Componente>();
+                Console.WriteLine();
+                objetivoMasDebil(objetivos, ldv, armasADisparar);
+            }
+
         }
 
         #region faseAtaqueArmas
@@ -554,19 +576,19 @@ namespace ico
                         !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(), _mechs[_myJugador].ladoEncaramientoTorso()) && _mechs[i].operativo() )
                         objetivos.Add(_mechs[i]);
 
-                Console.WriteLine("Al principio tenemos:");
+                /*Console.WriteLine("Al principio tenemos:");
                 for (int i = 0; i < objetivos.Count; i++)
                     Console.WriteLine(i + ": " + objetivos[i].nombre());
-                Console.WriteLine();
+                Console.WriteLine();*/
 
                 //Dejamos solo con los que tengamos linea de vision
                 List<LdV> ldv = new List<LdV>();
                 objetivosLdV(objetivos, ldv);
 
-                Console.WriteLine();
+                /*Console.WriteLine();
                 Console.WriteLine("En LdV tenemos:" + objetivos.Count);
                 for (int i = 0; i < objetivos.Count; i++)
-                    Console.WriteLine(i + ": " + objetivos[i].nombre());
+                    Console.WriteLine(i + ": " + objetivos[i].nombre());*/
 
                 //Escogemos al mas debil
                 List<Componente> armasADisparar = new List<Componente>();
