@@ -532,6 +532,6 @@ Ataque fisico (mech):
 
 
 		6/8/10
-		-(antonio) Oye tenemos un problema. Estaba simulando y queria pasar en el manglar de la casilla 0715 a la 0815 corriendo y me ha salido el siguiente mensaje en el simulador:
+		-(antonio) IMPORTANTE: Oye tenemos un problema. Estaba simulando y queria pasar en el manglar de la casilla 0715 a la 0815 corriendo y me ha salido el siguiente mensaje en el simulador:
 			"No se puede entrar en un hexagono de nivel <=-1 si se corre."
 						 
