@@ -512,7 +512,7 @@ namespace ico
         }
         #endregion
 
-
+        #region faseReaccion
         /// <summary>
         /// Metodo que realiza la fase de Reaccion
         /// </summary>
@@ -564,6 +564,8 @@ namespace ico
             f.WriteLine(giro);
             f.Close();
         }
+
+        #endregion
 
         #region faseAtaqueArmas
         /// <summary>
@@ -926,6 +928,10 @@ namespace ico
         private void faseAtaquesFisico() {
             Console.WriteLine("Fase Ataque Fisico");
             Console.WriteLine();
+            if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
+            {
+            }
+
         }
 
         /// <summary>
