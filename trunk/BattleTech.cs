@@ -222,7 +222,7 @@ namespace ico
                 
 
                 //prueba de pathfinder el 9/8 - Angel
-                string str;
+               /* string str;
                 do
                 {///*
                     Console.WriteLine("escribe la columnafila de ");
@@ -232,14 +232,15 @@ namespace ico
                     str = Console.ReadLine();
                     Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
                     Camino Camino = new Camino(_tablero.Casilla(de), _mechs[_myJugador], _tablero.Casilla(a), _tablero, _estrategia);
-                    //*/
+                    //
                     //Camino Camino = new Camino(_tablero.Casilla(_mechs[_myJugador].posicion()), _mechs[_myJugador], _tablero.Casilla(destino), _tablero);
 
                     Camino.print();
                     Console.WriteLine(Camino.ToString());
 
                     Console.ReadKey();
-                } while (true);
+                } while (true);*/
+                Console.ReadLine();
             }
         }
 
