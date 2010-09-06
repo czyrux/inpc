@@ -950,7 +950,7 @@ namespace ico
                 int encTorso = my.ladoEncaramientoTorso();
                 int enc = my.ladoEncaramiento();
 
-                 
+                Console.WriteLine("Hola");
                 //Escogemos al objetivo
                 for (int i = 0; i < _mechs.Length; i++) 
                 {
@@ -958,59 +958,64 @@ namespace ico
                         objetivo = _mechs[i];
                 }
 
-                //Vemos la localizacion del objetivo respecto a nuestro mech
-                if (my.conoDerecho(objetivo.posicion(), encTorso)) {
-                    situacion = "DRCHA";
-                }
-                else if (my.conoIzquierdo(objetivo.posicion(), encTorso)) {
-                    situacion = "IZQ";
-                }   
-                else
-                    situacion = "DNTE";
+                if (objetivo != null)
+                {
+                    //Vemos la localizacion del objetivo respecto a nuestro mech
+                    if (my.conoDerecho(objetivo.posicion(), encTorso))
+                    {
+                        situacion = "DRCHA";
+                    }
+                    else if (my.conoIzquierdo(objetivo.posicion(), encTorso))
+                    {
+                        situacion = "IZQ";
+                    }
+                    else
+                        situacion = "DNTE";
 
-                //Vemos la diferencia de nivel entre las casillas
-                diferenciaNivel = _tablero.Casilla(my.posicion()).nivel() - _tablero.Casilla(objetivo.posicion()).nivel();
+                    //Vemos la diferencia de nivel entre las casillas
+                    diferenciaNivel = _tablero.Casilla(my.posicion()).nivel() - _tablero.Casilla(objetivo.posicion()).nivel();
 
-                //Vemos las armas fisicas con las que darle
-                if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()
-                    && ( diferenciaNivel==0 || diferenciaNivel==-1)) 
-                {
-                    numeroArmas++;
-                    ordenes += "BD\n";
-                    ordenes += "1000\n";
-                    ordenes += objetivo.posicion() + "\n";
-                    ordenes += "Mech\n";
-                    ataque = true;
-                }
-                else if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo()
-                    && (diferenciaNivel == 0 || diferenciaNivel == -1))
-                {
-                    numeroArmas++;
-                    ordenes += "BI\n";
-                    ordenes += "1000\n";
-                    ordenes += objetivo.posicion() + "\n";
-                    ordenes += "Mech\n";
-                    ataque = true;
-                }
-                else if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda()
-                    && (diferenciaNivel == 0 || diferenciaNivel == 1) && !ataque)
-                {
-                    numeroArmas++;
-                    ordenes += "PI\n";
-                    ordenes += "2000\n";
-                    ordenes += objetivo.posicion() + "\n";
-                    ordenes += "Mech\n";
-                    ataque = true;
-                }
-                else if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha()
-                    && (diferenciaNivel == 0 || diferenciaNivel == 1) && !ataque)
-                {
-                    numeroArmas++;
-                    ordenes += "PD\n";
-                    ordenes += "2000\n";
-                    ordenes += objetivo.posicion() + "\n";
-                    ordenes += "Mech\n";
-                    ataque = true;
+                    //Vemos las armas fisicas con las que darle
+                    if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()
+                        && (diferenciaNivel == 0 || diferenciaNivel == -1))
+                    {
+                        numeroArmas++;
+                        ordenes += "BD\n";
+                        ordenes += "1000\n";
+                        ordenes += objetivo.posicion() + "\n";
+                        ordenes += "Mech\n";
+                        ataque = true;
+                    }
+                    else if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo()
+                        && (diferenciaNivel == 0 || diferenciaNivel == -1))
+                    {
+                        numeroArmas++;
+                        ordenes += "BI\n";
+                        ordenes += "1000\n";
+                        ordenes += objetivo.posicion() + "\n";
+                        ordenes += "Mech\n";
+                        ataque = true;
+                    }
+                    else if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda()
+                        && (diferenciaNivel == 0 || diferenciaNivel == 1) && !ataque)
+                    {
+                        numeroArmas++;
+                        ordenes += "PI\n";
+                        ordenes += "2000\n";
+                        ordenes += objetivo.posicion() + "\n";
+                        ordenes += "Mech\n";
+                        ataque = true;
+                    }
+                    else if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha()
+                        && (diferenciaNivel == 0 || diferenciaNivel == 1) && !ataque)
+                    {
+                        numeroArmas++;
+                        ordenes += "PD\n";
+                        ordenes += "2000\n";
+                        ordenes += objetivo.posicion() + "\n";
+                        ordenes += "Mech\n";
+                        ataque = true;
+                    }
                 }
             }
 
