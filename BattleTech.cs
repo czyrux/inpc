@@ -967,6 +967,7 @@ namespace ico
                 else
                     situacion = "DNTE";
 
+                //Vemos las armas a darle
                 if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()) 
                 {
                     ordenes += "BD\n";
