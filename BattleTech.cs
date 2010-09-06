@@ -950,7 +950,6 @@ namespace ico
                 int encTorso = my.ladoEncaramientoTorso();
                 int enc = my.ladoEncaramiento();
 
-                Console.WriteLine("Hola");
                 //Escogemos al objetivo
                 for (int i = 0; i < _mechs.Length; i++) 
                 {
@@ -958,6 +957,7 @@ namespace ico
                         objetivo = _mechs[i];
                 }
 
+                //Si tenemos objetivo
                 if (objetivo != null)
                 {
                     //Vemos la localizacion del objetivo respecto a nuestro mech
@@ -1024,6 +1024,8 @@ namespace ico
             StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
             f.WriteLine(ordenes);
             f.Close();
+
+            Console.ReadLine();
         }
         #endregion
 
