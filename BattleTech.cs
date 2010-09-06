@@ -35,7 +35,7 @@ namespace ico
 
 			//Leemos los mech
             readMechs();
-
+            _mechs[_myJugador].posicion();
 			//Leemos el tablero de juego
             _tablero = new Tablero(path+"mapaJ"+_myJugador.ToString()+".sbt");
 			
@@ -939,16 +939,65 @@ namespace ico
             MechJugador my = (MechJugador)_mechs[_myJugador];
             String ordenes="";
             int numeroArmas = 0;
+            bool ataque = false;
+
             ordenes += numeroArmas.ToString() + "\n";
 
             if (my.operativo() && my.consciente())
             {
-                
+                String situacion ;
+                int encTorso = my.ladoEncaramientoTorso();
+                int enc = my.ladoEncaramiento();
+
+                 
                 //Escogemos al objetivo
                 for (int i = 0; i < _mechs.Length; i++) 
                 {
-                    if (i != _myJugador && my.posicion().distancia(_mechs[i].posicion()) == 1 && !my.conoTrasero(_mechs[i].posicion(), my.ladoEncaramientoTorso()))
+                    if (i != _myJugador && my.posicion().distancia(_mechs[i].posicion()) == 1 && !my.conoTrasero(_mechs[i].posicion(), encTorso))
                         objetivo = _mechs[i];
+                }
+
+                //Vemos la localizacion del objetivo respecto a nuestro mech
+                if (my.conoDerecho(objetivo.posicion(), encTorso)) {
+                    situacion = "DRCHA";
+                }
+                else if (my.conoIzquierdo(objetivo.posicion(), encTorso)) {
+                    situacion = "IZQ";
+                }   
+                else
+                    situacion = "DNTE";
+
+                if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()) 
+                {
+                    ordenes += "BD\n";
+                    ordenes += "1000\n";
+                    ordenes += objetivo.posicion() + "\n";
+                    ordenes += "Mech\n";
+                    ataque = true;
+                }
+                else if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo())
+                {
+                    ordenes += "BI\n";
+                    ordenes += "1000\n";
+                    ordenes += objetivo.posicion() + "\n";
+                    ordenes += "Mech\n";
+                    ataque = true;
+                }
+                else if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda() && !ataque)
+                {
+                    ordenes += "PI\n";
+                    ordenes += "2000\n";
+                    ordenes += objetivo.posicion() + "\n";
+                    ordenes += "Mech\n";
+                    ataque = true;
+                }
+                else if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha() && !ataque)
+                {
+                    ordenes += "PD\n";
+                    ordenes += "2000\n";
+                    ordenes += objetivo.posicion() + "\n";
+                    ordenes += "Mech\n";
+                    ataque = true;
                 }
             }
 
