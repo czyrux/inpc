@@ -472,7 +472,7 @@ namespace ico
             Boolean flag = false, flagj = false;
             List<int> l;
 
-            for (int i = 1; i <camino.Count-1; i++)
+            for (int i = 1; i <camino.Count; i++)
             {
 
                 if (((Nodo)camino[i]).g() /*+ 4*/ < puntosMR)
