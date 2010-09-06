@@ -248,17 +248,17 @@ namespace ico
 		/// Metodo que indica los puntos para andar
 		/// </summary>
 		/// <returns>Entero</returns>
-		public int puntosAndar() { return _puntosAndar; }
+		public int andar() { return _puntosAndar; }
         /// <summary>
         /// Metodo que indica los puntos para correr
         /// </summary>
         /// <returns>Entero</returns>
-		public int puntosCorrer() { return _puntosCorrer; }
+		public int correr() { return _puntosCorrer; }
         /// <summary>
         /// Metodo que indica los puntos para saltar
         /// </summary>
         /// <returns>Entero</returns>
-		public int puntosSaltar() { return _puntosSaltar; }
+		public int saltar() { return _puntosSaltar; }
 		
         /// <summary>
         /// Metodo que indica el nº de radiadores encendidos
