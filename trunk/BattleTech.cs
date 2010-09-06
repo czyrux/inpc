@@ -186,6 +186,7 @@ namespace ico
             Console.WriteLine();
             Mech objetivo;
             Posicion[] destinos = new Posicion[PanelControl.numeroDestinos];
+            Camino[] posiblesCaminos = new Camino[PanelControl.numeroDestinos];
 
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
@@ -197,11 +198,27 @@ namespace ico
 
                 //Seleccionamos la casilla destino
                 seleccionDestino(objetivo,destinos);
+
+                //Para cada destino hacemos el pathfinder
                 Console.WriteLine("Casillas escogidas: " + destinos.Length);
                 for (int i = 0; i < destinos.Length; i++)
                 {
+                    posiblesCaminos[i] = new Camino(_tablero.Casilla(_mechs[_myJugador].posicion()), _mechs[_myJugador], _tablero.Casilla(destinos[i]), _tablero, _estrategia);
                     Console.WriteLine(i + ": " + destinos[i].ToString());
                 }
+
+                //Evaluamos la ultima posicion de cada camino y nos quedamos con el mayor
+                int[] puntuacionCamino = new int[PanelControl.numeroDestinos];
+                int index = 0, valor = int.MinValue;
+                for (int i = 0; i < destinos.Length; i++) {
+                    puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
+                    if (puntuacionCamino[i] > valor) {
+                        index = i;
+                        valor = puntuacionCamino[i];
+                    }
+                }
+
+                
                 
 
                 //prueba de pathfinder el 9/8 - Angel

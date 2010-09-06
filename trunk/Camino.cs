@@ -53,7 +53,7 @@ namespace ico
 
 #endregion
 
-        #region Funciones
+        #region Funciones publicas
         /// <summary>
         /// Devuelve el costo del movimiento en puntos de movimientos
         /// </summary>
@@ -155,6 +155,14 @@ namespace ico
         public void ToFile(){
             StreamWriter fich = new StreamWriter(PanelControl.movimientoArchivo);
             fich.Write(this.ToString());
+        }
+
+        /// <summary>
+        /// Devuelve la ultima casilla del destino
+        /// </summary>
+        /// <returns>Casilla final del camino</returns>
+        public Casilla casillaFinal() {
+            return _camino[_camino.Count - 1].casilla();
         }
 #endregion
        
