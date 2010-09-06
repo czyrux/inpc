@@ -531,3 +531,9 @@ Ataque fisico (mech):
 		-(antonio) El pathfinde me ha estado dando problemas, el problema estaba en la funcion caminoReal, que devolvia como indice el -1. 
 						 
 		-(Angel) coregido el problema de camino de 2 en el pathfinder, ademas de si el destino es itransitable.
+
+		-(angel) ya comprueba que el camino en corriendo no pase por agua, si lo hace devuelve un camino caminando.
+
+		-(angel) ya comprueba que no tiene giroscopios, si no tine devuelve un camino solo con el origen encarado
+
+		-(angel) compruba que si la casilla origen con su encaramiento y el destino con su encaramiento a la hora de pasarlo a cadena, que si no se movio escriba Inmovil.
