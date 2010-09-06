@@ -21,10 +21,10 @@ namespace ico
         public Camino(Casilla de,Mech ich, Casilla a, Tablero tablero, Estrategia estrategia) {
 
             _estrategia=estrategia;
-
-            if((ArrayList camino = pathFinder(de, ich, a, tablero))==null){
+            ArrayList camino;
+            if(( camino = pathFinder(de, ich, a, tablero))==null){
                 _estrategia=Estrategia.Agresiva;
-                camino=Camino(de,ich,a,tablero);
+                camino = pathFinder(de, ich, a, tablero);
             }
             int j = 0;
 
@@ -360,7 +360,7 @@ namespace ico
         private bool sePuedeHacerCorriendo(ArrayList camino) {
             foreach (Nodo i in camino)
             {
-                if (i.casilla().tipoTerreno() == 2 || i.casilla().nivel() < 0)
+                if ((i.casilla().tipoTerreno() == 2 && i.casilla().nivel() < 0) && _estrategia==Estrategia.Defensiva)
                     return false;
             }
             return true;
