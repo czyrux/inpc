@@ -205,6 +205,7 @@ namespace ico
                 {
                     posiblesCaminos[i] = new Camino(_tablero.Casilla(_mechs[_myJugador].posicion()), _mechs[_myJugador], _tablero.Casilla(destinos[i]), _tablero, _estrategia);
                     Console.WriteLine(i + ": " + destinos[i].ToString());
+                    posiblesCaminos[i].print();
                 }
 
                 //Evaluamos la ultima posicion de cada camino y nos quedamos con el mayor
