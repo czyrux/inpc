@@ -314,11 +314,11 @@ namespace ico
                 elemento = new Nodo();
 
                 elemento.casilla(b);
-                elemento.g(0);
                 elemento.h(0);
                 elemento.f(0);
                 elemento.direccion((Encaramiento)ich.ladoEncaramiento());
                 elemento.padre((Nodo)cerradas[cerradas.Count - 1]);
+                elemento.g(elemento.padre().g() + elemento.casilla().costoMovimiento() + elemento.padre().casilla().posicion().distancia(elemento.casilla().posicion()));
                 camino.Add(elemento);
 
                 Nodo padre = (Nodo)cerradas[cerradas.Count - 1];
@@ -429,7 +429,7 @@ namespace ico
         private ArrayList limpiarAgua(ArrayList camino)
         {
             int veces = 0;
-            for (int i = camino.Count - 2; i > 1; i--)
+            for (int i = camino.Count - 2; i > -1; i--)
             {
                 if (((Nodo)camino[i]).casilla().tipoTerreno() == 2)
                     veces++;
@@ -455,25 +455,22 @@ namespace ico
             if (ich.enSuelo()){
                 suelo = 2;
                 _original = _camino[0].direccion();
-                _seLevanto = true;
             }
             if (_estrategia == Estrategia.Defensiva)
             {
                 puntosMR = ich.puntosCorrer();
-                puntosM = puntosMR / 2;
             }
             else {
                 /*
                  * aqui hay que comprobar si la distancia de el enemigo y yo es muy grande entonces corro enlugar de caminar
                  */
                 puntosMR=ich.puntosAndar()- suelo;
-                puntosM = puntosMR / 2;
             }
             int j = 0, tmpC = 0, tmpJ = 0;
             Boolean flag = false, flagj = false;
             List<int> l;
 
-            for (int i = 1; i <camino.Count; i++)
+            for (int i = 0; i <camino.Count; i++)
             {
 
                 if (((Nodo)camino[i]).g() /*+ 4*/ < puntosMR)
