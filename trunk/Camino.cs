@@ -396,14 +396,14 @@ namespace ico
                 case Encaramiento.Arriba:
 
                     if ((int)d < 4)
-                        return "Derecha";
-                    else
                         return "Izquierda";
+                    else
+                        return "Derecha";
                     
                     break;
                 case Encaramiento.InferiorDerecho:
 
-                    if ((int)d <3 || d==Encaramiento.SuperiorIzquierda)
+                    if (Encaramiento.SuperiorDerecha || d==Encaramiento.Arriba)
                         return "Izquierda";
                     else
                         return "Derecha";
@@ -411,7 +411,7 @@ namespace ico
                     break;
                 case Encaramiento.InferiorIzquierda:
 
-                    if ((int)d > 4 || d == Encaramiento.Arriba)
+                    if (Encaramiento.SuperiorDerecha|| d == Encaramiento.Abajo)
                         return "Izquierda";
                     else
                         return "Derecha";
@@ -426,9 +426,9 @@ namespace ico
                     break;
                 case Encaramiento.SuperiorIzquierda:
                     if (d == Encaramiento.SuperiorDerecha || d == Encaramiento.Arriba)
-                        return "Izquierda";
-                    else
                         return "Derecha";
+                    else
+                        return "Izquierda";
                     break;
             
             }
