@@ -164,6 +164,7 @@ namespace ico
         public Casilla casillaFinal() {
             return _camino[_camino.Count - 1].casilla();
         }
+
 #endregion
        
         #region Privado
