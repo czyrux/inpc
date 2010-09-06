@@ -18,13 +18,13 @@ namespace ico
         /// <param name="a">destino del camino a construir; tipo Casilla</param>
         /// <param name="tablero">tablero del juego; tipo Tablero</param>
         /// <param name="estrategia">estrategia conforme a la cual se hara el combate; tipo Estrategia</param>
-        public Camino(Casilla de,Mech ich, Casilla a, Tablero tablero, Estrategia estrategia) {
+        public Camino(Mech ich, Casilla a, Tablero tablero, Estrategia estrategia, Mech objetivo) {
 
             _estrategia=estrategia;
             ArrayList camino;
-            if(( camino = pathFinder(de, ich, a, tablero))==null){
+            if(( camino = pathFinder(ich, a, tablero, objetivo))==null){
                 _estrategia=Estrategia.Agresiva;
-                camino = pathFinder(de, ich, a, tablero);
+                camino = pathFinder(ich, a, tablero, objetivo);
             }
             int j = 0;
 
@@ -222,7 +222,7 @@ namespace ico
         /// <param name="b">destino del camino a construir; tipo Casilla</param>
         /// <param name="Tablero">tablero del juego; tipo Tablero</param>
         /// <returns>devuelve el camino del punto a al punto untermedio; tipo Camino</returns>
-        private ArrayList pathFinder(Casilla a, Mech ich, Casilla b, Tablero Tablero)
+        private ArrayList pathFinder(Mech ich, Casilla b, Tablero Tablero, Mech objetivo)
         {
             ArrayList cerradas = new ArrayList();
             ArrayList abiertas = new ArrayList();
@@ -234,9 +234,9 @@ namespace ico
 
             
 
-            elemento.casilla(a);
+            elemento.casilla(Tablero.Casilla(ich.posicion()));
             elemento.g(0);
-            elemento.h(a.posicion().distancia(b.posicion()));
+            elemento.h(ich.posicion().distancia(b.posicion()));
             elemento.f(elemento.h());
             elemento.direccion((Encaramiento)ich.ladoEncaramiento());
             elemento.padre(elemento);
@@ -265,6 +265,9 @@ namespace ico
                     {
                         continue;
                     }
+                    if (elemento.casilla().ToString() == "0908")
+                        nueva = nueva;
+
                     // Ignoro las casillas que ya estan en la lista de cerradas.
                     if (esta(cerradas, elemento.casilla()))
                         continue;
@@ -348,23 +351,23 @@ namespace ico
                 elemento.casilla(b);
                 elemento.h(0);
                 elemento.f(0);
-                elemento.direccion((Encaramiento)ich.ladoEncaramiento());
                 elemento.padre((Nodo)cerradas[cerradas.Count - 1]);
+                elemento.direccion(elemento.direccion());
                 elemento.g(elemento.padre().g() + elemento.casilla().costoMovimiento() + elemento.padre().casilla().posicion().distancia(elemento.casilla().posicion()));
-                camino.Add(elemento);
+                camino.Add((Nodo)cerradas[cerradas.Count - 1]);
 
                 Nodo padre = (Nodo)cerradas[cerradas.Count - 1];
                 do
                 {
                     camino.Add(padre.padre());
                     padre = padre.padre();
-                } while (padre.casilla() != a);
+                } while (padre.casilla() != Tablero.Casilla(ich.posicion()));
 
 
 
                 if (abiertas.Count != 0)
                 {
-                    if ((aux = caminoReal(limpiarAgua(camino), b, ich, Tablero)) == -1)
+                    if ((aux = caminoReal(limpiarAgua(camino), b, ich, Tablero, objetivo)) == -1)
                         camino = camino.GetRange(camino.Count - 1, 1);
                     else
                         camino = camino.GetRange(aux, camino.Count-aux);
@@ -399,17 +402,17 @@ namespace ico
             switch (o) { 
                 case Encaramiento.Abajo:
                             if((int)d>4)
-                                return "Derecha";
-                            else
                                 return "Izquierda";
+                            else
+                                return "Derecha";
                    
                     break;
                 case Encaramiento.Arriba:
 
                     if ((int)d < 4)
-                        return "Izquierda";
-                    else
                         return "Derecha";
+                    else
+                        return "Izquierda";
                     
                     break;
                 case Encaramiento.InferiorDerecho:
@@ -490,7 +493,7 @@ namespace ico
         /// <param name="ich">mech que hara el camino; tipo Mech</param>
         /// <param name="t">tablero del juego; tipo Tablero</param>
         /// <returns>indice sobre el camino, el cual es alcanzable por el mech ich</returns>
-        private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t)
+        private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t, Mech objetivo)
         {
             int puntosM, puntosMR, suelo = 0;
 
@@ -534,6 +537,9 @@ namespace ico
                          * hay que hacer una funcion que puntue las distintas casillas y de esta selecion la mejor para disparar y no ser disparado ademas de que no me aleje del destino final
                          */
                     //}
+
+                    if (camino.Count == i)
+                        destino = t.Casilla(objetivo.posicion());
 
                     l = posiblesEncaramientos((Nodo)camino[i], destino, t);
 
