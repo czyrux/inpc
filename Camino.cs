@@ -464,7 +464,7 @@ namespace ico
                 /*
                  * aqui hay que comprobar si la distancia de el enemigo y yo es muy grande entonces corro enlugar de caminar
                  */
-                puntosMR=ich.puntosAndar()- suelo;
+                puntosMR=ich.puntosAndar() - suelo;
             }
             int j = 0, tmpC = 0, tmpJ = 0;
             Boolean flag = false, flagj = false;
