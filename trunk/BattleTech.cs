@@ -211,14 +211,17 @@ namespace ico
                 int[] puntuacionCamino = new int[PanelControl.numeroDestinos];
                 int index = 0, valor = int.MinValue;
                 for (int i = 0; i < destinos.Length; i++) {
+                    Console.WriteLine("Destino " + i + ": " + posiblesCaminos[i].casillaFinal().posicion().ToString());
                     puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
+                    Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
                     if (puntuacionCamino[i] > valor) {
                         index = i;
                         valor = puntuacionCamino[i];
                     }
                 }
 
-                
+                Console.WriteLine();
+                Console.WriteLine("Elegimos " + posiblesCaminos[index].casillaFinal().posicion().ToString());
                 
 
                 //prueba de pathfinder el 9/8 - Angel
