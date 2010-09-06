@@ -938,7 +938,7 @@ namespace ico
             Mech objetivo = null;
             MechJugador my = (MechJugador)_mechs[_myJugador];
             String ordenes="";
-            int numeroArmas = 0;
+            int numeroArmas = 0, diferenciaNivel = 0;
             bool ataque = false;
 
             ordenes += numeroArmas.ToString() + "\n";
@@ -967,9 +967,13 @@ namespace ico
                 else
                     situacion = "DNTE";
 
+                //Vemos la diferencia de nivel entre las casillas
+
+
                 //Vemos las armas a darle
                 if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()) 
                 {
+                    numeroArmas++;
                     ordenes += "BD\n";
                     ordenes += "1000\n";
                     ordenes += objetivo.posicion() + "\n";
@@ -978,6 +982,7 @@ namespace ico
                 }
                 else if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo())
                 {
+                    numeroArmas++;
                     ordenes += "BI\n";
                     ordenes += "1000\n";
                     ordenes += objetivo.posicion() + "\n";
@@ -986,6 +991,7 @@ namespace ico
                 }
                 else if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda() && !ataque)
                 {
+                    numeroArmas++;
                     ordenes += "PI\n";
                     ordenes += "2000\n";
                     ordenes += objetivo.posicion() + "\n";
@@ -994,6 +1000,7 @@ namespace ico
                 }
                 else if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha() && !ataque)
                 {
+                    numeroArmas++;
                     ordenes += "PD\n";
                     ordenes += "2000\n";
                     ordenes += objetivo.posicion() + "\n";
