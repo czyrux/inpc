@@ -953,7 +953,7 @@ namespace ico
 
             //Escribimos las ordenes
             StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
-            f.WriteLine(numeroArmas);
+            f.WriteLine(ordenes);
             f.Close();
         }
 
