@@ -11,8 +11,12 @@
       <FileName>Actuador.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.Tablero" Collapsed="true">
-    <Position X="10" Y="3.5" Width="1.5" />
+  <Class Name="ico.Tablero">
+    <Position X="10" Y="4.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAABCAAAAAAMAAAQgABAAAQAEAAAAgAAQA=</HashCode>
       <FileName>Tablero.cs</FileName>
@@ -29,57 +33,88 @@
       <FileName>BattleTech.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.Camino" Collapsed="true">
+  <Class Name="ico.Camino">
     <Position X="10" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAQIQAAIAJACAAAkAAIAggAAAAAEBEAAAAKAAAEQQhA=</HashCode>
       <FileName>Camino.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.Cara" Collapsed="true">
+  <Class Name="ico.Cara">
     <Position X="11.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAAgAAAAAAAAABAAAAAAAAAABAAAAAAA=</HashCode>
       <FileName>Cara.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.Casilla" Collapsed="true">
+  <Class Name="ico.Casilla">
     <Position X="6.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAEgAAACAAABQBEQAIAICAAIIAgAABAABAggABEQJA=</HashCode>
       <FileName>Casilla.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.Componente" Collapsed="true">
+  <Class Name="ico.Componente">
     <Position X="8.25" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>EAADAkjAiQAYAAeAAAgCigAAAAwQAIAQIIAEABMCQBg=</HashCode>
       <FileName>Componente.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.ConfiguracionJuego" Collapsed="true">
-    <Position X="10" Y="1.5" Width="1.5" />
+  <Class Name="ico.ConfiguracionJuego">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AkIEQAEgQIYAHEBAAEAiBQAABAEASECAEQUAIAAICEA=</HashCode>
       <FileName>ConfiguracionJuego.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.Inpc" Collapsed="true">
-    <Position X="11.75" Y="1.5" Width="1.5" />
+  <Class Name="ico.Inpc">
+    <Position X="11.75" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Inpc.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.LdV" Collapsed="true">
-    <Position X="6.5" Y="2.5" Width="1.5" />
+  <Class Name="ico.LdV">
+    <Position X="6.5" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAQAQAABAAAAAAAggABAAAAAAAAAAAAABAAAACBAAEA=</HashCode>
       <FileName>Ldv.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.LocalizacionMech" Collapsed="true">
-    <Position X="8.25" Y="2.5" Width="1.5" />
+  <Class Name="ico.LocalizacionMech">
+    <Position X="8.25" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAAAAQAAAAAAIAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>LocalizacionMech.cs</FileName>
@@ -99,43 +134,58 @@
       <FileName>MechJugador.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.Nodo" Collapsed="true">
-    <Position X="10" Y="2.5" Width="1.5" />
+  <Class Name="ico.Nodo">
+    <Position X="10" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAICAEAABAABAAAAAAAAAYQAAAiEAAEAA=</HashCode>
       <FileName>Nodo.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.PanelControl" Collapsed="true">
-    <Position X="11.75" Y="2.5" Width="1.5" />
+  <Class Name="ico.PanelControl">
+    <Position X="11.75" Y="3.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>gEARAAQAAAAAAIMAAAgQEEABAEAAAKANAAAhDSACACA=</HashCode>
       <FileName>PanelControl.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.Posicion" Collapsed="true">
-    <Position X="6.5" Y="3.5" Width="1.5" />
+  <Class Name="ico.Posicion">
+    <Position X="6.5" Y="4.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAABAABAAEAgAAAAQAA=</HashCode>
       <FileName>Posicion.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.Slot" Collapsed="true">
-    <Position X="8.25" Y="3.5" Width="1.5" />
+  <Class Name="ico.Slot">
+    <Position X="8.25" Y="4.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AQABAAAAIAAQBACAAAAAAAAAAgQAAAAAAIAAgAIAEBE=</HashCode>
       <FileName>Slot.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="ico.municion" Collapsed="true">
-    <Position X="6.5" Y="4.75" Width="1.5" />
+    <Position X="6.5" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAEAAAAAAAAAAA=</HashCode>
       <FileName>structs.cs</FileName>
     </TypeIdentifier>
   </Struct>
-  <Enum Name="ico.tipoMovimiento" Collapsed="true">
-    <Position X="8.25" Y="6.75" Width="1.5" />
+  <Enum Name="ico.tipoMovimiento">
+    <Position X="6.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAABAAAIAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>structs.cs</FileName>
@@ -148,22 +198,22 @@
       <FileName>structs.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="ico.estadoBlindaje" Collapsed="true">
-    <Position X="8.25" Y="6" Width="1.5" />
+  <Enum Name="ico.estadoBlindaje">
+    <Position X="4" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAABAACAAAAAA=</HashCode>
       <FileName>structs.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="ico.tipoMech" Collapsed="true">
-    <Position X="6.5" Y="6.75" Width="1.5" />
+  <Enum Name="ico.tipoMech">
+    <Position X="4" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAABAAAQAAAAAAAAAAAAAEAAAAQAAAA=</HashCode>
       <FileName>structs.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="ico.Encaramiento" Collapsed="true">
-    <Position X="6.5" Y="6" Width="1.5" />
+  <Enum Name="ico.Encaramiento">
+    <Position X="4" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAUQBI=</HashCode>
       <FileName>structs.cs</FileName>
