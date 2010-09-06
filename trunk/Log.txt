@@ -529,4 +529,9 @@ Ataque fisico (mech):
 		-(antonio) YA esta hecho para que elija un conjunto. El tamaño lo determina una variable dentro del panel de control. Mañana si kieres ablamos de los resultados que salen.
 		
 		-(antonio) El pathfinde me ha estado dando problemas, el problema estaba en la funcion caminoReal, que devolvia como indice el -1. 
+
+
+		6/8/10
+		-(antonio) Oye tenemos un problema. Estaba simulando y queria pasar en el manglar de la casilla 0715 a la 0815 corriendo y me ha salido el siguiente mensaje en el simulador:
+			"No se puede entrar en un hexagono de nivel <=-1 si se corre."
 						 
