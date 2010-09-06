@@ -220,7 +220,7 @@ namespace ico
                 Console.WriteLine("Elegimos " + posiblesCaminos[index].casillaFinal().posicion().ToString());
 
                 posiblesCaminos[index].ToFile(_myJugador);
-
+                posiblesCaminos[index].ToFile();
                 //prueba de pathfinder el 9/8 - Angel
                /* string str;
                 do
