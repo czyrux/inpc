@@ -484,7 +484,7 @@ namespace ico
                         tmpC = costoEncaramiento(((Nodo)camino[puntosM + i]).direccion(), (Encaramiento)l[c]);
                         tmpJ = costoEncaramiento(((Nodo)camino[puntosM + i]).direccion(), (Encaramiento)l[j]);
 
-                        if (((Nodo)camino[puntosM + i]).g() + tmpC  < ich.puntosAndar())
+                        if (((Nodo)camino[puntosM + i]).g() + tmpC  < puntosMR)
                         {
                             flag = true;
 
