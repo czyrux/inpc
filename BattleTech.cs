@@ -546,7 +546,7 @@ namespace ico
 
                 //Vemos si nos giramos
                 if ( !_mechs[_myJugador].conoDelantero(objetivo.posicion(),_mechs[_myJugador].ladoEncaramiento())) {
-                    if (_mechs[_myJugador].conoDerecho(objetivo.posicion(), _mechs[_myJugador].ladoEncaramiento())
+                    if (_mechs[_myJugador].conoDerecho(objetivo.posicion(), _mechs[_myJugador].ladoEncaramiento()))
                     {
                         giro = "Derecha";
                     }
