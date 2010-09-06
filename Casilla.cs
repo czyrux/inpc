@@ -58,7 +58,7 @@ namespace ico
         public int  costoMovimiento(){
             if (_puntosMovimientos == 0)
             {
-                _puntosMovimientos = 1;
+                _puntosMovimientos = 0;
                 switch (_tipoTerreno)
                 {
                     case 0://despejado
