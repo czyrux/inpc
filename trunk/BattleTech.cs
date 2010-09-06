@@ -206,7 +206,7 @@ namespace ico
                     posiblesCaminos[i] = new Camino(_tablero.Casilla(_mechs[_myJugador].posicion()), _mechs[_myJugador], _tablero.Casilla(destinos[i]), _tablero, _estrategia);
                     Console.WriteLine(i + ": " + destinos[i].ToString());
                     posiblesCaminos[i].print();
-                    Console.WriteLine(posiblesCaminos[i].print());
+                    Console.WriteLine(posiblesCaminos[i].ToString());
                     Console.WriteLine("Destino " + i + ": " + posiblesCaminos[i].casillaFinal().posicion().ToString());
                     puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
                     Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
