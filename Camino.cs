@@ -520,25 +520,8 @@ namespace ico
             {
 
                 if (((Nodo)camino[i]).g() /*+ 4*/ < puntosMR)
-                {/*
-                    Nodo elemento = new Nodo();
-                    for (int k = 1; k < 7; k++)
-                    {
-                        elemento = new Nodo();
-                        try
-                        {
-                            elemento.casilla(t.colindante(((Nodo)camino[puntosM + i]).casilla().posicion(), (Encaramiento)k));//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
-                        }
-                        catch (Exception e)
-                        {
-                            continue;
-                        }
-                        /*
-                         * hay que hacer una funcion que puntue las distintas casillas y de esta selecion la mejor para disparar y no ser disparado ademas de que no me aleje del destino final
-                         */
-                    //}
-
-                    if (camino.Count == i)
+                {
+                    if (((Nodo)camino[i]).casilla() == destino)
                         destino = t.Casilla(objetivo.posicion());
 
                     l = posiblesEncaramientos((Nodo)camino[i], destino, t);
@@ -617,13 +600,12 @@ namespace ico
             for (int i = 1; i < j+1; i++)
             {
                 try { 
-                tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino.posicion());
+                    tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino.posicion());
 
-                if (tmp <= min)
-                {
-                    min = tmp;
-                    l.Add(i);
-                }
+                    if (tmp <= min){
+                        min = tmp;
+                        l.Add(i);
+                        }
                 }
                 catch(Exception e) { }
 
