@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ico.Actuador" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAABAAAAACAQAACAAAAAAgAAAAAQAAAAIAIAAAIAAAA=</HashCode>
+      <FileName>Actuador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.Tablero" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAABCAAAAAAMAAAQgABAAAQAEAAAAgAAQA=</HashCode>
+      <FileName>Tablero.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.BattleTech" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAANEACAAAAAIUgAIICAgJAAEAACAEABAwAAEAAAAAA=</HashCode>
+      <FileName>BattleTech.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.Camino" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIQAAIAJACAAAkAAIAggAAAAAEBEAAAAKAAAEQQhA=</HashCode>
+      <FileName>Camino.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.Cara" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAgAAAAAAAAABAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Cara.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.Casilla" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEgAAACAAABQBEQAIAICAAIIAgAABAABAggABEQJA=</HashCode>
+      <FileName>Casilla.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.Componente" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAADAkjAiQAYAAeAAAgCigAAAAwQAIAQIIAEABMCQBg=</HashCode>
+      <FileName>Componente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.ConfiguracionJuego" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AkIEQAEgQIYAHEBAAEAiBQAABAEASECAEQUAIAAICEA=</HashCode>
+      <FileName>ConfiguracionJuego.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.Inpc" Collapsed="true">
+    <Position X="11.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Inpc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.LdV" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAABAAAAAAAggABAAAAAAAAAAAAABAAAACBAAEA=</HashCode>
+      <FileName>Ldv.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.LocalizacionMech" Collapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAQAAAAAAIAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>LocalizacionMech.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.Mech" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>XVwntBMU0LaQ4EL1hkoLz+sBEzJetES0tSYkoSfdU0o=</HashCode>
+      <FileName>Mech.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.MechJugador" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SQAAAwBABIEQCYAAhIAoBAACABAICFwBAAAQQCEYxSA=</HashCode>
+      <FileName>MechJugador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.Nodo" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAICAEAABAABAAAAAAAAAYQAAAiEAAEAA=</HashCode>
+      <FileName>Nodo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.PanelControl" Collapsed="true">
+    <Position X="11.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gEARAAQAAAAAAIMAAAgQEEABAEAAAKANAAAhDSACACA=</HashCode>
+      <FileName>PanelControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.Posicion" Collapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAABAABAAEAgAAAAQAA=</HashCode>
+      <FileName>Posicion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ico.Slot" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQABAAAAIAAQBACAAAAAAAAAAgQAAAAAAIAAgAIAEBE=</HashCode>
+      <FileName>Slot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ico.municion" Collapsed="true">
+    <Position X="6.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>structs.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="ico.tipoMovimiento" Collapsed="true">
+    <Position X="8.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAABAAAIAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>structs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ico.situacion" Collapsed="true">
+    <Position X="11.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAIAAAAgAAAAAgAAAAAABAAAA=</HashCode>
+      <FileName>structs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ico.estadoBlindaje" Collapsed="true">
+    <Position X="8.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAABAACAAAAAA=</HashCode>
+      <FileName>structs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ico.tipoMech" Collapsed="true">
+    <Position X="6.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAQAAAAAAAAAAAAAEAAAAQAAAA=</HashCode>
+      <FileName>structs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ico.Encaramiento" Collapsed="true">
+    <Position X="6.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAUQBI=</HashCode>
+      <FileName>structs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ico.Estrategia" Collapsed="true">
+    <Position X="10" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>structs.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
