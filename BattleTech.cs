@@ -927,6 +927,7 @@ namespace ico
         #endregion
 
 
+        #region faseAtaqueFisico
         /// <summary>
         /// Metodo que realiza la fase de Ataques Fisicos
         /// </summary>
@@ -1019,7 +1020,7 @@ namespace ico
             f.WriteLine(ordenes);
             f.Close();
         }
-
+        #endregion
 
         /// <summary>
         /// Metodo que realiza la fase final del turno
