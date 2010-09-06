@@ -223,6 +223,8 @@ namespace ico
             cerradas.Add(elemento);
             do
             {
+                nueva = false;
+
                 for (int i = 1; i < 7; i++)
                 {
                     elemento = new Nodo();
@@ -257,6 +259,7 @@ namespace ico
                             // compruebo si desde la aterior era mejor que esta
                             if (elemento.g() >= ((Nodo)abiertas[iaux]).g())
                             {
+                                nueva = true;
                                 // si, si continuo sin hacer cambios
                                 continue;
                             }
@@ -284,8 +287,6 @@ namespace ico
 
                     }
 
-                    nueva = false;
-
 
                 }
 
@@ -303,7 +304,9 @@ namespace ico
                     abiertas.RemoveAt(mejor);
                 }
 
-            } while (actual.casilla() != b && nueva);
+                if (actual.casilla().ToString() == "0316")
+                    nueva = nueva;
+            } while (actual.casilla() != b && nueva && abiertas.Count!=0);
 
             if (abiertas.Count != 0)
             {
@@ -469,10 +472,10 @@ namespace ico
             Boolean flag = false, flagj = false;
             List<int> l;
 
-            for (int i = camino.Count - 2; i != 0; i++)
+            for (int i = camino.Count - 2; i != 0; i--)
             {
 
-                if (((Nodo)camino[ i]).g() /*+ 4*/ < puntosMR)
+                if (((Nodo)camino[i]).g() /*+ 4*/ < puntosMR)
                 {/*
                     Nodo elemento = new Nodo();
                     for (int k = 1; k < 7; k++)
@@ -548,8 +551,21 @@ namespace ico
         /// <returns>devuelve los encaramientos que miran hacia el destino; tipo Int(Encaramiento)</returns>
         private List<int> posiblesEncaramientos(Nodo o, Casilla destino, Tablero t)
         {
-            int min = t.colindante(o.casilla().posicion(), (Encaramiento)6).posicion().distancia(destino.posicion()), tmp = 0;
-            List<int> l = new List<int>();
+            int min =0, tmp = 0, j=6;
+            Boolean continuar = false;
+            do{
+                try
+                {
+                    tmp = t.colindante(o.casilla().posicion(), (Encaramiento)j).posicion().distancia(destino.posicion());
+                    continuar=false;
+                }
+                catch (Exception e) {
+                    j--;
+                    continuar = true;
+                }
+
+            }while(continuar);
+                        List<int> l = new List<int>();
 
             for (int i = 1; i < 7; i++)
             {
