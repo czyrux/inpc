@@ -537,3 +537,5 @@ Ataque fisico (mech):
 		-(angel) ya comprueba que no tiene giroscopios, si no tine devuelve un camino solo con el origen encarado
 
 		-(angel) compruba que si la casilla origen con su encaramiento y el destino con su encaramiento a la hora de pasarlo a cadena, que si no se movio escriba Inmovil.
+
+		- (antonio) fase de ataques fisicos hecha, voi a probarla en el simulador.
