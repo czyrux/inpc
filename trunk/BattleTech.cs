@@ -925,11 +925,20 @@ namespace ico
         /// <summary>
         /// Metodo que realiza la fase de Ataques Fisicos
         /// </summary>
-        private void faseAtaquesFisico() {
+        private void faseAtaquesFisico() 
+        {
             Console.WriteLine("Fase Ataque Fisico");
             Console.WriteLine();
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
+                Mech objetivo = null;
+
+                //Escogemos al objetivo
+                for (int i = 0; i < _mechs.Length; i++) 
+                {
+                    if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) == 1 && !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(), _mechs[_myJugador].ladoEncaramientoTorso()))
+                        objetivo = _mechs[i];
+                }
             }
 
         }
