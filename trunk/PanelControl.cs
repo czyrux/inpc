@@ -9,7 +9,9 @@ namespace ico
     /// </summary>
     static public class PanelControl
     {
-        public const String Path = "/ficheros";
+        #region constantes
+
+        public const String Path = "/ficheros/";
 
         #region constantes de Mechs
 
@@ -183,6 +185,15 @@ namespace ico
 
         #endregion
 
+        #endregion
+
+        #endregion
+
+        #region metodos
+        public static String archivoAcciones( int numeroJ ) 
+        {
+            return ("accionJ" + numeroJ.ToString() + ".sbt");
+        }
         #endregion
     }
 }
