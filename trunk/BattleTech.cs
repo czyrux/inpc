@@ -527,6 +527,8 @@ namespace ico
                 determinarEstrategia();
 
                 List<Mech> objetivos = new List<Mech>();
+                Mech objetivo;
+
                 //Escogemos a los mech si estan dentro del alcance de tiro largo y no estan en nuestra espalda
                 for (int i = 0; i < _mechs.Length; i++)
                     if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].distanciaTiroLarga() &&
@@ -540,12 +542,23 @@ namespace ico
                 //Escogemos al mas debil
                 List<Componente> armasADisparar = new List<Componente>();
                 Console.WriteLine();
-                objetivoMasDebil(objetivos, ldv, armasADisparar);
+                objetivo = objetivoMasDebil(objetivos, ldv, armasADisparar);
 
                 //Vemos si nos giramos
-                
+                if ( !_mechs[_myJugador].conoDelantero(objetivo.posicion(),_mechs[_myJugador].ladoEncaramiento())) {
+                    if (_mechs[_myJugador].conoDerecho(objetivo.posicion(), _mechs[_myJugador].ladoEncaramiento())
+                    {
+                        giro = "Derecha";
+                    }
+                    else if (_mechs[_myJugador].conoIzquierdo(objetivo.posicion(), _mechs[_myJugador].ladoEncaramiento()))
+                        giro = "Izquierda";
+                }
             }
 
+            //Escribimos las ordenes
+            StreamWriter f = new StreamWriter("accionJ" + _myJugador.ToString() + ".sbt", false);
+            f.WriteLine(giro);
+            f.Close();
         }
 
         #region faseAtaqueArmas
