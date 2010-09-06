@@ -933,8 +933,9 @@ namespace ico
             Console.WriteLine("Fase Ataque Fisico");
             Console.WriteLine();
             Mech objetivo = null;
+            String ordenes="";
             int numeroArmas = 0;
-
+            ordenes += numeroArmas.ToString() + "\n";
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
                 MechJugador my = (MechJugador)_mechs[_myJugador];
