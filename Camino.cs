@@ -162,11 +162,22 @@ namespace ico
         /// </summary>
         public void ToFile(int jugador){
 
-            StreamWriter fich = new StreamWriter(PanelControl.archivoAcciones(jugador));
-            fich.Write(this.ToString(),false);
+            StreamWriter fich = new StreamWriter(PanelControl.archivoAcciones(jugador), false);
+            fich.Write(this.ToString());
             fich.Close();
         }
+        public void ToFile()
+        {
 
+            StreamWriter fich = new StreamWriter("debug.txt",false);
+            string str = "El camino es: ";
+            foreach (Nodo i in _camino)
+                str += "(" + i.casilla().posicion().ToString() + ", " + i.direccion().ToString() + ")" + "->";
+            str += "FIN";
+            fich.Write(str);
+            fich.Write(this.ToString());
+            fich.Close();
+        }
         /// <summary>
         /// Devuelve la ultima casilla del destino
         /// </summary>
@@ -403,7 +414,7 @@ namespace ico
                     break;
                 case Encaramiento.InferiorDerecho:
 
-                    if (Encaramiento.SuperiorDerecha || d==Encaramiento.Arriba)
+                    if (d==Encaramiento.SuperiorDerecha || d==Encaramiento.Arriba)
                         return "Izquierda";
                     else
                         return "Derecha";
@@ -411,7 +422,7 @@ namespace ico
                     break;
                 case Encaramiento.InferiorIzquierda:
 
-                    if (Encaramiento.SuperiorDerecha|| d == Encaramiento.Abajo)
+                    if (d==Encaramiento.SuperiorDerecha|| d == Encaramiento.Abajo)
                         return "Izquierda";
                     else
                         return "Derecha";
