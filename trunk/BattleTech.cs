@@ -545,13 +545,17 @@ namespace ico
                 objetivo = objetivoMasDebil(objetivos, ldv, armasADisparar);
 
                 //Vemos si nos giramos
-                if ( !_mechs[_myJugador].conoDelantero(objetivo.posicion(),_mechs[_myJugador].ladoEncaramiento())) {
-                    if (_mechs[_myJugador].conoDerecho(objetivo.posicion(), _mechs[_myJugador].ladoEncaramiento()))
+                if (objetivo != null)
+                {
+                    if (!_mechs[_myJugador].conoDelantero(objetivo.posicion(), _mechs[_myJugador].ladoEncaramiento()))
                     {
-                        giro = "Derecha";
+                        if (_mechs[_myJugador].conoDerecho(objetivo.posicion(), _mechs[_myJugador].ladoEncaramiento()))
+                        {
+                            giro = "Derecha";
+                        }
+                        else if (_mechs[_myJugador].conoIzquierdo(objetivo.posicion(), _mechs[_myJugador].ladoEncaramiento()))
+                            giro = "Izquierda";
                     }
-                    else if (_mechs[_myJugador].conoIzquierdo(objetivo.posicion(), _mechs[_myJugador].ladoEncaramiento()))
-                        giro = "Izquierda";
                 }
             }
 
@@ -611,19 +615,19 @@ namespace ico
                 objetivo = objetivoMasDebil(objetivos, ldv, armasADisparar);
 
                 Console.WriteLine();
-                Console.WriteLine("El objetivo es:" + objetivo.nombre());
+                if (objetivo!=null)Console.WriteLine("El objetivo es:" + objetivo.nombre());
                 Console.WriteLine();
 
 
                 //Vemos las armas a dispararle
-                seleccionArmasDisparar(objetivos, armasADisparar);
+                seleccionArmasDisparar(objetivo, armasADisparar);
 
                 Console.WriteLine("Disparamos:");
                 for (int i = 0; i < armasADisparar.Count; i++)
                     Console.WriteLine(armasADisparar[i].nombre());
 
                 //Escribimos las ordenes
-                escribirOrdenesArmas(objetivos, armasADisparar);
+                escribirOrdenesArmas(objetivo, armasADisparar);
 
                 Console.ReadLine();
             }
@@ -791,13 +795,13 @@ namespace ico
         /// </summary>
         /// <param name="objetivos">Lista de objetivos. Un unico elemento</param>
         /// <param name="seleccionArmas">List de componentes tipo arma</param>
-        private void seleccionArmasDisparar(List<Mech> objetivos, List<Componente> seleccionArmas) 
+        private void seleccionArmasDisparar( Mech objetivo, List<Componente> seleccionArmas) 
         {
 
             int calorMovimiento;
             int limiteCalor; 
 
-            if (objetivos.Count > 0)
+            if (objetivo != null)
             {
                 //Vemos el calor por el movimiento consumido
                 if (_config.movimiento(_myJugador) == "Inmovil") {
@@ -857,7 +861,7 @@ namespace ico
                 Boolean salir = false;
                 while (!salir) {
                     if ( itr<seleccionArmas.Count && calor + seleccionArmas[orden[itr]].calor() < limiteCalor 
-                        && _mechs[_myJugador].tiradaImpacto(seleccionArmas[orden[itr]],objetivos[0],_tablero,_config.movimiento(_myJugador),_config.movimiento(objetivos[0].numeroJ())) <=9 )
+                        && _mechs[_myJugador].tiradaImpacto(seleccionArmas[orden[itr]],objetivo,_tablero,_config.movimiento(_myJugador),_config.movimiento(objetivo.numeroJ())) <=9 )
                     {
                         calor += seleccionArmas[orden[itr]].calor();
                         conjuntoFinal.Add(seleccionArmas[orden[itr]]);
@@ -881,12 +885,12 @@ namespace ico
         /// </summary>
         /// <param name="objetivo">List de mech de un solo elemento, el objetivo a disparar</param>
         /// <param name="seleccionArmas">List de armas a disparar</param>
-        private void escribirOrdenesArmas(List<Mech> objetivo, List<Componente> seleccionArmas) {
+        private void escribirOrdenesArmas( Mech objetivo, List<Componente> seleccionArmas) {
             StreamWriter f = new StreamWriter("accionJ" + _myJugador.ToString() + ".sbt", false);
 
             f.WriteLine("False");//coger garrote
-            if ( objetivo.Count>0) {
-                f.WriteLine(objetivo[0].posicion().ToString()); //Posicion del objetivo primario
+            if ( objetivo != null) {
+                f.WriteLine(objetivo.posicion().ToString()); //Posicion del objetivo primario
                 f.WriteLine(seleccionArmas.Count); //Numero de armas a disparar
                 for (int i = 0; i < seleccionArmas.Count; i++) 
                 {
@@ -901,7 +905,7 @@ namespace ico
                     //Slot municion
                     f.WriteLine(_mechs[_myJugador].slotMunicion(seleccionArmas[i]));
                     //Hexagono objtivo
-                    f.WriteLine(objetivo[0].posicion().ToString());
+                    f.WriteLine(objetivo.posicion().ToString());
                     //Tipo objetivo
                     f.WriteLine("Mech");
                 }
