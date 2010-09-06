@@ -854,7 +854,35 @@ namespace ico {
         /// </summary>
         /// <returns>True en caso afirmativo</returns>
 		public Boolean conManoDerecha() { return _conManoDerecha; }
-		
+
+        /// <summary>
+        /// Indica si el mech tiene pierna izquierda
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
+        public Boolean conPiernaIzquierda() {
+            if (estadoEsctructuraPI() > 0)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Indica si el mech tiene pierna derecha
+        /// </summary>
+        /// <returns>True en caso afirmativo</returns>
+        public Boolean conPiernaDerecha()
+        {
+            if (estadoEsctructuraPD() > 0)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+
         /// <summary>
         /// Indica el numero de componentes de que dispone el mech
         /// </summary>
