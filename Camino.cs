@@ -333,8 +333,10 @@ namespace ico
                     else
                         camino = camino.GetRange(aux, camino.Count - aux);
                 }
+                camino.Reverse();
             }
-            camino.Reverse();
+            else
+                camino.Add(cerradas[0]);
 
 
             return camino;
