@@ -145,6 +145,10 @@ namespace ico
                 str2 += costoEncaramiento(_camino[i-1].direccion(), _final).ToString() + "\n";
                 pasos++;
             }
+
+            if (pasos == 0)
+                return "Inmovil\n";
+            
             
             str += pasos.ToString()+"\n";
 
@@ -215,12 +219,20 @@ namespace ico
             Boolean nueva = false;
             _original = (Encaramiento)ich.ladoEncaramiento();
 
+            
+
             elemento.casilla(a);
             elemento.g(0);
             elemento.h(a.posicion().distancia(b.posicion()));
             elemento.f(elemento.h());
             elemento.direccion((Encaramiento)ich.ladoEncaramiento());
             elemento.padre(elemento);
+
+            if (!ich.giroscopioOperativo() && ich.enSuelo()) {
+                camino.Add(elemento);
+                _final = (Encaramiento)posiblesEncaramientos(elemento, b, Tablero)[0];
+                return camino;
+            }
 
             Nodo actual = elemento;
 
@@ -314,8 +326,6 @@ namespace ico
                     nueva = true;
                 }
 
-                if (actual.casilla().ToString() == "0416")
-                    nueva = nueva;
             } while (actual.casilla() != b && nueva);
 
             if (abiertas.Count != 0)
@@ -537,7 +547,7 @@ namespace ico
 
                         tmpJ = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[j]);
 
-                        if (((Nodo)camino[i]).g() + tmpC < ich.puntosAndar())
+                        if (((Nodo)camino[i]).g() + tmpC < puntosMR)
                             flag = true;                            
 
                     }
