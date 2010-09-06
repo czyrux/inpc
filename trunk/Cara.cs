@@ -17,7 +17,7 @@ namespace ico
         /// <summary>
         /// constructor con parametros
         /// </summary>
-        /// <param name="rio">si hay rio o no; tipo Boolean</param>
+        /// <param name="rio">si hay rio o no; tipo <seBoolean</param>
         /// <param name="carretera">si hay carretera o no; tipo Boolean</param>
         public Cara(Boolean rio, Boolean carretera)
         {
