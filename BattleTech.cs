@@ -325,7 +325,7 @@ namespace ico
                 _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,PanelControl.radio);
             }
             else {
-                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosAndar());
+                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosAndar()*2/3 );
             }
 
             //Puntuamos las casillas
@@ -526,6 +526,8 @@ namespace ico
             Console.WriteLine("Fase Reaccion");
             Console.WriteLine();
 
+            string giro = "Igual";
+
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
                 determinarEstrategia();
@@ -545,6 +547,9 @@ namespace ico
                 List<Componente> armasADisparar = new List<Componente>();
                 Console.WriteLine();
                 objetivoMasDebil(objetivos, ldv, armasADisparar);
+
+                //Vemos si nos giramos
+                
             }
 
         }
@@ -571,6 +576,8 @@ namespace ico
                 determinarEstrategia();
 
                 List<Mech> objetivos = new List<Mech>();
+                Mech objetivo = null;
+
                 //Escogemos a los mech si estan dentro del alcance de tiro largo y no estan en nuestra espalda
                 for (int i = 0; i < _mechs.Length; i++)
                     if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].distanciaTiroLarga() &&
@@ -594,18 +601,17 @@ namespace ico
                 //Escogemos al mas debil
                 List<Componente> armasADisparar = new List<Componente>();
                 Console.WriteLine();
-                objetivoMasDebil(objetivos, ldv, armasADisparar);
+                objetivo = objetivoMasDebil(objetivos, ldv, armasADisparar);
 
                 Console.WriteLine();
-                Console.WriteLine("El objetivo es:" + armasADisparar.Count );
-                for (int i = 0; i < objetivos.Count; i++)
-                    Console.WriteLine(i + ": " + objetivos[i].nombre());
+                Console.WriteLine("El objetivo es:" + objetivo.nombre());
                 Console.WriteLine();
 
 
                 //Vemos las armas a dispararle
                 seleccionArmasDisparar(objetivos, armasADisparar);
 
+                Console.WriteLine("Disparamos:");
                 for (int i = 0; i < armasADisparar.Count; i++)
                     Console.WriteLine(armasADisparar[i].nombre());
 
@@ -623,8 +629,10 @@ namespace ico
         /// <param name="objetivos">Lista de objetivos a evaluar</param>
         /// <param name="ldv">LdV con los objetivos</param>
         /// <param name="armas">Lista de armas. Vacia</param>
-        private void objetivoMasDebil (List<Mech> objetivos , List<LdV> ldv , List<Componente> armas) 
+        private Mech objetivoMasDebil (List<Mech> objetivos , List<LdV> ldv , List<Componente> armas) 
         {
+            Mech objetivo = null;
+
             if (objetivos.Count > 1)
             {
                
@@ -680,20 +688,25 @@ namespace ico
                     armas.Add(armamento[index][i]);
 
                 //Borramos el resto de objetivos
-                for (int i = 0; i < objetivos.Count; i++)
+                objetivo = objetivos[0];
+                objetivos.Clear();
+                /*for (int i = 0; i < objetivos.Count; i++)
                     if (i != index) {
                         objetivos.RemoveAt(i);
                         ldv.RemoveAt(i);
                         index--;
                         i--;
-                    }
+                    }*/
             }
             else if (objetivos.Count == 1)
             {
+                objetivo = objetivos[0];
                 armasPermitidas(objetivos[0], armas);
+                objetivos.Clear();
             }
-            else
-                armas = null;
+
+
+            return objetivo;
         }
 
         /// <summary>

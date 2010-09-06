@@ -164,13 +164,13 @@ namespace ico
                 for (int j = 0; j < _columnas; j++)
                 {
                     dist = this._casillas[i, j].posicion().distancia(ich.posicion());
-                    if ( dist <= puntMov) {
+                    if ( dist < puntMov) {
                         //si esta en cono derecho o izquierdo
-                        if ( (ich.conoDerecho(this._casillas[i, j].posicion(), ich.ladoEncaramiento()) || ich.conoIzquierdo(this._casillas[i, j].posicion(), ich.ladoEncaramiento())) && dist<=puntMov-2)
+                        if ( (ich.conoDerecho(this._casillas[i, j].posicion(), ich.ladoEncaramiento()) || ich.conoIzquierdo(this._casillas[i, j].posicion(), ich.ladoEncaramiento())) && dist<puntMov-2)
                         {
                             casillas.Add(_casillas[i, j].posicion());
                         }
-                        else if (ich.conoTrasero(this._casillas[i, j].posicion(), ich.ladoEncaramiento()) && dist <= puntMov - 3)
+                        else if (ich.conoTrasero(this._casillas[i, j].posicion(), ich.ladoEncaramiento()) && dist < puntMov - 3)
                         {
                             casillas.Add(_casillas[i, j].posicion());
                         }
