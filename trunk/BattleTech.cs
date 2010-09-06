@@ -491,15 +491,15 @@ namespace ico
 
                         if (distancia > _mechs[i].distanciaTiroLarga())
                         {
-                            puntuacion += 3 * bonificador;
+                            puntuacion += 5 * bonificador;
                         }
                         else if (distancia > _mechs[i].distanciaTiroMedia())
                         {
-                            puntuacion += 2 * bonificador;
+                            puntuacion += 4 * bonificador;
                         }
                         else if (distancia > _mechs[i].distanciaTiroCorta())
                         {
-                            puntuacion += 1 * bonificador;
+                            puntuacion += 2 * bonificador;
                         }
                         else
                             puntuacion += 0;
