@@ -252,7 +252,12 @@ namespace ico
                     // verifico si es intrancitable
                     if (/*elemento.casilla.costoMovimiento() >= 0 ||*/  aux >= 0)
                     {
+                        //si es agua menor a 0 y estmos en defensiva
+                        if (elemento.casilla().nivel() < 0 && elemento.casilla().tipoTerreno() == 2 && _estrategia == Estrategia.Defensiva) {
+                            continue;//<--- no la agrego por ser intransitable la casilla
+                        }
 
+                            
                         // precalculo el costo de movimiento total a esa casilla desde la actual
                         elemento.g(elemento.casilla().costoMovimiento() + aux + gAcumulada);
 
@@ -353,7 +358,8 @@ namespace ico
         }
 
         private bool sePuedeHacerCorriendo(ArrayList camino) {
-            foreach (Nodo i in Camino) {
+            foreach (Nodo i in camino)
+            {
                 if (i.casilla().tipoTerreno() == 2 || i.casilla().nivel() < 0)
                     return false;
             }
