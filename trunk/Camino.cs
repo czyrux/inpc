@@ -305,31 +305,34 @@ namespace ico
 
             } while (actual.casilla() != b && abiertas.Count!=0);
 
-            elemento = new Nodo();
-
-            elemento.casilla(b);
-            elemento.g(0);
-            elemento.h(0);
-            elemento.f(0);
-            elemento.direccion((Encaramiento)ich.ladoEncaramiento());
-            elemento.padre((Nodo)cerradas[cerradas.Count - 1]);
-            camino.Add(elemento);
-
-            Nodo padre = (Nodo)cerradas[cerradas.Count - 1];
-            do
-            {
-                camino.Add(padre.padre());
-                padre = padre.padre();
-            } while (padre.casilla() != a);
-
-
-
             if (abiertas.Count != 0)
             {
-                if ((aux = caminoReal(limpiarAgua(camino), b, ich, Tablero)) == -1)
-                    camino = camino.GetRange(camino.Count - 1, 1);
-                else
-                    camino = camino.GetRange(aux, camino.Count - aux);
+                elemento = new Nodo();
+
+                elemento.casilla(b);
+                elemento.g(0);
+                elemento.h(0);
+                elemento.f(0);
+                elemento.direccion((Encaramiento)ich.ladoEncaramiento());
+                elemento.padre((Nodo)cerradas[cerradas.Count - 1]);
+                camino.Add(elemento);
+
+                Nodo padre = (Nodo)cerradas[cerradas.Count - 1];
+                do
+                {
+                    camino.Add(padre.padre());
+                    padre = padre.padre();
+                } while (padre.casilla() != a);
+
+
+
+                if (abiertas.Count != 0)
+                {
+                    if ((aux = caminoReal(limpiarAgua(camino), b, ich, Tablero)) == -1)
+                        camino = camino.GetRange(camino.Count - 1, 1);
+                    else
+                        camino = camino.GetRange(aux, camino.Count - aux);
+                }
             }
             camino.Reverse();
 
