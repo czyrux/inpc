@@ -199,19 +199,13 @@ namespace ico
                 //Seleccionamos la casilla destino
                 seleccionDestino(objetivo,destinos);
 
-                //Para cada destino hacemos el pathfinder
-                Console.WriteLine("Casillas escogidas: " + destinos.Length);
-                for (int i = 0; i < destinos.Length; i++)
-                {
-                    posiblesCaminos[i] = new Camino(_tablero.Casilla(_mechs[_myJugador].posicion()), _mechs[_myJugador], _tablero.Casilla(destinos[i]), _tablero, _estrategia);
-                    Console.WriteLine(i + ": " + destinos[i].ToString());
-                    posiblesCaminos[i].print();
-                }
-
                 //Evaluamos la ultima posicion de cada camino y nos quedamos con el mayor
                 int[] puntuacionCamino = new int[PanelControl.numeroDestinos];
                 int index = 0, valor = int.MinValue;
                 for (int i = 0; i < destinos.Length; i++) {
+                    posiblesCaminos[i] = new Camino(_tablero.Casilla(_mechs[_myJugador].posicion()), _mechs[_myJugador], _tablero.Casilla(destinos[i]), _tablero, _estrategia);
+                    Console.WriteLine(i + ": " + destinos[i].ToString());
+                    posiblesCaminos[i].print();
                     Console.WriteLine("Destino " + i + ": " + posiblesCaminos[i].casillaFinal().posicion().ToString());
                     puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
                     Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
