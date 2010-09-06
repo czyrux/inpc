@@ -22,8 +22,6 @@ namespace ico {
             if (args.Length > 0) {
                 numeroJugador = Convert.ToInt32(args[0]);
                 fase = args[1];
-                //Console.WriteLine(numeroJugador);
-                //Console.WriteLine(fase);
             }
 			
 
