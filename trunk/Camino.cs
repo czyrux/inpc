@@ -306,7 +306,7 @@ namespace ico
 
                 if (actual.casilla().ToString() == "0316")
                     nueva = nueva;
-            } while (actual.casilla() != b && nueva && abiertas.Count!=0);
+            } while (actual.casilla() != b && ((nueva && abiertas.Count != 0) || abiertas.Count != 0));
 
             if (abiertas.Count != 0)
             {
@@ -472,7 +472,7 @@ namespace ico
             Boolean flag = false, flagj = false;
             List<int> l;
 
-            for (int i = camino.Count - 2; i != 0; i--)
+            for (int i = 1; i <camino.Count-1; i++)
             {
 
                 if (((Nodo)camino[i]).g() /*+ 4*/ < puntosMR)
@@ -556,7 +556,7 @@ namespace ico
             do{
                 try
                 {
-                    tmp = t.colindante(o.casilla().posicion(), (Encaramiento)j).posicion().distancia(destino.posicion());
+                    min = t.colindante(o.casilla().posicion(), (Encaramiento)j).posicion().distancia(destino.posicion());
                     continuar=false;
                 }
                 catch (Exception e) {
@@ -567,7 +567,7 @@ namespace ico
             }while(continuar);
                         List<int> l = new List<int>();
 
-            for (int i = 1; i < 7; i++)
+            for (int i = 1; i < j+1; i++)
             {
                 try { 
                 tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino.posicion());
