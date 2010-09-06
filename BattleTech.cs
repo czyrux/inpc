@@ -968,10 +968,11 @@ namespace ico
                     situacion = "DNTE";
 
                 //Vemos la diferencia de nivel entre las casillas
+                diferenciaNivel = _tablero.Casilla(my.posicion()).nivel() - _tablero.Casilla(objetivo.posicion()).nivel();
 
-
-                //Vemos las armas a darle
-                if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()) 
+                //Vemos las armas fisicas con las que darle
+                if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()
+                    && ( diferenciaNivel==0 || diferenciaNivel==-1)) 
                 {
                     numeroArmas++;
                     ordenes += "BD\n";
@@ -980,7 +981,8 @@ namespace ico
                     ordenes += "Mech\n";
                     ataque = true;
                 }
-                else if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo())
+                else if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo()
+                    && (diferenciaNivel == 0 || diferenciaNivel == -1))
                 {
                     numeroArmas++;
                     ordenes += "BI\n";
@@ -989,7 +991,8 @@ namespace ico
                     ordenes += "Mech\n";
                     ataque = true;
                 }
-                else if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda() && !ataque)
+                else if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda()
+                    && (diferenciaNivel == 0 || diferenciaNivel == 1) && !ataque)
                 {
                     numeroArmas++;
                     ordenes += "PI\n";
@@ -998,7 +1001,8 @@ namespace ico
                     ordenes += "Mech\n";
                     ataque = true;
                 }
-                else if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha() && !ataque)
+                else if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha()
+                    && (diferenciaNivel == 0 || diferenciaNivel == 1) && !ataque)
                 {
                     numeroArmas++;
                     ordenes += "PD\n";
