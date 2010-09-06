@@ -883,7 +883,7 @@ namespace ico
         /// <summary>
         /// Metodo que escribe la tarea que va a realizar nuestro mech en esta fase del juego
         /// </summary>
-        /// <param name="objetivo">List de mech de un solo elemento, el objetivo a disparar</param>
+        /// <param name="objetivo">El objetivo a disparar</param>
         /// <param name="seleccionArmas">List de armas a disparar</param>
         private void escribirOrdenesArmas( Mech objetivo, List<Componente> seleccionArmas) {
             StreamWriter f = new StreamWriter("accionJ" + _myJugador.ToString() + ".sbt", false);
