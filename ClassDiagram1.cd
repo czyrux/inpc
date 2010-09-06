@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="ico.Actuador" Collapsed="true">
+  <Class Name="ico.Actuador">
     <Position X="6.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>EAABAAAAACAQAACAAAAAAgAAAAAQAAAAIAIAAAIAAAA=</HashCode>
       <FileName>Actuador.cs</FileName>
@@ -14,8 +18,12 @@
       <FileName>Tablero.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ico.BattleTech" Collapsed="true">
+  <Class Name="ico.BattleTech">
     <Position X="8.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>BAANEACAAAAAIUgAIICAgJAAEAACAEABAwAAEAAAAAA=</HashCode>
       <FileName>BattleTech.cs</FileName>
@@ -36,14 +44,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ico.Casilla" Collapsed="true">
-    <Position X="6.5" Y="1.5" Width="1.5" />
+    <Position X="6.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEgAAACAAABQBEQAIAICAAIIAgAABAABAggABEQJA=</HashCode>
       <FileName>Casilla.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ico.Componente" Collapsed="true">
-    <Position X="8.25" Y="1.5" Width="1.5" />
+    <Position X="8.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAADAkjAiQAYAAeAAAgCigAAAAwQAIAQIIAEABMCQBg=</HashCode>
       <FileName>Componente.cs</FileName>
