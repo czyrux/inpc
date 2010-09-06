@@ -289,18 +289,21 @@ namespace ico
 
                 }
 
-                //buesca la mejor casilla entre las abiertas
-                mejor = mejorCasillaAbierta(abiertas, actual.casilla(), b);
-                //actualizo la acomulacion de la g
-                gAcumulada = ((Nodo)abiertas[mejor]).g();
-                //agrego la mejor casilla
-                cerradas.Add(abiertas[mejor]);
-                //pongo la mejor como la siguiente actual
-                actual = (Nodo)abiertas[mejor];
-                //borro la mejor de las abiertas
-                abiertas.RemoveAt(mejor);
+                if (abiertas.Count != 0)
+                {
+                    //buesca la mejor casilla entre las abiertas
+                    mejor = mejorCasillaAbierta(abiertas, actual.casilla(), b);
+                    //actualizo la acomulacion de la g
+                    gAcumulada = ((Nodo)abiertas[mejor]).g();
+                    //agrego la mejor casilla
+                    cerradas.Add(abiertas[mejor]);
+                    //pongo la mejor como la siguiente actual
+                    actual = (Nodo)abiertas[mejor];
+                    //borro la mejor de las abiertas
+                    abiertas.RemoveAt(mejor);
+                }
 
-            } while (actual.casilla() != b);
+            } while (actual.casilla() != b && abiertas.Count!=0);
 
             elemento = new Nodo();
 
@@ -321,12 +324,13 @@ namespace ico
 
 
 
-
-            if ((aux = caminoReal(limpiarAgua(camino), b, ich, Tablero)) == -1)
-                camino = camino.GetRange(camino.Count-1,1);
-            else
-                camino = camino.GetRange(aux, camino.Count - aux);
-
+            if (abiertas.Count != 0)
+            {
+                if ((aux = caminoReal(limpiarAgua(camino), b, ich, Tablero)) == -1)
+                    camino = camino.GetRange(camino.Count - 1, 1);
+                else
+                    camino = camino.GetRange(aux, camino.Count - aux);
+            }
             camino.Reverse();
 
 
