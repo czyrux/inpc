@@ -19,16 +19,20 @@ namespace ico
         /// <param name="tablero">tablero del juego; tipo Tablero</param>
         /// <param name="estrategia">estrategia conforme a la cual se hara el combate; tipo Estrategia</param>
         public Camino(Casilla de,Mech ich, Casilla a, Tablero tablero, Estrategia estrategia) {
-           _estrategia=estrategia;
-           ArrayList camino = pathFinder(de, ich, a, tablero);
-           int j = 0;
 
-           _camino = new List<Nodo>();
-          foreach (Nodo i in camino) {
-              _camino.Add(i);
-              j++;
-          }
+            _estrategia=estrategia;
 
+            if((ArrayList camino = pathFinder(de, ich, a, tablero))==null){
+                _estrategia=Estrategia.Agresiva;
+                camino=Camino(de,ich,a,tablero);
+            }
+            int j = 0;
+
+            _camino = new List<Nodo>();
+            foreach (Nodo i in camino) {
+                _camino.Add(i);
+                j++;
+            }
 
         }
 
@@ -342,8 +346,18 @@ namespace ico
             else
                 camino.Add(cerradas[0]);
 
+            if (!sePuedeHacerCorriendo(camino))
+                return null;
 
             return camino;
+        }
+
+        private bool sePuedeHacerCorriendo(ArrayList camino) {
+            foreach (Nodo i in Camino) {
+                if (i.casilla().tipoTerreno() == 2 || i.casilla().nivel() < 0)
+                    return false;
+            }
+            return true;
         }
 
         /// <summary>
