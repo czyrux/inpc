@@ -302,11 +302,12 @@ namespace ico
                     actual = (Nodo)abiertas[mejor];
                     //borro la mejor de las abiertas
                     abiertas.RemoveAt(mejor);
+                    nueva = true;
                 }
 
-                if (actual.casilla().ToString() == "0316")
+                if (actual.casilla().ToString() == "0416")
                     nueva = nueva;
-            } while (actual.casilla() != b && ((nueva && abiertas.Count != 0) || abiertas.Count != 0));
+            } while (actual.casilla() != b && nueva);
 
             if (abiertas.Count != 0)
             {
@@ -334,7 +335,7 @@ namespace ico
                     if ((aux = caminoReal(limpiarAgua(camino), b, ich, Tablero)) == -1)
                         camino = camino.GetRange(camino.Count - 1, 1);
                     else
-                        camino = camino.GetRange(aux, camino.Count - aux);
+                        camino = camino.GetRange(aux, camino.Count-aux);
                 }
                 camino.Reverse();
             }
