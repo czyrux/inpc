@@ -489,11 +489,7 @@ namespace ico
                         tmpC = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[c]);
                         tmpJ = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[j]);
 
-<<<<<<< .mine
-                        if (((Nodo)camino[ i]).g() + tmpC  < ich.puntosAndar())
-=======
-                        if (((Nodo)camino[puntosM + i]).g() + tmpC  < puntosMR)
->>>>>>> .r317
+                        if (((Nodo)camino[i]).g() + tmpC  < puntosMR)
                         {
                             flag = true;
 
