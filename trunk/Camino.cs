@@ -161,8 +161,9 @@ namespace ico
         /// Guarda el camino en un archivo con nombre PanelControl.movimientoArchivo
         /// </summary>
         public void ToFile(int jugador){
+
             StreamWriter fich = new StreamWriter(PanelControl.archivoAcciones(jugador));
-            fich.Write(this.ToString());
+            fich.Write(this.ToString(),false);
             fich.Close();
         }
 
