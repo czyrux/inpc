@@ -512,6 +512,7 @@ namespace ico
         }
         #endregion
 
+
         #region faseReaccion
         /// <summary>
         /// Metodo que realiza la fase de Reaccion
@@ -566,6 +567,7 @@ namespace ico
         }
 
         #endregion
+
 
         #region faseAtaqueArmas
         /// <summary>
@@ -922,6 +924,7 @@ namespace ico
 
         #endregion
 
+
         /// <summary>
         /// Metodo que realiza la fase de Ataques Fisicos
         /// </summary>
@@ -929,19 +932,27 @@ namespace ico
         {
             Console.WriteLine("Fase Ataque Fisico");
             Console.WriteLine();
+            Mech objetivo = null;
+            int numeroArmas = 0;
+
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
-                Mech objetivo = null;
-
+                MechJugador my = (MechJugador)_mechs[_myJugador];
                 //Escogemos al objetivo
                 for (int i = 0; i < _mechs.Length; i++) 
                 {
-                    if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) == 1 && !_mechs[_myJugador].conoTrasero(_mechs[i].posicion(), _mechs[_myJugador].ladoEncaramientoTorso()))
+                    if (i != _myJugador && my.posicion().distancia(_mechs[i].posicion()) == 1 && !my.conoTrasero(_mechs[i].posicion(), my.ladoEncaramientoTorso()))
                         objetivo = _mechs[i];
                 }
             }
 
+
+            //Escribimos las ordenes
+            StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
+            f.WriteLine(numeroArmas);
+            f.Close();
         }
+
 
         /// <summary>
         /// Metodo que realiza la fase final del turno
