@@ -560,7 +560,7 @@ namespace ico
             }
 
             //Escribimos las ordenes
-            StreamWriter f = new StreamWriter("accionJ" + _myJugador.ToString() + ".sbt", false);
+            StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
             f.WriteLine(giro);
             f.Close();
         }
@@ -888,7 +888,7 @@ namespace ico
         /// <param name="objetivo">El objetivo a disparar</param>
         /// <param name="seleccionArmas">List de armas a disparar</param>
         private void escribirOrdenesArmas( Mech objetivo, List<Componente> seleccionArmas) {
-            StreamWriter f = new StreamWriter("accionJ" + _myJugador.ToString() + ".sbt", false);
+            StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
 
             f.WriteLine("False");//coger garrote
             if ( objetivo != null) {
