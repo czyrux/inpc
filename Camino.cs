@@ -303,7 +303,7 @@ namespace ico
                     abiertas.RemoveAt(mejor);
                 }
 
-            } while (actual.casilla() != b && abiertas.Count!=0);
+            } while (actual.casilla() != b && nueva);
 
             if (abiertas.Count != 0)
             {
