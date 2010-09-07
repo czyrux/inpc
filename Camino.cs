@@ -107,7 +107,7 @@ namespace ico
             
             if (_final == 0)
             {
-                _final = _camino[_camino.Count - 1].direccion();
+                _final = _camino[_camino.Count - 1].direccion()+"\n";
             }
             str +=_final.ToString()+"\n";
 
@@ -120,7 +120,7 @@ namespace ico
             }
             int tmp;
             if (_camino[i].direccion() != _original) {
-                str2 += izqOdrch(_camino[i].direccion(), _original).ToString();
+                str2 += izqOdrch(_camino[i].direccion(), _original).ToString() + "\n";
                 tmp = costoEncaramiento(_original, _camino[i].direccion());
                 str2 += tmp.ToString()+"\n";
                 pasos++;
@@ -271,8 +271,6 @@ namespace ico
                     {
                         continue;
                     }
-                    if (elemento.casilla().ToString() == "0908")
-                        nueva = nueva;
 
                     // Ignoro las casillas que ya estan en la lista de cerradas.
                     if (esta(cerradas, elemento.casilla()))
