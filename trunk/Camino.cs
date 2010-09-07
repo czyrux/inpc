@@ -521,10 +521,12 @@ namespace ico
 
                 if (((Nodo)camino[i]).g() /*+ 4*/ < puntosMR)
                 {
-                    if (((Nodo)camino[i]).casilla() == destino)
-                        destino = t.Casilla(objetivo.posicion());
-
-                    l = posiblesEncaramientos((Nodo)camino[i], destino, t);
+                    /*if (((Nodo)camino[i]).casilla() == destino)
+                    {
+                        j=queEncaramientoVengo(((Nodo)camino[i-1]).direccion(),
+                    }
+                    else*/
+                        l = posiblesEncaramientos((Nodo)camino[i], destino, t);
 
                     for (int c = 1; c < l.Count; c++)
                     {
@@ -572,8 +574,36 @@ namespace ico
             return -1;
         }
 
-        private Boolean sePuedeEncarrar(List<int> posibles,ref int mejor) { 
+        private Encaramiento queEncaramientoVengo(Casilla  origen, Casilla destino, Tablero t) {
+            Encaramiento oEncaramiento=Encaramiento.Arriba;
+            Casilla tmp;
+            for (int i = 1; i < 7; i++) { 
+                tmp=t.colindante(origen.posicion(),(Encaramiento)i)
+                if(tmp==destino){
+                    oEncaramiento=(Encaramiento)i;
+                }
+            }
+            switch ((Encaramiento)oEncaramiento)
+            {
+                case Encaramiento.Abajo:
+                    return Encaramiento.Arriba;
 
+                case Encaramiento.Arriba:
+                    return Encaramiento.Abajo;
+
+                case Encaramiento.InferiorDerecho:
+                    return Encaramiento.SuperiorIzquierda;
+
+                case Encaramiento.InferiorIzquierda:
+                    return Encaramiento.SuperiorDerecha;
+
+                case Encaramiento.SuperiorDerecha:
+                    return Encaramiento.InferiorIzquierda;
+
+                case Encaramiento.SuperiorIzquierda:
+                    return Encaramiento.InferiorDerecho;
+            }
+            return Encaramiento.Arriba;
         }
         /// <summary>
         /// Calcula los posibles encaramientos que esten mirando hacia la casilla destino. Usada en caminoReal.
