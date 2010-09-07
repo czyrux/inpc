@@ -147,9 +147,6 @@ namespace ico
                         ;
                         break;
                     default:
-                        if (a.nivel() - _nivel < 0)
-                            costo += 0;
-                        else
                             return 1000;//<--- Es inaccesible devuelve el maximo valor posible
                         
                         break;
