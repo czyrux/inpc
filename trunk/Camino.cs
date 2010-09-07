@@ -497,7 +497,7 @@ namespace ico
         private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t, Mech objetivo)
         {
             int puntosMR, suelo = 0;
-
+            costoEncaramientoAcumulado(camino);
             //devo comprobar si ay giroscopios
             if (ich.enSuelo()){
                 suelo = 2;
@@ -536,7 +536,18 @@ namespace ico
             return -1;
         }
 
-        Encaramiento mejorEncaramiento(Nodo origen, Posicion objetivo, Tablero t) {
+        private void costoEncaramientoAcumulado(ArrayList camino) {
+            int acumulado=0;
+            for (int i = camino.Count - 2; i != -1; i--) { 
+                if(((Nodo)camino[i+1]).direccion()!=((Nodo)camino[i]).direccion()){
+                    acumulado += costoEncaramiento(((Nodo)camino[i + 1]).direccion(), ((Nodo)camino[i]).direccion());
+                }
+                ((Nodo)camino[i]).g(acumulado + ((Nodo)camino[i]).g());
+            }
+        }
+
+        Encaramiento mejorEncaramiento(Nodo origen, Posicion objetivo, Tablero t)
+        {
             List<int> l= new List<int>();
             int min, tmp, tmpi=0;
 
