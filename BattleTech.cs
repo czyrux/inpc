@@ -785,31 +785,35 @@ namespace ico
         private int armasPermitidas( Mech objetivo, List<Componente> seleccionArmas) 
         {        
             string situacion;
-            int encTorso = _mechs[_myJugador].ladoEncaramientoTorso();
-            int distancia = _mechs[_myJugador].posicion().distancia(objetivo.posicion());
+            MechJugador my = (MechJugador)_mechs[_myJugador];
+            int encTorso = my.ladoEncaramientoTorso();
+            int enc = my.ladoEncaramiento();
+            int distancia = my.posicion().distancia(objetivo.posicion());
             int danio = 0;
 
             //Vemos la localizacion del objetivo respecto a nuestro mech
-            if (_mechs[_myJugador].conoDerecho(objetivo.posicion(), encTorso)) {
+            if (my.conoDerecho(objetivo.posicion(), encTorso)) {
                 situacion = "DRCHA";
             }
-            else if (_mechs[_myJugador].conoIzquierdo(objetivo.posicion(), encTorso)) {
+            else if (my.conoIzquierdo(objetivo.posicion(), encTorso)) {
                 situacion = "IZQ";
             }
             else
                 situacion = "DNTE";
 
             //Vemos las armas que podria disparar
-            ArrayList armas = _mechs[_myJugador].armas();
+            ArrayList armas = my.armas();
             String localizacion;
             for (int i = 0; i < armas.Count; i++) 
             {
                 localizacion = ((Componente)armas[i]).localizacionSTRING();
-                if (_mechs[_myJugador].tieneMunicion((Componente)armas[i]) && ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
+                if (my.tieneMunicion((Componente)armas[i]) && ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
                     ((Componente)armas[i]).distanciaMinima() < distancia && 
-                   ( ((localizacion == "BI" || localizacion == "PI") && (situacion == "IZQ" || situacion == "DNTE"))
-                   || ((localizacion == "PD"|| localizacion == "BD") && (situacion == "DRCHA" || situacion == "DNTE"))
-                   || ((localizacion != "TIa" || localizacion != "TDa" || localizacion != "TCa") && situacion == "DNTE" )
+                   ( (localizacion == "BI" && (situacion == "IZQ" || situacion == "DNTE"))
+                   || (localizacion == "BD" && (situacion == "DRCHA" || situacion == "DNTE"))
+                   || ((localizacion == "TC" || localizacion == "TD" || localizacion == "TI" || localizacion == "CAB") && situacion == "DNTE" )
+                   || (localizacion == "PD" && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)))
+                   || (localizacion == "PI" && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)))
                     ) )
                 {
                     danio += ((Componente)armas[i]).danio();
