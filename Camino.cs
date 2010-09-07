@@ -109,7 +109,7 @@ namespace ico
             {
                 _final = _camino[_camino.Count - 1].direccion();
             }
-            str +=_final.ToString()+"\n";
+            str +=((int)_final).ToString()+"\n";
 
             str += "False\n";
 
