@@ -994,8 +994,6 @@ namespace ico
             int numeroArmas = 0, diferenciaNivel = 0;
             bool ataque = false;
 
-            ordenes += numeroArmas.ToString() + "\n";
-
             if (my.operativo() && my.consciente())
             {
                 String situacion ;
@@ -1012,6 +1010,7 @@ namespace ico
                 //Si tenemos objetivo
                 if (objetivo != null)
                 {
+                    Console.WriteLine("Hay objetivo");
                     //Vemos la localizacion del objetivo respecto a nuestro mech
                     if (my.conoDerecho(objetivo.posicion(), encTorso))
                     {
@@ -1029,7 +1028,7 @@ namespace ico
 
                     //Vemos las armas fisicas con las que darle
                     if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()
-                        && (diferenciaNivel == 0 || diferenciaNivel == -1))
+                        && ((diferenciaNivel == 0 && !objetivo.enSuelo()) || diferenciaNivel == -1) )
                     {
                         numeroArmas++;
                         ordenes += "BD\n";
@@ -1037,8 +1036,9 @@ namespace ico
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
                     }
-                    else if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo()
-                        && (diferenciaNivel == 0 || diferenciaNivel == -1))
+                    
+                    if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo()
+                        && ((diferenciaNivel == 0 && !objetivo.enSuelo()) || diferenciaNivel == -1))
                     {
                         numeroArmas++;
                         ordenes += "BI\n";
@@ -1046,8 +1046,9 @@ namespace ico
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
                     }
-                    else if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda()
-                        && (diferenciaNivel == 0 || diferenciaNivel == 1))
+                    
+                    if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda()
+                        && (diferenciaNivel == 0 || (diferenciaNivel == 1 && !objetivo.enSuelo()) ))
                     {
                         numeroArmas++;
                         ordenes += "PI\n";
@@ -1056,8 +1057,9 @@ namespace ico
                         ordenes += "Mech\n";
                         ataque = true;
                     }
-                    else if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha()
-                        && (diferenciaNivel == 0 || diferenciaNivel == 1) && !ataque)
+                    
+                    if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha()
+                        && (diferenciaNivel == 0 || (diferenciaNivel == 1 && !objetivo.enSuelo())) && !ataque)
                     {
                         numeroArmas++;
                         ordenes += "PD\n";
@@ -1069,9 +1071,11 @@ namespace ico
                 }
             }
 
+            ordenes = numeroArmas.ToString() + "\n" + ordenes;
 
             //Escribimos las ordenes
             StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
+            Console.WriteLine(ordenes);
             f.WriteLine(ordenes);
             f.Close();
 
