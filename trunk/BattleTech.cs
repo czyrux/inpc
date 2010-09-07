@@ -249,7 +249,7 @@ namespace ico
 
         /// <summary>
         /// Metodo que elige el objetivo al cual atacar si la estrategia es ofensiva. Si la estrategia es defensiva
-        /// devolvera objetivo mas peligroso
+        /// devolvera como objetivo al rival mas peligroso.
         /// </summary>
         /// <returns>un mech rival; tipo Mech</returns>
         private Mech eleccionObjetivo() {
