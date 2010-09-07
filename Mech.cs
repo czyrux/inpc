@@ -549,10 +549,10 @@ namespace ico {
         /// </summary>
         protected void datos_armadura_inicial() {
             bool nuevo = true;
-            string path = "C:/ficheros/";
+            
             //si existe el fichero con los datos de armadura iniciales del mech, lo leemos
-            if (System.IO.File.Exists(path+"armaduraInicialJ" + _numeroJ.ToString() + ".sbt")) {
-                StreamReader f = new StreamReader(path+"armaduraInicialJ" + _numeroJ.ToString() + ".sbt");
+            if (System.IO.File.Exists(PanelControl.Path +"armaduraInicialJ" + _numeroJ.ToString() + ".sbt")) {
+                StreamReader f = new StreamReader(PanelControl.Path+"armaduraInicialJ" + _numeroJ.ToString() + ".sbt");
                 string nombre=f.ReadLine();
                 //si no es el mismo modelo de mech es el fichero de otro mech de una partida anterior
                 if (_nombre == nombre) nuevo = false;
@@ -587,7 +587,7 @@ namespace ico {
             
             if (nuevo) { //en caso opuesto lo creamos
 
-                StreamWriter f = new StreamWriter(path+"armaduraInicialJ" + _numeroJ.ToString() + ".sbt");
+                StreamWriter f = new StreamWriter(PanelControl.Path+"armaduraInicialJ" + _numeroJ.ToString() + ".sbt");
                 //escribimos los atributos
                 //escribimos el modelo de mech
                 f.WriteLine(_nombre);

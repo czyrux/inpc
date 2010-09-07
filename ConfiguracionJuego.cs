@@ -96,8 +96,8 @@ namespace ico {
         /// Metodo que lee el fichero de configuracion
         /// </summary>
         private void leerConfiguracion( ){
-			string path="C:/ficheros/";
-			StreamReader f = new StreamReader(path+"configJ"+_numeroJugador.ToString()+".sbt" );
+
+			StreamReader f = new StreamReader(PanelControl.Path+"configJ"+_numeroJugador.ToString()+".sbt" );
 			f.ReadLine();
 			_incendios=Convert.ToBoolean(f.ReadLine());
 		    _viento=Convert.ToBoolean(f.ReadLine());
@@ -119,8 +119,8 @@ namespace ico {
         /// Metodo que lee el fichero de iniciativa
         /// </summary>
 		private void leerIniciativa() {
-            string path = "C:/ficheros/";
-			StreamReader f = new StreamReader(path+"iniciativaJ"+_numeroJugador.ToString()+".sbt" );
+
+			StreamReader f = new StreamReader(PanelControl.Path+"iniciativaJ"+_numeroJugador.ToString()+".sbt" );
 			
 			int n = Convert.ToInt32(f.ReadLine());
 			_iniciativa = new int[n];
@@ -134,8 +134,8 @@ namespace ico {
         /// Metodo que lee el fichero de movimiento
         /// </summary>
         private void leerMovimiento() {
-            string path = "C:/ficheros/";
-            StreamReader f = new StreamReader(path + "mov.sbt");
+
+            StreamReader f = new StreamReader(PanelControl.Path + "mov.sbt");
             f.ReadLine(); //nombre del fichero movSBT
 
             int cantidad;
@@ -243,6 +243,20 @@ namespace ico {
                 return _movimientos[indice];
             }
             return null;
+        }
+
+        /// <summary>
+        /// Indica si el mech indicado por indice ya ha sido movido respecto a nuestro jugador
+        /// </summary>
+        /// <param name="indice">Numero del mech</param>
+        /// <returns></returns>
+        public Boolean mechMovido(int indice) {
+            if (_iniciativa[indice] < _iniciativa[_numeroJugador])
+            {
+                return true;
+            }
+            else
+                return false;
         }
         #endregion
 		
