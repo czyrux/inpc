@@ -495,7 +495,7 @@ namespace ico
         /// <returns>indice sobre el camino, el cual es alcanzable por el mech ich</returns>
         private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t, Mech objetivo)
         {
-            int puntosM, puntosMR, suelo = 0;
+            int puntosMR, suelo = 0;
 
             //devo comprobar si ay giroscopios
             if (ich.enSuelo()){
@@ -512,60 +512,21 @@ namespace ico
                  */
                 puntosMR=ich.puntosAndar() - suelo;
             }
-            int j = 0, tmpC = 0, tmpJ = 0;
-            Boolean flag = false, flagj = false;
-            List<int> l;
+            Encaramiento tmpE;
 
             for (int i = 0; i <camino.Count; i++)
             {
 
-                if (((Nodo)camino[i]).g() /*+ 4*/ < puntosMR)
+                if (((Nodo)camino[i]).g() < puntosMR)
                 {
-                    /*if (((Nodo)camino[i]).casilla() == destino)
+                    tmpE = mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
+                    if (((Nodo)camino[i]).g() + costoEncaramiento(((Nodo)camino[i]).direccion(), tmpE) < puntosMR)
                     {
-                        j=queEncaramientoVengo(((Nodo)camino[i-1]).direccion(),
-                    }
-                    else*/
-                    l = posiblesEncaramientos((Nodo)camino[i], objetivo.posicion(), t);
-                    tmpJ = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[0]);
-
-                    for (int c = 1; c < l.Count; c++)
-                    {
-                        tmpC = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[c]);
-
-                        if (((Nodo)camino[i]).g() + tmpC  < puntosMR)
-                        {
-                            flag = true;
-
-                            if (tmpJ > tmpC)
-                            {
-                                tmpC = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[c]);
-                                j = c;
-                            }
-                        }
+                        _final = tmpE;
+                        return i;
                     }
 
 
-                    if (l.Count == 1) {
-                            j = 0;
-
-                        tmpJ = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[j]);
-
-                        if (((Nodo)camino[i]).g() + tmpC < puntosMR)
-                            flag = true;                            
-
-                    }
-
-                    if (!flag)
-                        flag = false;
-                    else
-                    {
-                        _final = (Encaramiento)l[j];
-                        //((Nodo)camino[i]).direccion((Encaramiento)l[j]);
-                        return  i;
-                    }
-
-                    j = 0;
                 }
             }
 
@@ -574,7 +535,29 @@ namespace ico
             return -1;
         }
 
-        private Encaramiento queEncaramientoVengo(Casilla  origen, Casilla destino, Tablero t) {
+        Encaramiento mejorEncaramiento(Nodo origen, Posicion objetivo, Tablero t) {
+            List<int> l= new List<int>();
+            int min, tmp, tmpi=0;
+
+            l = posiblesEncaramientos(origen, objetivo, t);
+            min = costoEncaramiento(origen.direccion(), (Encaramiento)l[0]);
+
+            for (int c = 1; c < l.Count; c++)
+            {
+                tmp = costoEncaramiento(origen.direccion(), (Encaramiento)l[c]);
+
+                if ( tmp < min)
+                {
+                    tmpi = c;
+                    min = tmp;
+                }
+            }
+
+            return (Encaramiento)l[tmpi];
+
+        }
+
+        /*private Encaramiento queEncaramientoVengo(Casilla  origen, Casilla destino, Tablero t) {
             Encaramiento oEncaramiento=Encaramiento.Arriba;
             Casilla tmp;
             for (int i = 1; i < 7; i++) {
@@ -605,7 +588,7 @@ namespace ico
                     return Encaramiento.InferiorDerecho;
             }
             return Encaramiento.Arriba;
-        }
+        }*/
         /// <summary>
         /// Calcula los posibles encaramientos que esten mirando hacia la casilla destino. Usada en caminoReal.
         /// </summary>
