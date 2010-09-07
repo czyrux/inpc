@@ -534,7 +534,7 @@ namespace ico
             }
             if (_estrategia == Estrategia.Defensiva)
             {
-                puntosMR = ich.puntosCorrer();
+                puntosMR = ich.puntosCorrer()-suelo;
             }
             else {
                 /*
@@ -653,7 +653,7 @@ namespace ico
                 }
 
             }while(continuar);
-                        List<int> l = new List<int>();
+            List<int> l = new List<int>();
 
             for (int i = 1; i < j+1; i++)
             {
