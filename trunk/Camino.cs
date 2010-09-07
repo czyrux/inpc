@@ -243,7 +243,7 @@ namespace ico
 
             if (!ich.giroscopioOperativo() && ich.enSuelo()) {
                 camino.Add(elemento);
-                _final = (Encaramiento)posiblesEncaramientos(elemento, b, Tablero)[0];
+                _final = (Encaramiento)posiblesEncaramientos(elemento, objetivo.posicion(), Tablero)[0];
                 return camino;
             }
 
@@ -526,7 +526,7 @@ namespace ico
                         j=queEncaramientoVengo(((Nodo)camino[i-1]).direccion(),
                     }
                     else*/
-                    l = posiblesEncaramientos((Nodo)camino[i], destino, t);
+                    l = posiblesEncaramientos((Nodo)camino[i], objetivo.posicion(), t);
 
                     for (int c = 1; c < l.Count; c++)
                     {
@@ -613,14 +613,14 @@ namespace ico
         /// <param name="destino">casilla hacia el que queremos mirar; tipo Casilla</param>
         /// <param name="t">tablero del juego; tipo Tablero</param>
         /// <returns>devuelve los encaramientos que miran hacia el destino; tipo Int(Encaramiento)</returns>
-        private List<int> posiblesEncaramientos(Nodo o, Casilla destino, Tablero t)
+        private List<int> posiblesEncaramientos(Nodo o, Posicion destino, Tablero t)
         {
             int min =0, tmp = 0, j=6;
             Boolean continuar = false;
             do{
                 try
                 {
-                    min = t.colindante(o.casilla().posicion(), (Encaramiento)j).posicion().distancia(destino.posicion());
+                    min = t.colindante(o.casilla().posicion(), (Encaramiento)j).posicion().distancia(destino);
                     continuar=false;
                 }
                 catch (Exception e) {
@@ -634,7 +634,7 @@ namespace ico
             for (int i = 1; i < j+1; i++)
             {
                 try { 
-                    tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino.posicion());
+                    tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino);
 
                     if (tmp <= min){
                         min = tmp;
