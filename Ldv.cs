@@ -27,7 +27,7 @@ namespace ico
             String[] nodos;
             proc.StartInfo.WorkingDirectory = @".";
             proc.StartInfo.FileName = "LDVyC.exe";
-            string str= "mapaJ"+p1.numeroJ().ToString()+".sbt " + p1.posicion().ToString() + " ";
+            string str= PanelControl.Path+"mapaJ"+p1.numeroJ().ToString()+".sbt " + p1.posicion().ToString() + " ";
             if (p1.enSuelo()) {
                 str += "0 ";
             } else
@@ -84,7 +84,7 @@ namespace ico
             String[] nodos;
             proc.StartInfo.WorkingDirectory = @".";
             proc.StartInfo.FileName = "LDVyC.exe";
-            string str = "mapaJ" + numeroJ.ToString() + ".sbt " + p1.ToString() + " ";
+            string str = PanelControl.Path+"mapaJ" + numeroJ.ToString() + ".sbt " + p1.ToString() + " ";
             //suponemos que no esta en el suelo
             str += "1 ";
             str += p2.posicion().ToString() + " ";
