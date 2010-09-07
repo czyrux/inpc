@@ -484,10 +484,10 @@ namespace ico
                         puntuacion += 0;
                         break;
                     case 1://bosque ligero
-                        puntuacion += 3;
+                        puntuacion += 2;
                         break;
                     case 2://bosque denso
-                        puntuacion += 4;
+                        puntuacion += 3;
                         break;
                     case 3://edificio ligero
                         puntuacion += 0;
