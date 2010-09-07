@@ -640,19 +640,20 @@ namespace ico
         private List<int> posiblesEncaramientos(Nodo o, Posicion destino, Tablero t)
         {
             int min =10000, tmp = 0, j=6,tmpDist;
-            
-                
-                    for (int i = 1; i < 7; i++) {
-                        try
-                        {
-                            tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino);
-                            if (min > tmp)
-                            {
-                                min = tmp;
-                            }
-                        }
-                        catch (Exception e) { }
+
+
+            for (int i = 1; i < 7; i++)
+            {
+                try
+                {
+                    tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino);
+                    if (min > tmp)
+                    {
+                        min = tmp;
                     }
+                }
+                catch (Exception e) { }
+            }
                 
             
 
