@@ -537,6 +537,13 @@ namespace ico
 
             return puntuacion;
         }
+
+        private Boolean casillaEnLdV(Posicion p, Mech objetivo) 
+        {
+            LdV linea = new LdV(p, _myJugador, objetivo, _tablero);
+
+            return linea.ldv();
+        }
         #endregion
 
 
@@ -591,6 +598,8 @@ namespace ico
             StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
             f.WriteLine(giro);
             f.Close();
+
+            Console.WriteLine();
         }
 
         #endregion

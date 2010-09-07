@@ -62,6 +62,58 @@ namespace ico
             _length = _camino.Length;
         }
 
+
+        /// <summary>
+        /// Constructor con parametros. Se encarga de llamar al programa LDVyC.exe, y de leer 
+        /// los resultados de su ejecucion
+        /// </summary>
+        /// <param name="p1">Posicion donde estaremos situados</param>
+        /// <param name="numeroJ">Numero del jugador</param>
+        /// <param name="p2">Mech enemigo</param>
+        /// <param name="tablero">Mapa del juego</param>
+        public LdV(Posicion p1, int numeroJ , Mech p2, Tablero tablero)
+        {
+            Process proc = new Process();
+            String[] nodos;
+            proc.StartInfo.WorkingDirectory = @".";
+            proc.StartInfo.FileName = "LDVyC.exe";
+            string str = "mapaJ" + numeroJ.ToString() + ".sbt " + p1.ToString() + " ";
+            //suponemos que no esta en el suelo
+            str += "1 ";
+            str += p2.posicion().ToString() + " ";
+            if (p2.enSuelo())
+            {
+                str += "0";
+            }
+            else
+                str += "1";
+
+            proc.StartInfo.Arguments = str;
+            proc.StartInfo.UseShellExecute = false;
+            proc.StartInfo.RedirectStandardOutput = false;
+            proc.StartInfo.RedirectStandardError = true;
+            proc.Start();
+            proc.WaitForExit();
+            proc.Close();
+            StreamReader fich = new StreamReader("LDV.sbt");
+            nodos = fich.ReadLine().Split(' ');
+            _ldv = Convert.ToBoolean(fich.ReadLine());
+            _cobertura = Convert.ToBoolean(fich.ReadLine());
+            fich.Close();
+
+            _camino = new Casilla[nodos.Length + 2];
+
+
+            _camino[0] = tablero.Casilla(p1);
+            for (int i = 1; i <= nodos.Length; i++)
+            {
+                _camino[i] = tablero.Casilla(new Posicion(nodos[i - 1]));
+            }
+            _camino[nodos.Length + 1] = tablero.Casilla(p2.posicion());
+            _length = _camino.Length;
+        }
+
+
         /// <summary>
         /// Constructor con parametros
         /// </summary>
