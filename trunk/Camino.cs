@@ -40,13 +40,13 @@ namespace ico
                         camino = tmp;
                     }
                 }
+                else
+                    camino = tmp;
             }
-            int j = 0;
 
             _camino = new List<Nodo>();
             foreach (Nodo i in camino) {
                 _camino.Add(i);
-                j++;
             }
 
         }
