@@ -571,7 +571,10 @@ namespace ico
 
             return -1;
         }
-  
+
+        private Boolean sePuedeEncarrar(List<int> posibles,ref int mejor) { 
+
+        }
         /// <summary>
         /// Calcula los posibles encaramientos que esten mirando hacia la casilla destino. Usada en caminoReal.
         /// </summary>
