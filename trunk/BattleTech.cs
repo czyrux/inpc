@@ -374,7 +374,7 @@ namespace ico
                     {
                         destinosElegidos[escogidas] = posiblesDestinos[i];
                         escogidas++;
-                        Console.WriteLine(i + ": " + posiblesDestinos[i].ToString() + " punt:" + puntuacion[i]);
+                        //Console.WriteLine(i + ": " + posiblesDestinos[i].ToString() + " punt:" + puntuacion[i]);
                     }
                     if (escogidas >= destinosElegidos.Length)
                         salir = true;
