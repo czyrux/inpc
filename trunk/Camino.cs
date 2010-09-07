@@ -639,9 +639,9 @@ namespace ico
         /// <returns>devuelve los encaramientos que miran hacia el destino; tipo Int(Encaramiento)</returns>
         private List<int> posiblesEncaramientos(Nodo o, Posicion destino, Tablero t)
         {
-            int min =10000, tmp = 0, j=6,tmpDist;
+            int min =10000, tmp = 0, j=6;
 
-
+            //cal
             for (int i = 1; i < 7; i++)
             {
                 try
