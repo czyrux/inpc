@@ -190,6 +190,7 @@ namespace ico
 
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
+                //Determinamos la estrategia con la que jugaremos
                 determinarEstrategia();
   
                 //Seleccionamos el objetivo hacia el que vamos a dirigirnos en caso de ser una estrategia ofensiva
@@ -248,7 +249,7 @@ namespace ico
 
         /// <summary>
         /// Metodo que elige el objetivo al cual atacar si la estrategia es ofensiva. Si la estrategia es defensiva
-        /// devolvera null
+        /// devolvera objetivo mas peligroso
         /// </summary>
         /// <returns>un mech rival; tipo Mech</returns>
         private Mech eleccionObjetivo() {
@@ -256,21 +257,21 @@ namespace ico
 
             if (_numeroJugadores != 2)
             {
+                float[] notasParciales = new float[_numeroJugadores];
+
+                //Vemos cual la distancia maxima de los enemigos
+                int max = 0;
+                for (int i = 0; i < _mechs.Length; i++)
+                {
+                    if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) > max)
+                        max = _mechs[_myJugador].posicion().distancia(_mechs[i].posicion());
+                }
+
+                //Escogemos al enemigo
                 if (_estrategia == Estrategia.Agresiva)
                 {
-                    float[] notasParciales = new float[_numeroJugadores];
-
-                    //Vemos cual la distancia maxima de los enemigos
-                    int max = 0;
-                    for (int i = 0; i < _mechs.Length; i++)
-                    {
-                        if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) > max)
-                            max = _mechs[_myJugador].posicion().distancia(_mechs[i].posicion());
-                    }
-
                     //Asignamos una nota a cada mech en funcion de la distancia que nos separa y su puntuacion
                     for (int i = 0; i < _mechs.Length; i++)
-                    {
                         if (i != _myJugador)
                         {
                             //Console.WriteLine("Mech: " + _mechs[i].nombre());
@@ -283,7 +284,6 @@ namespace ico
                             //Console.WriteLine("Nota parcial:" + notasParciales[i]);
                             //Console.WriteLine();
                         }
-                    }
 
                     //Nos quedamos con el mech que tenga la nota menor
                     float nota = float.MaxValue;
@@ -294,9 +294,30 @@ namespace ico
                             objetivo = _mechs[i];
                         }
                 }
-                else
+                else //estrategia.defensiva
                 {
-                    objetivo = null;
+                    for (int i = 0; i < _mechs.Length; i++)
+                        if (i != _myJugador)
+                        {
+                            //Console.WriteLine("Mech: " + _mechs[i].nombre());
+                            //Nota estado
+                            notasParciales[i] = _mechs[i].notaEstado() * PanelControl.NOTA_MOV;
+                            //Console.WriteLine("Nota estado: " + _mechs[i].notaEstado());
+                            //Nota distancia
+                            notasParciales[i] += 10 - (((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV);
+                            //Console.WriteLine("Nota distancia: " + ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV);
+                            //Console.WriteLine("Nota parcial:" + notasParciales[i]);
+                            //Console.WriteLine();
+                        }
+
+                    //Nos quedamos con el mech que tenga la nota mayor
+                    float nota = float.MinValue;
+                    for (int i = 0; i < _mechs.Length; i++)
+                        if (i != _myJugador && notasParciales[i] > nota)
+                        {
+                            nota = notasParciales[i];
+                            objetivo = _mechs[i];
+                        }
                 }
 
             }else
