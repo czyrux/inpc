@@ -254,9 +254,9 @@ namespace ico
         private Mech eleccionObjetivo() {
             Mech objetivo=null;
 
-            if (_estrategia == Estrategia.Agresiva)
+            if (_numeroJugadores != 2)
             {
-                if (_mechs.Length > 2)
+                if (_estrategia == Estrategia.Agresiva)
                 {
                     float[] notasParciales = new float[_numeroJugadores];
 
@@ -295,11 +295,13 @@ namespace ico
                         }
                 }
                 else
-                    objetivo = _mechs[(_myJugador + 1) % 2];
-            }
-            else
-                objetivo = null;
-            
+                {
+                    objetivo = null;
+                }
+
+            }else
+                objetivo = _mechs[(_myJugador + 1) % 2];
+
             return objetivo;
         }
 
