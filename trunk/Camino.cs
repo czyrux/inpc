@@ -527,11 +527,11 @@ namespace ico
                     }
                     else*/
                     l = posiblesEncaramientos((Nodo)camino[i], objetivo.posicion(), t);
+                    tmpJ = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[0]);
 
                     for (int c = 1; c < l.Count; c++)
                     {
                         tmpC = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[c]);
-                        tmpJ = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[j]);
 
                         if (((Nodo)camino[i]).g() + tmpC  < puntosMR)
                         {
@@ -539,7 +539,7 @@ namespace ico
 
                             if (tmpJ > tmpC)
                             {
-                                //flagj = true;
+                                tmpC = costoEncaramiento(((Nodo)camino[i]).direccion(), (Encaramiento)l[c]);
                                 j = c;
                             }
                         }
