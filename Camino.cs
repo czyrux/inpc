@@ -104,7 +104,7 @@ namespace ico
 
             str += _camino[_camino.Count - 1].casilla().ToString()+"\n";
 
-            str += ((int)_final).ToString()+"\n";
+            str += (_final!=0)?((int)_final).ToString():_camino[_camino.Count-1].direccion().ToString()+"\n";
 
             str += "False\n";
 
