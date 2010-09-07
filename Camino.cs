@@ -21,11 +21,25 @@ namespace ico
         public Camino(int myJugador, Casilla a, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs) {
             _ich = mechs[myJugador];
             _estrategia=estrategia;
-            ArrayList camino;
-            if ((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)) == null)
+            ArrayList camino=null,tmp;
+            if (estrategia == Estrategia.Defensiva)
             {
-                _estrategia=Estrategia.Agresiva;
-                camino = pathFinder(myJugador, a, tablero, objetivo, mechs);
+                if ((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)) == null)
+                {
+                    _estrategia = Estrategia.Agresiva;
+                    camino = pathFinder(myJugador, a, tablero, objetivo, mechs);
+                }
+            }
+            else {
+                tmp = pathFinder(myJugador, a, tablero, objetivo, mechs);
+                if (mechs[myJugador].posicion() != a.posicion() && tmp.Count == 1)
+                {
+                    _estrategia = Estrategia.Defensiva;
+                    if ((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)) == null)
+                    {
+                        camino = tmp;
+                    }
+                }
             }
             int j = 0;
 
