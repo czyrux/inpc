@@ -141,7 +141,10 @@ namespace ico
                             costo = 1000;
                         else
                             costo += 2;
-                        
+                        break;
+                    case -1:
+                    case -2:
+                        ;
                         break;
                     default:
                         if (a.nivel() - _nivel < 0)
