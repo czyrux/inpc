@@ -639,31 +639,35 @@ namespace ico
         /// <returns>devuelve los encaramientos que miran hacia el destino; tipo Int(Encaramiento)</returns>
         private List<int> posiblesEncaramientos(Nodo o, Posicion destino, Tablero t)
         {
-            int min =0, tmp = 0, j=6;
-            Boolean continuar = false;
-            do{
-                try
-                {
-                    min = t.colindante(o.casilla().posicion(), (Encaramiento)j).posicion().distancia(destino);
-                    continuar=false;
-                }
-                catch (Exception e) {
-                    j--;
-                    continuar = true;
-                }
+            int min =10000, tmp = 0, j=6,tmpDist;
+            
+                
+                    for (int i = 1; i < 7; i++) {
+                        try
+                        {
+                            tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino);
+                            if (min > tmp)
+                            {
+                                min = tmp;
+                            }
+                        }
+                        catch (Exception e) { }
+                    }
+                
+            
 
-            }while(continuar);
             List<int> l = new List<int>();
 
-            for (int i = 1; i < j+1; i++)
+            for (int i = 1; i < 7; i++)
             {
                 try { 
                     tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino);
 
-                    if (tmp <= min){
+                    if (tmp == min)
+                    {
                         min = tmp;
                         l.Add(i);
-                        }
+                    }
                 }
                 catch(Exception e) { }
 
