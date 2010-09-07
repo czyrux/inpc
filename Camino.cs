@@ -19,7 +19,7 @@ namespace ico
         /// <param name="tablero">tablero del juego; tipo Tablero</param>
         /// <param name="estrategia">estrategia conforme a la cual se hara el combate; tipo Estrategia</param>
         public Camino(Mech ich, Casilla a, Tablero tablero, Estrategia estrategia, Mech objetivo) {
-
+            _ich = ich;
             _estrategia=estrategia;
             ArrayList camino;
             if(( camino = pathFinder(ich, a, tablero, objetivo))==null){
@@ -64,7 +64,7 @@ namespace ico
         /// <returns>costoen puntos de movimientos; tipo Int</returns>
         public int costoMovimiento() 
         {
-            return limpiarAgua(_camino)[_camino.Count - 2].g() + limpiarAgua(_camino)[_camino.Count - 2].casilla().posicion().distancia(limpiarAgua(_camino)[_camino.Count-1].casilla().posicion());
+            return limpiarAgua(_camino)[_camino.Count - 1].g() ;
         }
 
         /// <summary>
@@ -80,11 +80,11 @@ namespace ico
         /// Funcion que imprime el camino
         /// </summary>
         public void print()
-        { 
-            string str="El camino es: ";
+        {
+            string str = "El camino hecho por " + _ich.nombre() + ", con " + ((_estrategia==Estrategia.Agresiva)?_ich.puntosAndar().ToString():_ich.puntosCorrer().ToString()) + "PM con costo de camino "+costoMovimiento().ToString()+" es: \n";
             foreach (Nodo i in _camino)
                 str += "("+i.casilla().posicion().ToString()+", "+ i.direccion().ToString() +")"+ "->";
-            str += "FIN";
+            str += _final.ToString();
             Console.WriteLine(str);
         }
 
@@ -170,10 +170,10 @@ namespace ico
         {
 
             StreamWriter fich = new StreamWriter("debug.txt",false);
-            string str = "El camino es: ";
+            string str = "El camino hecho por " + _ich.nombre() + ", con " + ((_estrategia == Estrategia.Agresiva) ? _ich.puntosAndar().ToString() : _ich.puntosCorrer().ToString()) + "PM con costo de camino " + costoMovimiento().ToString() + " es: \n";
             foreach (Nodo i in _camino)
                 str += "(" + i.casilla().posicion().ToString() + ", " + i.direccion().ToString() + ")" + "->";
-            str += "FIN";
+            str += _final.ToString()+"\n";
             fich.Write(str);
             fich.Write(this.ToString());
             fich.Close();
@@ -211,6 +211,7 @@ namespace ico
         /// si al inicio el mech estaba en el suelo
         /// </summary>
         private Boolean _seLevanto;
+        private Mech _ich;
         #endregion
 
         #region Funciones
@@ -402,9 +403,9 @@ namespace ico
             switch (o) { 
                 case Encaramiento.Abajo:
                             if((int)d>4)
-                                return "Izquierda";
-                            else
                                 return "Derecha";
+                            else
+                                return "Izquierda";
                    
                     break;
                 case Encaramiento.Arriba:
