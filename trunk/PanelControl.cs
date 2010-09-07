@@ -141,6 +141,11 @@ namespace ico
         /// Limite de calor permitido cuando la estrategia es defensiva
         /// </summary>
         public const int calorDefensivo = 9;
+
+        /// <summary>
+        /// Constante que indica el limite a partir del cual no disparemos un arma
+        /// </summary>
+        public const int limiteTiradaPermitido = 10;
         #endregion
 
         #region constantes fase de Movimientos

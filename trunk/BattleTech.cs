@@ -20,7 +20,7 @@ namespace ico
         /// <param name="Jugador">Numero del jugador</param>
         /// <param name="fase">Fase del juego en que nos encontramos</param>
         public BattleTech(int Jugador, String  fase) {
-            string path = "C:/ficheros/";
+
             _myJugador = Jugador;
             _faseJuego = fase;
 
@@ -37,7 +37,7 @@ namespace ico
             readMechs();
             _mechs[_myJugador].posicion();
 			//Leemos el tablero de juego
-            _tablero = new Tablero(path+"mapaJ"+_myJugador.ToString()+".sbt");
+            _tablero = new Tablero(PanelControl.Path+"mapaJ"+_myJugador.ToString()+".sbt");
 			
 			//Leemos el fichero de configuracion
 			_config = new ConfiguracionJuego( _myJugador );
@@ -75,10 +75,8 @@ namespace ico
 
 			StreamReader f1, f2;
 			Mech m;
-			//variable path
-            string path = "C:/ficheros/";
 			
-			f1 = new StreamReader(path+"mechsJ"+_myJugador.ToString()+".sbt");
+			f1 = new StreamReader(PanelControl.Path+"mechsJ"+_myJugador.ToString()+".sbt");
 			f1.ReadLine();//nombre magico fichero
 			
 			//Leemos el numero de jugadores
@@ -87,7 +85,7 @@ namespace ico
 
 			//Leemos los datos de los jugadores
             for (int i = 0; i < _numeroJugadores; i++) {
-                f2 = new StreamReader(path+"defmechJ" + _myJugador.ToString() + "-" + Convert.ToString(i) + ".sbt");//fichero definicion				
+                f2 = new StreamReader(PanelControl.Path+"defmechJ" + _myJugador.ToString() + "-" + Convert.ToString(i) + ".sbt");//fichero definicion				
                 if (i == _myJugador) {
                     m = new MechJugador(f1, f2, _numeroJugadores);	
 				} else {
@@ -913,7 +911,7 @@ namespace ico
                 Boolean salir = false;
                 while (!salir) {
                     if ( itr<seleccionArmas.Count && calor + seleccionArmas[orden[itr]].calor() < limiteCalor 
-                        && _mechs[_myJugador].tiradaImpacto(seleccionArmas[orden[itr]],objetivo,_tablero,ldV[0].cobertura(),_config.movimiento(_myJugador),_config.movimiento(objetivo.numeroJ())) <=9 )
+                        && _mechs[_myJugador].tiradaImpacto(seleccionArmas[orden[itr]],objetivo,_tablero,ldV[0].cobertura(),_config.movimiento(_myJugador),_config.movimiento(objetivo.numeroJ())) <= PanelControl.limiteTiradaPermitido )
                     {
                         calor += seleccionArmas[orden[itr]].calor();
                         conjuntoFinal.Add(seleccionArmas[orden[itr]]);
