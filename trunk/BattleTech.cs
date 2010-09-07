@@ -612,7 +612,7 @@ namespace ico
             f.WriteLine(giro);
             f.Close();
 
-            Console.WriteLine();
+            Console.ReadLine();
         }
 
         #endregion
@@ -668,7 +668,7 @@ namespace ico
                 objetivo = objetivoMasDebil(objetivos, ldv, armasADisparar);
 
                 Console.WriteLine();
-                if (objetivo != null) Console.WriteLine("El objetivo es:" + objetivo.nombre());
+                if (objetivo != null) Console.WriteLine("El objetivo es:" + objetivo.nombre() +" ldv:"+ldv[0].ldv()+" cobr:"+ldv[0].cobertura());
                 Console.WriteLine();
 
 
@@ -1089,6 +1089,16 @@ namespace ico
         private void faseFinalTurno() {
             Console.WriteLine("Fase Final de Turno");
             Console.WriteLine();
+
+            StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
+            f.WriteLine(0); //numero radiadores a apagar
+            f.WriteLine(0);//numero de radiadores a encender que estuvieran apagados
+            f.WriteLine(((MechJugador)_mechs[_myJugador]).garrote()); //si tiene garrote y quiere soltarlo
+            f.WriteLine(0); //numero de municiones a expulsar
+            //quitamos municiones?¿
+            f.Close();
+
+            Console.ReadLine();
         }
 
         #endregion
