@@ -781,7 +781,7 @@ namespace ico
         /// </summary>
         /// <param name="objetivo">Objetivo al que se quiere disparar</param>
         /// <param name="seleccionArmas">Lista de armas. Vacia</param>
-        /// <returns>LA cantidad de daño que hacen las armas escogidas</returns>
+        /// <returns>La cantidad de daño que hacen las armas escogidas</returns>
         private int armasPermitidas( Mech objetivo, List<Componente> seleccionArmas) 
         {        
             string situacion;
