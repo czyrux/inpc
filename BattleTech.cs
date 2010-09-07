@@ -278,6 +278,9 @@ namespace ico
                             //Console.WriteLine("Nota estado: " + _mechs[i].notaEstado());
                             //Nota distancia
                             notasParciales[i] += ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV;
+                            //Nota por haberse movido
+                            if (_config.mechMovido(_mechs[i].numeroJ()))
+                                notasParciales[i] -= 1;
                             //Console.WriteLine("Nota distancia: " + ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV);
                             //Console.WriteLine("Nota parcial:" + notasParciales[i]);
                             //Console.WriteLine();
@@ -303,6 +306,9 @@ namespace ico
                             //Console.WriteLine("Nota estado: " + _mechs[i].notaEstado());
                             //Nota distancia
                             notasParciales[i] += 10 - (((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV);
+                            //Nota por haberse movido
+                            if (_config.mechMovido(_mechs[i].numeroJ()))
+                                notasParciales[i] += 1;
                             //Console.WriteLine("Nota distancia: " + ((_mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) * 10.0f) / max) * PanelControl.DISTANCIA_MOV);
                             //Console.WriteLine("Nota parcial:" + notasParciales[i]);
                             //Console.WriteLine();
@@ -446,7 +452,9 @@ namespace ico
                 if (objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
                     puntuacion += 4;
 
-                puntuacion -= (int)Math.Truncate(_mechs[_myJugador].posicion().distancia(p)*PanelControl.pesoDistancia);
+                //Puntuacion por distancia
+                puntuacion += (PanelControl.radio - p.distancia(objetivo.posicion()) ); 
+                //puntuacion -= (int)Math.Truncate(_mechs[_myJugador].posicion().distancia(p)*PanelControl.pesoDistancia);
             }
             else //Estrategia defensiva
             {
