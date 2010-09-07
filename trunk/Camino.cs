@@ -577,8 +577,8 @@ namespace ico
         private Encaramiento queEncaramientoVengo(Casilla  origen, Casilla destino, Tablero t) {
             Encaramiento oEncaramiento=Encaramiento.Arriba;
             Casilla tmp;
-            for (int i = 1; i < 7; i++) { 
-                tmp=t.colindante(origen.posicion(),(Encaramiento)i)
+            for (int i = 1; i < 7; i++) {
+                tmp = t.colindante(origen.posicion(), (Encaramiento)i);
                 if(tmp==destino){
                     oEncaramiento=(Encaramiento)i;
                 }
