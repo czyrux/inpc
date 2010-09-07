@@ -211,7 +211,7 @@ namespace ico
                     Console.WriteLine("Destino " + i + ": " + posiblesCaminos[i].casillaFinal().posicion().ToString());
                     puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
                     Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
-                    if (puntuacionCamino[i] > valor) {
+                    if (puntuacionCamino[i] > valor && (casillaEnLdV(posiblesCaminos[i].casillaFinal().posicion(),objetivo) || i==destinos.Length-1 ) ) {
                         index = i;
                         valor = puntuacionCamino[i];
                     }
