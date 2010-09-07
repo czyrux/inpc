@@ -107,7 +107,7 @@ namespace ico
         /// Determina si la estrategia del mech jugador ha de ser ofensiva o defensiva
         /// </summary>
         private void determinarEstrategia() {
-
+            
             if (_mechs[_myJugador].notaEstado() >= 7.3)
             {
                 _estrategia = Estrategia.Agresiva;
@@ -128,7 +128,7 @@ namespace ico
                     _estrategia = Estrategia.Defensiva;
             }
 
-            Console.WriteLine("Estrategia del mech: " + _estrategia);
+            Console.WriteLine("Mech: "+ _mechs[_myJugador].nombre()+" nota:"+_mechs[_myJugador].notaEstado()+ " estrategia del mech: " + _estrategia);
         }
 
         public void pruebas () 
