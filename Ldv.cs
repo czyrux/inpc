@@ -51,15 +51,22 @@ namespace ico
             _cobertura = Convert.ToBoolean(fich.ReadLine());
             fich.Close();
 
+            
             _camino = new Casilla[nodos.Length + 2];
 
-
-            _camino[0] = tablero.Casilla(p1.posicion());
-            for (int i = 1; i <= nodos.Length; i++) {
-                _camino[i] = tablero.Casilla(new Posicion(nodos[i - 1]));
+            if (nodos[0] != "")
+            {
+                _camino[0] = tablero.Casilla(p1.posicion());
+                for (int i = 1; i <= nodos.Length; i++)
+                {
+                    _camino[i] = tablero.Casilla(new Posicion(nodos[i - 1]));
+                }
+                _camino[nodos.Length + 1] = tablero.Casilla(p2.posicion());
+                _length = _camino.Length;
             }
-            _camino[nodos.Length+1] = tablero.Casilla(p2.posicion());
-            _length = _camino.Length;
+            else
+                _length = 0;
+            
         }
 
 
@@ -103,14 +110,18 @@ namespace ico
 
             _camino = new Casilla[nodos.Length + 2];
 
-
-            _camino[0] = tablero.Casilla(p1);
-            for (int i = 1; i <= nodos.Length; i++)
+            if (nodos[0] != "")
             {
-                _camino[i] = tablero.Casilla(new Posicion(nodos[i - 1]));
+                _camino[0] = tablero.Casilla(p1);
+                for (int i = 1; i <= nodos.Length; i++)
+                {
+                    _camino[i] = tablero.Casilla(new Posicion(nodos[i - 1]));
+                }
+                _camino[nodos.Length + 1] = tablero.Casilla(p2.posicion());
+                _length = _camino.Length;
             }
-            _camino[nodos.Length + 1] = tablero.Casilla(p2.posicion());
-            _length = _camino.Length;
+            else
+                _length = 0;
         }
 
 
