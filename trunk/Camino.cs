@@ -500,7 +500,7 @@ namespace ico
             //devo comprobar si ay giroscopios
             if (ich.enSuelo()){
                 suelo = 2;
-                _original = _camino[0].direccion();
+                _original = ((Nodo)camino[0]).direccion();//_camino[0].direccion();
             }
             if (_estrategia == Estrategia.Defensiva)
             {
