@@ -1897,7 +1897,7 @@ namespace ico {
         /// <param name="movimientoPropio">Cadena que indica el tipo de movimiento realizado por el mech atacante</param>
         /// <param name="movimientoObjetivo">Cadena que indica el tipo de movimiento realizado por el mech objetivo</param>
         /// <returns>Entero correspondiente a la puntuacion calculada</returns>
-        public int tiradaImpacto(Componente arma, Mech objetivo, Tablero mapa, String movimientoPropio = "Andar", String movimientoObjetivo = "Andar")
+        public int tiradaImpacto(Componente arma, Mech objetivo, Tablero mapa, bool coberturaParcial , String movimientoPropio = "Andar", String movimientoObjetivo = "Andar" )
         {
             int puntuacion = 0, distancia = _posicion.distancia(objetivo.posicion());
 
@@ -2011,6 +2011,10 @@ namespace ico {
             else // >24
                 puntuacion += 4;
             //Console.WriteLine("Calor: " + puntuacion);
+
+            //bonus
+            if (coberturaParcial) puntuacion += 3;
+
             /** MODIFICADORES PARA DISPARO
              * modificador distancia
              * " alcance minimo
@@ -2021,9 +2025,6 @@ namespace ico {
              * " objetivos inmoviles
              * " en suelo
              */
-
-            //bonus
-            puntuacion += 4;
             Console.WriteLine("Arma: " + arma.nombre() + " tirada para impacto:" + puntuacion);
             return puntuacion;
         }

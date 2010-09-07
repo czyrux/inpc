@@ -538,6 +538,13 @@ namespace ico
             return puntuacion;
         }
 
+
+        /// <summary>
+        /// Indica si desde una posicion hay linea de vision con el objetivo. Suponemos que estaremos levantados
+        /// </summary>
+        /// <param name="p">Posicion en la que estaremos hubicados</param>
+        /// <param name="objetivo">Objetivo al que queremos hacerle la LdV</param>
+        /// <returns></returns>
         private Boolean casillaEnLdV(Posicion p, Mech objetivo) 
         {
             LdV linea = new LdV(p, _myJugador, objetivo, _tablero);
@@ -655,12 +662,12 @@ namespace ico
                 objetivo = objetivoMasDebil(objetivos, ldv, armasADisparar);
 
                 Console.WriteLine();
-                if (objetivo!=null)Console.WriteLine("El objetivo es:" + objetivo.nombre());
+                if (objetivo != null) Console.WriteLine("El objetivo es:" + objetivo.nombre());
                 Console.WriteLine();
 
 
                 //Vemos las armas a dispararle
-                seleccionArmasDisparar(objetivo, armasADisparar);
+                seleccionArmasDisparar(objetivo, armasADisparar , ldv);
 
                 Console.WriteLine("Disparamos:");
                 for (int i = 0; i < armasADisparar.Count; i++)
@@ -739,15 +746,15 @@ namespace ico
                     armas.Add(armamento[index][i]);
 
                 //Borramos el resto de objetivos
-                objetivo = objetivos[0];
-                objetivos.Clear();
-                /*for (int i = 0; i < objetivos.Count; i++)
+                for (int i = 0; i < objetivos.Count; i++)
                     if (i != index) {
                         objetivos.RemoveAt(i);
                         ldv.RemoveAt(i);
                         index--;
                         i--;
-                    }*/
+                    }
+                objetivo = objetivos[0];
+                objetivos.Clear();
             }
             else if (objetivos.Count == 1)
             {
@@ -839,7 +846,8 @@ namespace ico
         /// </summary>
         /// <param name="objetivos">Lista de objetivos. Un unico elemento</param>
         /// <param name="seleccionArmas">List de componentes tipo arma</param>
-        private void seleccionArmasDisparar( Mech objetivo, List<Componente> seleccionArmas) 
+        /// <param name="ldV">Lista de LdV. Contendra un elemento, la linea de vision al objetivo</param>
+        private void seleccionArmasDisparar( Mech objetivo, List<Componente> seleccionArmas , List<LdV> ldV ) 
         {
 
             int calorMovimiento;
@@ -905,7 +913,7 @@ namespace ico
                 Boolean salir = false;
                 while (!salir) {
                     if ( itr<seleccionArmas.Count && calor + seleccionArmas[orden[itr]].calor() < limiteCalor 
-                        && _mechs[_myJugador].tiradaImpacto(seleccionArmas[orden[itr]],objetivo,_tablero,_config.movimiento(_myJugador),_config.movimiento(objetivo.numeroJ())) <=9 )
+                        && _mechs[_myJugador].tiradaImpacto(seleccionArmas[orden[itr]],objetivo,_tablero,ldV[0].cobertura(),_config.movimiento(_myJugador),_config.movimiento(objetivo.numeroJ())) <=9 )
                     {
                         calor += seleccionArmas[orden[itr]].calor();
                         conjuntoFinal.Add(seleccionArmas[orden[itr]]);
