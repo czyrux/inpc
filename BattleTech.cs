@@ -1030,7 +1030,6 @@ namespace ico
                         ordenes += "1000\n";
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
-                        ataque = true;
                     }
                     else if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo()
                         && (diferenciaNivel == 0 || diferenciaNivel == -1))
@@ -1040,10 +1039,9 @@ namespace ico
                         ordenes += "1000\n";
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
-                        ataque = true;
                     }
                     else if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda()
-                        && (diferenciaNivel == 0 || diferenciaNivel == 1) && !ataque)
+                        && (diferenciaNivel == 0 || diferenciaNivel == 1))
                     {
                         numeroArmas++;
                         ordenes += "PI\n";
