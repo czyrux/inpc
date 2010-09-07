@@ -202,7 +202,7 @@ namespace ico
                 int[] puntuacionCamino = new int[PanelControl.numeroDestinos];
                 int index = 0, valor = int.MinValue;
                 for (int i = 0; i < destinos.Length; i++) {
-                    posiblesCaminos[i] = new Camino(_mechs[_myJugador], _tablero.Casilla(destinos[i]), _tablero, _estrategia,objetivo);
+                    posiblesCaminos[i] = new Camino(_myJugador, _tablero.Casilla(destinos[i]), _tablero, _estrategia,objetivo.numeroJ(),_mechs);
                     Console.WriteLine(i + ": " + destinos[i].ToString());
                     //posiblesCaminos[i].print();
                     Console.WriteLine(posiblesCaminos[i].ToString());
