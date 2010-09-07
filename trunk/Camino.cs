@@ -18,13 +18,14 @@ namespace ico
         /// <param name="a">destino del camino a construir; tipo Casilla</param>
         /// <param name="tablero">tablero del juego; tipo Tablero</param>
         /// <param name="estrategia">estrategia conforme a la cual se hara el combate; tipo Estrategia</param>
-        public Camino(Mech ich, Casilla a, Tablero tablero, Estrategia estrategia, Mech objetivo) {
-            _ich = ich;
+        public Camino(int myJugador, Casilla a, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs) {
+            _ich = mechs[myJugador];
             _estrategia=estrategia;
             ArrayList camino;
-            if(( camino = pathFinder(ich, a, tablero, objetivo))==null){
+            if ((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)) == null)
+            {
                 _estrategia=Estrategia.Agresiva;
-                camino = pathFinder(ich, a, tablero, objetivo);
+                camino = pathFinder(myJugador, a, tablero, objetivo, mechs);
             }
             int j = 0;
 
@@ -228,7 +229,7 @@ namespace ico
         /// <param name="b">destino del camino a construir; tipo Casilla</param>
         /// <param name="Tablero">tablero del juego; tipo Tablero</param>
         /// <returns>devuelve el camino del punto a al punto untermedio; tipo Camino</returns>
-        private ArrayList pathFinder(Mech ich, Casilla b, Tablero Tablero, Mech objetivo)
+        private ArrayList pathFinder(int myJugador, Casilla b, Tablero Tablero, int objetivo, Mech[] mechs)
         {
             ArrayList cerradas = new ArrayList();
             ArrayList abiertas = new ArrayList();
@@ -236,20 +237,21 @@ namespace ico
             Nodo elemento = new Nodo();
             int aux = 0, iaux = 0, mejor = -1, gAcumulada = 0;
             Boolean nueva = false;
-            _original = (Encaramiento)ich.ladoEncaramiento();
+            _original = (Encaramiento)mechs[myJugador].ladoEncaramiento();
 
-            
 
-            elemento.casilla(Tablero.Casilla(ich.posicion()));
+
+            elemento.casilla(Tablero.Casilla(mechs[myJugador].posicion()));
             elemento.g(0);
-            elemento.h(ich.posicion().distancia(b.posicion()));
+            elemento.h(mechs[myJugador].posicion().distancia(b.posicion()));
             elemento.f(elemento.h());
-            elemento.direccion((Encaramiento)ich.ladoEncaramiento());
+            elemento.direccion((Encaramiento)mechs[myJugador].ladoEncaramiento());
             elemento.padre(elemento);
 
-            if (!ich.giroscopioOperativo() && ich.enSuelo()) {
+            if (!mechs[myJugador].giroscopioOperativo() && mechs[myJugador].enSuelo())
+            {
                 camino.Add(elemento);
-                _final = (Encaramiento)posiblesEncaramientos(elemento, objetivo.posicion(), Tablero)[0];
+                _final = (Encaramiento)posiblesEncaramientos(elemento, mechs[objetivo].posicion(), Tablero)[0];
                 return camino;
             }
 
@@ -278,8 +280,8 @@ namespace ico
 
                     // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
                     aux = actual.casilla().costoMovimiento(elemento.casilla()) + costoEncaramiento(actual.casilla(), (Encaramiento)i, elemento.casilla(), Tablero);
-                    //aux = actual.posicion().distancia(elemento.casilla.posicion());
-                    if (aux > 100)
+                    // verifico si es intrancitable
+                    if (aux > 100 || hayAlgunMech(elemento.casilla().posicion(),mechs))
                         continue;
                     // verifico si es intrancitable
                     if (/*elemento.casilla.costoMovimiento() >= 0 ||*/  aux >= 0)
@@ -365,13 +367,13 @@ namespace ico
                 {
                     camino.Add(padre.padre());
                     padre = padre.padre();
-                } while (padre.casilla() != Tablero.Casilla(ich.posicion()));
+                } while (padre.casilla() != Tablero.Casilla(mechs[myJugador].posicion()));
 
 
 
                 if (abiertas.Count != 0)
                 {
-                    if ((aux = caminoReal(limpiarAgua(camino), b, ich, Tablero, objetivo)) == -1)
+                    if ((aux = caminoReal(limpiarAgua(camino), b, mechs[myJugador], Tablero, mechs[objetivo])) == -1)
                         camino = camino.GetRange(camino.Count - 1, 1);
                     else
                         camino = camino.GetRange(aux, camino.Count-aux);
@@ -385,6 +387,14 @@ namespace ico
                 return null;
 
             return camino;
+        }
+
+        Boolean hayAlgunMech(Posicion deseada,Mech[] mechs) {
+            foreach (Mech i in mechs) 
+                if (i.posicion() == deseada)
+                    return true;
+            
+            return false;
         }
 
         private bool sePuedeHacerCorriendo(ArrayList camino) {
@@ -505,7 +515,8 @@ namespace ico
             if (ich.enSuelo()){
                 suelo = 2;
                 _seLevanto = true;
-                _original = ((Nodo)camino[0]).direccion();//_camino[0].direccion();
+                _original = mejorEncaramiento(((Nodo)camino[0]), objetivo.posicion(), t);//_camino[0].direccion();
+                ((Nodo)camino[0]).direccion(mejorEncaramiento(((Nodo)camino[0]), objetivo.posicion(), t));
             }
             if (_estrategia == Estrategia.Defensiva)
             {
