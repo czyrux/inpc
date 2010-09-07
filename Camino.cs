@@ -526,7 +526,7 @@ namespace ico
                         j=queEncaramientoVengo(((Nodo)camino[i-1]).direccion(),
                     }
                     else*/
-                        l = posiblesEncaramientos((Nodo)camino[i], destino, t);
+                    l = posiblesEncaramientos((Nodo)camino[i], destino, t);
 
                     for (int c = 1; c < l.Count; c++)
                     {
@@ -561,7 +561,7 @@ namespace ico
                     else
                     {
                         _final = (Encaramiento)l[j];
-                        ((Nodo)camino[i]).direccion((Encaramiento)l[j]);
+                        //((Nodo)camino[i]).direccion((Encaramiento)l[j]);
                         return  i;
                     }
 
@@ -581,6 +581,7 @@ namespace ico
                 tmp = t.colindante(origen.posicion(), (Encaramiento)i);
                 if(tmp==destino){
                     oEncaramiento=(Encaramiento)i;
+                    break;
                 }
             }
             switch ((Encaramiento)oEncaramiento)
