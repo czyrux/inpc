@@ -217,10 +217,10 @@ namespace ico
                     for (int i = 0; i < destinos.Length; i++)
                     {
                         posiblesCaminos[i] = new Camino(_myJugador, _tablero.Casilla(destinos[i]), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
-                        Console.WriteLine(i + ": " + destinos[i].ToString());
+                        Console.WriteLine("Destino preferido:"+i + ": " + destinos[i].ToString());
                         //posiblesCaminos[i].print();
                         Console.WriteLine(posiblesCaminos[i].ToString());
-                        Console.WriteLine("Destino " + i + ": " + posiblesCaminos[i].casillaFinal().posicion().ToString());
+                        Console.WriteLine("Llegamos hasta: " + posiblesCaminos[i].casillaFinal().posicion().ToString());
                         puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
                         Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
                         if (puntuacionCamino[i] > valor && (casillaEnLdV(posiblesCaminos[i].casillaFinal().posicion(), objetivo) || i == destinos.Length - 1))
@@ -228,6 +228,7 @@ namespace ico
                             destino = i;
                             valor = puntuacionCamino[i];
                         }
+                        Console.WriteLine();
                     }
 
                     Console.WriteLine();
