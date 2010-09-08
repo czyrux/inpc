@@ -590,12 +590,13 @@ namespace ico
             int punt = ((MechJugador)_mechs[_myJugador]).saltar();
 
             if (_estrategia == Estrategia.Defensiva && _mechs[_myJugador].posicion().distancia(p) <= punt && _tablero.Casilla(p).tipoTerreno() != 2
-                && punt != 0 && _config.mechMovido(objetivo.numeroJ()) )
+                && punt != 0 && _config.mechMovido(objetivo.numeroJ()))
             {
                 salto = true;
             }
             else if (_estrategia == Estrategia.Agresiva && _mechs[_myJugador].posicion().distancia(p) <= punt && _tablero.Casilla(p).tipoTerreno() != 2
-                && objetivo.conoTrasero(p, objetivo.ladoEncaramiento()) && punt != 0 && p.ToString() != _mechs[_myJugador].posicion().ToString() && _config.mechMovido(objetivo.numeroJ()))
+                && objetivo.conoTrasero(p, objetivo.ladoEncaramiento()) && punt != 0 && p.ToString() != _mechs[_myJugador].posicion().ToString() && _config.mechMovido(objetivo.numeroJ())
+                && _mechs[_myJugador].posicion().distancia(objetivo.posicion()) > 1)
                 salto = true;
 
             return salto;
