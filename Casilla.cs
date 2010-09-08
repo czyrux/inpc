@@ -135,17 +135,15 @@ namespace ico
                         ;
                         break;
                     case 1:
+                    case -1:
                         costo++;
                         break;
                     case 2:
+                    case -2:
                         if (_tipoTerreno == 2)
                             costo = 1000;
                         else
                             costo += 2;
-                        break;
-                    case -1:
-                    case -2:
-                        ;
                         break;
                     default:
                             return 1000;//<--- Es inaccesible devuelve el maximo valor posible
