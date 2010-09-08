@@ -402,7 +402,7 @@ namespace ico
                         if (puntuacion[i] == max)
                         {
                             vueltaVacia = false;
-                            destinosElegidos[escogidas] = posiblesDestinos[i];
+                            destinosElegidos.Add(posiblesDestinos[i]);
                             escogidas++;
                         }
                         if (escogidas >= PanelControl.numeroDestinos)
