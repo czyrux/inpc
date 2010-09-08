@@ -249,7 +249,9 @@ namespace ico
                     {
                         //Hacemos camino con nuestro casilla como destino
                         Camino c = new Camino(_myJugador, _tablero.Casilla(_mechs[_myJugador].posicion()), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
+                        c.print();
                         c.ToFile(_myJugador);
+                        Console.ReadLine();
                     }
                 }
                 else //Caso de poder llegar al destino saltando directamente
