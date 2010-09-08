@@ -122,13 +122,16 @@ namespace ico
         /// </summary>
         /// <param name="a">casilla al cual se le calculara el costo asociado</param>
         /// <returns>costo en puntos de mvimientos; tipo Int</returns>
-        public int costoMovimiento( Casilla a)
+        public int costoMovimiento( Casilla a, Boolean reversa=false)
         {
             int costo = 0;
             if (a.tipoTerreno() == 2)
                 costo = PanelControl.penalizadorAgua;
             if (Math.Abs(_posicion.columna() - a.columna()) < 2 || Math.Abs(_posicion.fila() - a.fila()) < 2)
             {
+                if ((a.nivel() - _nivel) != 0 && reversa) {
+                    return 1000;
+                }
                 switch (a.nivel() - _nivel)
                 {
                     case 0:
@@ -147,8 +150,7 @@ namespace ico
                         break;
                     default:
                             return 1000;//<--- Es inaccesible devuelve el maximo valor posible
-                        
-                        break;
+                      
                 }
             }
             else return 1000;

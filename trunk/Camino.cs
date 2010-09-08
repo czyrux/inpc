@@ -33,11 +33,14 @@ namespace ico
         /// <param name="a">destino del camino a construir; tipo Casilla</param>
         /// <param name="tablero">tablero del juego; tipo Tablero</param>
         /// <param name="estrategia">estrategia conforme a la cual se hara el combate; tipo Estrategia</param>
-        public Camino(int myJugador, Casilla a, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs) {
+        public Camino(int myJugador, Casilla a, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs, Boolean reversa=false ) {
             _ich = mechs[myJugador];
             _estrategia=estrategia;
             _salta = false;
-            ArrayList camino=null,tmp;
+            _reversa = reversa;
+
+            ArrayList camino = null, tmp;
+            _debug += "===============================================================================\n"; 
             if (estrategia == Estrategia.Defensiva)
             {
                 if ((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)) == null)
@@ -50,6 +53,7 @@ namespace ico
                 tmp = pathFinder(myJugador, a, tablero, objetivo, mechs);
                 if (mechs[myJugador].posicion() != a.posicion() && tmp.Count == 1)
                 {
+                    
                     _estrategia = Estrategia.Defensiva;
                     if ((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)) == null)
                     {
@@ -65,6 +69,11 @@ namespace ico
                 _camino.Add(i);
             }
 
+            _debug += "*******************************************************************************\n";
+
+            _debug += "Escribo en el archivo se accio:\n"+this.ToString();
+
+            _debug += "===============================================================================\n";
         }
 
 #endregion
@@ -112,11 +121,11 @@ namespace ico
         /// </summary>
         public void print()
         {
-            string str = "El camino hecho por " + _ich.nombre() + ", con " + ((_estrategia==Estrategia.Agresiva)?((MechJugador)_ich).andar().ToString():((MechJugador)_ich).correr().ToString()) + "PM con costo de camino "+costoMovimiento().ToString()+" es: \n";
+            /*string str = "El camino hecho por " + _ich.nombre() + ", con " + ((_estrategia==Estrategia.Agresiva)?((MechJugador)_ich).andar().ToString():((MechJugador)_ich).correr().ToString()) + "PM con costo de camino "+costoMovimiento().ToString()+" es: \n";
             foreach (Nodo i in _camino)
                 str += "("+i.casilla().posicion().ToString()+", "+ i.direccion().ToString() +")"+ "->";
-            str += _final.ToString();
-            Console.WriteLine(str);
+            str += _final.ToString();*/
+            Console.WriteLine(_debug);
         }
 
         /// <summary>
@@ -217,12 +226,13 @@ namespace ico
         public void ToFile()
         {
 
-            StreamWriter fich = new StreamWriter("debug.txt",false);
+            StreamWriter fich = new StreamWriter("debug.dbg",false);
             /*string str = "El camino hecho por " + _ich.nombre() + ", con " + ((_estrategia == Estrategia.Agresiva) ? _ich.puntosAndar().ToString() : _ich.puntosCorrer().ToString()) + "PM con costo de camino " + costoMovimiento().ToString() + " es: \n";
             foreach (Nodo i in _camino)
                 str += "(" + i.casilla().posicion().ToString() + ", " + i.direccion().ToString() + ")" + "->";
             str += _final.ToString()+"\n";
             fich.Write(str);*/
+            fich.Write(_debug);
             fich.Write(this.ToString());
             fich.Close();
         }
@@ -266,6 +276,7 @@ namespace ico
         private Boolean _salta;
         private Mech _ich;
         private string _debug;
+        private Boolean _reversa;
         #endregion
 
         #region Funciones
@@ -330,9 +341,7 @@ namespace ico
 
                         // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
                         aux = actual.casilla().costoMovimiento(elemento.casilla()) + costoEncaramiento(actual.casilla(), (Encaramiento)i, elemento.casilla(), Tablero);
-                        if (elemento.casilla().ToString() == "1307")
-                            nueva = nueva;
-                        
+
                         // verifico si es intrancitable
                         if (aux > 100 || Tablero.casillaOcupada(elemento.casilla().posicion(), mechs, myJugador))
                             continue;
@@ -423,9 +432,11 @@ namespace ico
                     padre = padre.padre();
                 } while (padre.casilla() != Tablero.Casilla(mechs[myJugador].posicion()));
 
+                limpiarAgua(camino);
+
                 debugString(camino, myJugador, objetivo, mechs);
 
-                if ((aux = caminoReal(limpiarAgua(camino), b, mechs[myJugador], Tablero, mechs[objetivo])) == -1)
+                if ((aux = caminoReal(camino, b, mechs[myJugador], Tablero, mechs[objetivo])) == -1)
                     camino = camino.GetRange(camino.Count - 1, 1);
                 else
                     camino = camino.GetRange(aux, camino.Count-aux);
@@ -448,22 +459,26 @@ namespace ico
         }
 
         private void debugString(ArrayList camino, int my, int objetivo, Mech[] mechs, Boolean ideal=true) {
-            _debug += "El mech " + mechs[my].nombre() + " con estrategia" + _estrategia.ToString() + " y objetivo " + 
-                objetivo.ToString() + (ideal ? " trata de hacer" : " hace") + "con costo"+
-                ((Nodo)limpiarAgua(camino)[camino.Count-1]).g().ToString()+":\n";
+
+            _debug += "El mech " + mechs[my].nombre() + mechs[my].numeroJ().ToString() + " con estrategia " + _estrategia.ToString() + " y objetivo " +
+                objetivo.ToString() + (ideal ? " trata de hacer" : " hace") + "con costo " +
+                ((Nodo)camino[(ideal ? 0 : camino.Count - 1)]).g().ToString() + ":\n\n";
             if (ideal) {
+
                 for (int i = camino.Count - 1; i > -1; i--) {
                     _debug += "(" + ((Nodo)camino[i]).casilla().ToString() + ", " + ((Nodo)camino[i]).direccion().ToString() + ")->";
                 }
             }
             else
             {
+
                 foreach (Nodo i in camino)
                 {
                     _debug += "(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ")->";
                 }
             }
-            _debug += ideal?"FIN\n":_final.ToString();
+            _debug += (ideal ? "FIN" : _final.ToString()) + "\n";
+            _debug += "-------------------------------------------------------------------------------\n\n";
         }
         Boolean hayAlgunMech(Posicion deseada,Mech[] mechs) {
             foreach (Mech i in mechs) 
@@ -504,9 +519,9 @@ namespace ico
 
                 case Encaramiento.InferiorDerecho:
                     if (d==Encaramiento.SuperiorDerecha || d==Encaramiento.Arriba)
-                        return "Izquierda";
-                    else
                         return "Derecha";
+                    else
+                        return "Izquierda";
 
                 case Encaramiento.InferiorIzquierda:
 
@@ -590,7 +605,7 @@ namespace ico
             }
             if (_estrategia == Estrategia.Defensiva)
             {
-                puntosMR = ((MechJugador)ich).correr()-suelo;
+                puntosMR = ((MechJugador)ich).correr() - suelo;
             }
             else {
                 /*
@@ -613,7 +628,7 @@ namespace ico
 
                     if (((Nodo)camino[i]).g() <= puntosMR)
                     {
-                        tmpE = mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
+                        tmpE = mejorEncaramiento(ich, objetivo, destino.posicion());//mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
                         if (((Nodo)camino[i]).g() + costoEncaramiento(((Nodo)camino[i]).direccion(), tmpE) < puntosMR)
                         {
                             _final = tmpE;
