@@ -334,7 +334,7 @@ namespace ico
         /// <param name="destinosElegidos">Array de tamñao fijo que sera completado con los mejores destinos. Segun su tamaño
         /// se incluiran mas o menos destinos</param>
         /// <returns>devuelve la posicion que se desea alcanzar; tipo posicion</returns>
-        private void seleccionDestino(Mech objetivo , Posicion[] destinosElegidos)  
+        private void seleccionDestino(Mech objetivo , List<Posicion> destinosElegidos)  
         {
             List<Posicion> posiblesDestinos = new List<Posicion>();
             int[] puntuacion;
@@ -374,10 +374,10 @@ namespace ico
                     {
                         if (puntuacion[i] == max)
                         {
-                            destinosElegidos[escogidas] = posiblesDestinos[i];
+                            destinosElegidos.Add(posiblesDestinos[i]);
                             escogidas++;
                         }
-                        if (escogidas >= destinosElegidos.Length)
+                        if (escogidas >= destinosElegidos.Count)
                             salir = true;
                     }
                 }
