@@ -17,7 +17,7 @@ namespace ico
             Nodo orig = new Nodo();
             orig.casilla(t.Casilla(mechs[myJugador].posicion()));
             orig.direccion((Encaramiento)mechs[myJugador].ladoEncaramiento());
-            _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo]);
+            _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo],destino);
             _camino.Add(orig);
 
             orig.casilla(t.Casilla(destino));
@@ -585,7 +585,7 @@ namespace ico
                 suelo = 2;
                 _seLevanto = true;
                 //tmpE=mejorEncaramiento(ich,objetivo);
-                _original = mejorEncaramiento(ich,objetivo);//_camino[0].direccion();
+                _original = mejorEncaramiento(ich,objetivo,destino.posicion());//_camino[0].direccion();
                 ((Nodo)camino[0]).direccion(_original);
             }
             if (_estrategia == Estrategia.Defensiva)
@@ -639,11 +639,11 @@ namespace ico
             }
         }
 
-        private Encaramiento mejorEncaramiento(Mech yo, Mech enemigo) { 
+        private Encaramiento mejorEncaramiento(Mech yo, Mech enemigo , Posicion p) { 
             int min=1000, imin=0;
             for (int i = 1; i < 7;i++)
             {
-                if (yo.posicion().conoDelantero(enemigo.posicion(), i)) {
+                if (p.conoDelantero(enemigo.posicion(), i)) {
                     if ( costoEncaramiento((Encaramiento)yo.ladoEncaramiento(), (Encaramiento)i) < min)
                     {
                         min = costoEncaramiento((Encaramiento)yo.ladoEncaramiento(), (Encaramiento)i);
