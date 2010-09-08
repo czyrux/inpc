@@ -639,6 +639,14 @@ namespace ico
             }
         }
 
+        /// <summary>
+        /// Devuelve cual es el mejor encaramiento de la posicion <paramref name="p"/> para estar encarado con el 
+        /// <paramref name="enemigo"/>
+        /// </summary>
+        /// <param name="yo">Mech Jugador</param>
+        /// <param name="enemigo">Mech oponente</param>
+        /// <param name="p">Posicion que queremos observar</param>
+        /// <returns></returns>
         private Encaramiento mejorEncaramiento(Mech yo, Mech enemigo , Posicion p) { 
             int min=1000, imin=0;
             for (int i = 1; i < 7;i++)
