@@ -522,10 +522,10 @@ namespace ico
         private string izqOdrch(Encaramiento o, Encaramiento d) {
             switch (o) { 
                 case Encaramiento.Abajo:
-                            if((int)d>4)
-                                return "Derecha";
-                            else
-                                return "Izquierda";
+                    if((int)d>4)
+                        return "Derecha";
+                    else
+                        return "Izquierda";
 
                 case Encaramiento.Arriba:
                     if ((int)d < 4)
