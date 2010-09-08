@@ -35,7 +35,7 @@ namespace ico
 
 			//Leemos los mech
             readMechs();
-            _mechs[_myJugador].posicion();
+
 			//Leemos el tablero de juego
             _tablero = new Tablero(PanelControl.Path+"mapaJ"+_myJugador.ToString()+".sbt");
 			
@@ -528,8 +528,9 @@ namespace ico
                     puntuacion += -_tablero.Casilla(p).nivel();
 
                 //Bonus por estar situado a espalda cuando el objetivo ya se ha movido 
-                if (_config.mechMovido(objetivo.numeroJ()) && objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
-                    puntuacion += 3;
+                if (_config.mechMovido(objetivo.numeroJ()) && objetivo.conoTrasero(p, objetivo.ladoEncaramiento())
+                    && _mechs[_myJugador].posicion().distancia(objetivo.posicion()) == 1)
+                    puntuacion += 5;
 
                 //Puntuacion por distancia
                 int distancia , bonificador;
