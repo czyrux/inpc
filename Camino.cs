@@ -112,7 +112,7 @@ namespace ico
         /// </summary>
         public void print()
         {
-            string str = "El camino hecho por " + _ich.nombre() + ", con " + ((_estrategia==Estrategia.Agresiva)?_ich.puntosAndar().ToString():_ich.puntosCorrer().ToString()) + "PM con costo de camino "+costoMovimiento().ToString()+" es: \n";
+            string str = "El camino hecho por " + _ich.nombre() + ", con " + ((_estrategia==Estrategia.Agresiva)?((MechJugador)_ich).andar().ToString():((MechJugador)_ich).correr().ToString()) + "PM con costo de camino "+costoMovimiento().ToString()+" es: \n";
             foreach (Nodo i in _camino)
                 str += "("+i.casilla().posicion().ToString()+", "+ i.direccion().ToString() +")"+ "->";
             str += _final.ToString();
@@ -261,6 +261,7 @@ namespace ico
         private Boolean _seLevanto;
         private Boolean _salta;
         private Mech _ich;
+        private string _debug;
         #endregion
 
         #region Funciones
@@ -325,6 +326,9 @@ namespace ico
 
                         // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
                         aux = actual.casilla().costoMovimiento(elemento.casilla()) + costoEncaramiento(actual.casilla(), (Encaramiento)i, elemento.casilla(), Tablero);
+                        if (elemento.casilla().ToString() == "1307")
+                            nueva = nueva;
+                        
                         // verifico si es intrancitable
                         if (aux > 100 || Tablero.casillaOcupada(elemento.casilla().posicion(), mechs, myJugador))
                             continue;
@@ -435,6 +439,13 @@ namespace ico
 
 
             return camino;
+        }
+
+        private void idealString(ArrayList camino, int my, int objetivo, Mech[] mechs) {
+            _debug += "el mech "+mechs[my].nombre()+" con estrategia"+_estrategia.ToString()+" y objetivo trata de hacer:\n";
+            foreach (Nodo i in camino) { 
+                _debug+="("+i.casilla().ToString()+", "+i.direccion().ToString()+")"
+            }
         }
 
         Boolean hayAlgunMech(Posicion deseada,Mech[] mechs) {
@@ -562,13 +573,13 @@ namespace ico
             }
             if (_estrategia == Estrategia.Defensiva)
             {
-                puntosMR = ich.puntosCorrer()-suelo;
+                puntosMR = ((MechJugador)ich).correr()-suelo;
             }
             else {
                 /*
                  * aqui hay que comprobar si la distancia de el enemigo y yo es muy grande entonces corro enlugar de caminar
                  */
-                puntosMR=ich.puntosAndar() - suelo;
+                puntosMR= ((MechJugador)ich).andar() - suelo;
             }
             //copruebo que se pueda levantar si no no hace nada
             if (puntosMR < 0)
