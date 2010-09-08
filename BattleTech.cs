@@ -1171,9 +1171,8 @@ namespace ico
         /// <param name="text">Cadena de texto con la informacion a escribir en el log</param>
         private void escribirLog( String text ) 
         {
-            Console.WriteLine("Fichero: "+PanelControl.fichLog);
-            StreamWriter f = new StreamWriter(PanelControl.fichLog, true);
-            f.WriteLine("Dia: " + System.DateTime.Today.Date + " Hora: " + System.DateTime.Now.Hour);
+            StreamWriter f = new StreamWriter(PanelControl.fichLog + _myJugador.ToString() + ".log", true);
+            f.WriteLine("Dia: " + System.DateTime.Now.DayOfWeek + "/" + System.DateTime.Now.Month + "/" + System.DateTime.Now.Year + " Hora: " + System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second);
             f.WriteLine("Fase de " + _faseJuego+". Jugador: "+_myJugador);
             f.WriteLine(text);
             f.Close();
