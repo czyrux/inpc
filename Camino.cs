@@ -434,7 +434,7 @@ namespace ico
 
         Boolean hayAlgunMech(Posicion deseada,Mech[] mechs) {
             foreach (Mech i in mechs) 
-                if (i.posicion() == deseada)
+                if (i.posicion().ToString() == deseada.ToString())
                     return true;
             
             return false;
