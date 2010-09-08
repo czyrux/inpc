@@ -415,10 +415,10 @@ namespace ico
                     padre = padre.padre();
                 } while (padre.casilla() != Tablero.Casilla(mechs[myJugador].posicion()));
 
-                    if ((aux = caminoReal(limpiarAgua(camino), b, mechs[myJugador], Tablero, mechs[objetivo])) == -1)
-                        camino = camino.GetRange(camino.Count - 1, 1);
-                    else
-                        camino = camino.GetRange(aux, camino.Count-aux);
+                if ((aux = caminoReal(limpiarAgua(camino), b, mechs[myJugador], Tablero, mechs[objetivo])) == -1)
+                    camino = camino.GetRange(camino.Count - 1, 1);
+                else
+                    camino = camino.GetRange(aux, camino.Count-aux);
                 
                 camino.Reverse();
                 if(camino[0]==camino[1]){
