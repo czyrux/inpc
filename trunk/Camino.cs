@@ -9,6 +9,21 @@ namespace ico
     public class Camino
     {
         #region Constructores
+
+        public Camino(int myJugador, Posicion destino, Tablero t, int objetivo, Mech[] mechs)
+        {
+            _salta = true;
+            _camino = new List<Nodo>();
+            Nodo orig = new Nodo();
+            orig.casilla(t.Casilla(mechs[myJugador].posicion()));
+            orig.direccion((Encaramiento)mechs[myJugador].ladoEncaramiento());
+            _final = (Encaramiento)mejorEncaramiento(orig, destino, t);
+            _camino.Add(orig);
+
+            orig.casilla(t.Casilla(destino));
+
+            _camino.Add(orig);
+        }
         
         /// <summary>
         /// Constructor que crea un camino a traves del pathfinder
@@ -18,7 +33,7 @@ namespace ico
         /// <param name="a">destino del camino a construir; tipo Casilla</param>
         /// <param name="tablero">tablero del juego; tipo Tablero</param>
         /// <param name="estrategia">estrategia conforme a la cual se hara el combate; tipo Estrategia</param>
-        public Camino(int myJugador, Casilla a, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs) {
+        public Camino(int myJugador, Casilla a, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs, Boolean salta=false) {
             _ich = mechs[myJugador];
             _estrategia=estrategia;
             ArrayList camino=null,tmp;
@@ -112,67 +127,79 @@ namespace ico
             string str,str2="";
             int i = 0, pasos=0;
 
-            if (_estrategia == Estrategia.Agresiva)
-                str = "Andar\n";
-            else
-                str = "Correr\n";
-
-            str += _camino[_camino.Count - 1].casilla().ToString()+"\n";
-
-            
-            if (_final == 0)
-            {
-                _final = _camino[_camino.Count - 1].direccion();
-            }
-            str +=((int)_final).ToString()+"\n";
-
-            str += "False\n";
-
-            if (_seLevanto) {
-                str2 += "Levantarse\n";
-                str2 += ((int)_original).ToString() + "\n";
-                pasos++;
-            }
-            int tmp;
-            if (_camino[i].direccion() != _original) {
-                str2 += izqOdrch(_camino[i].direccion(), _original).ToString() + "\n";
-                tmp = costoEncaramiento(_original, _camino[i].direccion());
-                str2 += tmp.ToString()+"\n";
-                pasos++;
-            }
-
-            i++;
-            while (i != _camino.Count)
+            if (!_salta)
             {
 
-                if (_camino[i-1].direccion() != _camino[i].direccion())
+                if (_estrategia == Estrategia.Agresiva)
+                    str = "Andar\n";
+                else
+                    str = "Correr\n";
+
+                str += _camino[_camino.Count - 1].casilla().ToString() + "\n";
+
+
+                if (_final == 0)
                 {
-                    tmp = costoEncaramiento(_camino[i - 1].direccion(), _camino[i].direccion());
-                    str2 += izqOdrch(_camino[i-1].direccion(), _camino[i].direccion()) + "\n";
+                    _final = _camino[_camino.Count - 1].direccion();
+                }
+                str += ((int)_final).ToString() + "\n";
+
+                str += "False\n";
+
+                if (_seLevanto)
+                {
+                    str2 += "Levantarse\n";
+                    str2 += ((int)_original).ToString() + "\n";
+                    pasos++;
+                }
+                int tmp;
+                if (_camino[i].direccion() != _original)
+                {
+                    str2 += izqOdrch(_camino[i].direccion(), _original).ToString() + "\n";
+                    tmp = costoEncaramiento(_original, _camino[i].direccion());
                     str2 += tmp.ToString() + "\n";
                     pasos++;
                 }
-                str2 += "Adelante\n";
-                str2 += "1\n";
-                pasos++;
+
                 i++;
-                
+                while (i != _camino.Count)
+                {
+
+                    if (_camino[i - 1].direccion() != _camino[i].direccion())
+                    {
+                        tmp = costoEncaramiento(_camino[i - 1].direccion(), _camino[i].direccion());
+                        str2 += izqOdrch(_camino[i - 1].direccion(), _camino[i].direccion()) + "\n";
+                        str2 += tmp.ToString() + "\n";
+                        pasos++;
+                    }
+                    str2 += "Adelante\n";
+                    str2 += "1\n";
+                    pasos++;
+                    i++;
+
+                }
+
+                if (_camino[i - 1].direccion() != _final)
+                {
+                    str2 += izqOdrch(_camino[i - 1].direccion(), _final) + "\n";
+                    str2 += costoEncaramiento(_camino[i - 1].direccion(), _final).ToString() + "\n";
+                    pasos++;
+                }
+
+                if (pasos == 0)
+                    return "Inmovil\n";
+
+
+                str += pasos.ToString() + "\n";
+
+                str += str2;
+
             }
-
-            if (_camino[i-1].direccion() != _final)
-            {
-                str2 += izqOdrch(_camino[i-1].direccion(),_final) + "\n";
-                str2 += costoEncaramiento(_camino[i-1].direccion(), _final).ToString() + "\n";
-                pasos++;
+            else {//Si saltamos
+                str = "Saltar\n";
+                str += _camino[_camino.Count - 1].casilla().ToString() + "\n";
+                str += ((int)_final).ToString();
             }
-
-            if (pasos == 0)
-                return "Inmovil\n";
-            
-            
-            str += pasos.ToString()+"\n";
-
-            str += str2;
 
             return str;
         }
@@ -231,6 +258,7 @@ namespace ico
         /// si al inicio el mech estaba en el suelo
         /// </summary>
         private Boolean _seLevanto;
+        private Boolean _salta;
         private Mech _ich;
         #endregion
 
