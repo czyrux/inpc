@@ -422,8 +422,7 @@ namespace ico
                 
                 camino.Reverse();
                 if(camino[0]==camino[1]){
-                    _final = ((Nodo)camino[1]).direccion();
-                    camino.Remove(1);
+                    camino.RemoveAt(1);
                 }
             }
             else
