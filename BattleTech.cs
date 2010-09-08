@@ -301,7 +301,6 @@ namespace ico
                     for (int i = 0; i < _mechs.Length; i++)
                         if (i != _myJugador)
                         {
-                            //Console.WriteLine("Mech: " + _mechs[i].nombre());
                             //Nota estado
                             notasParciales[i] = _mechs[i].notaEstado() * PanelControl.NOTA_MOV;
                             //Nota distancia
