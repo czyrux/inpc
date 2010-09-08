@@ -184,6 +184,7 @@ namespace ico
             Console.WriteLine();
             Mech objetivo;
             bool salto = false;
+            int destino = 0;
             Posicion[] destinos = new Posicion[PanelControl.numeroDestinos];
             Camino[] posiblesCaminos = new Camino[PanelControl.numeroDestinos];
 
@@ -202,14 +203,17 @@ namespace ico
                 //Vemos si hay condicion de salto
                 for (int i = 0; i < destinos.Length && !salto; i++)
                     if (deboSaltar(destinos[i], objetivo))
+                    {
                         salto = true;
+                        destino = i;
+                    }
 
                 //Si no podemos saltar directamente a ninguna casilla
                 if (!salto)
                 {
                     //Evaluamos la ultima posicion de cada camino y nos quedamos con el mayor
                     int[] puntuacionCamino = new int[PanelControl.numeroDestinos];
-                    int index = 0, valor = int.MinValue;
+                    int valor = int.MinValue;
                     for (int i = 0; i < destinos.Length; i++)
                     {
                         posiblesCaminos[i] = new Camino(_myJugador, _tablero.Casilla(destinos[i]), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
@@ -221,22 +225,25 @@ namespace ico
                         Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
                         if (puntuacionCamino[i] > valor && (casillaEnLdV(posiblesCaminos[i].casillaFinal().posicion(), objetivo) || i == destinos.Length - 1))
                         {
-                            index = i;
+                            destino = i;
                             valor = puntuacionCamino[i];
                         }
                     }
 
                     Console.WriteLine();
-                    Console.WriteLine("Elegimos " + posiblesCaminos[index].casillaFinal().posicion().ToString());
+                    Console.WriteLine("Elegimos " + posiblesCaminos[destino].casillaFinal().posicion().ToString());
 
-                    posiblesCaminos[index].print();
-                    Console.WriteLine(posiblesCaminos[index].ToString());
-                    posiblesCaminos[index].ToFile(_myJugador);
-                    posiblesCaminos[index].ToFile();
+                    posiblesCaminos[destino].print();
+                    Console.WriteLine(posiblesCaminos[destino].ToString());
+                    posiblesCaminos[destino].ToFile(_myJugador);
+                    posiblesCaminos[destino].ToFile();
                 }
-                else 
+                else //Saltamos
                 {
-                    Camino c;
+                    Camino c = new Camino(_myJugador,destinos[destino],_tablero,objetivo.numeroJ(),_mechs);
+                    Console.WriteLine(c.ToString());
+                    c.ToFile(_myJugador);
+
                 }
 
                 Console.ReadLine();
