@@ -441,13 +441,15 @@ namespace ico
             return camino;
         }
 
-        private void idealString(ArrayList camino, int my, int objetivo, Mech[] mechs) {
-            _debug += "el mech "+mechs[my].nombre()+" con estrategia"+_estrategia.ToString()+" y objetivo trata de hacer:\n";
-            foreach (Nodo i in camino) { 
-                _debug+="("+i.casilla().ToString()+", "+i.direccion().ToString()+")"
+        private void idealString(ArrayList camino, int my, int objetivo, Mech[] mechs, Boolean ideal=true) {
+            _debug += "El mech " + mechs[my].nombre() + " con estrategia" + _estrategia.ToString() + " y objetivo " + 
+                objetivo.ToString() + (ideal ? " trata de hacer" : " hace") + "con costo"+
+                ((Nodo)limpiarAgua(camino)[camino.Count-1]).g().ToString()+":\n";
+            foreach (Nodo i in camino) {
+                _debug += "(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ")->";
             }
+            _debug += ideal?"FIN\n":_final.ToString();
         }
-
         Boolean hayAlgunMech(Posicion deseada,Mech[] mechs) {
             foreach (Mech i in mechs) 
                 if (i.posicion().ToString() == deseada.ToString())
