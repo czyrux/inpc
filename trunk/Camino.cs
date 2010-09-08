@@ -291,7 +291,7 @@ namespace ico
             elemento.direccion((Encaramiento)mechs[myJugador].ladoEncaramiento());
             elemento.padre(elemento);
 
-            if (!mechs[myJugador].giroscopioOperativo() && mechs[myJugador].enSuelo())
+            if (!mechs[myJugador].giroscopioOperativo() || (!mechs[myJugador].conPiernaDerecha() && !mechs[myJugador].conPiernaIzquierda()))
             {
                 camino.Add(elemento);
                 _final = (Encaramiento)posiblesEncaramientos(elemento, mechs[objetivo].posicion(), Tablero)[0];
@@ -462,24 +462,19 @@ namespace ico
                                 return "Derecha";
                             else
                                 return "Izquierda";
-                   
-                    break;
-                case Encaramiento.Arriba:
 
+                case Encaramiento.Arriba:
                     if ((int)d < 4)
                         return "Derecha";
                     else
                         return "Izquierda";
-                    
-                    break;
-                case Encaramiento.InferiorDerecho:
 
+                case Encaramiento.InferiorDerecho:
                     if (d==Encaramiento.SuperiorDerecha || d==Encaramiento.Arriba)
                         return "Izquierda";
                     else
                         return "Derecha";
-                    
-                    break;
+
                 case Encaramiento.InferiorIzquierda:
 
                     if (d==Encaramiento.SuperiorDerecha|| d == Encaramiento.Abajo)
@@ -487,21 +482,17 @@ namespace ico
                     else
                         return "Derecha";
 
-                    break;
                 case Encaramiento.SuperiorDerecha:
                     if (d == Encaramiento.SuperiorIzquierda || d == Encaramiento.Arriba)
                         return "Izquierda";
                     else
                         return "Derecha";
 
-                    break;
                 case Encaramiento.SuperiorIzquierda:
                     if (d == Encaramiento.SuperiorDerecha || d == Encaramiento.Arriba)
                         return "Derecha";
                     else
                         return "Izquierda";
-                    break;
-            
             }
             return "";
 
@@ -553,11 +544,14 @@ namespace ico
         private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t, Mech objetivo)
         {
             int puntosMR, suelo = 0;
+            Encaramiento tmpE=Encaramiento.Arriba;
+
             costoEncaramientoAcumulado(camino);
-            //devo comprobar si ay giroscopios
+            //ya he comprobado si hay giroscopios y pernas en el pathfinder
             if (ich.enSuelo()){
                 suelo = 2;
                 _seLevanto = true;
+                tmpE=_original;
                 _original = mejorEncaramiento(((Nodo)camino[0]), objetivo.posicion(), t);//_camino[0].direccion();
                 ((Nodo)camino[0]).direccion(mejorEncaramiento(((Nodo)camino[0]), objetivo.posicion(), t));
             }
@@ -571,24 +565,32 @@ namespace ico
                  */
                 puntosMR=ich.puntosAndar() - suelo;
             }
-            Encaramiento tmpE;
-
-            for (int i = 0; i <camino.Count; i++)
+            //copruebo que se pueda levantar si no no hace nada
+            if (puntosMR < 0)
             {
+                _seLevanto = false;
+                _original = tmpE;//_camino[0].direccion();
+                ((Nodo)camino[0]).direccion(tmpE);
+            }
+            else
+            {// o no se a levantado o tine puntos negativos de movimientos
 
-                if (((Nodo)camino[i]).g() < puntosMR)
+                for (int i = 0; i < camino.Count; i++)
                 {
-                    tmpE = mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
-                    if (((Nodo)camino[i]).g() + costoEncaramiento(((Nodo)camino[i]).direccion(), tmpE) < puntosMR)
+
+                    if (((Nodo)camino[i]).g() <= puntosMR)
                     {
-                        _final = tmpE;
-                        return i;
+                        tmpE = mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
+                        if (((Nodo)camino[i]).g() + costoEncaramiento(((Nodo)camino[i]).direccion(), tmpE) < puntosMR)
+                        {
+                            _final = tmpE;
+                            return i;
+                        }
+
+
                     }
-
-
                 }
             }
-
 
 
             return -1;
@@ -602,6 +604,11 @@ namespace ico
                 }
                 ((Nodo)camino[i]).g(acumulado + ((Nodo)camino[i]).g());
             }
+        }
+
+        private Encaramiento mejorEncarmiento(Mech yo, Mech enemigo, Tablero t) { 
+
+            return Encaramiento.Arriba;
         }
 
         Encaramiento mejorEncaramiento(Nodo origen, Posicion objetivo, Tablero t)
@@ -669,13 +676,22 @@ namespace ico
         private List<int> posiblesEncaramientos(Nodo o, Posicion destino, Tablero t)
         {
             int min =10000, tmp = 0, j=6;
-
+            Casilla tmpCasilla;
+            List<int> l = new List<int>();
             //cal
             for (int i = 1; i < 7; i++)
             {
                 try
                 {
-                    tmp = t.colindante(o.casilla().posicion(), (Encaramiento)i).posicion().distancia(destino);
+                    tmpCasilla = t.colindante(o.casilla().posicion(), (Encaramiento)i);
+
+                    if (tmpCasilla.posicion().ToString() == destino.ToString())
+                    {
+                        l.Add(i);
+                        return l;
+                    }
+
+                    tmp = tmpCasilla.posicion().distancia(destino);
                     if (min > tmp)
                     {
                         min = tmp;
@@ -683,10 +699,7 @@ namespace ico
                 }
                 catch (Exception e) { }
             }
-                
-            
 
-            List<int> l = new List<int>();
 
             for (int i = 1; i < 7; i++)
             {
