@@ -687,13 +687,14 @@ namespace ico
             String log = "";
             Console.WriteLine("Fase Ataque con Armas");
             Console.WriteLine();
+            List<Mech> objetivos = new List<Mech>();
+            List<Componente> armasADisparar = new List<Componente>();
+            List<LdV> ldv = new List<LdV>();
+            Mech objetivo = null;
 
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
                 determinarEstrategia();
-
-                List<Mech> objetivos = new List<Mech>();
-                Mech objetivo = null;
 
                 //Escogemos a los mech si estan dentro del alcance de tiro largo y no estan en nuestra espalda
                 for (int i = 0; i < _mechs.Length; i++)
@@ -707,7 +708,6 @@ namespace ico
                 Console.WriteLine();*/
 
                 //Dejamos solo con los que tengamos linea de vision
-                List<LdV> ldv = new List<LdV>();
                 objetivosLdV(objetivos, ldv);
 
                 /*Console.WriteLine();
@@ -716,12 +716,20 @@ namespace ico
                     Console.WriteLine(i + ": " + objetivos[i].nombre());*/
 
                 //Escogemos al mas debil
-                List<Componente> armasADisparar = new List<Componente>();
-                Console.WriteLine();
+                //Console.WriteLine();
                 objetivo = objetivoMasDebil(objetivos, ldv, armasADisparar);
 
                 //Console.WriteLine();
                 if (objetivo != null) 
+                {
+                    log += "\tEscogemos como objetivo al Mech J-" + objetivo.numeroJ() + ": " + objetivo.nombre() + ". Hubicacion: " + objetivo.posicion().ToString() + "\n";
+                    log += "\tLinea de vision con objetivo: " + ldv[0].ldv() + ". Cobertura del objetivo: " + ldv[0].cobertura() + "\n";
+                    log += "\tPodriamos disparar:\n";
+                    foreach (Componente c in armasADisparar) 
+                    {
+                        log += "\t\t" + c.nombre();
+                    }
+                }
                 //Console.WriteLine("El objetivo es:" + objetivo.nombre() +" ldv:"+ldv[0].ldv()+" cobr:"+ldv[0].cobertura());
                 //Console.WriteLine();
 
@@ -729,15 +737,30 @@ namespace ico
                 //Vemos las armas a dispararle
                 seleccionArmasDisparar(objetivo, armasADisparar , ldv);
 
-                Console.WriteLine("Disparamos:");
-                for (int i = 0; i < armasADisparar.Count; i++)
-                    Console.WriteLine(armasADisparar[i].nombre());
+                if (objetivo != null)
+                {
+                    if (armasADisparar.Count > 0)
+                    {
+                        log += "\tDisparamos:\n";
+                        foreach (Componente c in armasADisparar)
+                        {
+                            log += "\t\t" + c.nombre();
+                        }
+                    }
+                    else
+                        log += "\tNo disparemos ningun arma\n";
+                    //Console.WriteLine("Disparamos:");
+                    //for (int i = 0; i < armasADisparar.Count; i++)
+                        //Console.WriteLine(armasADisparar[i].nombre());
+                }else
+                    log += "\tNo hay ningun objetivo a nuestro alcance o bien no hay linea de vision con ellos\n";
 
                 //Escribimos las ordenes
                 escribirOrdenesArmas(objetivo, armasADisparar);
-
-                Console.ReadLine();
             }
+
+            escribirLog(log);
+            Console.ReadLine();
         }
 
         /// <summary>
