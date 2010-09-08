@@ -33,9 +33,10 @@ namespace ico
         /// <param name="a">destino del camino a construir; tipo Casilla</param>
         /// <param name="tablero">tablero del juego; tipo Tablero</param>
         /// <param name="estrategia">estrategia conforme a la cual se hara el combate; tipo Estrategia</param>
-        public Camino(int myJugador, Casilla a, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs, Boolean salta=false) {
+        public Camino(int myJugador, Casilla a, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs) {
             _ich = mechs[myJugador];
             _estrategia=estrategia;
+            _salta = false;
             ArrayList camino=null,tmp;
             if (estrategia == Estrategia.Defensiva)
             {
