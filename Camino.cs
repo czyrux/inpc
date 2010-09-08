@@ -199,7 +199,7 @@ namespace ico
             else {//Si saltamos
                 str = "Saltar\n";
                 str += _camino[_camino.Count - 1].casilla().ToString() + "\n";
-                str += ((int)_final).ToString();
+                str += ((int)_original).ToString();
             }
 
             return str;
@@ -585,7 +585,7 @@ namespace ico
                 suelo = 2;
                 _seLevanto = true;
                 tmpE=_original;
-                _original = mejorEncaramiento(((Nodo)camino[0]), objetivo.posicion(), t);//_camino[0].direccion();
+                _original = mejorEncaramiento(ich,objetivo);//_camino[0].direccion();
                 ((Nodo)camino[0]).direccion(mejorEncaramiento(((Nodo)camino[0]), objetivo.posicion(), t));
             }
             if (_estrategia == Estrategia.Defensiva)
@@ -639,9 +639,19 @@ namespace ico
             }
         }
 
-        private Encaramiento mejorEncarmiento(Mech yo, Mech enemigo, Tablero t) { 
-
-            return Encaramiento.Arriba;
+        private Encaramiento mejorEncaramiento(Mech yo, Mech enemigo) { 
+            int min=1000, imin=0;
+            for (int i = 1; i < 7;i++)
+            {
+                if (yo.posicion().conoDelantero(enemigo.posicion(), i)) {
+                    if ( costoEncaramiento((Encaramiento)yo.ladoEncaramiento(), (Encaramiento)i) < min)
+                    {
+                        min = costoEncaramiento((Encaramiento)yo.ladoEncaramiento(), (Encaramiento)i);
+                        imin = i;
+                    }
+                }
+            }
+            return (Encaramiento)imin;
         }
 
         Encaramiento mejorEncaramiento(Nodo origen, Posicion objetivo, Tablero t)
