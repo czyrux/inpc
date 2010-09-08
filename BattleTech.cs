@@ -347,7 +347,7 @@ namespace ico
                 _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,PanelControl.radio,_mechs,_myJugador);
             }
             else {
-                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosAndar(),_mechs );
+                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, ((MechJugador)_mechs[_myJugador]).andar(),_mechs );
             }
 
             //Puntuamos las casillas
@@ -607,7 +607,7 @@ namespace ico
         /// <returns>True en caso afirmativo</returns>
         private Boolean deboSaltar(Posicion p , Mech objetivo) {
             bool salto = false;
-            int punt = _mechs[_myJugador].puntosSaltar();
+            int punt = ((MechJugador)_mechs[_myJugador]).saltar();
 
             if (_estrategia == Estrategia.Defensiva && _mechs[_myJugador].posicion().distancia(p) <= punt && _tablero.Casilla(p).tipoTerreno() != 2
                 && punt != 0 && _config.mechMovido(objetivo.numeroJ()) )
