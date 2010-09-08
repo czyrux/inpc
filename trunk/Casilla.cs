@@ -16,6 +16,7 @@ namespace ico
             _nivel = _fceEdificio = _tipoTerreno = _objetoTerreno = _nGarrotes = /*_heuristica.g = */0;
             //_heuristica.f = _heuristica.h = 0;
             _edificioDerrumbado = _fuego = _humo = false;
+
             _caras = new Cara[6];
             _posicion = new Posicion();
             _puntosMovimientos = 0;
