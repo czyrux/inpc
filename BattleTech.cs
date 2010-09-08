@@ -365,8 +365,9 @@ namespace ico
             //Escogemos las que tienen mejores puntuaciones mientras haya espacio en el array destinosElegidos
             while (!salir)
             {
-                if ((_estrategia == Estrategia.Agresiva && _mechs[_myJugador].posicion().fila() > objetivo.posicion().fila())
-                    || (_estrategia == Estrategia.Defensiva && _mechs[_myJugador].posicion().fila() < objetivo.posicion().fila()))
+                //La recorremos de forma ascendente
+                if ((_estrategia == Estrategia.Agresiva && _mechs[_myJugador].posicion().fila() >= objetivo.posicion().fila())
+                    || (_estrategia == Estrategia.Defensiva && _mechs[_myJugador].posicion().fila() <= objetivo.posicion().fila()))
                 {
                     for (int i = 0; i < puntuacion.Length && !salir; i++)
                     {
@@ -379,7 +380,7 @@ namespace ico
                             salir = true;
                     }
                 }
-                else 
+                else //La recorremos de forma descendente
                 {
                     for (int i = puntuacion.Length-1 ; i >= 0 && !salir; i--)
                     {
