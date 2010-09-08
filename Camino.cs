@@ -41,39 +41,46 @@ namespace ico
             _reversa = reversa;
 
             ArrayList camino = null, tmp;
-            _debug += "===============================================================================\n"; 
-            if (estrategia == Estrategia.Defensiva)
+            _debug += "===============================================================================\n";
+            if (((MechJugador)mechs[myJugador]).andar() != 0)
             {
-                if ((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)) == null)
+                if (estrategia == Estrategia.Defensiva)
                 {
-                    _estrategia = Estrategia.Agresiva;
-                    camino = pathFinder(myJugador, a, tablero, objetivo, mechs);
-                }
-            }
-            else {
-                tmp = pathFinder(myJugador, a, tablero, objetivo, mechs);
-                if (mechs[myJugador].posicion() != a.posicion() && tmp.Count == 1)
-                {
-                    
-                    _estrategia = Estrategia.Defensiva;
                     if ((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)) == null)
                     {
-                        camino = tmp;
+                        _estrategia = Estrategia.Agresiva;
+                        camino = pathFinder(myJugador, a, tablero, objetivo, mechs);
                     }
                 }
                 else
-                    camino = tmp;
+                {
+                    tmp = pathFinder(myJugador, a, tablero, objetivo, mechs);
+                    if (mechs[myJugador].posicion() != a.posicion() && tmp.Count == 1)
+                    {
+
+                        _estrategia = Estrategia.Defensiva;
+                        if ((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)) == null)
+                        {
+                            camino = tmp;
+                        }
+                    }
+                    else
+                        camino = tmp;
+                }
+
+                _camino = new List<Nodo>();
+                foreach (Nodo i in camino)
+                {
+                    _camino.Add(i);
+                }
+
+                _debug += "*******************************************************************************\n";
+
+                _debug += "Escribo en el archivo se accion:\n" + this.ToString();
             }
+            else { 
 
-            _camino = new List<Nodo>();
-            foreach (Nodo i in camino) {
-                _camino.Add(i);
             }
-
-            _debug += "*******************************************************************************\n";
-
-            _debug += "Escribo en el archivo se accion:\n"+this.ToString();
-
             _debug += "===============================================================================\n";
         }
 
@@ -460,14 +467,14 @@ namespace ico
         }
 
         private void debugString(ArrayList camino, int my, int objetivo, Mech[] mechs, Boolean ideal=true) {
-
+            int j = 0;
             _debug += "El mech " + mechs[my].nombre() + mechs[my].numeroJ().ToString() + " con " + (_estrategia == Estrategia.Defensiva ? ((MechJugador)mechs[my]).correr().ToString() : ((MechJugador)mechs[my]).andar().ToString()) + "PM de "+(_estrategia == Estrategia.Defensiva?"correr":"andar")+" y objetivo " +
                 objetivo.ToString() + (ideal ? " trata de hacer" : " hace") + "con costo " +
                 ((Nodo)camino[(ideal ? 0 : camino.Count - 1)]).g().ToString() + ":\n\n";
             if (ideal) {
 
                 for (int i = camino.Count - 1; i > -1; i--) {
-                    _debug += "(" + ((Nodo)camino[i]).casilla().ToString() + ", " + ((Nodo)camino[i]).direccion().ToString() + ", " + ((Nodo)camino[i]).g().ToString() + ")->";
+                    _debug += "(" + ((Nodo)camino[i]).casilla().ToString() + ", " + ((Nodo)camino[i]).direccion().ToString() + ", " + ((Nodo)camino[i]).g().ToString() + "g)->";
                 }
             }
             else
@@ -475,7 +482,8 @@ namespace ico
 
                 foreach (Nodo i in camino)
                 {
-                    _debug += "(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ", "+((Nodo)camino[i]).g().ToString() + ")->";
+                    _debug += "(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ", "+((Nodo)camino[j]).g().ToString() + "g)->";
+                    j++;
                 }
             }
             _debug += (ideal ? "FIN" : _final.ToString()) + "\n";
@@ -627,10 +635,10 @@ namespace ico
                 for (int i = 0; i < camino.Count; i++)
                 {
 
-                    if (((Nodo)camino[i]).g() <= puntosMR)
+                    if (((Nodo)camino[i]).g() < puntosMR)
                     {
                         tmpE = mejorEncaramiento(ich, objetivo, destino.posicion());//mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
-                        if (((Nodo)camino[i]).g() + costoEncaramiento(((Nodo)camino[i]).direccion(), tmpE) < puntosMR)
+                        if (((Nodo)camino[i]).g() + costoEncaramiento(((Nodo)camino[i]).direccion(), tmpE) <= puntosMR)
                         {
                             _final = tmpE;
                             return i;
