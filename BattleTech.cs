@@ -236,6 +236,7 @@ namespace ico
                     posiblesCaminos[destino].print();
                     Console.WriteLine(posiblesCaminos[destino].ToString());
                     posiblesCaminos[destino].ToFile(_myJugador);
+                    Console.ReadLine();
                     posiblesCaminos[destino].ToFile();
                 }
                 else //Saltamos
@@ -243,10 +244,10 @@ namespace ico
                     Camino c = new Camino(_myJugador,destinos[destino],_tablero,objetivo.numeroJ(),_mechs);
                     Console.WriteLine(c.ToString());
                     c.ToFile(_myJugador);
-
+                    Console.ReadLine();
+                    c.ToFile();
                 }
-
-                Console.ReadLine();
+                
             }
         }
 
@@ -574,12 +575,13 @@ namespace ico
             bool salto = false;
             int punt = _mechs[_myJugador].puntosSaltar();
 
-            if (_estrategia == Estrategia.Defensiva && _mechs[_myJugador].posicion().distancia(p) <= punt && _tablero.Casilla(p).tipoTerreno() != 2)
+            if (_estrategia == Estrategia.Defensiva && _mechs[_myJugador].posicion().distancia(p) <= punt && _tablero.Casilla(p).tipoTerreno() != 2
+                && punt != 0)
             {
                 salto = true;
             }
             else if (_estrategia == Estrategia.Agresiva && _mechs[_myJugador].posicion().distancia(p) <= punt && _tablero.Casilla(p).tipoTerreno() != 2
-                && objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
+                && objetivo.conoTrasero(p, objetivo.ladoEncaramiento()) && punt != 0)
                 salto = true;
 
             return salto;
