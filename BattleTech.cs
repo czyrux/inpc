@@ -413,7 +413,7 @@ namespace ico
                     }
                 }
                 max--;
-                if (vueltaVacia) salir = true;
+                if (max<10) salir = true;
             }
         }
 
