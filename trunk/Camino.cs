@@ -324,7 +324,7 @@ namespace ico
                     // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
                     aux = actual.casilla().costoMovimiento(elemento.casilla()) + costoEncaramiento(actual.casilla(), (Encaramiento)i, elemento.casilla(), Tablero);
                     // verifico si es intrancitable
-                    if (aux > 100 || hayAlgunMech(elemento.casilla().posicion(),mechs))
+                    if (aux > 100 || Tablero.casillaOcupada(elemento.casilla().posicion(),mechs,myJugador))
                         continue;
                     // verifico si es intrancitable
                     if (/*elemento.casilla.costoMovimiento() >= 0 ||*/  aux >= 0)
