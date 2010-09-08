@@ -235,8 +235,8 @@ namespace ico
                     posiblesCaminos[index].ToFile();
                 }
                 else 
-                { 
-                
+                {
+                    Camino c;
                 }
 
                 Console.ReadLine();
