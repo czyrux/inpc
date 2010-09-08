@@ -1080,7 +1080,7 @@ namespace ico
                         ordenes += "1000\n";
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
-                        log += "\tGolpeamos con: BD\n";
+                        log += "\t\tGolpeamos con: BD\n";
                     }
 
                     if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo()
@@ -1091,7 +1091,7 @@ namespace ico
                         ordenes += "1000\n";
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
-                        log += "\tGolpeamos con: BI\n";
+                        log += "\t\tGolpeamos con: BI\n";
                     }
 
                     if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda()
@@ -1103,7 +1103,7 @@ namespace ico
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
                         ataque = true;
-                        log += "\tGolpeamos con: PI\n";
+                        log += "\t\tGolpeamos con: PI\n";
                     }
 
                     if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha()
@@ -1115,14 +1115,14 @@ namespace ico
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
                         ataque = true;
-                        log += "\tGolpeamos con: PD\n";
+                        log += "\t\tGolpeamos con: PD\n";
                     }
                 }
             }
             else
-                log += "\tNo podemos atacar a ningun Mech";
+                log += "\t\tNo podemos atacar a ningun Mech";
 
-            if (numeroArmas == 0) log += "\tNo podemos golpearle\n";
+            if (numeroArmas == 0) log += "\t\tNo podemos golpearle\n";
             ordenes = numeroArmas.ToString() + "\n" + ordenes;
 
             //Escribimos las ordenes
