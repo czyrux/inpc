@@ -467,33 +467,8 @@ namespace ico
                 if (objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
                     puntuacion += 4;
 
-                //Puntuacion por distancia
-                /*int distancia, bonificador;
-                distancia = objetivo.posicion().distancia(p);
-                if (_mechs[i].tipo() == tipoMech.Asalto)
-                {
-                            bonificador = 2;
-                        }
-                        else
-                            bonificador = 1;
-
-                        if (distancia > _mechs[i].distanciaTiroLarga())
-                        {
-                            puntuacion += 5 * bonificador;
-                        }
-                        else if (distancia > _mechs[i].distanciaTiroMedia())
-                        {
-                            puntuacion += 4 * bonificador;
-                        }
-                        else if (distancia > _mechs[i].distanciaTiroCorta())
-                        {
-                            puntuacion += 2 * bonificador;
-                        }
-                        else
-                            puntuacion += 0;*/
-
                 //Bono por cercania
-                puntuacion += (PanelControl.radio - p.distancia(objetivo.posicion()) );
+                puntuacion += (PanelControl.radio - p.distancia(objetivo.posicion()) ) + 1;
 
             }
             else //Estrategia defensiva
@@ -551,6 +526,10 @@ namespace ico
                 //Puntuacion por nivel
                 if ( _tablero.Casilla(p).nivel() > 0)
                     puntuacion += -_tablero.Casilla(p).nivel();
+
+                //Bonus por estar situado a espalda cuando el objetivo ya se ha movido 
+                if (_config.mechMovido(objetivo.numeroJ()) && objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
+                    puntuacion += 3;
 
                 //Puntuacion por distancia
                 int distancia , bonificador;
