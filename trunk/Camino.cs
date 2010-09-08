@@ -234,6 +234,10 @@ namespace ico
             return _camino[_camino.Count - 1].casilla();
         }
 
+        public string ToDebug() {
+            return _debug;
+        }
+
 #endregion
        
         #region Privado
