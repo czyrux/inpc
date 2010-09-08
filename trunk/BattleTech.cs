@@ -213,6 +213,7 @@ namespace ico
                 {
                     if (destinos.Count > 0)
                     {
+                        Console.WriteLine("Tenemos destinos:" + destinos.Count);
                         //Evaluamos la ultima posicion de cada camino y nos quedamos con el mayor
                         posiblesCaminos = new Camino[destinos.Count];
                         int[] puntuacionCamino = new int[destinos.Count];
