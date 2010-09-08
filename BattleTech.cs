@@ -684,6 +684,7 @@ namespace ico
              * 4º Ver las armas a dispararle
              * 5º Escribir el fichero
              */
+            String log = "";
             Console.WriteLine("Fase Ataque con Armas");
             Console.WriteLine();
 
@@ -719,9 +720,10 @@ namespace ico
                 Console.WriteLine();
                 objetivo = objetivoMasDebil(objetivos, ldv, armasADisparar);
 
-                Console.WriteLine();
-                if (objetivo != null) Console.WriteLine("El objetivo es:" + objetivo.nombre() +" ldv:"+ldv[0].ldv()+" cobr:"+ldv[0].cobertura());
-                Console.WriteLine();
+                //Console.WriteLine();
+                if (objetivo != null) 
+                //Console.WriteLine("El objetivo es:" + objetivo.nombre() +" ldv:"+ldv[0].ldv()+" cobr:"+ldv[0].cobertura());
+                //Console.WriteLine();
 
 
                 //Vemos las armas a dispararle
