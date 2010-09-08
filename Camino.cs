@@ -301,98 +301,101 @@ namespace ico
             Nodo actual = elemento;
 
             cerradas.Add(elemento);
-            do
+            if (elemento.casilla() != b)
             {
-                nueva = false;
-
-                for (int i = 1; i < 7; i++)
+                do
                 {
-                    elemento = new Nodo();
-                    try
-                    {
-                        elemento.casilla(Tablero.colindante(actual.casilla().posicion(), (Encaramiento)i));//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
-                    }
-                    catch (Exception e)
-                    {
-                        continue;
-                    }
+                    nueva = false;
 
-                    // Ignoro las casillas que ya estan en la lista de cerradas.
-                    if (esta(cerradas, elemento.casilla()))
-                        continue;
-
-                    // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
-                    aux = actual.casilla().costoMovimiento(elemento.casilla()) + costoEncaramiento(actual.casilla(), (Encaramiento)i, elemento.casilla(), Tablero);
-                    // verifico si es intrancitable
-                    if (aux > 100 || Tablero.casillaOcupada(elemento.casilla().posicion(),mechs,myJugador))
-                        continue;
-                    // verifico si es intrancitable
-                    if (/*elemento.casilla.costoMovimiento() >= 0 ||*/  aux >= 0)
+                    for (int i = 1; i < 7; i++)
                     {
-                        //si es agua menor a 0 y estmos en defensiva
-                        if (elemento.casilla().nivel() < 0 && elemento.casilla().tipoTerreno() == 2 && _estrategia == Estrategia.Defensiva) {
-                            continue;//<--- no la agrego por ser intransitable la casilla
+                        elemento = new Nodo();
+                        try
+                        {
+                            elemento.casilla(Tablero.colindante(actual.casilla().posicion(), (Encaramiento)i));//<-- hay que revisar en caso de que salga del tablero, aunque con el try funciona.
+                        }
+                        catch (Exception e)
+                        {
+                            continue;
                         }
 
-                            
-                        // precalculo el costo de movimiento total a esa casilla desde la actual
-                        elemento.g(elemento.casilla().costoMovimiento() + aux + gAcumulada);
+                        // Ignoro las casillas que ya estan en la lista de cerradas.
+                        if (esta(cerradas, elemento.casilla()))
+                            continue;
 
-                        // verifico si la casilla actual ya esta entre las abiertas
-                        if ((iaux = estaEn(abiertas, elemento.casilla())) >= 0)
+                        // Precalculo el costo de movimiento relacional, para no hacerlo varias veces
+                        aux = actual.casilla().costoMovimiento(elemento.casilla()) + costoEncaramiento(actual.casilla(), (Encaramiento)i, elemento.casilla(), Tablero);
+                        // verifico si es intrancitable
+                        if (aux > 100 || Tablero.casillaOcupada(elemento.casilla().posicion(), mechs, myJugador))
+                            continue;
+                        // verifico si es intrancitable
+                        if (/*elemento.casilla.costoMovimiento() >= 0 ||*/  aux >= 0)
                         {
-
-                            // compruebo si desde la aterior era mejor que esta
-                            if (elemento.g() >= ((Nodo)abiertas[iaux]).g())
+                            //si es agua menor a 0 y estmos en defensiva
+                            if (elemento.casilla().nivel() < 0 && elemento.casilla().tipoTerreno() == 2 && _estrategia == Estrategia.Defensiva)
                             {
-                                nueva = true;
-                                // si, si continuo sin hacer cambios
-                                continue;
+                                continue;//<--- no la agrego por ser intransitable la casilla
                             }
-                            //sino modifico la casilla antigua
-                            else
+
+
+                            // precalculo el costo de movimiento total a esa casilla desde la actual
+                            elemento.g(elemento.casilla().costoMovimiento() + aux + gAcumulada);
+
+                            // verifico si la casilla actual ya esta entre las abiertas
+                            if ((iaux = estaEn(abiertas, elemento.casilla())) >= 0)
                             {
+
+                                // compruebo si desde la aterior era mejor que esta
+                                if (elemento.g() >= ((Nodo)abiertas[iaux]).g())
+                                {
+                                    nueva = true;
+                                    // si, si continuo sin hacer cambios
+                                    continue;
+                                }
+                                //sino modifico la casilla antigua
+                                else
+                                {
+                                    nueva = true;
+                                    elemento.h(((Nodo)abiertas[iaux]).h());
+                                    elemento.f(elemento.g() + elemento.h());
+                                    elemento.padre(actual);
+                                    elemento.direccion((Encaramiento)i);
+                                    abiertas[iaux] = elemento;
+                                }
+
+                            }
+                            else
+                            {//si no estaba entre las abiertas inserto la nueva casilla
                                 nueva = true;
-                                elemento.h(((Nodo)abiertas[iaux]).h());
+                                elemento.h(heuristica(elemento.casilla(), b));
                                 elemento.f(elemento.g() + elemento.h());
                                 elemento.padre(actual);
                                 elemento.direccion((Encaramiento)i);
-                                abiertas[iaux] = elemento;
+                                abiertas.Add(elemento);
                             }
 
                         }
-                        else
-                        {//si no estaba entre las abiertas inserto la nueva casilla
-                            nueva = true;
-                            elemento.h(heuristica(elemento.casilla(), b));
-                            elemento.f(elemento.g() + elemento.h());
-                            elemento.padre(actual);
-                            elemento.direccion((Encaramiento)i);
-                            abiertas.Add(elemento);
-                        }
+
 
                     }
 
+                    if (abiertas.Count != 0)
+                    {
+                        //buesca la mejor casilla entre las abiertas
+                        mejor = mejorCasillaAbierta(abiertas, actual.casilla(), b);
+                        //actualizo la acomulacion de la g
+                        gAcumulada = ((Nodo)abiertas[mejor]).g();
+                        //agrego la mejor casilla
+                        cerradas.Add(abiertas[mejor]);
+                        //pongo la mejor como la siguiente actual
+                        actual = (Nodo)abiertas[mejor];
+                        //borro la mejor de las abiertas
+                        abiertas.RemoveAt(mejor);
+                        nueva = true;
+                    }
 
-                }
-
-                if (abiertas.Count != 0)
-                {
-                    //buesca la mejor casilla entre las abiertas
-                    mejor = mejorCasillaAbierta(abiertas, actual.casilla(), b);
-                    //actualizo la acomulacion de la g
-                    gAcumulada = ((Nodo)abiertas[mejor]).g();
-                    //agrego la mejor casilla
-                    cerradas.Add(abiertas[mejor]);
-                    //pongo la mejor como la siguiente actual
-                    actual = (Nodo)abiertas[mejor];
-                    //borro la mejor de las abiertas
-                    abiertas.RemoveAt(mejor);
-                    nueva = true;
-                }
-
-            } while (actual.casilla() != b && nueva);
-
+                } while (actual.casilla() != b && nueva);
+            }
             if (actual.casilla() == b)
             {
                 elemento = new Nodo();
