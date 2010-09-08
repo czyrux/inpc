@@ -356,23 +356,41 @@ namespace ico
                 puntuacion[i] = puntuacionCasilla(posiblesDestinos[i], objetivo);
             }
 
-            //Escogemos las que tienen mejores puntuaciones mientras haya espacio en el array destinosElegidos
+            //Vemos cual es la maxima puntuacion
             int max = 0;
             for (int i = 0; i < puntuacion.Length; i++)
                 if (puntuacion[i] > max)
                     max = puntuacion[i];
 
+            //Escogemos las que tienen mejores puntuaciones mientras haya espacio en el array destinosElegidos
             while (!salir)
             {
-                for (int i = 0; i < puntuacion.Length && !salir; i++)
+                if ((_estrategia == Estrategia.Agresiva && _mechs[_myJugador].posicion().fila() > objetivo.posicion().fila())
+                    || (_estrategia == Estrategia.Defensiva && _mechs[_myJugador].posicion().fila() < objetivo.posicion().fila()))
                 {
-                    if (puntuacion[i] == max)
+                    for (int i = 0; i < puntuacion.Length && !salir; i++)
                     {
-                        destinosElegidos[escogidas] = posiblesDestinos[i];
-                        escogidas++;
+                        if (puntuacion[i] == max)
+                        {
+                            destinosElegidos[escogidas] = posiblesDestinos[i];
+                            escogidas++;
+                        }
+                        if (escogidas >= destinosElegidos.Length)
+                            salir = true;
                     }
-                    if (escogidas >= destinosElegidos.Length)
-                        salir = true;
+                }
+                else 
+                {
+                    for (int i = puntuacion.Length-1 ; i >= 0 && !salir; i--)
+                    {
+                        if (puntuacion[i] == max)
+                        {
+                            destinosElegidos[escogidas] = posiblesDestinos[i];
+                            escogidas++;
+                        }
+                        if (escogidas >= destinosElegidos.Length)
+                            salir = true;
+                    }
                 }
                 max--;
             }
