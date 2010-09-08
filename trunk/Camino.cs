@@ -419,6 +419,8 @@ namespace ico
                     padre = padre.padre();
                 } while (padre.casilla() != Tablero.Casilla(mechs[myJugador].posicion()));
 
+                debugString(camino, myJugador, objetivo, mechs);
+
                 if ((aux = caminoReal(limpiarAgua(camino), b, mechs[myJugador], Tablero, mechs[objetivo])) == -1)
                     camino = camino.GetRange(camino.Count - 1, 1);
                 else
@@ -437,16 +439,25 @@ namespace ico
             if (!sePuedeHacerCorriendo(camino))
                 return null;
 
-
+            debugString(camino, myJugador, objetivo, mechs, false);
             return camino;
         }
 
-        private void idealString(ArrayList camino, int my, int objetivo, Mech[] mechs, Boolean ideal=true) {
+        private void debugString(ArrayList camino, int my, int objetivo, Mech[] mechs, Boolean ideal=true) {
             _debug += "El mech " + mechs[my].nombre() + " con estrategia" + _estrategia.ToString() + " y objetivo " + 
                 objetivo.ToString() + (ideal ? " trata de hacer" : " hace") + "con costo"+
                 ((Nodo)limpiarAgua(camino)[camino.Count-1]).g().ToString()+":\n";
-            foreach (Nodo i in camino) {
-                _debug += "(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ")->";
+            if (ideal) {
+                for (int i = camino.Count - 1; i > -1; i--) {
+                    _debug += "(" + ((Nodo)camino[i]).casilla().ToString() + ", " + ((Nodo)camino[i]).direccion().ToString() + ")->";
+                }
+            }
+            else
+            {
+                foreach (Nodo i in camino)
+                {
+                    _debug += "(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ")->";
+                }
             }
             _debug += ideal?"FIN\n":_final.ToString();
         }
