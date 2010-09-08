@@ -211,37 +211,47 @@ namespace ico
                 //Si no podemos saltar directamente a ninguna casilla
                 if (!salto)
                 {
-                    //Evaluamos la ultima posicion de cada camino y nos quedamos con el mayor
-                    posiblesCaminos = new Camino[destinos.Count];
-                    int[] puntuacionCamino = new int[destinos.Count];
-                    int valor = int.MinValue;
-                    for (int i = 0; i < destinos.Count; i++)
+                    if (destinos.Count > 0)
                     {
-                        posiblesCaminos[i] = new Camino(_myJugador, _tablero.Casilla(destinos[i]), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
-                        Console.WriteLine("Destino preferido:"+i + ": " + destinos[i].ToString());
-                        //posiblesCaminos[i].print();
-                        Console.WriteLine(posiblesCaminos[i].ToString());
-                        Console.WriteLine("Llegamos hasta: " + posiblesCaminos[i].casillaFinal().posicion().ToString());
-                        puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
-                        Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
-                        if (puntuacionCamino[i] > valor && (casillaEnLdV(posiblesCaminos[i].casillaFinal().posicion(), objetivo) || i == destinos.Count - 1))
+                        //Evaluamos la ultima posicion de cada camino y nos quedamos con el mayor
+                        posiblesCaminos = new Camino[destinos.Count];
+                        int[] puntuacionCamino = new int[destinos.Count];
+                        int valor = int.MinValue;
+                        for (int i = 0; i < destinos.Count; i++)
                         {
-                            destino = i;
-                            valor = puntuacionCamino[i];
+                            posiblesCaminos[i] = new Camino(_myJugador, _tablero.Casilla(destinos[i]), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
+                            Console.WriteLine("Destino preferido:" + i + ": " + destinos[i].ToString());
+                            //posiblesCaminos[i].print();
+                            Console.WriteLine(posiblesCaminos[i].ToString());
+                            Console.WriteLine("Llegamos hasta: " + posiblesCaminos[i].casillaFinal().posicion().ToString());
+                            puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
+                            Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
+                            if (puntuacionCamino[i] > valor && (casillaEnLdV(posiblesCaminos[i].casillaFinal().posicion(), objetivo) || i == destinos.Count - 1))
+                            {
+                                destino = i;
+                                valor = puntuacionCamino[i];
+                            }
+                            Console.WriteLine();
                         }
+
                         Console.WriteLine();
+                        Console.WriteLine("Elegimos " + posiblesCaminos[destino].casillaFinal().posicion().ToString());
+
+                        posiblesCaminos[destino].print();
+                        //Console.WriteLine(posiblesCaminos[destino].ToString());
+                        posiblesCaminos[destino].ToFile(_myJugador);
+                        Console.ReadLine();
+                        posiblesCaminos[destino].ToFile();
+
                     }
-
-                    Console.WriteLine();
-                    Console.WriteLine("Elegimos " + posiblesCaminos[destino].casillaFinal().posicion().ToString());
-
-                    posiblesCaminos[destino].print();
-                    //Console.WriteLine(posiblesCaminos[destino].ToString());
-                    posiblesCaminos[destino].ToFile(_myJugador);
-                    Console.ReadLine();
-                    posiblesCaminos[destino].ToFile();
+                    else //Caso base de no tener destinos porque no tenemos puntos de movimiento
+                    {
+                        //Hacemos camino con nuestro casilla como destino
+                        Camino c = new Camino(_myJugador, _tablero.Casilla(_mechs[_myJugador].posicion()), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
+                        c.ToFile(_myJugador);
+                    }
                 }
-                else //Saltamos
+                else //Caso de poder llegar al destino saltando directamente
                 {
                     Camino c = new Camino(_myJugador,destinos[destino],_tablero,objetivo.numeroJ(),_mechs);
                     c.print();
