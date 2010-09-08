@@ -152,7 +152,7 @@ namespace ico
         public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int radio ) {
             for (int i = 0; i < _filas; i++)
                 for (int j = 0; j < _columnas; j++) {
-                    if (this._casillas[i, j].posicion().distancia(actual) <= radio)
+                    if (this._casillas[i, j].posicion().distancia(actual) <= radio && actual != this._casillas[i,j].posicion() )
                         casillas.Add(_casillas[i, j].posicion());
                 }
         }

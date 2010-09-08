@@ -183,6 +183,7 @@ namespace ico
             Console.WriteLine("Fase movimiento");
             Console.WriteLine();
             Mech objetivo;
+            bool salto = false;
             Posicion[] destinos = new Posicion[PanelControl.numeroDestinos];
             Camino[] posiblesCaminos = new Camino[PanelControl.numeroDestinos];
 
@@ -198,49 +199,46 @@ namespace ico
                 //Seleccionamos la casilla destino
                 seleccionDestino(objetivo,destinos);
 
-                //Evaluamos la ultima posicion de cada camino y nos quedamos con el mayor
-                int[] puntuacionCamino = new int[PanelControl.numeroDestinos];
-                int index = 0, valor = int.MinValue;
-                for (int i = 0; i < destinos.Length; i++) {
-                    posiblesCaminos[i] = new Camino(_myJugador, _tablero.Casilla(destinos[i]), _tablero, _estrategia,objetivo.numeroJ(),_mechs);
-                    Console.WriteLine(i + ": " + destinos[i].ToString());
-                    //posiblesCaminos[i].print();
-                    Console.WriteLine(posiblesCaminos[i].ToString());
-                    Console.WriteLine("Destino " + i + ": " + posiblesCaminos[i].casillaFinal().posicion().ToString());
-                    puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
-                    Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
-                    if (puntuacionCamino[i] > valor && (casillaEnLdV(posiblesCaminos[i].casillaFinal().posicion(),objetivo) || i==destinos.Length-1 ) ) {
-                        index = i;
-                        valor = puntuacionCamino[i];
+                //Vemos si hay condicion de salto
+                for (int i = 0; i < destinos.Length && !salto; i++)
+                    if (podemosSaltar(destinos[i], objetivo))
+                        salto = true;
+
+                //Si no podemos saltar directamente a ninguna casilla
+                if (!salto)
+                {
+                    //Evaluamos la ultima posicion de cada camino y nos quedamos con el mayor
+                    int[] puntuacionCamino = new int[PanelControl.numeroDestinos];
+                    int index = 0, valor = int.MinValue;
+                    for (int i = 0; i < destinos.Length; i++)
+                    {
+                        posiblesCaminos[i] = new Camino(_myJugador, _tablero.Casilla(destinos[i]), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
+                        Console.WriteLine(i + ": " + destinos[i].ToString());
+                        //posiblesCaminos[i].print();
+                        Console.WriteLine(posiblesCaminos[i].ToString());
+                        Console.WriteLine("Destino " + i + ": " + posiblesCaminos[i].casillaFinal().posicion().ToString());
+                        puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
+                        Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
+                        if (puntuacionCamino[i] > valor && (casillaEnLdV(posiblesCaminos[i].casillaFinal().posicion(), objetivo) || i == destinos.Length - 1))
+                        {
+                            index = i;
+                            valor = puntuacionCamino[i];
+                        }
                     }
+
+                    Console.WriteLine();
+                    Console.WriteLine("Elegimos " + posiblesCaminos[index].casillaFinal().posicion().ToString());
+
+                    posiblesCaminos[index].print();
+                    Console.WriteLine(posiblesCaminos[index].ToString());
+                    posiblesCaminos[index].ToFile(_myJugador);
+                    posiblesCaminos[index].ToFile();
+                }
+                else 
+                { 
+                
                 }
 
-                Console.WriteLine();
-                Console.WriteLine("Elegimos " + posiblesCaminos[index].casillaFinal().posicion().ToString());
-
-                posiblesCaminos[index].print();
-                Console.WriteLine(posiblesCaminos[index].ToString());
-                posiblesCaminos[index].ToFile(_myJugador);
-                posiblesCaminos[index].ToFile();
-                //prueba de pathfinder el 9/8 - Angel
-               /* string str;
-                do
-                {///*
-                    Console.WriteLine("escribe la columnafila de ");
-                    str = Console.ReadLine();
-                    Posicion de = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
-                    Console.WriteLine("escribe la columnafila a ");
-                    str = Console.ReadLine();
-                    Posicion a = new Posicion(Convert.ToInt16(str.Substring(2, 2)), Convert.ToInt16(str.Substring(0, 2)));
-                    Camino Camino = new Camino(_tablero.Casilla(de), _mechs[_myJugador], _tablero.Casilla(a), _tablero, _estrategia);
-                    //
-                    //Camino Camino = new Camino(_tablero.Casilla(_mechs[_myJugador].posicion()), _mechs[_myJugador], _tablero.Casilla(destino), _tablero);
-
-                    Camino.print();
-                    Console.WriteLine(Camino.ToString());
-
-                    Console.ReadKey();
-                } while (true);*/
                 Console.ReadLine();
             }
         }
@@ -556,6 +554,28 @@ namespace ico
             LdV linea = new LdV(p, _myJugador, objetivo, _tablero);
 
             return linea.ldv();
+        }
+
+
+        /// <summary>
+        /// Indica si un mech puede saltar a la casilla indica como parametro <paramref name="p"/>
+        /// </summary>
+        /// <param name="p">Casilla a la que desea saltar</param>
+        /// <param name="objetivo">Mech al que nos estamos enfrentando</param>
+        /// <returns>True en caso afirmativo</returns>
+        private Boolean podemosSaltar(Posicion p , Mech objetivo) {
+            bool salto = false;
+            int punt = _mechs[_myJugador].puntosSaltar();
+
+            if (_estrategia == Estrategia.Defensiva && _mechs[_myJugador].posicion().distancia(p) <= punt && _tablero.Casilla(p).tipoTerreno() != 2)
+            {
+                salto = true;
+            }
+            else if (_estrategia == Estrategia.Agresiva && _mechs[_myJugador].posicion().distancia(p) <= punt && _tablero.Casilla(p).tipoTerreno() != 2
+                && objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
+                salto = true;
+
+            return salto;
         }
         #endregion
 
