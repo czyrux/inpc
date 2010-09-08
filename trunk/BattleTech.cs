@@ -468,7 +468,7 @@ namespace ico
                     puntuacion += 4;
 
                 //Bono por cercania
-                puntuacion += (PanelControl.radio - p.distancia(objetivo.posicion()) ) + 1;
+                puntuacion += (PanelControl.radio - p.distancia(objetivo.posicion()) ) + 2;
 
             }
             else //Estrategia defensiva
@@ -529,7 +529,7 @@ namespace ico
 
                 //Bonus por estar situado a espalda cuando el objetivo ya se ha movido 
                 if (_config.mechMovido(objetivo.numeroJ()) && objetivo.conoTrasero(p, objetivo.ladoEncaramiento())
-                    && _mechs[_myJugador].posicion().distancia(objetivo.posicion()) == 1)
+                    && (_mechs[_myJugador].posicion().distancia(objetivo.posicion()) == 1 || _mechs[_myJugador].posicion().distancia(objetivo.posicion()) == 2))
                     puntuacion += 5;
 
                 //Puntuacion por distancia
