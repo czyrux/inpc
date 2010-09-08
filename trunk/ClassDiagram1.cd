@@ -29,7 +29,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>BAANEACAAAAAIUgAIICAgJAAEAACAEABAwAAEAAAAAA=</HashCode>
+      <HashCode>BAANEACAAAAAIUgAIICCgJAAEAACAEABAwAAEAAAAAA=</HashCode>
       <FileName>BattleTech.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -40,7 +40,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAQIQAAIAJACAAAkAAIAggAAAAAEBEAAAAKAAAEQQhA=</HashCode>
+      <HashCode>AAQIQAAIAJACAAAkAAMAggAIEAAEBEAAAEKAAAEQQhA=</HashCode>
       <FileName>Camino.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -84,7 +84,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AkIEQAEgQIYAHEBAAEAiBQAABAEASECAEQUAIAAICEA=</HashCode>
+      <HashCode>AkIEQAEgSIYAHEBAAEAiBQAABAEASECAEQUAIAAICEA=</HashCode>
       <FileName>ConfiguracionJuego.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -123,14 +123,14 @@
   <Class Name="ico.Mech" Collapsed="true">
     <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>XVwntBMU0LaQ4EL1hkoLz+sBEzJetES0tSYkoSfdU0o=</HashCode>
+      <HashCode>XVwntBMU0LaQ8EL1hkoLz+sBEzJetES0tSYkoSfdU0o=</HashCode>
       <FileName>Mech.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ico.MechJugador" Collapsed="true">
     <Position X="4" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>SQAAAwBABIEQCYAAhIAoBAACABAICFwBAAAQQCEYxSA=</HashCode>
+      <HashCode>SQAAAwBABAEUCYAABIAoDAACABAICFyBAAAQQCEYxCA=</HashCode>
       <FileName>MechJugador.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -151,7 +151,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>gEARAAQAAAAAAIMAAAgQEEABAEAAAKANAAAhDSACACA=</HashCode>
+      <HashCode>gGARAAQAAAAAAIMAAAgQEEABAEAAAKQNAAAhDSACACA=</HashCode>
       <FileName>PanelControl.cs</FileName>
     </TypeIdentifier>
   </Class>
