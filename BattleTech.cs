@@ -459,8 +459,33 @@ namespace ico
                     puntuacion += 4;
 
                 //Puntuacion por distancia
-                puntuacion += (PanelControl.radio - p.distancia(objetivo.posicion()) ); 
-                //puntuacion -= (int)Math.Truncate(_mechs[_myJugador].posicion().distancia(p)*PanelControl.pesoDistancia);
+                /*int distancia, bonificador;
+                distancia = objetivo.posicion().distancia(p);
+                if (_mechs[i].tipo() == tipoMech.Asalto)
+                {
+                            bonificador = 2;
+                        }
+                        else
+                            bonificador = 1;
+
+                        if (distancia > _mechs[i].distanciaTiroLarga())
+                        {
+                            puntuacion += 5 * bonificador;
+                        }
+                        else if (distancia > _mechs[i].distanciaTiroMedia())
+                        {
+                            puntuacion += 4 * bonificador;
+                        }
+                        else if (distancia > _mechs[i].distanciaTiroCorta())
+                        {
+                            puntuacion += 2 * bonificador;
+                        }
+                        else
+                            puntuacion += 0;*/
+
+                //Bono por cercania
+                puntuacion += (PanelControl.radio - p.distancia(objetivo.posicion()) );
+
             }
             else //Estrategia defensiva
             {
