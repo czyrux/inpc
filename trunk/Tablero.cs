@@ -181,7 +181,7 @@ namespace ico
         }
 
 
-        private bool casillaOcupada( Posicion p , Mech[] mechs , int my ) 
+        public bool casillaOcupada( Posicion p , Mech[] mechs , int my ) 
         {
             bool ocupada = false;
 
