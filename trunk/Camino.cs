@@ -37,8 +37,9 @@ namespace ico
         public Camino(int myJugador, Casilla a, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs, Boolean reversa=false ) {
             _ich = mechs[myJugador];
             _estrategia=estrategia;
-            _salta = false;
+            _salta = _seLevanto = false;
             _reversa = reversa;
+
 
             ArrayList camino = null, tmp;
             _debug += "===============================================================================\n";
@@ -78,8 +79,14 @@ namespace ico
 
                 _debug += "Escribo en el archivo se accion:\n" + this.ToString();
             }
-            else { 
-
+            else {
+                Nodo e = new Nodo();
+                e.casilla(tablero.Casilla(mechs[myJugador].posicion()));
+                e.direccion((Encaramiento)mechs[myJugador].ladoEncaramiento());
+                _original = e.direccion();
+                _final = _original;
+                _seLevanto = false;
+                _camino.Add(e);
             }
             _debug += "===============================================================================\n";
         }
