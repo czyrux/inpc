@@ -695,7 +695,7 @@ namespace ico
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
                 determinarEstrategia();
-
+                log += "\tEstrategia del Mech Jugador" + _estrategia + "\n";
                 //Escogemos a los mech si estan dentro del alcance de tiro largo y no estan en nuestra espalda
                 for (int i = 0; i < _mechs.Length; i++)
                     if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].distanciaTiroLarga() &&
@@ -727,7 +727,7 @@ namespace ico
                     log += "\tPodriamos disparar:\n";
                     foreach (Componente c in armasADisparar) 
                     {
-                        log += "\t\t" + c.nombre();
+                        log += "\t\t" + c.nombre() + "\n";
                     }
                 }
                 //Console.WriteLine("El objetivo es:" + objetivo.nombre() +" ldv:"+ldv[0].ldv()+" cobr:"+ldv[0].cobertura());
@@ -744,7 +744,7 @@ namespace ico
                         log += "\tDisparamos:\n";
                         foreach (Componente c in armasADisparar)
                         {
-                            log += "\t\t" + c.nombre();
+                            log += "\t\t" + c.nombre() + "\n";
                         }
                     }
                     else
