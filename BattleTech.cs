@@ -1028,8 +1028,9 @@ namespace ico
         /// </summary>
         private void faseAtaquesFisico() 
         {
-            Console.WriteLine("Fase Ataque Fisico");
-            Console.WriteLine();
+            String log = "";
+            //Console.WriteLine("Fase Ataque Fisico");
+            //Console.WriteLine();
 
             Mech objetivo = null;
             MechJugador my = (MechJugador)_mechs[_myJugador];
@@ -1039,12 +1040,12 @@ namespace ico
 
             if (my.operativo() && my.consciente())
             {
-                String situacion ;
+                String situacion;
                 int encTorso = my.ladoEncaramientoTorso();
                 int enc = my.ladoEncaramiento();
 
                 //Escogemos al objetivo
-                for (int i = 0; i < _mechs.Length; i++) 
+                for (int i = 0; i < _mechs.Length; i++)
                 {
                     if (i != _myJugador && my.posicion().distancia(_mechs[i].posicion()) == 1 && !my.conoTrasero(_mechs[i].posicion(), encTorso))
                         objetivo = _mechs[i];
@@ -1053,7 +1054,8 @@ namespace ico
                 //Si tenemos objetivo
                 if (objetivo != null)
                 {
-                    Console.WriteLine("Hay objetivo");
+                    log += "\tEscogemos como objetivo al Mech J-" + objetivo.numeroJ() + ": " + objetivo.nombre() + ". Hubicacion: " + objetivo.posicion().ToString() + "\n";
+                    //Console.WriteLine("Hay objetivo");
                     //Vemos la localizacion del objetivo respecto a nuestro mech
                     if (my.conoDerecho(objetivo.posicion(), encTorso))
                     {
@@ -1071,15 +1073,16 @@ namespace ico
 
                     //Vemos las armas fisicas con las que darle
                     if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()
-                        && ((diferenciaNivel == 0 && !objetivo.enSuelo()) || diferenciaNivel == -1) )
+                        && ((diferenciaNivel == 0 && !objetivo.enSuelo()) || diferenciaNivel == -1))
                     {
                         numeroArmas++;
                         ordenes += "BD\n";
                         ordenes += "1000\n";
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
+                        log += "\tGolpeamos con: BD\n";
                     }
-                    
+
                     if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo()
                         && ((diferenciaNivel == 0 && !objetivo.enSuelo()) || diferenciaNivel == -1))
                     {
@@ -1088,10 +1091,11 @@ namespace ico
                         ordenes += "1000\n";
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
+                        log += "\tGolpeamos con: BI\n";
                     }
-                    
+
                     if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda()
-                        && (diferenciaNivel == 0 || (diferenciaNivel == 1 && !objetivo.enSuelo()) ))
+                        && (diferenciaNivel == 0 || (diferenciaNivel == 1 && !objetivo.enSuelo())))
                     {
                         numeroArmas++;
                         ordenes += "PI\n";
@@ -1099,8 +1103,9 @@ namespace ico
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
                         ataque = true;
+                        log += "\tGolpeamos con: PI\n";
                     }
-                    
+
                     if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha()
                         && (diferenciaNivel == 0 || (diferenciaNivel == 1 && !objetivo.enSuelo())) && !ataque)
                     {
@@ -1110,10 +1115,14 @@ namespace ico
                         ordenes += objetivo.posicion() + "\n";
                         ordenes += "Mech\n";
                         ataque = true;
+                        log += "\tGolpeamos con: PD\n";
                     }
                 }
             }
+            else
+                log += "\tNo podemos atacar a ningun Mech";
 
+            if (numeroArmas == 0) log += "\tNo podemos golpearle\n";
             ordenes = numeroArmas.ToString() + "\n" + ordenes;
 
             //Escribimos las ordenes
@@ -1153,7 +1162,8 @@ namespace ico
         {
             StreamWriter f = new StreamWriter(PanelControl.fichLog + _myJugador.ToString() + ".log", true);
             f.WriteLine("Dia: " + System.DateTime.Now.Day + "/" + System.DateTime.Now.Month + "/" + System.DateTime.Now.Year + " Hora: " + System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second);
-            f.WriteLine("Fase de " + _faseJuego+". Jugador: "+_myJugador);
+            f.WriteLine("Fase de " + _faseJuego + ". Jugador: " + _mechs[_myJugador].nombre());
+            f.WriteLine(" nº: " + _myJugador.ToString() + " hubicacion: " + _mechs[_myJugador].posicion().ToString());
             f.WriteLine(text);
             f.Close();
         }
