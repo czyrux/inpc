@@ -378,10 +378,8 @@ namespace ico
                     max = puntuacion[i];
 
             //Escogemos las que tienen mejores puntuaciones mientras haya espacio en el array destinosElegidos
-            Boolean vueltaVacia = true;
             while (!salir)
             {
-                vueltaVacia = true;
                 //La recorremos de forma ascendente
                 if ((_estrategia == Estrategia.Agresiva && _mechs[_myJugador].posicion().fila() >= objetivo.posicion().fila())
                     || (_estrategia == Estrategia.Defensiva && _mechs[_myJugador].posicion().fila() <= objetivo.posicion().fila()))
@@ -390,7 +388,6 @@ namespace ico
                     {
                         if (puntuacion[i] == max)
                         {
-                            vueltaVacia = false;
                             destinosElegidos.Add(posiblesDestinos[i]);
                             escogidas++;
                         }
@@ -404,7 +401,6 @@ namespace ico
                     {
                         if (puntuacion[i] == max)
                         {
-                            vueltaVacia = false;
                             destinosElegidos.Add(posiblesDestinos[i]);
                             escogidas++;
                         }
@@ -413,7 +409,7 @@ namespace ico
                     }
                 }
                 max--;
-                if (max<10) salir = true;
+                if (max < 10) salir = true;
             }
         }
 
