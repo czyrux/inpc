@@ -421,12 +421,17 @@ namespace ico
                         camino = camino.GetRange(aux, camino.Count-aux);
                 
                 camino.Reverse();
+                if(camino[0]==camino[1]){
+                    _final = ((Nodo)camino[1]).direccion();
+                    camino.Remove(1);
+                }
             }
             else
                 camino.Add(cerradas[0]);
 
             if (!sePuedeHacerCorriendo(camino))
                 return null;
+
 
             return camino;
         }
