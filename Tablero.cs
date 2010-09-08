@@ -149,22 +149,22 @@ namespace ico
         }
 
 
-        public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int radio ) {
+        public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int radio , Mech[] mechs , int my ) {
             for (int i = 0; i < _filas; i++)
                 for (int j = 0; j < _columnas; j++) {
-                    if (this._casillas[i, j].posicion().distancia(actual) <= radio )
+                    if (this._casillas[i, j].posicion().distancia(actual) <= radio && !casillaOcupada(_casillas[i, j].posicion(), mechs, my))
                         casillas.Add(_casillas[i, j].posicion());
                 }
         }
 
-        public void casillasEnMov(Mech ich, List<Posicion> casillas, int puntMov) 
+        public void casillasEnMov(Mech ich, List<Posicion> casillas, int puntMov, Mech[] mechs ) 
         {
             int dist;
             for (int i = 0; i < _filas; i++)
                 for (int j = 0; j < _columnas; j++)
                 {
                     dist = this._casillas[i, j].posicion().distancia(ich.posicion());
-                    if ( dist < puntMov) {
+                    if ( dist < puntMov && !casillaOcupada(_casillas[i, j].posicion(),mechs,ich.numeroJ()) ) {
                         //si esta en cono derecho o izquierdo
                         if ( (ich.conoDerecho(this._casillas[i, j].posicion(), ich.ladoEncaramiento()) || ich.conoIzquierdo(this._casillas[i, j].posicion(), ich.ladoEncaramiento())) && dist<puntMov-2)
                         {
@@ -178,6 +178,19 @@ namespace ico
                             casillas.Add(_casillas[i, j].posicion());
                     }
                 }
+        }
+
+
+        private bool casillaOcupada( Posicion p , Mech[] mechs , int my ) 
+        {
+            bool ocupada = false;
+
+            foreach ( Mech i in mechs)
+            {
+                if (i.numeroJ() != my && i.posicion().ToString() == p.ToString())
+                    ocupada = true;
+            }
+            return ocupada;
         }
 
         public int filas() { return _filas; }

@@ -353,10 +353,10 @@ namespace ico
             //Escogemos las casillas a evaluar
             if (_estrategia == Estrategia.Agresiva)
             {
-                _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,PanelControl.radio);
+                _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,PanelControl.radio,_mechs,_myJugador);
             }
             else {
-                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosAndar()*2/3 );
+                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, _mechs[_myJugador].puntosAndar(),_mechs );
             }
 
             //Puntuamos las casillas
