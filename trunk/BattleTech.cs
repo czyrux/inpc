@@ -1162,6 +1162,7 @@ namespace ico
             //Escribimos las ordenes
             StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
             //Console.WriteLine(ordenes);
+            escribirLog(log);
             f.WriteLine(ordenes);
             f.Close();
 
