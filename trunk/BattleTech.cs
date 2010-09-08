@@ -380,7 +380,6 @@ namespace ico
                     {
                         destinosElegidos[escogidas] = posiblesDestinos[i];
                         escogidas++;
-                        //Console.WriteLine(i + ": " + posiblesDestinos[i].ToString() + " punt:" + puntuacion[i]);
                     }
                     if (escogidas >= destinosElegidos.Length)
                         salir = true;
@@ -606,7 +605,7 @@ namespace ico
                 salto = true;
             }
             else if (_estrategia == Estrategia.Agresiva && _mechs[_myJugador].posicion().distancia(p) <= punt && _tablero.Casilla(p).tipoTerreno() != 2
-                && objetivo.conoTrasero(p, objetivo.ladoEncaramiento()) && punt != 0)
+                && objetivo.conoTrasero(p, objetivo.ladoEncaramiento()) && punt != 0 && p.ToString() != _mechs[_myJugador].posicion().ToString() )
                 salto = true;
 
             return salto;
