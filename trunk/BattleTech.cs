@@ -185,8 +185,8 @@ namespace ico
             Mech objetivo;
             bool salto = false;
             int destino = 0;
-            Posicion[] destinos = new Posicion[PanelControl.numeroDestinos];
-            Camino[] posiblesCaminos = new Camino[PanelControl.numeroDestinos];
+            List<Posicion> destinos = new List<Posicion>();
+            Camino[] posiblesCaminos;
 
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
@@ -201,7 +201,7 @@ namespace ico
                 seleccionDestino(objetivo,destinos);
 
                 //Vemos si hay condicion de salto
-                for (int i = 0; i < destinos.Length && !salto; i++)
+                for (int i = 0; i < destinos.Count && !salto; i++)
                     if (deboSaltar(destinos[i], objetivo))
                     {
                         salto = true;
@@ -212,9 +212,10 @@ namespace ico
                 if (!salto)
                 {
                     //Evaluamos la ultima posicion de cada camino y nos quedamos con el mayor
-                    int[] puntuacionCamino = new int[PanelControl.numeroDestinos];
+                    posiblesCaminos = new Camino[destinos.Count];
+                    int[] puntuacionCamino = new int[destinos.Count];
                     int valor = int.MinValue;
-                    for (int i = 0; i < destinos.Length; i++)
+                    for (int i = 0; i < destinos.Count; i++)
                     {
                         posiblesCaminos[i] = new Camino(_myJugador, _tablero.Casilla(destinos[i]), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
                         Console.WriteLine("Destino preferido:"+i + ": " + destinos[i].ToString());
@@ -223,7 +224,7 @@ namespace ico
                         Console.WriteLine("Llegamos hasta: " + posiblesCaminos[i].casillaFinal().posicion().ToString());
                         puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
                         Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
-                        if (puntuacionCamino[i] > valor && (casillaEnLdV(posiblesCaminos[i].casillaFinal().posicion(), objetivo) || i == destinos.Length - 1))
+                        if (puntuacionCamino[i] > valor && (casillaEnLdV(posiblesCaminos[i].casillaFinal().posicion(), objetivo) || i == destinos.Count - 1))
                         {
                             destino = i;
                             valor = puntuacionCamino[i];
@@ -364,8 +365,10 @@ namespace ico
                     max = puntuacion[i];
 
             //Escogemos las que tienen mejores puntuaciones mientras haya espacio en el array destinosElegidos
+            Boolean vueltaVacia = true;
             while (!salir)
             {
+                vueltaVacia = true;
                 //La recorremos de forma ascendente
                 if ((_estrategia == Estrategia.Agresiva && _mechs[_myJugador].posicion().fila() >= objetivo.posicion().fila())
                     || (_estrategia == Estrategia.Defensiva && _mechs[_myJugador].posicion().fila() <= objetivo.posicion().fila()))
@@ -374,10 +377,11 @@ namespace ico
                     {
                         if (puntuacion[i] == max)
                         {
+                            vueltaVacia = false;
                             destinosElegidos.Add(posiblesDestinos[i]);
                             escogidas++;
                         }
-                        if (escogidas >= destinosElegidos.Count)
+                        if (escogidas >= PanelControl.numeroDestinos)
                             salir = true;
                     }
                 }
@@ -387,14 +391,16 @@ namespace ico
                     {
                         if (puntuacion[i] == max)
                         {
+                            vueltaVacia = false;
                             destinosElegidos[escogidas] = posiblesDestinos[i];
                             escogidas++;
                         }
-                        if (escogidas >= destinosElegidos.Length)
+                        if (escogidas >= PanelControl.numeroDestinos)
                             salir = true;
                     }
                 }
                 max--;
+                if (vueltaVacia) salir = true;
             }
         }
 
