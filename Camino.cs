@@ -218,11 +218,11 @@ namespace ico
         {
 
             StreamWriter fich = new StreamWriter("debug.txt",false);
-            string str = "El camino hecho por " + _ich.nombre() + ", con " + ((_estrategia == Estrategia.Agresiva) ? _ich.puntosAndar().ToString() : _ich.puntosCorrer().ToString()) + "PM con costo de camino " + costoMovimiento().ToString() + " es: \n";
+            /*string str = "El camino hecho por " + _ich.nombre() + ", con " + ((_estrategia == Estrategia.Agresiva) ? _ich.puntosAndar().ToString() : _ich.puntosCorrer().ToString()) + "PM con costo de camino " + costoMovimiento().ToString() + " es: \n";
             foreach (Nodo i in _camino)
                 str += "(" + i.casilla().posicion().ToString() + ", " + i.direccion().ToString() + ")" + "->";
             str += _final.ToString()+"\n";
-            fich.Write(str);
+            fich.Write(str);*/
             fich.Write(this.ToString());
             fich.Close();
         }
