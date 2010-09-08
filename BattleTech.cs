@@ -1160,10 +1160,23 @@ namespace ico
             f.WriteLine(0); //numero de municiones a expulsar
             //quitamos municiones?¿
             f.Close();
-
+            escribirLog("");
             Console.ReadLine();
         }
 
+        
+        /// <summary>
+        /// Funcion que escribe en el fichero log el resultado de las distintas fases del juego
+        /// </summary>
+        /// <param name="text">Cadena de texto con la informacion a escribir en el log</param>
+        private void escribirLog( String text ) 
+        {
+            StreamWriter f = new StreamWriter(PanelControl.fichLog, true);
+            f.WriteLine("Dia: " + System.DateTime.Today.Date + " Hora: " + System.DateTime.Now.Hour);
+            f.WriteLine("Fase de " + _faseJuego+". Jugador: "+_myJugador);
+            f.WriteLine(text);
+            f.Close();
+        }
         #endregion
 
         #region atributos

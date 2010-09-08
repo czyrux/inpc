@@ -13,6 +13,8 @@ namespace ico
 
         public const String Path = "/ficheros/";
 
+        public const String fichLog = "x76656970.log";
+
         #region constantes de Mechs
 
         #region blindaje
