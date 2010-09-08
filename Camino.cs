@@ -39,6 +39,7 @@ namespace ico
             _estrategia=estrategia;
             _salta = _seLevanto = false;
             _reversa = reversa;
+            _camino = new List<Nodo>();
 
 
             ArrayList camino = null, tmp;
@@ -69,7 +70,6 @@ namespace ico
                         camino = tmp;
                 }
 
-                _camino = new List<Nodo>();
                 foreach (Nodo i in camino)
                 {
                     _camino.Add(i);
