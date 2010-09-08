@@ -393,7 +393,7 @@ namespace ico
 
             } while (actual.casilla() != b && nueva);
 
-            if (abiertas.Count != 0)
+            if (actual.casilla() == b)
             {
                 elemento = new Nodo();
 
@@ -412,15 +412,11 @@ namespace ico
                     padre = padre.padre();
                 } while (padre.casilla() != Tablero.Casilla(mechs[myJugador].posicion()));
 
-
-
-                if (abiertas.Count != 0)
-                {
                     if ((aux = caminoReal(limpiarAgua(camino), b, mechs[myJugador], Tablero, mechs[objetivo])) == -1)
                         camino = camino.GetRange(camino.Count - 1, 1);
                     else
                         camino = camino.GetRange(aux, camino.Count-aux);
-                }
+                
                 camino.Reverse();
             }
             else
