@@ -421,9 +421,10 @@ namespace ico
                     camino = camino.GetRange(aux, camino.Count-aux);
                 
                 camino.Reverse();
-                //Para caminos donde el destino e inicio coinciden
-                if(camino[0]==camino[1])
-                    camino.RemoveAt(1);
+                if(camino.Count>1)
+                    //Para caminos donde el destino e inicio coinciden
+                    if(camino[0]==camino[1])
+                        camino.RemoveAt(1);
                 
             }
             else
