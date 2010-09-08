@@ -201,7 +201,7 @@ namespace ico
 
                 //Vemos si hay condicion de salto
                 for (int i = 0; i < destinos.Length && !salto; i++)
-                    if (podemosSaltar(destinos[i], objetivo))
+                    if (deboSaltar(destinos[i], objetivo))
                         salto = true;
 
                 //Si no podemos saltar directamente a ninguna casilla
@@ -563,7 +563,7 @@ namespace ico
         /// <param name="p">Casilla a la que desea saltar</param>
         /// <param name="objetivo">Mech al que nos estamos enfrentando</param>
         /// <returns>True en caso afirmativo</returns>
-        private Boolean podemosSaltar(Posicion p , Mech objetivo) {
+        private Boolean deboSaltar(Posicion p , Mech objetivo) {
             bool salto = false;
             int punt = _mechs[_myJugador].puntosSaltar();
 
