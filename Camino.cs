@@ -541,7 +541,7 @@ namespace ico
 
                 case Encaramiento.InferiorIzquierda:
 
-                    if (d==Encaramiento.SuperiorDerecha|| d == Encaramiento.Abajo)
+                    if (d==Encaramiento.InferiorDerecho || d == Encaramiento.Abajo)
                         return "Izquierda";
                     else
                         return "Derecha";
