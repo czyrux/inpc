@@ -235,7 +235,7 @@ namespace ico
                     Console.WriteLine("Elegimos " + posiblesCaminos[destino].casillaFinal().posicion().ToString());
 
                     posiblesCaminos[destino].print();
-                    Console.WriteLine(posiblesCaminos[destino].ToString());
+                    //Console.WriteLine(posiblesCaminos[destino].ToString());
                     posiblesCaminos[destino].ToFile(_myJugador);
                     Console.ReadLine();
                     posiblesCaminos[destino].ToFile();
@@ -243,7 +243,7 @@ namespace ico
                 else //Saltamos
                 {
                     Camino c = new Camino(_myJugador,destinos[destino],_tablero,objetivo.numeroJ(),_mechs);
-                    Console.WriteLine(c.ToString());
+                    c.print();
                     c.ToFile(_myJugador);
                     Console.ReadLine();
                     c.ToFile();
