@@ -933,19 +933,19 @@ namespace ico {
         /// Indica los puntos para andar del mech
         /// </summary>
         /// <returns>Entero</returns>
-        public int puntosAndar() { return _andarDefinicion; }
+        public int puntosAndarDefinicion() { return _andarDefinicion; }
 
         /// <summary>
         /// Indica los puntos para correr del mech
         /// </summary>
         /// <returns>Entero</returns>
-		public int puntosCorrer() { return _correrDefinicion; }
+		public int puntosCorrerDefinicion() { return _correrDefinicion; }
 
         /// <summary>
         /// Indica los puntos para saltar del mech
         /// </summary>
         /// <returns>Entero</returns>
-		public int puntosSaltar() { return _saltarDefinicion; }
+		public int puntosSaltarDefinicion() { return _saltarDefinicion; }
 
         /// <summary>
         /// Indica el tipo de radiador del mech
