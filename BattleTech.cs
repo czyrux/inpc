@@ -1172,7 +1172,7 @@ namespace ico
         private void escribirLog( String text ) 
         {
             StreamWriter f = new StreamWriter(PanelControl.fichLog + _myJugador.ToString() + ".log", true);
-            f.WriteLine("Dia: " + System.DateTime.Now.DayOfWeek + "/" + System.DateTime.Now.Month + "/" + System.DateTime.Now.Year + " Hora: " + System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second);
+            f.WriteLine("Dia: " + System.DateTime.Now.Day + "/" + System.DateTime.Now.Month + "/" + System.DateTime.Now.Year + " Hora: " + System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second);
             f.WriteLine("Fase de " + _faseJuego+". Jugador: "+_myJugador);
             f.WriteLine(text);
             f.Close();
