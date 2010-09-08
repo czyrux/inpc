@@ -608,6 +608,7 @@ namespace ico
         /// Metodo que realiza la fase de Reaccion
         /// </summary>
         private void faseReaccion() {
+            String log = "";
             Console.WriteLine("Fase Reaccion");
             Console.WriteLine();
 
@@ -632,7 +633,6 @@ namespace ico
 
                 //Escogemos al mas debil
                 List<Componente> armasADisparar = new List<Componente>();
-                Console.WriteLine();
                 objetivo = objetivoMasDebil(objetivos, ldv, armasADisparar);
 
                 //Vemos si nos giramos
@@ -643,18 +643,27 @@ namespace ico
                         if (_mechs[_myJugador].conoDerecho(objetivo.posicion(), _mechs[_myJugador].ladoEncaramiento()))
                         {
                             giro = "Derecha";
+                            log += "\tNos giramos a derecha hacia el Mech J-" + objetivo.numeroJ() + ": " + objetivo.nombre() 
+                                + ". Hubicacion: " + objetivo.posicion().ToString() + "\n";
                         }
                         else if (_mechs[_myJugador].conoIzquierdo(objetivo.posicion(), _mechs[_myJugador].ladoEncaramiento()))
+                        {
                             giro = "Izquierda";
+                            log += "\tNos giramos a izquierda hacia el Mech J-" + objetivo.numeroJ() + ": " + objetivo.nombre()
+                                + ". Hubicacion: " + objetivo.posicion().ToString() + "\n";
+                        }
                     }
                 }
             }
+
+            if (giro == "Igual") log += "\tNos quedamos igual\n";
 
             //Escribimos las ordenes
             StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
             f.WriteLine(giro);
             f.Close();
 
+            escribirLog(log);
             Console.ReadLine();
         }
 
@@ -750,23 +759,23 @@ namespace ico
 
                 //Calculamos el array de notas para cada mech
                 for (int i = 0; i < objetivos.Count; i++) {
-                    Console.WriteLine("Mech: "+objetivos[i].nombre());
+                    //Console.WriteLine("Mech: "+objetivos[i].nombre());
                     //Añadimos las notas
                     notasParciales[i] = objetivos[i].notaEstado() * PanelControl.NOTA_ARMAS;
-                    Console.WriteLine("Nota mech: " + objetivos[i].notaEstado());
+                    //Console.WriteLine("Nota mech: " + objetivos[i].notaEstado());
 
                     //Añadimos la nota del danio y la seleccion de armas para ese mech
                     List<Componente> arm = new List<Componente>();
                     danio = armasPermitidas(objetivos[i], arm);
                     armamento.Add(arm);
                     notaAux = 10 - (danio * 10.0f / _mechs[_myJugador].danioMaximo());
-                    Console.WriteLine("Nota danio: " + notaAux);
+                    //Console.WriteLine("Nota danio: " + notaAux);
                     notasParciales[i] += (notaAux * PanelControl.DANIO_ARMAS);
 
                     //Añadimos la nota de la distancia
                     notaAux = (_mechs[_myJugador].posicion().distancia(objetivos[i].posicion()) * 10.0f) / _mechs[_myJugador].distanciaTiroLarga();
                     notasParciales[i] += notaAux * PanelControl.DISTANCIA_ARMAS;
-                    Console.WriteLine("Nota distancia: " + notaAux);
+                    //Console.WriteLine("Nota distancia: " + notaAux);
 
                     //Si estamos a su espalda, tenemos un bonus
                     if (objetivos[i].conoTrasero(_mechs[_myJugador].posicion(), objetivos[i].ladoEncaramiento()))
@@ -776,8 +785,8 @@ namespace ico
                     if (objetivos[i].atascado() || (objetivos[i].enSuelo() && _mechs[_myJugador].posicion().distancia(objetivos[i].posicion()) == 1))
                         notasParciales[i] -= 0.5f;
 
-                    Console.WriteLine("Nota parcial: " + notasParciales[i]);
-                    Console.WriteLine();
+                    //Console.WriteLine("Nota parcial: " + notasParciales[i]);
+                    //Console.WriteLine();
                 }
 
                 //Escogemos como objetivo le que tenga una nota menor
@@ -1029,8 +1038,8 @@ namespace ico
         private void faseAtaquesFisico() 
         {
             String log = "";
-            //Console.WriteLine("Fase Ataque Fisico");
-            //Console.WriteLine();
+            Console.WriteLine("Fase Ataque Fisico");
+            Console.WriteLine();
 
             Mech objetivo = null;
             MechJugador my = (MechJugador)_mechs[_myJugador];
@@ -1127,7 +1136,7 @@ namespace ico
 
             //Escribimos las ordenes
             StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
-            Console.WriteLine(ordenes);
+            //Console.WriteLine(ordenes);
             f.WriteLine(ordenes);
             f.Close();
 
@@ -1135,25 +1144,34 @@ namespace ico
         }
         #endregion
 
+
+        #region faseFinalTurno
         /// <summary>
         /// Metodo que realiza la fase final del turno
         /// </summary>
         private void faseFinalTurno() {
+            String log = "";
             Console.WriteLine("Fase Final de Turno");
             Console.WriteLine();
 
             StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
             f.WriteLine(0); //numero radiadores a apagar
+            log += "\tNº radiadores a apagar: 0\n";
             f.WriteLine(0);//numero de radiadores a encender que estuvieran apagados
+            log += "\tNº radiadores apagados a encender: 0\n";
             f.WriteLine(((MechJugador)_mechs[_myJugador]).garrote()); //si tiene garrote y quiere soltarlo
+            log += "\tSoltamos garrote: "+((MechJugador)_mechs[_myJugador]).garrote()+"\n";
             f.WriteLine(0); //numero de municiones a expulsar
+            log += "\tNº municiones a expulsar (funcionalidad no implementada):0\n";
             //quitamos municiones?¿
             f.Close();
-            escribirLog("");
+            escribirLog(log);
+
             Console.ReadLine();
         }
+        #endregion
 
-        
+
         /// <summary>
         /// Funcion que escribe en el fichero log el resultado de las distintas fases del juego
         /// </summary>
@@ -1166,6 +1184,7 @@ namespace ico
             f.WriteLine(text);
             f.Close();
         }
+
         #endregion
 
         #region atributos
