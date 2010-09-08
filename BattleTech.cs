@@ -727,7 +727,7 @@ namespace ico
                     log += "\tPodriamos disparar:\n";
                     foreach (Componente c in armasADisparar) 
                     {
-                        log += "\t\t" + c.nombre() + "\n";
+                        log += "\t\t" + c.nombre() + " \n";
                     }
                 }
                 //Console.WriteLine("El objetivo es:" + objetivo.nombre() +" ldv:"+ldv[0].ldv()+" cobr:"+ldv[0].cobertura());
@@ -744,7 +744,7 @@ namespace ico
                         log += "\tDisparamos:\n";
                         foreach (Componente c in armasADisparar)
                         {
-                            log += "\t\t" + c.nombre() + "\n";
+                            log += "\t\t" + c.nombre() + " \n";
                         }
                     }
                     else
