@@ -17,7 +17,7 @@ namespace ico
             Nodo orig = new Nodo();
             orig.casilla(t.Casilla(mechs[myJugador].posicion()));
             orig.direccion((Encaramiento)mechs[myJugador].ladoEncaramiento());
-            _final = (Encaramiento)mejorEncaramiento(orig, destino, t);
+            _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo]);
             _camino.Add(orig);
 
             orig.casilla(t.Casilla(destino));
@@ -199,7 +199,7 @@ namespace ico
             else {//Si saltamos
                 str = "Saltar\n";
                 str += _camino[_camino.Count - 1].casilla().ToString() + "\n";
-                str += ((int)_original).ToString();
+                str += ((int)_final).ToString();
             }
 
             return str;
@@ -584,9 +584,9 @@ namespace ico
             if (ich.enSuelo()){
                 suelo = 2;
                 _seLevanto = true;
-                tmpE=_original;
+                //tmpE=mejorEncaramiento(ich,objetivo);
                 _original = mejorEncaramiento(ich,objetivo);//_camino[0].direccion();
-                ((Nodo)camino[0]).direccion(mejorEncaramiento(((Nodo)camino[0]), objetivo.posicion(), t));
+                ((Nodo)camino[0]).direccion(_original);
             }
             if (_estrategia == Estrategia.Defensiva)
             {
