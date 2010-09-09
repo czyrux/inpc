@@ -318,15 +318,7 @@ namespace ico
 
         #region Funciones
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="a">origen del camino a construir; tipo Casilla</param>
-        /// <param name="ich">mi mech; tipo Mech</param>
-        /// <param name="b">destino del camino a construir; tipo Casilla</param>
-        /// <param name="Tablero">tablero del juego; tipo Tablero</param>
-        /// <returns>devuelve el camino del punto a al punto untermedio; tipo Camino</returns>
-
+ 
         /// <summary>
         /// funcion que calula el camino de donde esta el mech a un punto intermedio hacia el punto b
         /// </summary>
@@ -359,6 +351,17 @@ namespace ico
             {
                 camino.Add(elemento);
                 _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo], b.posicion()); //(Encaramiento)posiblesEncaramientos(elemento, mechs[objetivo].posicion(), Tablero)[0];
+                return camino;
+            }
+
+            if (mechs[myJugador].enSuelo() && ((MechJugador)mechs[myJugador]).andar()>1 )
+            {
+                _seLevanto = true;
+                //tmpE=mejorEncaramiento(ich,objetivo);
+                //_original = mejorEncaramiento(ich,objetivo,destino.posicion());//_camino[0].direccion();
+
+                elemento.direccion(mejorEncaramiento(mechs[myJugador], mechs[objetivo], b.posicion()));
+                camino.Add(elemento);
                 return camino;
             }
 
@@ -507,13 +510,13 @@ namespace ico
         }
 
         /// <summary>
-        /// 
+        /// Funcion que forma la la informacion de depuracion y archivo bitacora; la cual es establecida en la variable _debug
         /// </summary>
-        /// <param name="camino"></param>
-        /// <param name="my"></param>
-        /// <param name="objetivo"></param>
-        /// <param name="mechs"></param>
-        /// <param name="ideal"></param>
+        /// <param name="camino">el camino ideal o completo</param>
+        /// <param name="my">indice de el mech que hara el camino, sobre el vector <paramref name="mechs"/>; tipo int</param>
+        /// <param name="objetivo">indice de el mech al cual queremos a tacar o defendernos, sobre el vector <paramref name="mechs"/>; tipo int</param>
+        /// <param name="mechs">vector de mechs en el juego; tipo mechs[]</param>
+        /// <param name="ideal">indica si la llamada es de el camino ideal o del el real</param>
         private void debugString(ArrayList camino, int my, int objetivo, Mech[] mechs, Boolean ideal=true) {
             int j = 0;
             
@@ -543,15 +546,18 @@ namespace ico
             _debug += (ideal ? "" : "\t\tEncarandose hacia: "+_final.ToString()) + "\n";
         }
 
-
-        Boolean hayAlgunMech(Posicion deseada,Mech[] mechs) {
+       /* Boolean hayAlgunMech(Posicion deseada,Mech[] mechs) {
             foreach (Mech i in mechs) 
                 if (i.posicion().ToString() == deseada.ToString())
                     return true;
             
             return false;
-        }
-
+        }*/
+        /// <summary>
+        /// comprueba si el camino es recorrible corriendo
+        /// </summary>
+        /// <param name="camino">el camino ideal; tipo ArrayList</param>
+        /// <returns>devuele true si es recorrible corriendo y false por el contrario; tipo bool</returns>
         private bool sePuedeHacerCorriendo(ArrayList camino) {
             foreach (Nodo i in camino)
             {
@@ -643,7 +649,7 @@ namespace ico
             }
             return camino;
         }
-        
+
         /// <summary>
         /// Calcula de un camino entero(a->b) una posicion c, siendo c un indice del camino que representa un nodo intermedio entre a y b, y siendo este c alcanzable con los puntos de movimientos del mech (incluyendo el encaramiento final).
         /// Es decir calcula un indice de nodo alacanzable sobre el camino deseado. Se usa para el pathfinder
@@ -652,6 +658,7 @@ namespace ico
         /// <param name="destino">casilla destino; tipo Casilla</param>
         /// <param name="ich">mech que hara el camino; tipo Mech</param>
         /// <param name="t">tablero del juego; tipo Tablero</param>
+        /// <param name="objetivo">indice de el mech al cual queremos a tacar o defendernos, sobre el vector <paramref name="mechs"/>; tipo int</param>
         /// <returns>indice sobre el camino, el cual es alcanzable por el mech ich</returns>
         private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t, Mech objetivo)
         {
@@ -660,13 +667,13 @@ namespace ico
 
             costoEncaramientoAcumulado(camino);
             //ya he comprobado si hay giroscopios y pernas en el pathfinder
-            if (ich.enSuelo()){
+           /* if (ich.enSuelo()){
                 suelo = 2;
                 _seLevanto = true;
                 //tmpE=mejorEncaramiento(ich,objetivo);
                 //_original = mejorEncaramiento(ich,objetivo,destino.posicion());//_camino[0].direccion();
                 ((Nodo)camino[0]).direccion(mejorEncaramiento(ich, objetivo, destino.posicion()));
-            }
+            }*/
             if (_estrategia == Estrategia.Defensiva)
             {
                 puntosMR = ((MechJugador)ich).correr() - suelo;
@@ -708,6 +715,10 @@ namespace ico
             return -1;
         }
 
+        /// <summary>
+        /// limpia el costo del penalizador por agua
+        /// </summary>
+        /// <param name="camino">el camino al que va limpiar; tipo ArrayList</param>
         private void costoEncaramientoAcumulado(ArrayList camino) {
             int acumulado=0;
             for (int i = camino.Count - 2; i != -1; i--) { 
