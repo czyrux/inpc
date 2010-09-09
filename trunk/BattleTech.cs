@@ -1238,7 +1238,7 @@ namespace ico
             StreamWriter f = new StreamWriter(PanelControl.fichLog + _myJugador.ToString() + ".log", true);
             f.WriteLine("===============================================================================");
             f.WriteLine("Dia: " + System.DateTime.Now.Day + "/" + System.DateTime.Now.Month + "/" + System.DateTime.Now.Year + " Hora: " + System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second);
-            f.WriteLine("Fase de " + _faseJuego + ". Jugador: " + _mechs[_myJugador].nombre() + " nº: " + _myJugador.ToString() + " hubicacion: " + _mechs[_myJugador].posicion().ToString());
+            f.WriteLine("Fase de " + _faseJuego + ". Jugador: " + _mechs[_myJugador].nombre() + ". Nº: " + _myJugador.ToString() + ". Hubicacion: " + _mechs[_myJugador].posicion().ToString() + ". Encaramiento: " + _mechs[_myJugador].ladoEncaramiento().ToString());
             f.WriteLine(text);
             f.WriteLine("===============================================================================\n");
             f.Close();
