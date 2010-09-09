@@ -21,7 +21,7 @@ namespace ico
         /// <param name="destino">posicion destino al que se quiere saltar; tipo posicion</param>
         /// <param name="t"> tablero del juego; tipo Tablero </param>
         /// <param name="objetivo">el indice del mech rival al cual quiera escapar o atacar sobre sobre el vector de <paramref name="mechs"/>; tipo int</param>
-        /// <param name="mechs">mechs en el juego</param>
+        /// <param name="mechs">mechs en el juego; tipo Mech[]</param>
         public Camino(int myJugador, Posicion destino, Tablero t, int objetivo, Mech[] mechs)
         {
             _salta = true;
@@ -39,31 +39,15 @@ namespace ico
         }
 
         /// <summary>
-        /// Constructor de caminos en caso de salto saltos
-        /// </summary>
-        /// <param name="myJugador">el indice del jugador que hara el movimiento sobre el vector de <paramref name="mechs"/>; tipo int</param>
-        /// <param name="destino">posicion destino al que se quiere saltar; tipo posicion</param>
-        /// <param name="t"> tablero del juego; tipo Tablero </param>
-        /// <param name="objetivo">el indice del mech rival al cual quiera escapar o atacar sobre sobre el vector de <paramref name="mechs"/>; tipo int</param>
-        /// <param name="mechs">mechs en el juego</param>
-        /// <summary>
-        /// Constructor que crea un camino a traves del pathfinder
-        /// </summary>
-        /// <param name="de">origen del camino a construir; tipo Casilla</param>
-        /// <param name="ich">mi mech; tipo Mech</param>
-        /// <param name="a">destino del camino a construir; tipo Casilla</param>
-        /// <param name="tablero">tablero del juego; tipo Tablero</param>
-        /// <param name="estrategia">estrategia conforme a la cual se hara el combate; tipo Estrategia</param>
-        /// <summary>
         /// Constructor que crea un camino a traves del pathfinder
         /// </summary>
         /// <param name="myJugador">el indice del jugador que hara el movimiento sobre el vector de <paramref name="mechs"/>; tipo int</param>
         /// <param name="destino">destino del camino a construir; tipo Casilla</param>
-        /// <param name="tablero"></param>
-        /// <param name="estrategia"></param>
-        /// <param name="objetivo"></param>
-        /// <param name="mechs"></param>
-        /// <param name="reversa"></param>
+        /// <param name="tablero"> tablero del juego; tipo Tablero</param>
+        /// <param name="estrategia">estrategia de forma que se hara el camino; tipo estrategia</param>
+        /// <param name="objetivo">el indice del mech rival al cual quiera escapar o atacar sobre sobre el vector de <paramref name="mechs"/>; tipo int</param>
+        /// <param name="mechs">mechs en el juego; tipo Mech[]</param>
+        /// <param name="reversa">indica si se va ir en reversa(esta opcion aun esta en desarrollo)</param>
         public Camino(int myJugador, Casilla destino, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs, Boolean reversa=false ) {
             _ich = mechs[myJugador];
             _estrategia=estrategia;
@@ -104,7 +88,7 @@ namespace ico
                     _camino.Add(i);
                 }
 
-                _debug += "\t\t\t\t\t\t<<++++++++++++++++>>\n";
+                _debug += "\t\t\t\t\t\t<<< ----------------- >>>\n";
 
                 _debug += "Escribo en el archivo se accion:\n" + this.ToString();
             }
@@ -112,8 +96,8 @@ namespace ico
                 Nodo e = new Nodo();
                 e.casilla(tablero.Casilla(mechs[myJugador].posicion()));
                 e.direccion((Encaramiento)mechs[myJugador].ladoEncaramiento());
-                _original = e.direccion();
-                _final = _original;
+                //_original = e.direccion();
+                _final = e.direccion();
                 _seLevanto = false;
                 _camino.Add(e);
             }
@@ -144,7 +128,7 @@ namespace ico
         /// <summary>
         /// Devuelve el costo del movimiento en puntos de movimientos
         /// </summary>
-        /// <returns>costoen puntos de movimientos; tipo Int</returns>
+        /// <returns>costo en puntos de movimientos; tipo Int</returns>
         public int costoMovimiento() 
         {
             return limpiarAgua(_camino)[_camino.Count - 1].g() ;
@@ -211,13 +195,6 @@ namespace ico
                     }
                 }
                 int tmp;
-                /*if (_camino[i].direccion() != _original)
-                {
-                    str2 += izqOdrch(_camino[i].direccion(), _original).ToString() + "\n";
-                    tmp = costoEncaramiento(_original, _camino[i].direccion());
-                    str2 += tmp.ToString() + "\n";
-                    pasos++;
-                }*/
 
                 i++;
                 while (i != _camino.Count)
@@ -266,24 +243,11 @@ namespace ico
         /// Guarda el camino en un archivo con nombre PanelControl.movimientoArchivo
         /// </summary>
         public void ToFile(int jugador){
-
             StreamWriter fich = new StreamWriter(PanelControl.archivoAcciones(jugador), false);
             fich.Write(this.ToString());
             fich.Close();
         }
-        public void ToFile()
-        {
-
-            StreamWriter fich = new StreamWriter("debug.dbg",false);
-            /*string str = "El camino hecho por " + _ich.nombre() + ", con " + ((_estrategia == Estrategia.Agresiva) ? _ich.puntosAndar().ToString() : _ich.puntosCorrer().ToString()) + "PM con costo de camino " + costoMovimiento().ToString() + " es: \n";
-            foreach (Nodo i in _camino)
-                str += "(" + i.casilla().posicion().ToString() + ", " + i.direccion().ToString() + ")" + "->";
-            str += _final.ToString()+"\n";
-            fich.Write(str);*/
-            fich.Write(_debug);
-            //fich.Write(this.ToString());
-            fich.Close();
-        }
+       
         /// <summary>
         /// Devuelve la ultima casilla del destino
         /// </summary>
@@ -292,6 +256,10 @@ namespace ico
             return _camino[_camino.Count - 1].casilla();
         }
 
+        /// <summary>
+        /// Devuelve una cadena con informacion de depuracion
+        /// </summary>
+        /// <returns>la cadena de este camino; tipo string</returns>
         public string ToDebug() {
             return _debug;
         }
@@ -305,10 +273,10 @@ namespace ico
         /// Lista de nodos que representan el camino
         /// </summary>
         private List<Nodo> _camino;
-        /// <summary>
+        /*/// <summary>
         /// el encaramiento original al inicio del movimiento
         /// </summary>
-        private Encaramiento _original;
+        private Encaramiento _original;*/
         /// <summary>
         /// el encaramiento final al final del movimiento
         /// </summary>
@@ -344,7 +312,7 @@ namespace ico
             Nodo elemento = new Nodo();
             int aux = 0, iaux = 0, mejor = -1, gAcumulada = 0;
             Boolean nueva = false;
-            _original = (Encaramiento)mechs[myJugador].ladoEncaramiento();
+            //_original = (Encaramiento)mechs[myJugador].ladoEncaramiento();
 
 
 
@@ -654,8 +622,8 @@ namespace ico
                 suelo = 2;
                 _seLevanto = true;
                 //tmpE=mejorEncaramiento(ich,objetivo);
-                _original = mejorEncaramiento(ich,objetivo,destino.posicion());//_camino[0].direccion();
-                ((Nodo)camino[0]).direccion(_original);
+                //_original = mejorEncaramiento(ich,objetivo,destino.posicion());//_camino[0].direccion();
+                ((Nodo)camino[0]).direccion(mejorEncaramiento(ich, objetivo, destino.posicion()));
             }
             if (_estrategia == Estrategia.Defensiva)
             {
