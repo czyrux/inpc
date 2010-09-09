@@ -9,16 +9,10 @@ namespace ico
     public class Tablero
     {
         #region Constructores
-        public Tablero(uint filas, uint columas) {
-            _casillas = new Casilla[filas, columas];
-        }
-		
-		
-        public Tablero() { 
-            _casillas=new Casilla[12,30];
-        }
-		
-		
+		/// <summary>
+		/// Constructor de tablero, recive el archivo tablero a leer
+		/// </summary>
+		/// <param name="nombreMapa">archivo funte del tablero; tipo string</param>
         public Tablero(string nombreMapa) {
             try
             {
@@ -64,6 +58,7 @@ namespace ico
         #endregion
 
         #region Funciones
+        /*
         public void casillaInfo(int fila, int columna) {
             int n = 0;
             Console.WriteLine("Casilla (" + fila + "," + columna + ") ");
@@ -84,9 +79,13 @@ namespace ico
                 Console.WriteLine("Rio= " + i.rio().ToString());
                 n++;
             }
-        }
+        }*/
 		
-		
+		/// <summary>
+		/// funcion que devuelve la casilla que esta en la posicion <paramref name="p"/>
+		/// </summary>
+		/// <param name="p">posicion</param>
+		/// <returns></returns>
         public Casilla Casilla(Posicion p) {
             if (p.fila() - 1 < 0 || p.columna() - 1 < 0) {
                 return null;

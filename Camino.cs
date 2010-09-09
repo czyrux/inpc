@@ -347,19 +347,17 @@ namespace ico
             elemento.direccion((Encaramiento)mechs[myJugador].ladoEncaramiento());
             elemento.padre(elemento);
 
+            //en caso de que este en el suelo y no tenga piernas no hago nada
             if (!mechs[myJugador].giroscopioOperativo() || (!mechs[myJugador].conPiernaDerecha() && !mechs[myJugador].conPiernaIzquierda()))
             {
                 camino.Add(elemento);
                 _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo], b.posicion()); //(Encaramiento)posiblesEncaramientos(elemento, mechs[objetivo].posicion(), Tablero)[0];
                 return camino;
             }
-
+            // en caso que este en el suelo y me levanto encarado al objetivo y no hago nada
             if (mechs[myJugador].enSuelo() && ((MechJugador)mechs[myJugador]).andar()>1 )
             {
                 _seLevanto = true;
-                //tmpE=mejorEncaramiento(ich,objetivo);
-                //_original = mejorEncaramiento(ich,objetivo,destino.posicion());//_camino[0].direccion();
-
                 elemento.direccion(mejorEncaramiento(mechs[myJugador], mechs[objetivo], b.posicion()));
                 camino.Add(elemento);
                 return camino;
@@ -730,7 +728,7 @@ namespace ico
         }
 
         /// <summary>
-        /// Devuelve cual es el mejor encaramiento de la posicion <paramref name="p"/> para estar encarado con el 
+        /// Devuelve cual es el mejor encaramiento de la posicion <paramref name="p"/> para estar encarado con el enemigo <paramref name="enemigo"/>
         /// <paramref name="enemigo"/>
         /// </summary>
         /// <param name="yo">Mech Jugador</param>
@@ -752,6 +750,13 @@ namespace ico
             return (Encaramiento)imin;
         }
 
+        /// <summary>
+        /// Devuelve cual es el mejor encaramiento del nodo <paramref name="origen"/> para estar encarado con la posicion <paramref name="objetivo"/>
+        /// </summary>
+        /// <param name="origen">nodo de origen; tipo Nodo</param>
+        /// <param name="objetivo">la posiscion del enemigo; tipo Posicion</param>
+        /// <param name="t">tablero del juego; tipo tablero</param>
+        /// <returns>el mejor encaramiento; tipo encaramiento</returns>
         Encaramiento mejorEncaramiento(Nodo origen, Posicion objetivo, Tablero t)
         {
             List<int> l= new List<int>();
