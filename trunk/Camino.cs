@@ -493,7 +493,9 @@ namespace ico
             }
             else
             {
-                _debug += "\tEl Mech Jugador hace " + (_estrategia == Estrategia.Defensiva ? "corriendo" : "caminando") + " el camino:\n";
+                _debug += "\tEl Mech Jugador hace " + (_estrategia == Estrategia.Defensiva ? "corriendo" : "caminando") + " el camino hasta la casilla: ";
+                _debug += ((Nodo)camino[camino.Count - 1]).casilla().ToString() + " con encaramiento: " + _final.ToString() + ".\n";
+                _debug += "\tEl camino realizado ha sido:\n";
 
                 foreach (Nodo i in camino)
                 {
@@ -502,7 +504,7 @@ namespace ico
                     j++;
                 }
             }
-            _debug += (ideal ? "" : "\tEncarandose hacia: "+_final.ToString()) + "\n";
+            _debug += (ideal ? "" : "\t\tEncarandose hacia: "+_final.ToString()) + "\n";
         }
 
 
