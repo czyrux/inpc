@@ -113,7 +113,7 @@ namespace ico
                 _estrategia = Estrategia.Agresiva;
             }
             else {
-                //Vemos si somos el jugador con la nota mas alta
+                //Vemos si quien es el jugador con la nota mas alta
                 int max=-1;
                 float nota = 0;
                 for (int i = 0; i < _mechs.Length; i++)
@@ -122,6 +122,7 @@ namespace ico
                         max = i;
                     }
 
+                //Si somos el jugador con la nota mas alta o la diferencia en es pequeña, nos ponemos en agresiva
                 if (max == _myJugador || Math.Abs(_mechs[_myJugador].notaEstado() - _mechs[max].notaEstado()) <= 0.3)
                 {
                     _estrategia = Estrategia.Agresiva;
@@ -131,6 +132,9 @@ namespace ico
             }
         }
 
+        /// <summary>
+        /// Funcion para debuguear
+        /// </summary>
         public void pruebas () 
         {
 			/*Console.WriteLine("Numero de jugadores: " + _numeroJugadores);
