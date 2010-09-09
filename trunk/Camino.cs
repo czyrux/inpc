@@ -476,8 +476,8 @@ namespace ico
         private void debugString(ArrayList camino, int my, int objetivo, Mech[] mechs, Boolean ideal=true) {
             int j = 0;
             _debug += "El mech " + mechs[my].nombre() + mechs[my].numeroJ().ToString() + " con " + (_estrategia == Estrategia.Defensiva ? ((MechJugador)mechs[my]).correr().ToString() : ((MechJugador)mechs[my]).andar().ToString()) + "PM de "+(_estrategia == Estrategia.Defensiva?"correr":"andar")+" y objetivo " +
-                objetivo.ToString() + (ideal ? " trata de hacer" : " hace") + "con costo " +
-                ((Nodo)camino[(ideal ? 0 : camino.Count - 1)]).g().ToString() + ":\n\n";
+                objetivo.ToString() + (ideal ? " trata de hacer" : " hace") + " con costo aproximado" +
+                ((Nodo)camino[(ideal ? 0 : camino.Count - 1)]).g().ToString() + " el camino:\n\n";
             if (ideal) {
 
                 for (int i = camino.Count - 1; i > -1; i--) {
