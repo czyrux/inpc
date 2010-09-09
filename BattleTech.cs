@@ -243,7 +243,7 @@ namespace ico
                         posiblesCaminos[destino].ToFile(_myJugador);
                         Console.ReadLine();
                         posiblesCaminos[destino].ToFile();
-
+                        escribirLog(posiblesCaminos[destino].ToDebug());
                     }
                     else //Caso base de no tener destinos porque no tenemos puntos de movimiento
                     {
@@ -261,7 +261,10 @@ namespace ico
                     c.ToFile(_myJugador);
                     Console.ReadLine();
                     c.ToFile();
+                    escribirLog(c.ToDebug());
                 }
+
+                
                 
             }
         }
