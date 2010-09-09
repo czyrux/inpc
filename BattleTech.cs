@@ -493,7 +493,8 @@ namespace ico
                     puntuacion += 3;
 
                 //Bono por cercania
-                puntuacion += (PanelControl.radio - p.distancia(objetivo.posicion()) ) + 4;
+                if (objetivo.posicion().distancia(p) <= PanelControl.radio)
+                    puntuacion += (PanelControl.radio - p.distancia(objetivo.posicion()) ) + 4;
 
             }
             else //Estrategia defensiva
