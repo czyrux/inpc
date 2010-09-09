@@ -539,3 +539,6 @@ Ataque fisico (mech):
 		-(angel) compruba que si la casilla origen con su encaramiento y el destino con su encaramiento a la hora de pasarlo a cadena, que si no se movio escriba Inmovil.
 
 		- (antonio) fase de ataques fisicos hecha, voi a probarla en el simulador.
+
+		08/09/2010
+		-(angel) todas las casillas destino daban caminos intransitables asi que se quedaba inmovil, caso (0515,medio,gresivo) yo  (1207,ligero,defensivo). Creo que en este caso hay que tratar de saltar de a una casilla al borde de el radio de salto.

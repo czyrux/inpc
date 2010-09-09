@@ -522,13 +522,13 @@ namespace ico
         private string izqOdrch(Encaramiento o, Encaramiento d) {
             switch (o) { 
                 case Encaramiento.Abajo:
-                    if((int)d>4)
+                    if (d == Encaramiento.InferiorIzquierda || d == Encaramiento.SuperiorIzquierda)
                         return "Derecha";
                     else
                         return "Izquierda";
 
                 case Encaramiento.Arriba:
-                    if ((int)d < 4)
+                    if (d==Encaramiento.InferiorDerecho || d==Encaramiento.SuperiorDerecha)
                         return "Derecha";
                     else
                         return "Izquierda";
@@ -644,7 +644,7 @@ namespace ico
 
                     if (((Nodo)camino[i]).g() < puntosMR)
                     {
-                        tmpE = mejorEncaramiento(ich, objetivo, destino.posicion());//mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
+                        tmpE = /*mejorEncaramiento(ich, objetivo, destino.posicion());*/mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
                         if (((Nodo)camino[i]).g() + costoEncaramiento(((Nodo)camino[i]).direccion(), tmpE) <= puntosMR)
                         {
                             _final = tmpE;
