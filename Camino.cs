@@ -54,6 +54,7 @@ namespace ico
             _salta = _seLevanto = false;
             _reversa = reversa;
             _camino = new List<Nodo>();
+            string tmpstring;
 
 
             ArrayList camino = null, tmp;
@@ -63,6 +64,7 @@ namespace ico
                 {
                     if (((camino = pathFinder(myJugador, destino, tablero, objetivo, mechs)).Count == 1) && destino != ((Nodo)(camino[0])).casilla())
                     {
+                        _debug = "";
                         _estrategia = Estrategia.Agresiva;
                         camino = pathFinder(myJugador, destino, tablero, objetivo, mechs);
                     }
@@ -72,10 +74,12 @@ namespace ico
                     tmp = pathFinder(myJugador, destino, tablero, objetivo, mechs);
                     if (mechs[myJugador].posicion() != destino.posicion() && tmp.Count == 1)
                     {
-
+                        tmpstring = _debug;
+                        _debug = "";
                         _estrategia = Estrategia.Defensiva;
                         if ((camino = pathFinder(myJugador, destino, tablero, objetivo, mechs)) == null)
                         {
+                            _debug = tmpstring;
                             camino = tmp;
                         }
                     }
