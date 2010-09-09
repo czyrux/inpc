@@ -180,8 +180,8 @@ namespace ico
         /// </summary>
         private void faseMovimiento() 
         {
-            Console.WriteLine("Fase movimiento");
-            Console.WriteLine();
+            //Console.WriteLine("Fase movimiento");
+            //Console.WriteLine();
             Mech objetivo;
             bool salto = false;
             int destino = 0;
@@ -195,7 +195,7 @@ namespace ico
   
                 //Seleccionamos el objetivo hacia el que vamos a dirigirnos en caso de ser una estrategia ofensiva
                 objetivo = eleccionObjetivo();
-                if(objetivo != null )Console.WriteLine("El objetivo elegido es: " + objetivo.nombre());
+                //if(objetivo != null )Console.WriteLine("El objetivo elegido es: " + objetivo.nombre());
 
                 //Seleccionamos la casilla destino
                 destinos = seleccionDestino(objetivo);
@@ -213,7 +213,7 @@ namespace ico
                 {
                     if (destinos.Count > 0)
                     {
-                        Console.WriteLine("Tenemos destinos:" + destinos.Count);
+                        //Console.WriteLine("Tenemos destinos:" + destinos.Count);
                         //Evaluamos la ultima posicion de cada camino y nos quedamos con el mayor
                         posiblesCaminos = new Camino[destinos.Count];
                         int[] puntuacionCamino = new int[destinos.Count];
@@ -221,22 +221,22 @@ namespace ico
                         for (int i = 0; i < destinos.Count; i++)
                         {
                             posiblesCaminos[i] = new Camino(_myJugador, _tablero.Casilla(destinos[i]), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
-                            Console.WriteLine("Destino preferido:" + i + ": " + destinos[i].ToString());
+                            //Console.WriteLine("Destino preferido:" + i + ": " + destinos[i].ToString());
                             //posiblesCaminos[i].print();
                             //Console.WriteLine(posiblesCaminos[i].ToString());
-                            Console.WriteLine("Llegamos hasta: " + posiblesCaminos[i].casillaFinal().posicion().ToString());
+                            //Console.WriteLine("Llegamos hasta: " + posiblesCaminos[i].casillaFinal().posicion().ToString());
                             puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
-                            Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
+                            //Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
                             if (puntuacionCamino[i] > valor && (casillaEnLdV(posiblesCaminos[i].casillaFinal().posicion(), objetivo) || i == destinos.Count - 1))
                             {
                                 destino = i;
                                 valor = puntuacionCamino[i];
                             }
-                            Console.WriteLine();
+                            //Console.WriteLine();
                         }
 
-                        Console.WriteLine();
-                        Console.WriteLine("Elegimos " + posiblesCaminos[destino].casillaFinal().posicion().ToString());
+                        //Console.WriteLine();
+                        //Console.WriteLine("Elegimos " + posiblesCaminos[destino].casillaFinal().posicion().ToString());
 
                         //posiblesCaminos[destino].print();
                         //Console.WriteLine(posiblesCaminos[destino].ToString());
@@ -630,8 +630,8 @@ namespace ico
         /// </summary>
         private void faseReaccion() {
             String log = "";
-            Console.WriteLine("Fase Reaccion");
-            Console.WriteLine();
+            //Console.WriteLine("Fase Reaccion");
+            //Console.WriteLine();
 
             string giro = "Igual";
 
@@ -706,8 +706,8 @@ namespace ico
              * 5º Escribir el fichero
              */
             String log = "";
-            Console.WriteLine("Fase Ataque con Armas");
-            Console.WriteLine();
+            //Console.WriteLine("Fase Ataque con Armas");
+            //Console.WriteLine();
             List<Mech> objetivos = new List<Mech>();
             List<Componente> armasADisparar = new List<Componente>();
             List<LdV> ldv;
@@ -1092,8 +1092,8 @@ namespace ico
         private void faseAtaquesFisico() 
         {
             String log = "";
-            Console.WriteLine("Fase Ataque Fisico");
-            Console.WriteLine();
+            //Console.WriteLine("Fase Ataque Fisico");
+            //Console.WriteLine();
 
             Mech objetivo = null;
             MechJugador my = (MechJugador)_mechs[_myJugador];
@@ -1207,8 +1207,8 @@ namespace ico
         /// </summary>
         private void faseFinalTurno() {
             String log = "";
-            Console.WriteLine("Fase Final de Turno");
-            Console.WriteLine();
+            //Console.WriteLine("Fase Final de Turno");
+            //Console.WriteLine();
 
             StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
             f.WriteLine(0); //numero radiadores a apagar
