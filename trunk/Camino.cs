@@ -510,9 +510,9 @@ namespace ico
             int j = 0;
             
             if (ideal) {
-                _debug += "\t\tTrata de ir de la casilla " + mechs[my].posicion().ToString() + " a la casilla "+((Nodo)camino[camino.Count-1]).casilla().ToString()+" el mech " + mechs[my].nombre() + mechs[my].numeroJ().ToString() + " con " + 
+                _debug += "\t\tIntente ir a el destino: " +((Nodo)camino[camino.Count-1]).casilla().ToString()+" con " + 
                     (_estrategia == Estrategia.Defensiva ? ((MechJugador)mechs[my]).correr().ToString() : ((MechJugador)mechs[my]).andar().ToString())
-                    + "PM de " + (_estrategia == Estrategia.Defensiva ? "correr" : "andar") + " y encarando a " + mechs[objetivo].nombre() + mechs[objetivo].numeroJ().ToString() + ":\n";
+                    + "PM de " + (_estrategia == Estrategia.Defensiva ? "correr" : "andar") + " y encarando a el jugador: " + mechs[objetivo].numeroJ().ToString() +" con mech: "+ mechs[objetivo].nombre() + ":\n";
 
                 /*for (int i = camino.Count - 1; i > -1; i--) {
                     _debug += "\t(" + ((Nodo)camino[i]).casilla().ToString() + ", " + ((Nodo)camino[i]).direccion().ToString() + ", " + ((Nodo)camino[i]).g().ToString() + "g)\n";
@@ -521,7 +521,7 @@ namespace ico
             }
             else
             {
-                _debug += "y hace " + (_estrategia == Estrategia.Defensiva ? "corriendo" : "caminando")+"\n";
+                _debug += "\t\t y hace " + (_estrategia == Estrategia.Defensiva ? "corriendo" : "caminando") + " el camino:\n";
 
                 foreach (Nodo i in camino)
                 {
@@ -530,8 +530,7 @@ namespace ico
                     j++;
                 }
             }
-            _debug += (ideal ? "" : "\t\t\t"+_final.ToString()) + "\n";
-            _debug += "\t\t\t\t\t\t<<--------------->>\n\n";
+            _debug += (ideal ? "" : "\tEncarando: "+_final.ToString()) + "\n";
         }
         Boolean hayAlgunMech(Posicion deseada,Mech[] mechs) {
             foreach (Mech i in mechs) 
