@@ -330,7 +330,7 @@ namespace ico
             if (!mechs[myJugador].giroscopioOperativo() || (!mechs[myJugador].conPiernaDerecha() && !mechs[myJugador].conPiernaIzquierda()))
             {
                 camino.Add(elemento);
-                _final = (Encaramiento)posiblesEncaramientos(elemento, mechs[objetivo].posicion(), Tablero)[0];
+                _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo], b.posicion()); //(Encaramiento)posiblesEncaramientos(elemento, mechs[objetivo].posicion(), Tablero)[0];
                 return camino;
             }
 
