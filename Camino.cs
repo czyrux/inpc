@@ -35,7 +35,10 @@ namespace ico
             orig.casilla(t.Casilla(destino));
             _camino.Add(orig);
 
-            _debug = this.ToString();
+            //Ordenes del fichero log
+            _debug = "\tEl Mech Jugador salta hacia la casilla: "+ destino.ToString() + ", con encaramiento: " + _final.ToString() + ".\n";
+            _debug += "\t\t\t<<< ----------------- >>>\n";
+            _debug += "Escribo en el archivo se accion:\n" + this.ToString();
         }
 
         /// <summary>
@@ -92,7 +95,7 @@ namespace ico
                     _camino.Add(i);
                 }
 
-                _debug += "\t\t\t\t<<< ----------------- >>>\n";
+                _debug += "\t\t\t<<< ----------------- >>>\n";
 
                 _debug += "Escribo en el archivo se accion:\n" + this.ToString();
             }
