@@ -1239,13 +1239,14 @@ namespace ico {
         #region Metodos de los conosVision
         /// <summary>
         /// Metodo que indica si una posicion esta dentro del cono delantero de vision de un mech
+        /// para el encaramiento dado
         /// </summary>
         /// <param name="casilla">Posicion a observar</param>
         /// <param name="encaramiento">Encaramiento hacia donde estamos mirando</param>
         /// <returns>True en caso de estar en el cono delantero, false en caso opuesto</returns>
         public Boolean conoDelantero( Posicion casilla , int encaramiento ) 
         {
-            Boolean enCono = false;
+            /*Boolean enCono = false;
             int jIzq, jDrcha;
             //Console.WriteLine(casilla.columna() + " "+casilla.fila());
             //Console.WriteLine(encaramiento);
@@ -1401,20 +1402,20 @@ namespace ico {
                     }
                 }
 
-            }
+            }*/
 
-            return enCono;
+            return _posicion.conoDelantero(casilla,encaramiento);
         }
 
         /// <summary>
-        /// Metodo que indica si una posicion esta dentro del cono trasero de vision de un mech
-        /// </summary>
+        /// Metodo que indica si una posicion esta dentro del cono delantero de vision de un mech
+        /// para el encaramiento dado
         /// <param name="casilla">Posicion a observar</param>
         /// <param name="encaramiento">Encaramiento hacia donde estamos mirando</param>
         /// <returns>True en caso de estar en el cono delantero, false en caso opuesto</returns>
         public Boolean conoTrasero(Posicion casilla, int encaramiento)
         {
-            Boolean enCono = false;
+            /*Boolean enCono = false;
             int jIzq, jDrcha;
             //Console.WriteLine(casilla.columna() + " "+casilla.fila());
             //Console.WriteLine(encaramiento);
@@ -1576,20 +1577,20 @@ namespace ico {
                             enCono = true;
                     }
                 }
-            }
+            }*/
 
-            return enCono;
+            return _posicion.conoTrasero(casilla,encaramiento);
         }
 
         /// <summary>
-        /// Metodo que indica si una posicion esta dentro del cono derecho de vision de un mech
-        /// </summary>
+        /// Metodo que indica si una posicion esta dentro del cono delantero de vision de un mech
+        /// para el encaramiento dado
         /// <param name="casilla">Posicion a observar</param>
         /// <param name="encaramiento">Encaramiento hacia donde estamos mirando</param>
         /// <returns>True en caso de estar en el cono delantero, false en caso opuesto</returns>
         public Boolean conoDerecho(Posicion casilla, int encaramiento) 
         {
-            Boolean enCono = false;
+            /*Boolean enCono = false;
 
             if (!conoDelantero(casilla, encaramiento) && !conoTrasero(casilla, encaramiento)) {
                 if (encaramiento == 1) {
@@ -1617,27 +1618,27 @@ namespace ico {
                         enCono = true;
                 }  
             
-            }
+            }*/
 
-            return enCono;
+            return _posicion.conoDerecho(casilla,encaramiento);
         }
 
         /// <summary>
-        /// Metodo que indica si una posicion esta dentro del cono izquierdo de vision de un mech
-        /// </summary>
+        /// Metodo que indica si una posicion esta dentro del cono delantero de vision de un mech
+        /// para el encaramiento dado
         /// <param name="casilla">Posicion a observar</param>
         /// <param name="encaramiento">Encaramiento hacia donde estamos mirando</param>
         /// <returns>True en caso de estar en el cono delantero, false en caso opuesto</returns>
         public Boolean conoIzquierdo(Posicion casilla, int encaramiento)
         {
-            Boolean enCono = false;
+            /*Boolean enCono = false;
 
             if (!conoDelantero(casilla, encaramiento) && !conoTrasero(casilla, encaramiento) && !conoDerecho(casilla,encaramiento) )
             {
                 enCono = true;
-            }
+            }*/
 
-            return enCono;
+            return _posicion.conoIzquierdo(casilla,encaramiento);
         }
 
         #endregion
