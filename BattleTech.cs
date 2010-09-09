@@ -702,10 +702,8 @@ namespace ico
         private void faseAtaqueArmas() {
             /*
              * 1º Eleccion de rivales dentro de radio accion (rango alcance: distancia tiro larga media) y que no esten en el cono trasero
-             *    Si no hay ninguno metemos los que esten a distancia de tiro de alcance maximo?¿
              * 2º Ver si hay linea de vision con ellos
-             * 3º a. De los restantes escoger si hay algunos en un radio de 3 casillas, y de ellos al que menos puntuacion tenga
-             *    b. En caso opuesto escoger al mas debil (nota mas baja)
+             * 3º a. De los restantes escoger al mas debil (nota mas baja)
              * 4º Ver las armas a dispararle
              * 5º Escribir el fichero
              */
@@ -741,10 +739,8 @@ namespace ico
                     Console.WriteLine(i + ": " + objetivos[i].nombre());*/
 
                 //Escogemos al mas debil
-                //Console.WriteLine();
                 objetivo = objetivoMasDebil(objetivos, ldv, armasADisparar);
 
-                //Console.WriteLine();
                 if (objetivo != null) 
                 {
                     log += "\tEscogemos como objetivo al Mech J-" + objetivo.numeroJ() + ": " + objetivo.nombre() + ". Hubicacion: " + objetivo.posicion().ToString() + "\n";
@@ -931,6 +927,7 @@ namespace ico
             //Vemos las armas que podria disparar
             ArrayList armas = my.armas();
             bool conBrazos = (my.conBrazoIzquierdo() || my.conBrazoDerecho()) ? true : false;
+            bool ambosBrazos = (my.conBrazoIzquierdo() && my.conBrazoDerecho()) ? true : false;
             String localizacion;
             for (int i = 0; i < armas.Count; i++) 
             {
@@ -938,7 +935,7 @@ namespace ico
                 if (my.tieneMunicion((Componente)armas[i]) && ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
                     ((Componente)armas[i]).distanciaMinima() < distancia && 
                    ( (localizacion == "BI" && (situacion == "IZQ" || situacion == "DNTE") && !my.enSuelo())
-                   || (localizacion == "BD" && (situacion == "DRCHA" || situacion == "DNTE") && !my.enSuelo())
+                   || (localizacion == "BD" && (situacion == "DRCHA" || situacion == "DNTE") && (!my.enSuelo() || (my.enSuelo() && ambosBrazos)) )
                    || ((localizacion == "TC" || localizacion == "TD" || localizacion == "TI" || localizacion == "CAB") && situacion == "DNTE" && ((my.enSuelo() && conBrazos) || !my.enSuelo() ))
                    || (localizacion == "PD" && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.enSuelo())
                    || (localizacion == "PI" && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.enSuelo())
