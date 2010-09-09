@@ -38,7 +38,14 @@ namespace ico
             _debug = this.ToString();
         }
 
-
+        /// <summary>
+        /// Constructor de caminos en caso de salto saltos
+        /// </summary>
+        /// <param name="myJugador">el indice del jugador que hara el movimiento sobre el vector de <paramref name="mechs"/>; tipo int</param>
+        /// <param name="destino">posicion destino al que se quiere saltar; tipo posicion</param>
+        /// <param name="t"> tablero del juego; tipo Tablero </param>
+        /// <param name="objetivo">el indice del mech rival al cual quiera escapar o atacar sobre sobre el vector de <paramref name="mechs"/>; tipo int</param>
+        /// <param name="mechs">mechs en el juego</param>
         /// <summary>
         /// Constructor que crea un camino a traves del pathfinder
         /// </summary>
@@ -51,7 +58,7 @@ namespace ico
         /// Constructor que crea un camino a traves del pathfinder
         /// </summary>
         /// <param name="myJugador">el indice del jugador que hara el movimiento sobre el vector de <paramref name="mechs"/>; tipo int</param>
-        /// <param name="destino"></param>
+        /// <param name="destino">destino del camino a construir; tipo Casilla</param>
         /// <param name="tablero"></param>
         /// <param name="estrategia"></param>
         /// <param name="objetivo"></param>
@@ -501,18 +508,20 @@ namespace ico
 
         private void debugString(ArrayList camino, int my, int objetivo, Mech[] mechs, Boolean ideal=true) {
             int j = 0;
-            _debug += "\tEl mech " + mechs[my].nombre() + mechs[my].numeroJ().ToString() + " con " + (_estrategia == Estrategia.Defensiva ? ((MechJugador)mechs[my]).correr().ToString() : ((MechJugador)mechs[my]).andar().ToString()) + "PM de "+(_estrategia == Estrategia.Defensiva?"correr":"andar")+" y objetivo " +
-                 mechs[objetivo].nombre() + mechs[objetivo].numeroJ().ToString() + (ideal ? " trata de hacer" : " hace") + " con costo aproximado" +
-                ((Nodo)camino[(ideal ? 0 : camino.Count - 1)]).g().ToString() + " el camino:\n";
+            
             if (ideal) {
+                _debug += "\t\tTrata de ir de la casilla " + mechs[my].posicion().ToString() + " a la casilla "+((Nodo)camino[camino.Count-1]).casilla().ToString()+" el mech " + mechs[my].nombre() + mechs[my].numeroJ().ToString() + " con " + 
+                    (_estrategia == Estrategia.Defensiva ? ((MechJugador)mechs[my]).correr().ToString() : ((MechJugador)mechs[my]).andar().ToString())
+                    + "PM de " + (_estrategia == Estrategia.Defensiva ? "correr" : "andar") + " y encarando a " + mechs[objetivo].nombre() + mechs[objetivo].numeroJ().ToString() + ":\n";
 
-                for (int i = camino.Count - 1; i > -1; i--) {
+                /*for (int i = camino.Count - 1; i > -1; i--) {
                     _debug += "\t(" + ((Nodo)camino[i]).casilla().ToString() + ", " + ((Nodo)camino[i]).direccion().ToString() + ", " + ((Nodo)camino[i]).g().ToString() + "g)\n";
                     _debug += "\t\t\t|\n";
-                }
+                }*/
             }
             else
             {
+                _debug += "y hace " + (_estrategia == Estrategia.Defensiva ? "corriendo" : "caminando")+"\n";
 
                 foreach (Nodo i in camino)
                 {
@@ -521,7 +530,7 @@ namespace ico
                     j++;
                 }
             }
-            _debug += (ideal ? "FIN" : _final.ToString()) + "\n";
+            _debug += (ideal ? "" : "\t\t\t"+_final.ToString()) + "\n";
             _debug += "\t\t\t\t\t\t<<--------------->>\n\n";
         }
         Boolean hayAlgunMech(Posicion deseada,Mech[] mechs) {
