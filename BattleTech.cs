@@ -718,7 +718,7 @@ namespace ico
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
             {
                 determinarEstrategia();
-                log += "\tEstrategia del Mech Jugador" + _estrategia + "\n";
+                log += "\tEstrategia del Mech Jugador: " + _estrategia + "\n";
                 //Escogemos a los mech si estan dentro del alcance de tiro largo y no estan en nuestra espalda
                 for (int i = 0; i < _mechs.Length; i++)
                     if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) < _mechs[_myJugador].distanciaTiroLarga() &&
@@ -953,7 +953,7 @@ namespace ico
         /// Metodo que selecciona de la lista de armas a disparar, aquellas que finalmente dispararemos al Mech
         /// <paramref name="objetivo"/>
         /// </summary>
-        /// <param name="objetivos">Lista de objetivos. Un unico elemento</param>
+        /// <param name="objetivo">Mech rival al que nos enfrentamos</param>
         /// <param name="seleccionArmas">List de componentes tipo arma</param>
         /// <param name="ldV">Lista de LdV. Contendra un elemento, la linea de vision al objetivo, o ninguno
         /// en caso de ser un objetivo nulo</param>
