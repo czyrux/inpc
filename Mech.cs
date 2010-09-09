@@ -2038,7 +2038,7 @@ namespace ico {
             bool operativo = false;
 
             for (int i = 0; i < _actuadores.Length && !operativo ; i++) {
-                if (_actuadores[i].nombre() == "Giroscopio" && _actuadores[i].operativo() && _actuadores[i].numeroImpactos() == 0)
+                if (_actuadores[i].nombre() == "Giroscopio" && _actuadores[i].operativo() && _actuadores[i].numeroImpactos() <= 2)
                     operativo = true;
             }
                 return operativo;
