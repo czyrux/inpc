@@ -122,9 +122,11 @@ namespace ico
                         max = i;
                     }
 
-                if (max == _myJugador) {
+                if (max == _myJugador || Math.Abs(_mechs[_myJugador].notaEstado() - _mechs[max].notaEstado()) <= 0.3)
+                {
                     _estrategia = Estrategia.Agresiva;
-                }else
+                }
+                else
                     _estrategia = Estrategia.Defensiva;
             }
 
