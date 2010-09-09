@@ -128,7 +128,7 @@ namespace ico
                     _estrategia = Estrategia.Defensiva;
             }
 
-            Console.WriteLine("Mech: "+ _mechs[_myJugador].nombre()+" nota:"+_mechs[_myJugador].notaEstado()+ " estrategia del mech: " + _estrategia);
+            //Console.WriteLine("Mech: "+ _mechs[_myJugador].nombre()+" nota:"+_mechs[_myJugador].notaEstado()+ " estrategia del mech: " + _estrategia);
         }
 
         public void pruebas () 
@@ -153,13 +153,13 @@ namespace ico
 			Boolean fin=false;
 			
 			while (!fin) {
-                Console.WriteLine();
-				Console.WriteLine("Elija la casilla que desea averiguar la distancia a la casilla del mech");
+                //Console.WriteLine();
+				//Console.WriteLine("Elija la casilla que desea averiguar la distancia a la casilla del mech");
 				c1=Console.ReadLine();
 				if (c1!="q"){
 					p1 = new Posicion(c1);
                     //Casilla aux = _tablero.Casilla(p1);
-                    Console.WriteLine("La distancia es:"+_mechs[0].posicion().distancia(p1));
+                    //Console.WriteLine("La distancia es:"+_mechs[0].posicion().distancia(p1));
                    /* if (_mechs[0].conoDerecho(p1, _mechs[0].ladoEncaramiento()))
                     {
                         Console.WriteLine("cono drcha");
@@ -1207,7 +1207,7 @@ namespace ico
         /// </summary>
         private void faseFinalTurno() {
             String log = "";
-            //Console.WriteLine("Fase Final de Turno");
+            Console.WriteLine("Fase Final de Turno");
             //Console.WriteLine();
 
             StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
