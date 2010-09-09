@@ -202,6 +202,7 @@ namespace ico
                 if (i.numeroJ() != my && i.posicion().ToString() == p.ToString())
                     ocupada = true;
             }
+
             return ocupada;
         }
 
