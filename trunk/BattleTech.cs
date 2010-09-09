@@ -223,7 +223,7 @@ namespace ico
                             posiblesCaminos[i] = new Camino(_myJugador, _tablero.Casilla(destinos[i]), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
                             Console.WriteLine("Destino preferido:" + i + ": " + destinos[i].ToString());
                             //posiblesCaminos[i].print();
-                            Console.WriteLine(posiblesCaminos[i].ToString());
+                            //Console.WriteLine(posiblesCaminos[i].ToString());
                             Console.WriteLine("Llegamos hasta: " + posiblesCaminos[i].casillaFinal().posicion().ToString());
                             puntuacionCamino[i] = puntuacionCasilla(posiblesCaminos[i].casillaFinal().posicion(), objetivo);
                             Console.WriteLine("Puntuacion: " + puntuacionCamino[i]);
@@ -410,7 +410,7 @@ namespace ico
                     }
                 }
                 max--;
-                if (max < 20) salir = true;
+                if (max < -20) salir = true;
             }
 
             return destinosElegidos;
