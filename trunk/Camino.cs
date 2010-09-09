@@ -88,7 +88,7 @@ namespace ico
                     _camino.Add(i);
                 }
 
-                _debug += "\t\t\t\t\t\t<<< ----------------- >>>\n";
+                _debug += "\t\t\t\t<<< ----------------- >>>\n";
 
                 _debug += "Escribo en el archivo se accion:\n" + this.ToString();
             }
