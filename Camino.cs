@@ -50,7 +50,7 @@ namespace ico
         /// <summary>
         /// Constructor que crea un camino a traves del pathfinder
         /// </summary>
-        /// <param name="myJugador"></param>
+        /// <param name="myJugador">el indice del jugador que hara el movimiento sobre el vector de <paramref name="mechs"/>; tipo int</param>
         /// <param name="destino"></param>
         /// <param name="tablero"></param>
         /// <param name="estrategia"></param>
@@ -70,7 +70,7 @@ namespace ico
             {
                 if (estrategia == Estrategia.Defensiva)
                 {
-                    if (((camino = pathFinder(myJugador, destino, tablero, objetivo, mechs)).Count == 1) && a != ((Nodo)(camino[0])).casilla())
+                    if (((camino = pathFinder(myJugador, destino, tablero, objetivo, mechs)).Count == 1) && destino != ((Nodo)(camino[0])).casilla())
                     {
                         _estrategia = Estrategia.Agresiva;
                         camino = pathFinder(myJugador, destino, tablero, objetivo, mechs);
