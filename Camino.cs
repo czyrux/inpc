@@ -253,7 +253,7 @@ namespace ico
             str += _final.ToString()+"\n";
             fich.Write(str);*/
             fich.Write(_debug);
-            fich.Write(this.ToString());
+            //fich.Write(this.ToString());
             fich.Close();
         }
         /// <summary>
