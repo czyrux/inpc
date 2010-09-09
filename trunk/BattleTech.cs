@@ -117,7 +117,7 @@ namespace ico
                 int max=-1;
                 float nota = 0;
                 for (int i = 0; i < _mechs.Length; i++)
-                    if (_mechs[i].operativo() && nota < _mechs[i].notaEstado()) {
+                    if (_mechs[i].operativo() && nota < _mechs[i].notaEstado() ) {
                         nota = _mechs[i].notaEstado();
                         max = i;
                     }
@@ -921,17 +921,18 @@ namespace ico
 
             //Vemos las armas que podria disparar
             ArrayList armas = my.armas();
+            bool conBrazos = (my.conBrazoIzquierdo() || my.conBrazoDerecho()) ? true : false;
             String localizacion;
             for (int i = 0; i < armas.Count; i++) 
             {
                 localizacion = ((Componente)armas[i]).localizacionSTRING();
                 if (my.tieneMunicion((Componente)armas[i]) && ((Componente)armas[i]).operativo() && ((Componente)armas[i]).distanciaLarga() >= distancia &&
                     ((Componente)armas[i]).distanciaMinima() < distancia && 
-                   ( (localizacion == "BI" && (situacion == "IZQ" || situacion == "DNTE"))
-                   || (localizacion == "BD" && (situacion == "DRCHA" || situacion == "DNTE"))
-                   || ((localizacion == "TC" || localizacion == "TD" || localizacion == "TI" || localizacion == "CAB") && situacion == "DNTE" )
-                   || (localizacion == "PD" && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)))
-                   || (localizacion == "PI" && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)))
+                   ( (localizacion == "BI" && (situacion == "IZQ" || situacion == "DNTE") && !my.enSuelo())
+                   || (localizacion == "BD" && (situacion == "DRCHA" || situacion == "DNTE") && !my.enSuelo())
+                   || ((localizacion == "TC" || localizacion == "TD" || localizacion == "TI" || localizacion == "CAB") && situacion == "DNTE" && ((my.enSuelo() && conBrazos) || !my.enSuelo() ))
+                   || (localizacion == "PD" && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.enSuelo())
+                   || (localizacion == "PI" && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.enSuelo())
                     ) )
                 {
                     danio += ((Componente)armas[i]).danio();
@@ -1126,7 +1127,7 @@ namespace ico
 
                     //Vemos las armas fisicas con las que darle
                     if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()
-                        && ((diferenciaNivel == 0 && !objetivo.enSuelo()) || diferenciaNivel == -1))
+                        && ((diferenciaNivel == 0 && !objetivo.enSuelo()) || diferenciaNivel == -1) && !my.enSuelo())
                     {
                         numeroArmas++;
                         ordenes += "BD\n";
@@ -1137,7 +1138,7 @@ namespace ico
                     }
 
                     if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo()
-                        && ((diferenciaNivel == 0 && !objetivo.enSuelo()) || diferenciaNivel == -1))
+                        && ((diferenciaNivel == 0 && !objetivo.enSuelo()) || diferenciaNivel == -1) && !my.enSuelo())
                     {
                         numeroArmas++;
                         ordenes += "BI\n";
@@ -1148,7 +1149,7 @@ namespace ico
                     }
 
                     if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda()
-                        && (diferenciaNivel == 0 || (diferenciaNivel == 1 && !objetivo.enSuelo())))
+                        && (diferenciaNivel == 0 || (diferenciaNivel == 1 && !objetivo.enSuelo())) && !my.enSuelo())
                     {
                         numeroArmas++;
                         ordenes += "PI\n";
@@ -1160,7 +1161,7 @@ namespace ico
                     }
 
                     if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha()
-                        && (diferenciaNivel == 0 || (diferenciaNivel == 1 && !objetivo.enSuelo())) && !ataque)
+                        && (diferenciaNivel == 0 || (diferenciaNivel == 1 && !objetivo.enSuelo())) && !ataque && !my.enSuelo())
                     {
                         numeroArmas++;
                         ordenes += "PD\n";
