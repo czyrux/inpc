@@ -280,7 +280,7 @@ namespace ico
                 int max = 0;
                 for (int i = 0; i < _mechs.Length; i++)
                 {
-                    if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) > max)
+                    if (i != _myJugador && _mechs[_myJugador].posicion().distancia(_mechs[i].posicion()) > max && _mechs[i].operativo())
                         max = _mechs[_myJugador].posicion().distancia(_mechs[i].posicion());
                 }
 
@@ -289,7 +289,7 @@ namespace ico
                 {
                     //Asignamos una nota a cada mech en funcion de la distancia que nos separa y su puntuacion
                     for (int i = 0; i < _mechs.Length; i++)
-                        if (i != _myJugador)
+                        if (i != _myJugador && _mechs[i].operativo())
                         {
                             //Nota estado
                             notasParciales[i] = _mechs[i].notaEstado() * PanelControl.NOTA_MOV;
@@ -303,7 +303,7 @@ namespace ico
                     //Nos quedamos con el mech que tenga la nota menor
                     float nota = float.MaxValue;
                     for (int i = 0; i < _mechs.Length; i++)
-                        if (i != _myJugador && notasParciales[i] < nota)
+                        if (i != _myJugador && notasParciales[i] < nota && _mechs[i].operativo())
                         {
                             nota = notasParciales[i];
                             objetivo = _mechs[i];
@@ -312,7 +312,7 @@ namespace ico
                 else //estrategia.defensiva
                 {
                     for (int i = 0; i < _mechs.Length; i++)
-                        if (i != _myJugador)
+                        if (i != _myJugador && _mechs[i].operativo())
                         {
                             //Nota estado
                             notasParciales[i] = _mechs[i].notaEstado() * PanelControl.NOTA_MOV;
@@ -326,7 +326,7 @@ namespace ico
                     //Nos quedamos con el mech que tenga la nota mayor
                     float nota = float.MinValue;
                     for (int i = 0; i < _mechs.Length; i++)
-                        if (i != _myJugador && notasParciales[i] > nota)
+                        if (i != _myJugador && notasParciales[i] > nota && _mechs[i].operativo())
                         {
                             nota = notasParciales[i];
                             objetivo = _mechs[i];
@@ -1110,7 +1110,8 @@ namespace ico
                 //Escogemos al objetivo
                 for (int i = 0; i < _mechs.Length; i++)
                 {
-                    if (i != _myJugador && my.posicion().distancia(_mechs[i].posicion()) == 1 && !my.conoTrasero(_mechs[i].posicion(), encTorso))
+                    if (i != _myJugador && my.posicion().distancia(_mechs[i].posicion()) == 1 && !my.conoTrasero(_mechs[i].posicion(), encTorso)
+                        && _mechs[i].operativo())
                         objetivo = _mechs[i];
                 }
 
