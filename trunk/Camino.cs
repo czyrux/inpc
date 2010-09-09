@@ -639,7 +639,7 @@ namespace ico
             if (puntosMR < 0)
             {
                 _seLevanto = false;
-                _original = tmpE;//_camino[0].direccion();
+                //_original = tmpE;//_camino[0].direccion();
                 ((Nodo)camino[0]).direccion(tmpE);
             }
             else
