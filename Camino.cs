@@ -494,12 +494,12 @@ namespace ico
             else
             {
                 _debug += "\tEl Mech Jugador hace " + (_estrategia == Estrategia.Defensiva ? "corriendo" : "caminando") + " el camino hasta la casilla: ";
-                _debug += ((Nodo)camino[camino.Count - 1]).casilla().ToString() + " con encaramiento: " + _final.ToString() + ".\n";
+                _debug += ((Nodo)camino[camino.Count - 1]).casilla().ToString() + ", con encaramiento: " + _final.ToString() + ".\n";
                 _debug += "\tEl camino realizado ha sido:\n";
 
                 foreach (Nodo i in camino)
                 {
-                    _debug += "\t\t(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ", " + ((Nodo)camino[j]).g().ToString() + "g)\n";
+                    _debug += "\t\t(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ", " + ((Nodo)camino[j]).g().ToString() + "PM )\n";
                     _debug += "\t\t\t\t\t|\n";
                     j++;
                 }
