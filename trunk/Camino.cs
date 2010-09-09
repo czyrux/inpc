@@ -171,20 +171,25 @@ namespace ico
 
                 str += "False\n";
 
-                if (_seLevanto)
+                if (_seLevanto )
                 {
                     str2 += "Levantarse\n";
-                    str2 += ((int)_original).ToString() + "\n";
+                    str2 += ((int)_final).ToString() + "\n";
                     pasos++;
+                    if (_camino.Count == 1) {
+                        str += pasos.ToString()+"\n";
+                        str += str2;
+                        return str;
+                    }
                 }
                 int tmp;
-                if (_camino[i].direccion() != _original)
+                /*if (_camino[i].direccion() != _original)
                 {
                     str2 += izqOdrch(_camino[i].direccion(), _original).ToString() + "\n";
                     tmp = costoEncaramiento(_original, _camino[i].direccion());
                     str2 += tmp.ToString() + "\n";
                     pasos++;
-                }
+                }*/
 
                 i++;
                 while (i != _camino.Count)
