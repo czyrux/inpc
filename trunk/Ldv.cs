@@ -39,6 +39,7 @@ namespace ico
                 str += "1";
 
             proc.StartInfo.Arguments = str ;
+            proc.StartInfo.CreateNoWindow = true;
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.RedirectStandardOutput = false;
             proc.StartInfo.RedirectStandardError = true;
