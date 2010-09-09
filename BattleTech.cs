@@ -485,6 +485,10 @@ namespace ico
                 if (objetivo.conoTrasero(p, objetivo.ladoEncaramiento()))
                     puntuacion += 4;
 
+                //Bono por estar pegado
+                if (objetivo.posicion().distancia(p) == 1)
+                    puntuacion += 3;
+
                 //Bono por cercania
                 puntuacion += (PanelControl.radio - p.distancia(objetivo.posicion()) ) + 4;
 
