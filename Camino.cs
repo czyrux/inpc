@@ -48,7 +48,7 @@ namespace ico
             {
                 if (estrategia == Estrategia.Defensiva)
                 {
-                    if ((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)) == null)
+                    if (((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)).Count == 1) && a != ((Nodo)(camino[0])).casilla())
                     {
                         _estrategia = Estrategia.Agresiva;
                         camino = pathFinder(myJugador, a, tablero, objetivo, mechs);
