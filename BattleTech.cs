@@ -248,9 +248,9 @@ namespace ico
                     else //Caso base de no tener destinos porque no tenemos puntos de movimiento
                     {
                         //Hacemos camino con nuestro casilla como destino
-                        Camino c = new Camino(_myJugador, _tablero.Casilla(_mechs[_myJugador].posicion()), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
+                        /*Camino c = new Camino(_myJugador, _tablero.Casilla(_mechs[_myJugador].posicion()), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
                         c.print();
-                        c.ToFile(_myJugador);
+                        c.ToFile(_myJugador);*/
                         Console.ReadLine();
                     }
                 }
@@ -647,8 +647,8 @@ namespace ico
                         objetivos.Add(_mechs[i]);
 
                 //Dejamos solo con los que tengamos linea de vision
-                List<LdV> ldv = new List<LdV>();
-                objetivosLdV(objetivos, ldv);
+                List<LdV> ldv;
+                ldv = objetivosLdV(objetivos);
 
                 //Escogemos al mas debil
                 List<Componente> armasADisparar = new List<Componente>();
@@ -708,7 +708,7 @@ namespace ico
             Console.WriteLine();
             List<Mech> objetivos = new List<Mech>();
             List<Componente> armasADisparar = new List<Componente>();
-            List<LdV> ldv = new List<LdV>();
+            List<LdV> ldv;
             Mech objetivo = null;
 
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
@@ -727,7 +727,7 @@ namespace ico
                 Console.WriteLine();*/
 
                 //Dejamos solo con los que tengamos linea de vision
-                objetivosLdV(objetivos, ldv);
+                ldv = objetivosLdV(objetivos);
 
                 /*Console.WriteLine();
                 Console.WriteLine("En LdV tenemos:" + objetivos.Count);
@@ -873,10 +873,11 @@ namespace ico
         /// Metodo que deja en la lista de <paramref name="objetivos"/> solo a los que tengan ldV con nuestro Mech
         /// </summary>
         /// <param name="objetivos">Lista de objetivos a evaluar</param>
-        /// <param name="ldv">Lista de linea de vision para cada mech de la lista de objetivos. Vacia</param>
-        private void objetivosLdV(List<Mech> objetivos , List<LdV> ldv )
+        /// <returns>Devuelve una lista con correspondencia de cada posicion con la lista de objetivos</returns>
+        private List<LdV> objetivosLdV(List<Mech> objetivos )
         {
             LdV c;
+            List<LdV> ldv = new List<LdV>();
             if (objetivos.Count > 0)
             {
                 for (int i = 0; i < objetivos.Count; i++)
@@ -891,6 +892,8 @@ namespace ico
                         ldv.Add(c);
                 }
             }
+
+            return ldv;
         }
 
         /// <summary>
@@ -898,7 +901,7 @@ namespace ico
         /// disparar al <paramref name="objetivo"/>
         /// </summary>
         /// <param name="objetivo">Objetivo al que se quiere disparar</param>
-        /// <param name="seleccionArmas">Lista de armas. Vacia</param>
+        /// <param name="seleccionArmas">Lista de armas. Variable usada para devolver la lista de armas</param>
         /// <returns>La cantidad de daño que hacen las armas escogidas</returns>
         private int armasPermitidas( Mech objetivo, List<Componente> seleccionArmas) 
         {        
@@ -949,7 +952,8 @@ namespace ico
         /// </summary>
         /// <param name="objetivos">Lista de objetivos. Un unico elemento</param>
         /// <param name="seleccionArmas">List de componentes tipo arma</param>
-        /// <param name="ldV">Lista de LdV. Contendra un elemento, la linea de vision al objetivo</param>
+        /// <param name="ldV">Lista de LdV. Contendra un elemento, la linea de vision al objetivo, o ninguno
+        /// en caso de ser un objetivo nulo</param>
         private void seleccionArmasDisparar( Mech objetivo, List<Componente> seleccionArmas , List<LdV> ldV ) 
         {
 
