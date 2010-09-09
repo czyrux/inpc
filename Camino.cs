@@ -6,10 +6,22 @@ using System.IO;
 using System.Collections.Generic;
 namespace ico
 {
+    /// <summary>
+    /// Clase resopnsable de formar caminos desde la posicion de un mech hasta un posicion deseada, 
+    /// devolviendo un camino real(alcanzable) y encarada al enemigo seleccionado
+    /// </summary>
     public class Camino
     {
         #region Constructores
 
+        /// <summary>
+        /// Constructor de caminos en caso de salto saltos
+        /// </summary>
+        /// <param name="myJugador">el indice del jugador que hara el movimiento sobre el vector de <paramref name="mechs"/>; tipo int</param>
+        /// <param name="destino">posicion destino al que se quiere saltar; tipo posicion</param>
+        /// <param name="t"> tablero del juego; tipo Tablero </param>
+        /// <param name="objetivo">el indice del mech rival al cual quiera escapar o atacar sobre sobre el vector de <paramref name="mechs"/>; tipo int</param>
+        /// <param name="mechs">mechs en el juego</param>
         public Camino(int myJugador, Posicion destino, Tablero t, int objetivo, Mech[] mechs)
         {
             _salta = true;
@@ -25,7 +37,8 @@ namespace ico
 
             _debug = this.ToString();
         }
-        
+
+
         /// <summary>
         /// Constructor que crea un camino a traves del pathfinder
         /// </summary>
@@ -34,7 +47,17 @@ namespace ico
         /// <param name="a">destino del camino a construir; tipo Casilla</param>
         /// <param name="tablero">tablero del juego; tipo Tablero</param>
         /// <param name="estrategia">estrategia conforme a la cual se hara el combate; tipo Estrategia</param>
-        public Camino(int myJugador, Casilla a, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs, Boolean reversa=false ) {
+        /// <summary>
+        /// Constructor que crea un camino a traves del pathfinder
+        /// </summary>
+        /// <param name="myJugador"></param>
+        /// <param name="destino"></param>
+        /// <param name="tablero"></param>
+        /// <param name="estrategia"></param>
+        /// <param name="objetivo"></param>
+        /// <param name="mechs"></param>
+        /// <param name="reversa"></param>
+        public Camino(int myJugador, Casilla destino, Tablero tablero, Estrategia estrategia, int objetivo, Mech[] mechs, Boolean reversa=false ) {
             _ich = mechs[myJugador];
             _estrategia=estrategia;
             _salta = _seLevanto = false;
@@ -47,20 +70,20 @@ namespace ico
             {
                 if (estrategia == Estrategia.Defensiva)
                 {
-                    if (((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)).Count == 1) && a != ((Nodo)(camino[0])).casilla())
+                    if (((camino = pathFinder(myJugador, destino, tablero, objetivo, mechs)).Count == 1) && a != ((Nodo)(camino[0])).casilla())
                     {
                         _estrategia = Estrategia.Agresiva;
-                        camino = pathFinder(myJugador, a, tablero, objetivo, mechs);
+                        camino = pathFinder(myJugador, destino, tablero, objetivo, mechs);
                     }
                 }
                 else
                 {
-                    tmp = pathFinder(myJugador, a, tablero, objetivo, mechs);
-                    if (mechs[myJugador].posicion() != a.posicion() && tmp.Count == 1)
+                    tmp = pathFinder(myJugador, destino, tablero, objetivo, mechs);
+                    if (mechs[myJugador].posicion() != destino.posicion() && tmp.Count == 1)
                     {
 
                         _estrategia = Estrategia.Defensiva;
-                        if ((camino = pathFinder(myJugador, a, tablero, objetivo, mechs)) == null)
+                        if ((camino = pathFinder(myJugador, destino, tablero, objetivo, mechs)) == null)
                         {
                             camino = tmp;
                         }
@@ -478,13 +501,14 @@ namespace ico
 
         private void debugString(ArrayList camino, int my, int objetivo, Mech[] mechs, Boolean ideal=true) {
             int j = 0;
-            _debug += "El mech " + mechs[my].nombre() + mechs[my].numeroJ().ToString() + " con " + (_estrategia == Estrategia.Defensiva ? ((MechJugador)mechs[my]).correr().ToString() : ((MechJugador)mechs[my]).andar().ToString()) + "PM de "+(_estrategia == Estrategia.Defensiva?"correr":"andar")+" y objetivo " +
-                objetivo.ToString() + (ideal ? " trata de hacer" : " hace") + " con costo aproximado" +
-                ((Nodo)camino[(ideal ? 0 : camino.Count - 1)]).g().ToString() + " el camino:\n\n\t";
+            _debug += "\tEl mech " + mechs[my].nombre() + mechs[my].numeroJ().ToString() + " con " + (_estrategia == Estrategia.Defensiva ? ((MechJugador)mechs[my]).correr().ToString() : ((MechJugador)mechs[my]).andar().ToString()) + "PM de "+(_estrategia == Estrategia.Defensiva?"correr":"andar")+" y objetivo " +
+                 mechs[objetivo].nombre() + mechs[objetivo].numeroJ().ToString() + (ideal ? " trata de hacer" : " hace") + " con costo aproximado" +
+                ((Nodo)camino[(ideal ? 0 : camino.Count - 1)]).g().ToString() + " el camino:\n";
             if (ideal) {
 
                 for (int i = camino.Count - 1; i > -1; i--) {
-                    _debug += "(" + ((Nodo)camino[i]).casilla().ToString() + ", " + ((Nodo)camino[i]).direccion().ToString() + ", " + ((Nodo)camino[i]).g().ToString() + "g)->";
+                    _debug += "\t(" + ((Nodo)camino[i]).casilla().ToString() + ", " + ((Nodo)camino[i]).direccion().ToString() + ", " + ((Nodo)camino[i]).g().ToString() + "g)\n";
+                    _debug += "\t\t\t|\n";
                 }
             }
             else
@@ -492,7 +516,8 @@ namespace ico
 
                 foreach (Nodo i in camino)
                 {
-                    _debug += "(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ", "+((Nodo)camino[j]).g().ToString() + "g)->";
+                    _debug += "(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ", " + ((Nodo)camino[j]).g().ToString() + "g)\n";
+                    _debug += "\t\t\t|\n";
                     j++;
                 }
             }
