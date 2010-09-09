@@ -80,6 +80,7 @@ namespace ico
                     {
                         tmpstring = _debug;
                         _debug = "";
+
                         _estrategia = Estrategia.Defensiva;
                         if ((camino = pathFinder(myJugador, destino, tablero, objetivo, mechs)) == null)
                         {
@@ -294,24 +295,47 @@ namespace ico
         /// </summary>
         private Estrategia _estrategia;
         /// <summary>
-        /// si al inicio el mech estaba en el suelo
+        /// indica que se levanto
         /// </summary>
         private Boolean _seLevanto;
+        /// <summary>
+        /// indica si salto el mech
+        /// </summary>
         private Boolean _salta;
+        /// <summary>
+        /// indica el mech que hace el camino
+        /// </summary>
         private Mech _ich;
+        /// <summary>
+        /// informacion de depuracion del camino
+        /// </summary>
         private string _debug;
+        /// <summary>
+        /// indica si va en reversa (en desarrollo)
+        /// </summary>
         private Boolean _reversa;
         #endregion
 
         #region Funciones
+
         /// <summary>
-        /// funcion que calula el camino de un punto a a un punto intermedio hacia el punto b
+        /// 
         /// </summary>
         /// <param name="a">origen del camino a construir; tipo Casilla</param>
         /// <param name="ich">mi mech; tipo Mech</param>
         /// <param name="b">destino del camino a construir; tipo Casilla</param>
         /// <param name="Tablero">tablero del juego; tipo Tablero</param>
         /// <returns>devuelve el camino del punto a al punto untermedio; tipo Camino</returns>
+
+        /// <summary>
+        /// funcion que calula el camino de donde esta el mech a un punto intermedio hacia el punto b
+        /// </summary>
+        /// <param name="myJugador">indice de el mech que hara el camino, sobre el vector <paramref name="mechs"/>; tipo int</param>
+        /// <param name="b">destion de el camino; tipo Casilla</param>
+        /// <param name="Tablero">tablero del juego; tipo Tablero</param>
+        /// <param name="objetivo">indice de el mech al cual queremos a tacar o defendernos, sobre el vector <paramref name="mechs"/>; tipo int</param>
+        /// <param name="mechs">vector de mechs en el juego; tipo mechs[]</param>
+        /// <returns>una ArrayList de Nodos que representan un camino; tipo ArrayList</returns>
         private ArrayList pathFinder(int myJugador, Casilla b, Tablero Tablero, int objetivo, Mech[] mechs)
         {
             ArrayList cerradas = new ArrayList();
@@ -482,6 +506,14 @@ namespace ico
             return camino;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="camino"></param>
+        /// <param name="my"></param>
+        /// <param name="objetivo"></param>
+        /// <param name="mechs"></param>
+        /// <param name="ideal"></param>
         private void debugString(ArrayList camino, int my, int objetivo, Mech[] mechs, Boolean ideal=true) {
             int j = 0;
             
