@@ -984,6 +984,9 @@ namespace ico
                     limiteCalor = PanelControl.calorOfensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
                 }else
                     limiteCalor = PanelControl.calorDefensivo + _mechs[_myJugador].numeroRadiadores() - _mechs[_myJugador].nivelTemp() - calorMovimiento;
+
+                if (limiteCalor > 29) limiteCalor = 29;
+
                 //Console.WriteLine("Limite calor= " + limiteCalor + " (calorOfensivo:" + calorOfensivo + " numero radiadores:" + _mechs[_myJugador].numeroRadiadores() + " temp:" + _mechs[_myJugador].nivelTemp() + " mov:"+calorMovimiento+" )");
                 //Calculamos la relacion de las armas daño/calor
                 float[] potencia = new float[seleccionArmas.Count];
