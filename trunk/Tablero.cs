@@ -159,25 +159,31 @@ namespace ico
 
         public void casillasEnMov(Mech ich, List<Posicion> casillas, int puntMov, Mech[] mechs ) 
         {
-            int dist;
-            for (int i = 0; i < _filas; i++)
-                for (int j = 0; j < _columnas; j++)
-                {
-                    dist = this._casillas[i, j].posicion().distancia(ich.posicion());
-                    if ( dist < puntMov && !casillaOcupada(_casillas[i, j].posicion(),mechs,ich.numeroJ()) ) {
-                        //si esta en cono derecho o izquierdo
-                        if ( (ich.conoDerecho(this._casillas[i, j].posicion(), ich.ladoEncaramiento()) || ich.conoIzquierdo(this._casillas[i, j].posicion(), ich.ladoEncaramiento())) && dist<puntMov-2)
+            if (puntMov != 0)
+            {
+                int dist;
+                for (int i = 0; i < _filas; i++)
+                    for (int j = 0; j < _columnas; j++)
+                    {
+                        dist = this._casillas[i, j].posicion().distancia(ich.posicion());
+                        if (dist < puntMov && !casillaOcupada(_casillas[i, j].posicion(), mechs, ich.numeroJ()))
                         {
-                            casillas.Add(_casillas[i, j].posicion());
+                            //si esta en cono derecho o izquierdo
+                            if ((ich.conoDerecho(this._casillas[i, j].posicion(), ich.ladoEncaramiento()) || ich.conoIzquierdo(this._casillas[i, j].posicion(), ich.ladoEncaramiento())) && dist < puntMov - 2)
+                            {
+                                casillas.Add(_casillas[i, j].posicion());
+                            }
+                            else if (ich.conoTrasero(this._casillas[i, j].posicion(), ich.ladoEncaramiento()) && dist < puntMov - 3)
+                            {
+                                casillas.Add(_casillas[i, j].posicion());
+                            }
+                            else
+                                casillas.Add(_casillas[i, j].posicion());
                         }
-                        else if (ich.conoTrasero(this._casillas[i, j].posicion(), ich.ladoEncaramiento()) && dist < puntMov - 3)
-                        {
-                            casillas.Add(_casillas[i, j].posicion());
-                        }
-                        else
-                            casillas.Add(_casillas[i, j].posicion());
                     }
-                }
+            }
+            else
+                casillas.Add(ich.posicion());
         }
 
 
