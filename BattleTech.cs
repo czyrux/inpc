@@ -129,8 +129,6 @@ namespace ico
                 else
                     _estrategia = Estrategia.Defensiva;
             }
-
-            //Console.WriteLine("Mech: "+ _mechs[_myJugador].nombre()+" nota:"+_mechs[_myJugador].notaEstado()+ " estrategia del mech: " + _estrategia);
         }
 
         public void pruebas () 
