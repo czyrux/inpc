@@ -132,6 +132,7 @@ namespace ico
             }
         }
 
+        /*
         /// <summary>
         /// Funcion para debuguear
         /// </summary>
@@ -150,7 +151,7 @@ namespace ico
             ArrayList aux = _mechs[_myJugador].armas();
             for ( int i=0 ; i<aux.Count ;i++ ){
                 _mechs[_myJugador].tieneMunicion((Componente)aux[i]);
-            }*/
+            }
 
 			string c1 ;
 			Posicion p1 ;
@@ -169,13 +170,13 @@ namespace ico
                         Console.WriteLine("cono drcha");
                     }
                     else if (_mechs[0].conoIzquierdo(p1, _mechs[0].ladoEncaramiento()))
-                        Console.WriteLine("cono izq");*/
-					_tablero.casillaInfo(p1.fila(),p1.columna());
-				}else
+                        Console.WriteLine("cono izq");
+					//_tablero.casillaInfo(p1.fila(),p1.columna());
+				/*}else
 					fin=true;
 			}
 		}
-
+        */
 
         #region faseMovimiento
 
