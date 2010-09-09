@@ -2025,7 +2025,6 @@ namespace ico {
              * " objetivos inmoviles
              * " en suelo
              */
-            Console.WriteLine("Arma: " + arma.nombre() + " tirada para impacto:" + puntuacion);
             return puntuacion;
         }
 
