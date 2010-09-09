@@ -185,7 +185,7 @@ namespace ico
             Mech objetivo;
             bool salto = false;
             int destino = 0;
-            List<Posicion> destinos = new List<Posicion>();
+            List<Posicion> destinos;
             Camino[] posiblesCaminos;
 
             if (_mechs[_myJugador].operativo() && ((MechJugador)_mechs[_myJugador]).consciente())
@@ -198,7 +198,7 @@ namespace ico
                 if(objetivo != null )Console.WriteLine("El objetivo elegido es: " + objetivo.nombre());
 
                 //Seleccionamos la casilla destino
-                seleccionDestino(objetivo,destinos);
+                destinos = seleccionDestino(objetivo);
 
                 //Vemos si hay condicion de salto
                 for (int i = 0; i < destinos.Count && !salto; i++)
@@ -348,9 +348,10 @@ namespace ico
         /// <param name="destinosElegidos">Array de tamñao fijo que sera completado con los mejores destinos. Segun su tamaño
         /// se incluiran mas o menos destinos</param>
         /// <returns>devuelve la posicion que se desea alcanzar; tipo posicion</returns>
-        private void seleccionDestino(Mech objetivo , List<Posicion> destinosElegidos)  
+        private List<Posicion> seleccionDestino(Mech objetivo )  
         {
-            List<Posicion> posiblesDestinos = new List<Posicion>();
+            List<Posicion> destinosElegidos = new List<Posicion>();
+            List<Posicion> posiblesDestinos ;
             int[] puntuacion;
             Boolean salir = false;
             int escogidas = 0;
@@ -358,10 +359,10 @@ namespace ico
             //Escogemos las casillas a evaluar
             if (_estrategia == Estrategia.Agresiva)
             {
-                _tablero.casillasEnRadio(objetivo.posicion(), posiblesDestinos,PanelControl.radio,_mechs,_myJugador);
+                posiblesDestinos = _tablero.casillasEnRadio(objetivo.posicion(),PanelControl.radio,_mechs,_myJugador);
             }
             else {
-                _tablero.casillasEnMov(_mechs[_myJugador], posiblesDestinos, ((MechJugador)_mechs[_myJugador]).andar(),_mechs );
+                posiblesDestinos = _tablero.casillasEnMov(_mechs[_myJugador], ((MechJugador)_mechs[_myJugador]).andar(), _mechs);
             }
 
             //Puntuamos las casillas
@@ -411,6 +412,8 @@ namespace ico
                 max--;
                 if (max < 20) salir = true;
             }
+
+            return destinosElegidos;
         }
 
         

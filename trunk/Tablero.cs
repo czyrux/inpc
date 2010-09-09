@@ -149,16 +149,20 @@ namespace ico
         }
 
 
-        public void casillasEnRadio( Posicion actual, List<Posicion> casillas , int radio , Mech[] mechs , int my ) {
+        public List<Posicion> casillasEnRadio( Posicion actual  , int radio , Mech[] mechs , int my ) {
+            List<Posicion> casillas = new List<Posicion>();
             for (int i = 0; i < _filas; i++)
                 for (int j = 0; j < _columnas; j++) {
                     if (this._casillas[i, j].posicion().distancia(actual) <= radio && !casillaOcupada(_casillas[i, j].posicion(), mechs, my))
                         casillas.Add(_casillas[i, j].posicion());
                 }
+
+            return casillas;
         }
 
-        public void casillasEnMov(Mech ich, List<Posicion> casillas, int puntMov, Mech[] mechs ) 
+        public List<Posicion> casillasEnMov(Mech ich, int puntMov, Mech[] mechs ) 
         {
+            List<Posicion> casillas = new List<Posicion>();
             if (puntMov != 0)
             {
                 int dist;
@@ -184,6 +188,8 @@ namespace ico
             }
             else
                 casillas.Add(ich.posicion());
+
+            return casillas;
         }
 
 
