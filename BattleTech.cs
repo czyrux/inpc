@@ -409,7 +409,7 @@ namespace ico
                     }
                 }
                 max--;
-                if (max < 10) salir = true;
+                if (max < 20) salir = true;
             }
         }
 
