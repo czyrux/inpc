@@ -43,7 +43,6 @@ namespace ico
 
 
             ArrayList camino = null, tmp;
-            _debug += "===============================================================================\n";
             if (((MechJugador)mechs[myJugador]).andar() != 0)
             {
                 if (estrategia == Estrategia.Defensiva)
@@ -75,7 +74,7 @@ namespace ico
                     _camino.Add(i);
                 }
 
-                _debug += "*******************************************************************************\n";
+                _debug += "\t\t\t\t\t\t<<++++++++++++++++>>\n";
 
                 _debug += "Escribo en el archivo se accion:\n" + this.ToString();
             }
@@ -88,7 +87,6 @@ namespace ico
                 _seLevanto = false;
                 _camino.Add(e);
             }
-            _debug += "===============================================================================\n";
         }
 
 #endregion
@@ -482,7 +480,7 @@ namespace ico
             int j = 0;
             _debug += "El mech " + mechs[my].nombre() + mechs[my].numeroJ().ToString() + " con " + (_estrategia == Estrategia.Defensiva ? ((MechJugador)mechs[my]).correr().ToString() : ((MechJugador)mechs[my]).andar().ToString()) + "PM de "+(_estrategia == Estrategia.Defensiva?"correr":"andar")+" y objetivo " +
                 objetivo.ToString() + (ideal ? " trata de hacer" : " hace") + " con costo aproximado" +
-                ((Nodo)camino[(ideal ? 0 : camino.Count - 1)]).g().ToString() + " el camino:\n\n";
+                ((Nodo)camino[(ideal ? 0 : camino.Count - 1)]).g().ToString() + " el camino:\n\n\t";
             if (ideal) {
 
                 for (int i = camino.Count - 1; i > -1; i--) {
@@ -499,7 +497,7 @@ namespace ico
                 }
             }
             _debug += (ideal ? "FIN" : _final.ToString()) + "\n";
-            _debug += "-------------------------------------------------------------------------------\n\n";
+            _debug += "\t\t\t\t\t\t<<--------------->>\n\n";
         }
         Boolean hayAlgunMech(Posicion deseada,Mech[] mechs) {
             foreach (Mech i in mechs) 
