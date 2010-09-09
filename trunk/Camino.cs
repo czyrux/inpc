@@ -510,9 +510,9 @@ namespace ico
             int j = 0;
             
             if (ideal) {
-                _debug += "\t\tIntente ir a el destino: " +((Nodo)camino[camino.Count-1]).casilla().ToString()+" con " + 
+                _debug += "\tIntenta ir a el destino: " +((Nodo)camino[camino.Count-1]).casilla().ToString()+" con " + 
                     (_estrategia == Estrategia.Defensiva ? ((MechJugador)mechs[my]).correr().ToString() : ((MechJugador)mechs[my]).andar().ToString())
-                    + "PM de " + (_estrategia == Estrategia.Defensiva ? "correr" : "andar") + " y encarando a el jugador: " + mechs[objetivo].numeroJ().ToString() +" con mech: "+ mechs[objetivo].nombre() + ":\n";
+                    + "PM de " + (_estrategia == Estrategia.Defensiva ? "correr" : "andar") + ". Encarandose al mech J-" + mechs[objetivo].numeroJ().ToString() +": "+ mechs[objetivo].nombre() + "\n";
 
                 /*for (int i = camino.Count - 1; i > -1; i--) {
                     _debug += "\t(" + ((Nodo)camino[i]).casilla().ToString() + ", " + ((Nodo)camino[i]).direccion().ToString() + ", " + ((Nodo)camino[i]).g().ToString() + "g)\n";
@@ -521,17 +521,19 @@ namespace ico
             }
             else
             {
-                _debug += "\t\t y hace " + (_estrategia == Estrategia.Defensiva ? "corriendo" : "caminando") + " el camino:\n";
+                _debug += "\tEl Mech Jugador hace " + (_estrategia == Estrategia.Defensiva ? "corriendo" : "caminando") + " el camino:\n";
 
                 foreach (Nodo i in camino)
                 {
-                    _debug += "(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ", " + ((Nodo)camino[j]).g().ToString() + "g)\n";
-                    _debug += "\t\t\t|\n";
+                    _debug += "\t\t(" + i.casilla().ToString() + ", " + i.direccion().ToString() + ", " + ((Nodo)camino[j]).g().ToString() + "g)\n";
+                    _debug += "\t\t\t\t\t|\n";
                     j++;
                 }
             }
-            _debug += (ideal ? "" : "\tEncarando: "+_final.ToString()) + "\n";
+            _debug += (ideal ? "" : "\tEncarandose hacia: "+_final.ToString()) + "\n";
         }
+
+
         Boolean hayAlgunMech(Posicion deseada,Mech[] mechs) {
             foreach (Mech i in mechs) 
                 if (i.posicion().ToString() == deseada.ToString())
