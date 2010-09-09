@@ -785,7 +785,7 @@ namespace ico
         /// <returns>devuelve los encaramientos que miran hacia el destino; tipo Int(Encaramiento)</returns>
         private List<int> posiblesEncaramientos(Nodo o, Posicion destino, Tablero t)
         {
-            int min =10000, tmp = 0, j=6;
+            int min =10000, tmp = 0;
             Casilla tmpCasilla;
             List<int> l = new List<int>();
             //cal
