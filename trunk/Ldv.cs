@@ -98,6 +98,7 @@ namespace ico
 
             proc.StartInfo.Arguments = str;
             proc.StartInfo.UseShellExecute = false;
+            proc.StartInfo.CreateNoWindow = true;
             proc.StartInfo.RedirectStandardOutput = false;
             proc.StartInfo.RedirectStandardError = true;
             proc.Start();
@@ -123,23 +124,6 @@ namespace ico
             }
             else
                 _length = 0;
-        }
-
-
-        /// <summary>
-        /// Constructor con parametros
-        /// </summary>
-        /// <param name="LdV">ArrayList con una LdV</param>
-        public LdV(ArrayList LdV)
-        {
-            _length = LdV.Count;
-            _camino = new Casilla[_length];
-            for (int i = 0; i < _length; i++)
-            {
-                _camino[i] = (Casilla)LdV[i];
-            }
-            _ldv =_cobertura= false;
-            //_nldv = _movimientos = 0;
         }
         #endregion
 
