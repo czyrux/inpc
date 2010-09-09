@@ -238,11 +238,10 @@ namespace ico
                         Console.WriteLine();
                         Console.WriteLine("Elegimos " + posiblesCaminos[destino].casillaFinal().posicion().ToString());
 
-                        posiblesCaminos[destino].print();
+                        //posiblesCaminos[destino].print();
                         //Console.WriteLine(posiblesCaminos[destino].ToString());
                         posiblesCaminos[destino].ToFile(_myJugador);
-                        Console.ReadLine();
-                        posiblesCaminos[destino].ToFile();
+                        //Console.ReadLine();
                         escribirLog(posiblesCaminos[destino].ToDebug());
                     }
                     else //Caso base de no tener destinos porque no tenemos puntos de movimiento
@@ -251,21 +250,17 @@ namespace ico
                         /*Camino c = new Camino(_myJugador, _tablero.Casilla(_mechs[_myJugador].posicion()), _tablero, _estrategia, objetivo.numeroJ(), _mechs);
                         c.print();
                         c.ToFile(_myJugador);*/
-                        Console.ReadLine();
+                        //Console.ReadLine();
                     }
                 }
                 else //Caso de poder llegar al destino saltando directamente
                 {
-                    Camino c = new Camino(_myJugador,destinos[destino],_tablero,objetivo.numeroJ(),_mechs);
-                    c.print();
+                    Camino c = new Camino(_myJugador, destinos[destino], _tablero, objetivo.numeroJ(), _mechs);
+                    //c.print();
                     c.ToFile(_myJugador);
-                    Console.ReadLine();
-                    c.ToFile();
+                    //Console.ReadLine();
                     escribirLog(c.ToDebug());
-                }
-
-                
-                
+                }   
             }
         }
 
@@ -584,7 +579,6 @@ namespace ico
                             puntuacion += 0;
                     }
                 }
-
             }
 
             return puntuacion;
@@ -691,7 +685,7 @@ namespace ico
             f.Close();
 
             escribirLog(log);
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
         #endregion
@@ -787,7 +781,7 @@ namespace ico
             }
 
             escribirLog(log);
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
         /// <summary>
@@ -1198,7 +1192,7 @@ namespace ico
             f.WriteLine(ordenes);
             f.Close();
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
         #endregion
 
@@ -1237,7 +1231,7 @@ namespace ico
         private void escribirLog( String text ) 
         {
             StreamWriter f = new StreamWriter(PanelControl.fichLog + _myJugador.ToString() + ".log", true);
-            f.WriteLine("===============================================================================\n");
+            f.WriteLine("===============================================================================");
             f.WriteLine("Dia: " + System.DateTime.Now.Day + "/" + System.DateTime.Now.Month + "/" + System.DateTime.Now.Year + " Hora: " + System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second);
             f.WriteLine("Fase de " + _faseJuego + ". Jugador: " + _mechs[_myJugador].nombre() + " nº: " + _myJugador.ToString() + " hubicacion: " + _mechs[_myJugador].posicion().ToString());
             f.WriteLine(text);
