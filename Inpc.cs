@@ -17,7 +17,7 @@ namespace ico {
 
             int numeroJugador = 1;
             string fase = "Movimiento";
-            
+
             //En caso de tener argumentos
             if (args.Length > 0) {
                 numeroJugador = Convert.ToInt32(args[0]);

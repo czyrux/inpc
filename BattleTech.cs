@@ -1209,7 +1209,7 @@ namespace ico
         /// </summary>
         private void faseFinalTurno() {
             String log = "";
-            Console.WriteLine("Fase Final de Turno");
+            //Console.WriteLine("Fase Final de Turno");
             //Console.WriteLine();
 
             StreamWriter f = new StreamWriter(PanelControl.archivoAcciones(_myJugador), false);
@@ -1225,7 +1225,7 @@ namespace ico
             f.Close();
             escribirLog(log);
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
         #endregion
 
