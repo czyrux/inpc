@@ -4,14 +4,17 @@ using System;
 namespace ico
 {
 
+    /// <summary>
+    /// Estructura usada para guardar datos de municion
+    /// </summary>
 	public struct municion {
 		public string _localizacion;
 		public int _slotMunicion;
 	};
-
-    /**
-     * Enumerado utilizado para clasificar al tipo de mech segun su armadura 
-     */
+    
+    /// <summary>
+    /// Enumerado utilizado para clasificar al tipo de mech segun su armadura 
+    /// </summary>
     public enum tipoMech { 
         Ligero ,
         Medio ,
