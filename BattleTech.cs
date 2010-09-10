@@ -808,7 +808,7 @@ namespace ico
                 for (int i = 0; i < objetivos.Count; i++) {
                     //Console.WriteLine("Mech: "+objetivos[i].nombre());
                     //Añadimos las notas
-                    notasParciales[i] = objetivos[i].notaEstado() * PanelControl.NOTA_ARMAS;
+                    notasParciales[i] = objetivos[i].notaEstado() * PanelControl.NOTA_ESTADO;
                     //Console.WriteLine("Nota mech: " + objetivos[i].notaEstado());
 
                     //Añadimos la nota del danio y la seleccion de armas para ese mech

@@ -121,7 +121,7 @@ namespace ico
         /// <summary>
         /// Tanto por ciento de la nota del mech usado para el calculo del enemigo a disparar.
         /// </summary>
-        public const float NOTA_ARMAS = 0.4f;
+        public const float NOTA_ESTADO= 0.4f;
 
         /// <summary>
         /// Tanto por ciento del daño de las armas usado para el calculo del enemigo a disparar.
