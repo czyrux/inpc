@@ -5,7 +5,7 @@ using System.Text;
 namespace ico
 {
     /// <summary>
-    /// Clase 
+    /// Clase que almacena datos de un nodo de un camino o de la elvoracion de uno
     /// </summary>
     public class Nodo
     {

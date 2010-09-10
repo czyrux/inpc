@@ -6,6 +6,9 @@ using System.IO;
 
 namespace ico
 {
+    /// <summary>
+    /// Clase que almacena informacino de el tablero del juego y funciones que generan informacion referente a el mismo.
+    /// </summary>
     public class Tablero
     {
         #region Constructores
@@ -92,7 +95,12 @@ namespace ico
             }else
                 return _casillas[p.fila() - 1, p.columna() - 1];
         }
-
+        /// <summary>
+        /// funcion que indicandole la posicion en la que estas y el encaramiento deseado develve la casilla que se encuentra hacia ese encaramiento
+        /// </summary>
+        /// <param name="actual">posicion de la casilla la cual deseas saber la colindante; tipo Posicion</param>
+        /// <param name="direccion">direcion en la cual deseas buscar la colindante; tipo Encaramiento</param>
+        /// <returns>Devuelve la casilla colindante a <paramref name="actual"/> en el el encaramiento <paramref name="direccion"/></returns>
         public Casilla colindante(Posicion actual, Encaramiento direccion)
         {//revisada v2
             Casilla devolver = null;
@@ -147,7 +155,14 @@ namespace ico
             return devolver;
         }
 
-
+        /// <summary>
+        /// Devuelve las casillas alrededor de la posicion <paramref name="actual"/> de tamaño <paramref name="radio"/> ignorando las ocupadas por los <paramref name="mechs"/>.
+        /// </summary>
+        /// <param name="actual">el centro del radio a generar; tipo Posicion</param>
+        /// <param name="radio">el tamaño del radio; tipo int</param>
+        /// <param name="mechs">lista de mechs para saber su localizacion; tipo Mech[]</param>
+        /// <param name="my">inidice sobre la el vector de <paramref name="mechs"/> que representa mi mech; tipo int</param>
+        /// <returns>devuelve la lista de casillas que representan todas las del radio</returns>
         public List<Posicion> casillasEnRadio( Posicion actual  , int radio , Mech[] mechs , int my ) {
             List<Posicion> casillas = new List<Posicion>();
             for (int i = 0; i < _filas; i++)
@@ -159,6 +174,14 @@ namespace ico
             return casillas;
         }
 
+        /// <summary>
+        /// Devuelve las casillas alrededor del mech <paramref name="ich"/> de radio <paramref name="puntMov"/> que son los puntos de movimientos. 
+        /// Esta funcion ademas tiene algunas consideraciones sobre el movimiento.
+        /// </summary>
+        /// <param name="ich">el mech sobre el cual se calculara el radio; tipo Mech</param>
+        /// <param name="puntMov">los puntos de movimientos del mech sobre la cual se calculara el radio; tipo int</param>
+        /// <param name="mechs">lista de todos los mechs del juego; tipo Mech[]</param>
+        /// <returns>devuelve la lista de casillas que representan todas las del radio</returns>
         public List<Posicion> casillasEnMov(Mech ich, int puntMov, Mech[] mechs ) 
         {
             List<Posicion> casillas = new List<Posicion>();
@@ -191,7 +214,13 @@ namespace ico
             return casillas;
         }
 
-
+        /// <summary>
+        /// funcion que indica si una casilla esta ocupada por alguno de los <paramref name="mechs"/> que no se el mio (<paramref name="my"/>)
+        /// </summary>
+        /// <param name="p">posicion que queremos saber si esta ocupada; tipo int</param>
+        /// <param name="mechs">lista de mechs en el juego; tipo mech[]</param>
+        /// <param name="my">indice sobre el vector de <paramref name="mechs"/> que representa mi mech, tipo int</param>
+        /// <returns>devuelve true si esta ocupado por un mech que no se yo; false por el contrario</returns>
         static public bool casillaOcupada( Posicion p , Mech[] mechs , int my ) 
         {
             bool ocupada = false;
@@ -205,17 +234,35 @@ namespace ico
             return ocupada;
         }
 
+        /// <summary>
+        /// devuelve el numero de filas del tablero
+        /// </summary>
+        /// <returns>numero de filas; tipo int</returns>
         public int filas() { return _filas; }
+
+        /// <summary>
+        /// devuelve el numero de columnas del tablero
+        /// </summary>
+        /// <returns>numero de columnas; tipo int</returns>
         public int columnas() { return _columnas; }
 
         #endregion
 
         #region Privados
+        /// <summary>
+        /// la matriz de casillas
+        /// </summary>
         private Casilla[,] _casillas;
+        /// <summary>
+        /// el numero de filas que tiene la matriz de casillas
+        /// </summary>
         int _filas; 
+        /// <summary>
+        /// numero de columnas que tine la matriz de casillas
+        /// </summary>
         int _columnas;
         #region Funciones privadas		
-		
+		/*
         public Casilla desplazamientoRecto(Casilla actual, Encaramiento direccion ,int movimiento) {
             Casilla devolver = null;
             if (direccion == Encaramiento.Arriba || direccion == Encaramiento.Abajo)
@@ -269,9 +316,8 @@ namespace ico
             return devolver;
         }
 		
-		
-        private void rellenaHeuristica( ArrayList casillas) { 
-        }
+		*/
+ 
         #endregion
         #endregion
     }
