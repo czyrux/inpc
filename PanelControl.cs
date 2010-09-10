@@ -5,7 +5,7 @@ using System.Text;
 namespace ico
 {
     /// <summary>
-    /// Clase encargada de almacenar las distintas constantes del programa
+    /// Clase estatica encargada de almacenar las distintas constantes del programa
     /// </summary>
     static public class PanelControl
     {

@@ -6,8 +6,8 @@ using System.IO;
 
 namespace ico {
 	
-    class Inpc {
-
+    class Inpc 
+    {
 		/// <summary>
 		/// funcion main del programa
 		/// </summary>
