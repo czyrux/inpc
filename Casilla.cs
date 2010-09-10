@@ -5,6 +5,9 @@ using System.Text;
 
 namespace ico
 {
+    /// <summary>
+    /// Clase que almacena o calcula propiedades de una casilla.
+    /// </summary>
     public class Casilla
     {
         #region Constructores
@@ -50,7 +53,7 @@ namespace ico
         }*/
 #endregion
 
-        #region "publicas"
+        #region Publicas
         
         /// <summary>
         /// costo intrinceco en puntos de movimentos de una casilla

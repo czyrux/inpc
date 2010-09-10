@@ -4,6 +4,9 @@ using System.Text;
 
 namespace ico
 {
+    /// <summary>
+    /// Clase 
+    /// </summary>
     public class Nodo
     {
         /// <summary>

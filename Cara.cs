@@ -5,6 +5,9 @@ using System.Text;
 
 namespace ico
 {
+    /// <summary>
+    /// Clase que contiene las propiedades de una cara de una casilla.
+    /// </summary>
     public class Cara
     {
         /// <summary>
