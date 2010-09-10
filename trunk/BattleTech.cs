@@ -1160,7 +1160,7 @@ namespace ico
                         log += "\t\tGolpeamos con: BI\n";
                     }
 
-                    if (my.conPiernaIzquierda() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda()
+                    if (my.conPiernaIzquierda() && my.conPiernaDerecha() && (my.conoIzquierdo(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaIzquierda()
                         && (diferenciaNivel == 0 || (diferenciaNivel == 1 && !objetivo.enSuelo())) && !my.enSuelo())
                     {
                         numeroArmas++;
@@ -1172,7 +1172,7 @@ namespace ico
                         log += "\t\tGolpeamos con: PI\n";
                     }
 
-                    if (my.conPiernaDerecha() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha()
+                    if (my.conPiernaDerecha() && my.conPiernaIzquierda() && (my.conoDerecho(objetivo.posicion(), enc) || my.conoDelantero(objetivo.posicion(), enc)) && !my.disparoPiernaDerecha()
                         && (diferenciaNivel == 0 || (diferenciaNivel == 1 && !objetivo.enSuelo())) && !ataque && !my.enSuelo())
                     {
                         numeroArmas++;
