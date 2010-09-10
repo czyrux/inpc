@@ -3,7 +3,9 @@ using System;
 
 namespace ico
 {
-
+    /// <summary>
+    /// Clase que almacena datos de un posicion y proporciona funcionalidades sobre ella con respecto a tras posiciones.
+    /// </summary>
 	public class Posicion {
 		
 		/// <summary>
