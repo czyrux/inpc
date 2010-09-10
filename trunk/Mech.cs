@@ -1075,7 +1075,7 @@ namespace ico {
             {
                 for (int i = 0; i < _componentes.Length && !municion; i++)
                 {
-                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > 0 && _componentes[i].operativo() ) {
+                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() >= arma.disparosTurno() && _componentes[i].operativo() ) {
                         municion = true;
                     }
 
