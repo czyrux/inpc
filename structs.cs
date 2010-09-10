@@ -9,17 +9,6 @@ namespace ico
 		public int _slotMunicion;
 	};
 
-    /// <summary>
-    /// tipo de movimientos que puede realizar un mech
-    /// </summary>
-    public enum tipoMovimiento
-    {
-        Inmovil,
-        Andar,
-        Correr,
-        Saltar
-    };
-
     /**
      * Enumerado utilizado para clasificar al tipo de mech segun su armadura 
      */
