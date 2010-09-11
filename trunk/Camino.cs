@@ -349,8 +349,10 @@ namespace ico
             elemento.direccion((Encaramiento)mechs[myJugador].ladoEncaramiento());
             elemento.padre(elemento);
 
-            //en caso de que este en el suelo y no tenga piernas no hago nada
-            if (!mechs[myJugador].giroscopioOperativo() || (!mechs[myJugador].conPiernaDerecha() && !mechs[myJugador].conPiernaIzquierda()))
+            //en caso de que este en el suelo y no tenga piernas no hago nada o giroscopios o puntos de movimiento
+            if ((!mechs[myJugador].giroscopioOperativo() || (!mechs[myJugador].conPiernaDerecha() && !mechs[myJugador].conPiernaIzquierda()) 
+                || ((MechJugador)mechs[myJugador]).andar() == 0 || ((MechJugador)mechs[myJugador]).andar() == 1)
+                && mechs[myJugador].enSuelo() )
             {
                 camino.Add(elemento);
                 _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo], mechs[myJugador].posicion()); //(Encaramiento)posiblesEncaramientos(elemento, mechs[objetivo].posicion(), Tablero)[0];
