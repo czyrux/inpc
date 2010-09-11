@@ -694,7 +694,7 @@ namespace ico
                 {
                     if (((Nodo)camino[i]).g() <= puntosMR)
                     {
-                        mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
+                        tmpE = mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
                         /*if(i!=0){
                             tmpE = mejorEncaramiento(ich,objetivo,destino.posicion(),((Nodo)camino[i-1]).direccion());//mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
                         }else
