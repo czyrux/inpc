@@ -1221,7 +1221,6 @@ namespace ico
             log += "\tSoltamos garrote: "+((MechJugador)_mechs[_myJugador]).garrote()+"\n";
             f.WriteLine(0); //numero de municiones a expulsar
             log += "\tNº municiones a expulsar (funcionalidad no implementada):0\n";
-            //quitamos municiones?¿
             f.Close();
             escribirLog(log);
 
