@@ -16,9 +16,21 @@ namespace ico
     /// Enumerado utilizado para clasificar al tipo de mech segun su armadura 
     /// </summary>
     public enum tipoMech { 
+        /// <summary>
+        /// Si el tipo de mech es ligero o 0
+        /// </summary>
         Ligero ,
+        /// <summary>
+        /// Si el tipo de mech es medio o 1
+        /// </summary>
         Medio ,
+        /// <summary>
+        /// Si el tipo de mech es pesado o 2
+        /// </summary>
         Pesado ,
+        /// <summary>
+        /// Si el tipo de mech es asalto o 3
+        /// </summary>
         Asalto ,
     };
 
