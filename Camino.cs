@@ -195,7 +195,7 @@ namespace ico
                 if (_seLevanto )
                 {
                     str2 += "Levantarse\n";
-                    str2 += ((Nodo)camino[0]).direccion().ToString() + "\n";//((int)_final).ToString() + "\n";
+                    str2 += ((Nodo)_camino[0]).direccion().ToString() + "\n";//((int)_final).ToString() + "\n";
                     pasos++;
                     if (_camino.Count == 1) {
                         str += pasos.ToString()+"\n";
@@ -695,7 +695,7 @@ namespace ico
                 for (int i = 0; i < camino.Count; i++)
                 {
 
-                    if (((Nodo)camino[i]).g() < puntosMR)
+                    if (((Nodo)camino[i]).g() <= puntosMR)
                     {
                         tmpE = /*mejorEncaramiento(ich, objetivo, destino.posicion());*/mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
                         if (((Nodo)camino[i]).g() + costoEncaramiento(((Nodo)camino[i]).direccion(), tmpE) <= puntosMR)

@@ -11,7 +11,7 @@ namespace ico
     {
         #region constantes
 
-        public const String Path = "";
+        public const String Path = "/ficheros/";
 
         public const String fichLog = "x76656970-J";
 
