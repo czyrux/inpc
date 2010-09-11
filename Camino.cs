@@ -195,7 +195,7 @@ namespace ico
                 if (_seLevanto )
                 {
                     str2 += "Levantarse\n";
-                    str2 += ((int)_final).ToString() + "\n";
+                    str2 += ((Nodo)camino[0]).direccion().ToString() + "\n";//((int)_final).ToString() + "\n";
                     pasos++;
                     if (_camino.Count == 1) {
                         str += pasos.ToString()+"\n";
