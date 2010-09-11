@@ -60,8 +60,8 @@ namespace ico
         /// </summary>
         /// <returns>costo en puntos de mvimientos, tipo Int</returns>
         public int  costoMovimiento(){
-            if (_puntosMovimientos == 0)
-            {
+           // if (_puntosMovimientos == 0)
+            //{
                 _puntosMovimientos = 0;
                 switch (_tipoTerreno)
                 {
@@ -93,7 +93,6 @@ namespace ico
                 }
                 switch (_objetoTerreno)
                 {
-
                     case 0://escombros
                         _puntosMovimientos += 2;
                         break;
@@ -116,7 +115,7 @@ namespace ico
                         _puntosMovimientos += 5;
                         break;
                 }
-            }
+            //}
             return _puntosMovimientos;
         }
 
