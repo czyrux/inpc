@@ -10,9 +10,14 @@ namespace ico
     static public class PanelControl
     {
         #region constantes
-
+        /// <summary>
+        /// constante que indica donde estan todos los archivos y programas para le ejecucion, algo como PATH current
+        /// </summary>
         public const String Path = "";
 
+        /// <summary>
+        /// nombere base del fichero log
+        /// </summary>
         public const String fichLog = "x76656970-J";
 
         #region constantes de Mechs
