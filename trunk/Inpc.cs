@@ -15,7 +15,7 @@ namespace ico {
 	
         static void Main(string[] args) {
 
-            int numeroJugador = 1;
+            int numeroJugador = 0;
             string fase = "Movimiento";
 
             //En caso de tener argumentos
