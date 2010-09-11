@@ -669,14 +669,7 @@ namespace ico
             Encaramiento tmpE=Encaramiento.Arriba;
 
             costoEncaramientoAcumulado(camino);
-            //ya he comprobado si hay giroscopios y pernas en el pathfinder
-           /* if (ich.enSuelo()){
-                suelo = 2;
-                _seLevanto = true;
-                //tmpE=mejorEncaramiento(ich,objetivo);
-                //_original = mejorEncaramiento(ich,objetivo,destino.posicion());//_camino[0].direccion();
-                ((Nodo)camino[0]).direccion(mejorEncaramiento(ich, objetivo, destino.posicion()));
-            }*/
+
             if (_estrategia == Estrategia.Defensiva)
             {
                 puntosMR = ((MechJugador)ich).correr() - suelo;
