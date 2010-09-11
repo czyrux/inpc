@@ -13,7 +13,7 @@ namespace ico
         /// <summary>
         /// constante que indica donde estan todos los archivos y programas para le ejecucion, algo como PATH current
         /// </summary>
-        public const String Path = "";
+        public const String Path = "/ficheros/";
 
         /// <summary>
         /// nombere base del fichero log
