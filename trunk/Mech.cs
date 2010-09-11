@@ -988,6 +988,9 @@ namespace ico {
         #endregion
 
         #region metodos
+        /// <summary>
+        /// Metodo que imprime en consola las principales caracteristicas del mech
+        /// </summary>
 		public void datos(){
 			Console.WriteLine("Numero jugador:"+ _numeroJ);
 			Console.WriteLine("Nombre mech: "+_nombre);
@@ -1252,6 +1255,7 @@ namespace ico {
         /// <summary>
         /// Metodo que indica si una posicion esta dentro del cono delantero de vision de un mech
         /// para el encaramiento dado
+        /// </summary>
         /// <param name="casilla">Posicion a observar</param>
         /// <param name="encaramiento">Encaramiento hacia donde estamos mirando</param>
         /// <returns>True en caso de estar en el cono delantero, false en caso opuesto</returns>
@@ -1263,6 +1267,7 @@ namespace ico {
         /// <summary>
         /// Metodo que indica si una posicion esta dentro del cono delantero de vision de un mech
         /// para el encaramiento dado
+        /// </summary>
         /// <param name="casilla">Posicion a observar</param>
         /// <param name="encaramiento">Encaramiento hacia donde estamos mirando</param>
         /// <returns>True en caso de estar en el cono delantero, false en caso opuesto</returns>
@@ -1274,6 +1279,7 @@ namespace ico {
         /// <summary>
         /// Metodo que indica si una posicion esta dentro del cono delantero de vision de un mech
         /// para el encaramiento dado
+        /// </summary>
         /// <param name="casilla">Posicion a observar</param>
         /// <param name="encaramiento">Encaramiento hacia donde estamos mirando</param>
         /// <returns>True en caso de estar en el cono delantero, false en caso opuesto</returns>
@@ -1536,6 +1542,7 @@ namespace ico {
         /// <param name="arma">Componente de tipo arma que se desea disparar</param>
         /// <param name="objetivo">Mech al cual se va a disparar</param>
         /// <param name="mapa">Tablero del juego</param>
+        /// <param name="coberturaParcial">Indica si el objetivo tiene cobertura parcial</param>
         /// <param name="movimientoPropio">Cadena que indica el tipo de movimiento realizado por el mech atacante</param>
         /// <param name="movimientoObjetivo">Cadena que indica el tipo de movimiento realizado por el mech objetivo</param>
         /// <returns>Entero correspondiente a la puntuacion calculada</returns>
@@ -1657,7 +1664,7 @@ namespace ico {
             //bonus
             if (coberturaParcial) puntuacion += 3;
 
-            /** MODIFICADORES PARA DISPARO
+            /* MODIFICADORES PARA DISPARO
              * modificador distancia
              * " alcance minimo
              * " movimiento atacante

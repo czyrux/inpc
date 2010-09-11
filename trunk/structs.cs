@@ -9,9 +9,12 @@ namespace ico
     /// </summary>
 	public struct municion {
         /// <summary>
-        /// 
+        /// Localizacion en que se encuentra hubicado
         /// </summary>
 		public string _localizacion;
+        /// <summary>
+        /// Entero correspondiente al slot dentro de la localizacion
+        /// </summary>
 		public int _slotMunicion;
 	};
     

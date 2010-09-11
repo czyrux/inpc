@@ -344,8 +344,6 @@ namespace ico
         /// elige el destino el cual se desea calcular el camino
         /// </summary>
         /// <param name="objetivo">elige el mech rival que mas peso tine; tipo Mech</param>
-        /// <param name="destinosElegidos">Array de tamñao fijo que sera completado con los mejores destinos. Segun su tamaño
-        /// se incluiran mas o menos destinos</param>
         /// <returns>devuelve la posicion que se desea alcanzar; tipo posicion</returns>
         private List<Posicion> seleccionDestino(Mech objetivo )  
         {
