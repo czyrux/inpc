@@ -698,6 +698,9 @@ namespace ico
                             tmpE = mejorEncaramiento(ich,objetivo,destino.posicion(),((Nodo)camino[i-1]).direccion());//mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
                         }else
                             tmpE = mejorEncaramiento(ich, objetivo, destino.posicion());
+                        /* la suma de abajo mas: costoEncaramiento(tmpE, encaramiento que tengo ke tener para el objetivo)
+                         o comprobar si tmpE esta tiene al objetivo como cono delantero
+                         */
                         if (((Nodo)camino[i]).g() + costoEncaramiento(((Nodo)camino[i]).direccion(), tmpE) <= puntosMR)
                         {
                             _final = tmpE;
@@ -708,7 +711,6 @@ namespace ico
                     }
                 }
             }
-
 
             return -1;
         }
