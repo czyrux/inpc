@@ -353,13 +353,14 @@ namespace ico
             if (!mechs[myJugador].giroscopioOperativo() || (!mechs[myJugador].conPiernaDerecha() && !mechs[myJugador].conPiernaIzquierda()))
             {
                 camino.Add(elemento);
-                _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo], b.posicion()); //(Encaramiento)posiblesEncaramientos(elemento, mechs[objetivo].posicion(), Tablero)[0];
+                _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo], mechs[myJugador].posicion()); //(Encaramiento)posiblesEncaramientos(elemento, mechs[objetivo].posicion(), Tablero)[0];
                 return camino;
             }
             // en caso que este en el suelo y me levanto encarado al objetivo y no hago nada
             if (mechs[myJugador].enSuelo() && ((MechJugador)mechs[myJugador]).andar()>1 )
             {
                 _seLevanto = true;
+                _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo], mechs[myJugador].posicion());
                 elemento.direccion(mejorEncaramiento(mechs[myJugador], mechs[objetivo], mechs[myJugador].posicion()));
                 camino.Add(elemento);
                 return camino;
@@ -699,7 +700,10 @@ namespace ico
 
                     if (((Nodo)camino[i]).g() <= puntosMR)
                     {
-                        tmpE = /*mejorEncaramiento(ich, objetivo, destino.posicion());*/mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
+                        if(i!=0){
+                            tmpE = mejorEncaramiento(ich,objetivo,destino.posicion(),((Nodo)camino[i-1]).direccion());//mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
+                        }else
+                            tmpE = mejorEncaramiento(ich, objetivo, destino.posicion());
                         if (((Nodo)camino[i]).g() + costoEncaramiento(((Nodo)camino[i]).direccion(), tmpE) <= puntosMR)
                         {
                             _final = tmpE;
@@ -729,6 +733,32 @@ namespace ico
             }
         }
 
+       
+        /// <summary>
+        /// Devuelve cual es el mejor encaramiento de la posicion <paramref name="p"/> para estar encarado con el enemigo <paramref name="enemigo"/>
+        /// <paramref name="enemigo"/>
+        /// </summary>
+        /// <param name="yo">Mech Jugador</param>
+        /// <param name="enemigo">Mech oponente</param>
+        /// <param name="p">Posicion desde la que observamos</param>
+        /// <returns>el mejor encaramiento</returns>
+        private Encaramiento mejorEncaramiento(Mech yo, Mech enemigo, Posicion p)
+        {
+            int min = 1000, imin = 0;
+            for (int i = 1; i < 7; i++)
+            {
+                if (p.conoDelantero(enemigo.posicion(), i))
+                {
+                    if (costoEncaramiento((Encaramiento)yo.ladoEncaramiento(), (Encaramiento)i) < min)
+                    {
+                        min = costoEncaramiento((Encaramiento)yo.ladoEncaramiento(), (Encaramiento)i);
+                        imin = i;
+                    }
+                }
+            }
+            return (Encaramiento)imin;
+        }
+
         /// <summary>
         /// Devuelve cual es el mejor encaramiento de la posicion <paramref name="p"/> para estar encarado con el enemigo <paramref name="enemigo"/>
         /// <paramref name="enemigo"/>
@@ -736,12 +766,17 @@ namespace ico
         /// <param name="yo">Mech Jugador</param>
         /// <param name="enemigo">Mech oponente</param>
         /// <param name="p">Posicion que queremos observar</param>
-        /// <returns></returns>
-        private Encaramiento mejorEncaramiento(Mech yo, Mech enemigo , Posicion p) { 
+        /// <param name="siguiente">el encaramiento siguente a encarar</param>
+        /// <returns>el mejor encaramiento</returns>
+        private Encaramiento mejorEncaramiento(Mech yo, Mech enemigo , Posicion p, Encaramiento siguiente) { 
             int min=1000, imin=0;
             for (int i = 1; i < 7;i++)
             {
                 if (p.conoDelantero(enemigo.posicion(), i)) {
+                    if (((Encaramiento)i) == siguiente) {
+                        imin = i;
+                        break;
+                    }
                     if ( costoEncaramiento((Encaramiento)yo.ladoEncaramiento(), (Encaramiento)i) < min)
                     {
                         min = costoEncaramiento((Encaramiento)yo.ladoEncaramiento(), (Encaramiento)i);
