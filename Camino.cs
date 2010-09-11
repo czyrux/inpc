@@ -355,7 +355,9 @@ namespace ico
                 && mechs[myJugador].enSuelo() )
             {
                 camino.Add(elemento);
-                _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo], mechs[myJugador].posicion()); //(Encaramiento)posiblesEncaramientos(elemento, mechs[objetivo].posicion(), Tablero)[0];
+                _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo], mechs[myJugador].posicion());
+                if (costoEncaramiento(elemento.direccion(), _final) > ((MechJugador)mechs[myJugador]).andar())
+                    _final = elemento.direccion();
                 return camino;
             }
             // en caso que este en el suelo y me levanto encarado al objetivo y no hago nada
