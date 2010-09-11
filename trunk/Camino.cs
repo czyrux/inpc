@@ -66,7 +66,8 @@ namespace ico
             {
                 if (estrategia == Estrategia.Defensiva)
                 {
-                    if (((camino = pathFinder(myJugador, destino, tablero, objetivo, mechs)).Count == 1) && destino != ((Nodo)(camino[0])).casilla())
+                    camino = pathFinder(myJugador, destino, tablero, objetivo, mechs);
+                    if ( camino==null)
                     {
                         _debug = "";
                         _estrategia = Estrategia.Agresiva;
