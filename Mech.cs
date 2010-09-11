@@ -1075,7 +1075,7 @@ namespace ico {
             {
                 for (int i = 0; i < _componentes.Length && !municion; i++)
                 {
-                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() >= arma.disparosTurno() && _componentes[i].operativo() ) {
+                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > arma.disparosTurno() && _componentes[i].operativo() ) {
                         municion = true;
                     }
 
@@ -1122,7 +1122,7 @@ namespace ico {
                 //Buscamos la localizacion y el codigo de la municion
                 for (int i = 0; i < _componentes.Length && !salir; i++)
                 {
-                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > 0 && _componentes[i].operativo())
+                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > arma.disparosTurno() && _componentes[i].operativo())
                     {
                         localizacion = _componentes[i].localizacionINT();
                         codigo = _componentes[i].codigo();
@@ -1166,7 +1166,7 @@ namespace ico {
             {
                 for (int i = 0; i < _componentes.Length && !salir; i++)
                 {
-                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > 0 && _componentes[i].operativo())
+                    if (_componentes[i].clase() == "MUNICION" && _componentes[i].municionPara() == arma.codigo() && _componentes[i].cantidadMunicion() > arma.disparosTurno() && _componentes[i].operativo())
                     {
                         localizacion = _componentes[i].localizacionSTRING();
                         salir = true;
