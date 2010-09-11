@@ -123,6 +123,7 @@ namespace ico
         /// costo asociado en puntos de movimentos de una casilla
         /// </summary>
         /// <param name="a">casilla al cual se le calculara el costo asociado</param>
+        /// <param name="reversa">indica si el movimiento es en reversa</param>
         /// <returns>costo en puntos de mvimientos; tipo Int</returns>
         public int costoMovimiento( Casilla a, Boolean reversa=false)
         {

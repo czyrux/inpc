@@ -362,8 +362,10 @@ namespace ico
             if (mechs[myJugador].enSuelo() && ((MechJugador)mechs[myJugador]).andar()>1 )
             {
                 _seLevanto = true;
-                _final = mejorEncaramiento(mechs[myJugador], mechs[objetivo], mechs[myJugador].posicion());
-                elemento.direccion(mejorEncaramiento(mechs[myJugador], mechs[objetivo], mechs[myJugador].posicion()));
+                _final = mejorEncaramiento(((Nodo)camino[0]), mechs[objetivo].posicion(), Tablero);
+                //_final = mejorEncaramiento(mechs[myJugador], mechs[objetivo], mechs[myJugador].posicion());
+                elemento.direccion(mejorEncaramiento(((Nodo)camino[0]), mechs[objetivo].posicion(), Tablero));
+                //elemento.direccion(mejorEncaramiento(mechs[myJugador], mechs[objetivo], mechs[myJugador].posicion()));
                 camino.Add(elemento);
                 return camino;
             }
@@ -661,7 +663,7 @@ namespace ico
         /// <param name="destino">casilla destino; tipo Casilla</param>
         /// <param name="ich">mech que hara el camino; tipo Mech</param>
         /// <param name="t">tablero del juego; tipo Tablero</param>
-        /// <param name="objetivo">indice de el mech al cual queremos a tacar o defendernos, sobre el vector <paramref name="mechs"/>; tipo int</param>
+        /// <param name="objetivo">indice de el mech al cual queremos a tacar o defendernos; tipo Mech</param>
         /// <returns>indice sobre el camino, el cual es alcanzable por el mech ich</returns>
         private int caminoReal(ArrayList camino, Casilla destino, Mech ich, Tablero t, Mech objetivo)
         {
@@ -694,11 +696,11 @@ namespace ico
                 {
                     if (((Nodo)camino[i]).g() <= puntosMR)
                     {
-                        tmpE = mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
-                        /*if(i!=0){
-                            tmpE = mejorEncaramiento(ich,objetivo,destino.posicion(),((Nodo)camino[i-1]).direccion());//mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
+                        //tmpE = mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
+                        if(i!=0){
+                            tmpE = mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t, (int)((Nodo)camino[i-1]).direccion());
                         }else
-                            tmpE = mejorEncaramiento(ich, objetivo, destino.posicion());*/
+                            tmpE = mejorEncaramiento(((Nodo)camino[i]), objetivo.posicion(), t);
                         
                         if (((Nodo)camino[i]).g() + costoEncaramiento(((Nodo)camino[i]).direccion(), tmpE) <= puntosMR)
                         {
@@ -739,16 +741,17 @@ namespace ico
         /// <returns>el mejor encaramiento</returns>
         private Encaramiento mejorEncaramiento(Mech yo, Mech enemigo, Posicion p)
         {
-            int min = 1000, imin = 0;
+            int /*min = 1000,*/ imin = 0;
             for (int i = 1; i < 7; i++)
             {
                 if (p.conoDelantero(enemigo.posicion(), i))
                 {
-                    if (costoEncaramiento((Encaramiento)yo.ladoEncaramiento(), (Encaramiento)i) < min)
+                    return (Encaramiento)i;
+                    /*if (costoEncaramiento((Encaramiento)yo.ladoEncaramiento(), (Encaramiento)i) < min)
                     {
                         min = costoEncaramiento((Encaramiento)yo.ladoEncaramiento(), (Encaramiento)i);
                         imin = i;
-                    }
+                    }*/
                 }
             }
             return (Encaramiento)imin;
@@ -782,14 +785,8 @@ namespace ico
             return (Encaramiento)imin;
         }
 
-        /// <summary>
-        /// Devuelve cual es el mejor encaramiento del nodo <paramref name="origen"/> para estar encarado con la posicion <paramref name="objetivo"/>
-        /// </summary>
-        /// <param name="origen">nodo de origen; tipo Nodo</param>
-        /// <param name="objetivo">la posiscion del enemigo; tipo Posicion</param>
-        /// <param name="t">tablero del juego; tipo tablero</param>
-        /// <returns>el mejor encaramiento; tipo encaramiento</returns>
-        Encaramiento mejorEncaramiento(Nodo origen, Posicion objetivo, Tablero t)
+ 
+        /*Encaramiento mejorEncaramiento(Nodo origen, Posicion objetivo, Tablero t)
         {
             List<int> l= new List<int>();
             int min, tmp, tmpi=0;
@@ -802,6 +799,43 @@ namespace ico
                 tmp = costoEncaramiento(origen.direccion(), (Encaramiento)l[c]);
 
                 if ( tmp < min)
+                {
+                    tmpi = c;
+                    min = tmp;
+                }
+            }
+
+
+            return (Encaramiento)l[tmpi];
+
+        }*/
+        //--------------------------------------------------------------------
+        /// <summary>
+        /// Devuelve cual es el mejor encaramiento del nodo <paramref name="origen"/> para estar encarado con la posicion <paramref name="objetivo"/>
+        /// </summary>
+        /// <param name="origen">nodo de origen; tipo Nodo</param>
+        /// <param name="objetivo">la posiscion del enemigo; tipo Posicion</param>
+        /// <param name="t">tablero del juego; tipo tablero</param>
+        /// <param name="siguienteEncaramiento">indica cual es el encaramiento para movernos a la siguiente casilla; tipo int</param>
+        /// <returns>el mejor encaramiento; tipo encaramiento</returns>
+        Encaramiento mejorEncaramiento(Nodo origen, Posicion objetivo, Tablero t, int siguienteEncaramiento=0)
+        {
+            List<int> l = new List<int>();
+            int min, tmp, tmpi = 0;
+
+            l = posiblesEncaramientos(origen, objetivo, t);
+            min = costoEncaramiento(origen.direccion(), (Encaramiento)l[0]);
+
+            for (int c = 1; c < l.Count; c++)
+            {
+                tmp = costoEncaramiento(origen.direccion(), (Encaramiento)l[c]);
+                //--------------------------------------------------------------
+                if (c == siguienteEncaramiento)
+                {
+                    return (Encaramiento)c;
+                }
+                //--------------------------------------------------------------
+                if (tmp < min)
                 {
                     tmpi = c;
                     min = tmp;

@@ -202,6 +202,11 @@ namespace ico
         #endregion
 
         #region metodos
+        /// <summary>
+        /// funcion que genera el fichero de accion
+        /// </summary>
+        /// <param name="numeroJ">numero de jugador que generara el fichero; tipo int</param>
+        /// <returns></returns>
         public static String archivoAcciones( int numeroJ ) 
         {
             return ("accionJ" + numeroJ.ToString() + ".sbt");

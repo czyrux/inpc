@@ -67,7 +67,10 @@ namespace ico
         /// </summary>
         /// <returns>valor de la propidad columna; tipo Int</returns>
 		public int columna() { return _columna; }
-
+        /// <summary>
+        /// funcion que indica como se combierte una posicion en una cadena
+        /// </summary>
+        /// <returns>devuelve una cadena con formato CCFF</returns>
         public override String ToString() {
             String posicion;
 

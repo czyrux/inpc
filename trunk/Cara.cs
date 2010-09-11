@@ -20,7 +20,7 @@ namespace ico
         /// <summary>
         /// constructor con parametros
         /// </summary>
-        /// <param name="rio">si hay rio o no; tipo <seBoolean</param>
+        /// <param name="rio">si hay rio o no; tipo boolean</param>
         /// <param name="carretera">si hay carretera o no; tipo Boolean</param>
         public Cara(Boolean rio, Boolean carretera)
         {
@@ -53,9 +53,9 @@ namespace ico
             return _carretera;
         }
         /// <summary>
-        /// propiedad establece si hay rio o no
+        /// propiedad establece si hay carretera o no
         /// </summary>
-        /// <param name="rio"></param>
+        /// <param name="carretera">valor que establece si hay carretara; tipo boolean</param>
         public void carretera(Boolean carretera)
         {
             _carretera = carretera;
