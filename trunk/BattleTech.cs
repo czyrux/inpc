@@ -1134,7 +1134,7 @@ namespace ico
                     diferenciaNivel = _tablero.Casilla(my.posicion()).nivel() - _tablero.Casilla(objetivo.posicion()).nivel();
 
                     //Vemos las armas fisicas con las que darle
-                    if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()
+                    if (my.conBrazoDerecho() && my.conAntebrazoDerecho() && my.conHombroDerecho() && (situacion == "DNTE" || situacion == "DRCHA") && !my.disparoBrazoDerecha()
                         && ((diferenciaNivel == 0 && !objetivo.enSuelo()) || diferenciaNivel == -1) && !my.enSuelo())
                     {
                         numeroArmas++;
@@ -1145,7 +1145,7 @@ namespace ico
                         log += "\t\tGolpeamos con: BD\n";
                     }
 
-                    if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo()
+                    if (my.conBrazoIzquierdo() && my.conAntebrazoIzquierdo() && my.conHombroIzquierdo() && (situacion == "DNTE" || situacion == "IZQ") && !my.disparoBrazoIzquierdo()
                         && ((diferenciaNivel == 0 && !objetivo.enSuelo()) || diferenciaNivel == -1) && !my.enSuelo())
                     {
                         numeroArmas++;
