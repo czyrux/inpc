@@ -358,7 +358,7 @@ namespace ico
             if (mechs[myJugador].enSuelo() && ((MechJugador)mechs[myJugador]).andar()>1 )
             {
                 _seLevanto = true;
-                elemento.direccion(mejorEncaramiento(mechs[myJugador], mechs[objetivo], b.posicion()));
+                elemento.direccion(mejorEncaramiento(mechs[myJugador], mechs[objetivo], mechs[myJugador].posicion()));
                 camino.Add(elemento);
                 return camino;
             }
