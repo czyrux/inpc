@@ -670,16 +670,15 @@ namespace ico
 
             costoEncaramientoAcumulado(camino);
 
+            //Determinamos los puntos de movimiento de los que disponemos
             if (_estrategia == Estrategia.Defensiva)
             {
                 puntosMR = ((MechJugador)ich).correr() - suelo;
             }
             else {
-                /*
-                 * aqui hay que comprobar si la distancia de el enemigo y yo es muy grande entonces corro enlugar de caminar
-                 */
                 puntosMR= ((MechJugador)ich).andar() - suelo;
             }
+
             //copruebo que se pueda levantar si no no hace nada
             if (puntosMR < 0)
             {
@@ -690,9 +689,9 @@ namespace ico
             else
             {// o no se a levantado o tine puntos negativos de movimientos
 
+                //Vemos hasta que punto del camino podemos movernos
                 for (int i = 0; i < camino.Count; i++)
                 {
-
                     if (((Nodo)camino[i]).g() <= puntosMR)
                     {
                         if(i!=0){
