@@ -8,6 +8,9 @@ namespace ico
     /// Estructura usada para guardar datos de municion
     /// </summary>
 	public struct municion {
+        /// <summary>
+        /// 
+        /// </summary>
 		public string _localizacion;
 		public int _slotMunicion;
 	};
