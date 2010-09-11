@@ -176,7 +176,7 @@ namespace ico
             if (!_salta)
             {
 
-                if (_estrategia == Estrategia.Agresiva)
+                if (_estrategia == Estrategia.Agresiva || _seLevanto )
                     str = "Andar\n";
                 else
                     str = "Correr\n";
