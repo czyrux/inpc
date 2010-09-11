@@ -552,7 +552,7 @@ namespace ico
             }
             if (_final == 0)
             {
-                _final = camino[camino.Count - 1].direccion();
+                _final = ((Nodo)camino[camino.Count - 1]).direccion();
             }
             _debug += (ideal ? "" : "\t\tEncarandose hacia: "+_final.ToString()) + "\n";
         }
