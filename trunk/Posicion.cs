@@ -525,7 +525,7 @@ namespace ico
                 }
                 else
                 {
-                    if (_fila > casilla.fila())
+                    if (_fila >= casilla.fila())
                         enCono = true;
                 }
 
