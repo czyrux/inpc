@@ -1,0 +1,1 @@
+Proyecto de jugador inteligente de BattleTech para la asignatura de Ingeniería del conocimiento para la Universidad de Granada.
